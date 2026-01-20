@@ -13,6 +13,8 @@ import EquipmentFleet from '../components/EquipmentFleet';
 import EquipmentTables from '../components/EquipmentTables';
 import ProcessOverview from '../components/ProcessOverview';
 import Compliance from '../components/Compliance';
+import CertificationsCompliance from '../components/CertificationsCompliance';
+import RFQWorkflow from '../components/RFQWorkflow';
 import SafetyCommitment from '../components/SafetyCommitment';
 import CoreValues from '../components/CoreValues';
 import Testimonials from '../components/Testimonials';
@@ -38,6 +40,8 @@ const Home = () => {
         <EquipmentTables />
         <ProcessOverview />
         <Compliance />
+        <CertificationsCompliance />
+        <RFQWorkflow />
         <SafetyCommitment />
         <CoreValues />
         <Testimonials />
