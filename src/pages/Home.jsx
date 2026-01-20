@@ -2,21 +2,16 @@ import React from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import CapabilitySnapshot from '../components/CapabilitySnapshot';
-import About from '../components/About';
-import CompanyStory from '../components/CompanyStory';
-import MissionVision from '../components/MissionVision';
+import AboutUs from '../components/AboutUs';
 import Services from '../components/Services';
 import Resources from '../components/Resources';
 import Suppliers from '../components/Suppliers';
 import Projects from '../components/Projects';
 import EquipmentFleet from '../components/EquipmentFleet';
-import EquipmentTables from '../components/EquipmentTables';
 import ProcessOverview from '../components/ProcessOverview';
-import Compliance from '../components/Compliance';
-import CertificationsCompliance from '../components/CertificationsCompliance';
+import ComplianceCertifications from '../components/ComplianceCertifications';
 import RFQWorkflow from '../components/RFQWorkflow';
 import SafetyCommitment from '../components/SafetyCommitment';
-import CoreValues from '../components/CoreValues';
 import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
@@ -29,21 +24,16 @@ const Home = () => {
       <main>
         <Hero />
         <CapabilitySnapshot />
-        <About />
-        <CompanyStory />
-        <MissionVision />
+        <AboutUs />
         <Services />
+        <Projects />
         <Resources />
         <Suppliers />
-        <Projects />
         <EquipmentFleet />
-        <EquipmentTables />
         <ProcessOverview />
-        <Compliance />
-        <CertificationsCompliance />
-        <RFQWorkflow />
+        <ComplianceCertifications />
         <SafetyCommitment />
-        <CoreValues />
+        <RFQWorkflow />
         <Testimonials />
         <Contact />
       </main>
