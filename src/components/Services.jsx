@@ -13,7 +13,7 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="py-20 bg-fixed bg-cover bg-center"
+      className="py-16 bg-fixed bg-cover bg-center"
       style={{
         backgroundImage:
           "linear-gradient(rgba(8, 55, 124, 0.78), rgba(8, 55, 124, 0.78)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
@@ -41,6 +41,28 @@ const Services = () => {
               <p className="text-gray-700 leading-relaxed">{service.desc}</p>
             </div>
           ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center mt-12">
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-mont font-semibold text-white mb-4">Ready to Start Your Project?</h3>
+            <p className="text-white/90 mb-6">Get a customized quote for your land development or civil works needs</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="#rfq"
+                className="bg-secondary text-primary font-semibold py-3 px-8 rounded shadow-lg shadow-secondary/30 hover:shadow-secondary/50 hover:-translate-y-0.5 transition-all"
+              >
+                Request Quote
+              </a>
+              <a
+                href="tel:+63495466107"
+                className="border-2 border-white/60 text-white bg-white/10 hover:bg-white hover:text-primary font-semibold py-3 px-8 rounded transition-all"
+              >
+                Call Now
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -44,7 +44,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-light">
+    <section id="about" className="py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-12 relative">
@@ -132,6 +132,38 @@ const AboutUs = () => {
           </div>
         </div>
 
+        {/* Key Statistics */}
+        <div className="mb-16">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl md:text-3xl font-mont font-semibold text-primary mb-2">Key Statistics</h3>
+            <p className="text-gray">Our capabilities at a glance</p>
+            <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="border border-primary/10 bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray mb-3">Years in Operation</p>
+              <p className="text-2xl font-mont font-semibold text-primary">2018–Present</p>
+              <p className="text-sm text-gray mt-3">Registered November 28, 2018</p>
+            </div>
+            <div className="border border-primary/10 bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray mb-3">Backfill Resources</p>
+              <p className="text-2xl font-mont font-semibold text-primary">22.2M+ cu.m.</p>
+              <p className="text-sm text-gray mt-3">Calamba + Silang sites combined</p>
+            </div>
+            <div className="border border-primary/10 bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray mb-3">Coverage</p>
+              <p className="text-2xl font-mont font-semibold text-primary">CALABARZON+</p>
+              <p className="text-sm text-gray mt-3">Laguna, Cavite, and beyond</p>
+            </div>
+            <div className="border border-primary/10 bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow text-center">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray mb-3">Service Scope</p>
+              <p className="text-2xl font-mont font-semibold text-primary">One-Stop Shop</p>
+              <p className="text-sm text-gray mt-3">Backfill to civil works</p>
+            </div>
+          </div>
+        </div>
+
         {/* Core Values */}
         <div>
           <div className="text-center mb-16">
@@ -153,6 +185,36 @@ const AboutUs = () => {
                 <p className="text-dark text-base leading-relaxed">{value.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center mt-16">
+          <div className="bg-primary text-white rounded-lg p-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-mont font-semibold mb-4">Partner with Cliberduche Corporation</h3>
+            <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+              Experience our commitment to quality, safety, and timely delivery. Let's discuss your project needs.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="#rfq"
+                className="bg-secondary text-primary font-semibold py-3 px-8 rounded shadow-lg shadow-secondary/30 hover:shadow-secondary/50 hover:-translate-y-0.5 transition-all"
+              >
+                Get Free Quote
+              </a>
+              <a
+                href="mailto:cliberduche.corp@yahoo.com"
+                className="border-2 border-white/60 text-white bg-white/10 hover:bg-white hover:text-primary font-semibold py-3 px-8 rounded transition-all"
+              >
+                Email Us
+              </a>
+              <a
+                href="tel:+63495466107"
+                className="border-2 border-white/60 text-white bg-white/10 hover:bg-white hover:text-primary font-semibold py-3 px-8 rounded transition-all"
+              >
+                Call +63 49 546-6107
+              </a>
+            </div>
           </div>
         </div>
       </div>

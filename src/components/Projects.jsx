@@ -54,6 +54,7 @@ const Projects = () => {
       location: 'Calamba, Laguna',
       highlight: 'Scope: embankment + roadworks + drainage + electrical',
       category: ['ongoing', 'laguna'],
+      metrics: { area: '50 hectares', duration: '12 months', value: '₱25M' },
     },
     {
       id: 2,
@@ -130,7 +131,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-light">
+    <section id="projects" className="py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-12">
@@ -191,6 +192,20 @@ const Projects = () => {
           ))}
         </div>
 
+        {/* CTA Section */}
+        <div className="text-center mt-12">
+          <div className="bg-primary text-white rounded-lg p-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-mont font-semibold mb-4">Have a Similar Project?</h3>
+            <p className="text-white/90 mb-6">Let's discuss how we can bring your vision to life with our proven expertise</p>
+            <a
+              href="#rfq"
+              className="bg-secondary text-primary font-semibold py-3 px-8 rounded shadow-lg shadow-secondary/30 hover:shadow-secondary/50 hover:-translate-y-0.5 transition-all inline-block"
+            >
+              Start Your Project
+            </a>
+          </div>
+        </div>
+
         {/* Case Study Modal */}
         {showModal && selectedProject && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -230,6 +245,25 @@ const Projects = () => {
                       {selectedProject.tag}
                     </span>
                   </div>
+                  {selectedProject.metrics && (
+                    <div>
+                      <h4 className="font-semibold text-dark">Project Metrics</h4>
+                      <div className="grid grid-cols-3 gap-4 mt-2">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-primary">{selectedProject.metrics.area}</div>
+                          <div className="text-sm text-gray">Area</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-primary">{selectedProject.metrics.duration}</div>
+                          <div className="text-sm text-gray">Duration</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-primary">{selectedProject.metrics.value}</div>
+                          <div className="text-sm text-gray">Value</div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   <div>
                     <h4 className="font-semibold text-dark">Case Study Details</h4>
                     <p className="text-gray">

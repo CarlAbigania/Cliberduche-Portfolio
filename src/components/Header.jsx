@@ -12,10 +12,22 @@ const Header = () => {
           <img src={logo} alt="Cliberduche Corporation Logo" className="h-12 w-auto" />
         </div>
 
+        {/* Contact Info */}
+        <div className="hidden lg:flex items-center space-x-6 text-sm">
+          <a href="tel:+63495466107" className="text-dark hover:text-secondary flex items-center gap-2">
+            <i className="fas fa-phone"></i>
+            +63 49 546-6107
+          </a>
+          <a href="mailto:cliberduche.corp@yahoo.com" className="text-dark hover:text-secondary flex items-center gap-2">
+            <i className="fas fa-envelope"></i>
+            cliberduche.corp@yahoo.com
+          </a>
+        </div>
+
         {/* Desktop Nav */}
         <nav className="hidden md:block">
-          <ul className="flex space-x-8">
-            {['Home', 'About', 'Story', 'Mission & Vision', 'Services', 'Resources', 'Suppliers', 'Projects', 'Equipment', 'Safety', 'Contact'].map((item) => (
+          <ul className="flex space-x-6">
+            {['Home', 'About', 'Services', 'Projects', 'Resources', 'Suppliers', 'Equipment', 'Compliance', 'RFQ', 'Contact'].map((item) => (
               <li key={item}>
                 <a
                   href={`#${item.toLowerCase().replace(/\s+&\s+|\s+/g, '-')}`}
@@ -44,7 +56,7 @@ const Header = () => {
   }`}
 >
   <ul className="flex flex-col p-6 space-y-3">
-    {['Home', 'About', 'Story', 'Mission & Vision', 'Services', 'Resources', 'Suppliers', 'Projects', 'Equipment', 'Safety', 'Contact'].map((item) => (
+    {['Home', 'About', 'Services', 'Projects', 'Resources', 'Suppliers', 'Equipment', 'Compliance', 'RFQ', 'Contact'].map((item) => (
       <li key={item}>
         <a
           href={`#${item.toLowerCase().replace(/\s+&\s+|\s+/g, '-')}`}

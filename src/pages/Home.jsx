@@ -1,18 +1,17 @@
 import React from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
-import CapabilitySnapshot from '../components/CapabilitySnapshot';
 import AboutUs from '../components/AboutUs';
 import Services from '../components/Services';
-import Resources from '../components/Resources';
-import Suppliers from '../components/Suppliers';
+import ResourcesPartners from '../components/ResourcesPartners';
 import Projects from '../components/Projects';
 import EquipmentFleet from '../components/EquipmentFleet';
 import ProcessOverview from '../components/ProcessOverview';
-import ComplianceCertifications from '../components/ComplianceCertifications';
+import ComplianceSafety from '../components/ComplianceSafety';
 import RFQWorkflow from '../components/RFQWorkflow';
-import SafetyCommitment from '../components/SafetyCommitment';
-import Testimonials from '../components/Testimonials';
+import TrustSocialProof from '../components/TrustSocialProof';
+import NewsBlog from '../components/NewsBlog';
+import MeetOurTeam from '../components/MeetOurTeam';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import BackToTopButton from '../components/BackToTopButton';
@@ -23,18 +22,17 @@ const Home = () => {
       <Header />
       <main>
         <Hero />
-        <CapabilitySnapshot />
         <AboutUs />
         <Services />
         <Projects />
-        <Resources />
-        <Suppliers />
+        <ResourcesPartners />
         <EquipmentFleet />
         <ProcessOverview />
-        <ComplianceCertifications />
-        <SafetyCommitment />
+        <ComplianceSafety />
         <RFQWorkflow />
-        <Testimonials />
+        <TrustSocialProof />
+        <NewsBlog />
+        <MeetOurTeam />
         <Contact />
       </main>
       <Footer />

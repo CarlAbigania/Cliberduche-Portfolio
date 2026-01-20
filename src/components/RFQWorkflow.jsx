@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const RFQWorkflow = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,9 +20,13 @@ const RFQWorkflow = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission (could send to backend or email)
+    setIsSubmitting(true);
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
     alert('RFQ submitted successfully! We will contact you soon.');
     setFormData({
       name: '',
@@ -33,6 +38,7 @@ const RFQWorkflow = () => {
       timeline: '',
       budget: ''
     });
+    setIsSubmitting(false);
   };
 
   return (
@@ -158,9 +164,17 @@ const RFQWorkflow = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-primary text-white py-3 px-6 rounded-lg shadow-md hover:bg-primary-dark transition-colors font-medium"
+                disabled={isSubmitting}
+                className="w-full bg-primary text-white py-3 px-6 rounded-lg shadow-md hover:bg-primary-dark transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
-                Submit RFQ
+                {isSubmitting ? (
+                  <>
+                    <i className="fas fa-spinner fa-spin mr-2"></i>
+                    Submitting...
+                  </>
+                ) : (
+                  'Submit RFQ'
+                )}
               </button>
             </form>
           </div>
