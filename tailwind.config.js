@@ -7,13 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#1a4f8c',
-        secondary: '#e6a019',
-        dark: '#2c3e50',
-        light: '#f8f9fa',
-        gray: '#6c757d',
-        success: '#28a745',
-        danger: '#dc3545',
+        primary: '#08377C',
+        secondary: '#80D12A',
+        accent: '#0F4AA1',
+        dark: '#10243E',
+        light: '#F8F8F8',
+        gray: '#6C7A89',
+        success: '#2E9E4D',
+        danger: '#D94141',
       },
       fontFamily: {
         sans: ['Open Sans', 'sans-serif'],

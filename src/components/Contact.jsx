@@ -13,7 +13,8 @@ const Contact = () => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-3">Contact Us</h2>
-          <p className="text-dark">Reach us for backfill sourcing, site development, and civil works inquiries</p>
+          <p className="text-gray">Reach us for backfill sourcing, site development, and civil works inquiries</p>
+          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-10">
@@ -61,7 +62,7 @@ const Contact = () => {
           {/* Contact Form + Map */}
           <div className="lg:w-1/2 space-y-8">
             {/* Form */}
-            <div className="bg-white p-8 rounded-lg shadow-md">
+            <div className="bg-white p-8 rounded-lg shadow-md border border-primary/10">
               <h3 className="text-xl font-semibold text-primary mb-6">Send us a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input
@@ -90,7 +91,7 @@ const Contact = () => {
                 ></textarea>
                 <button
                   type="submit"
-                  className="bg-secondary text-white font-semibold px-6 py-3 rounded hover:bg-yellow-700 transition-all"
+                  className="bg-secondary text-primary font-semibold px-6 py-3 rounded shadow-md shadow-secondary/30 hover:-translate-y-0.5 transition-all"
                 >
                   Send Message
                 </button>
@@ -98,7 +99,7 @@ const Contact = () => {
             </div>
 
             {/* Map */}
-            <div className="bg-white p-8 rounded-lg shadow-md">
+            <div className="bg-white p-8 rounded-lg shadow-md border border-primary/10">
               <h3 className="text-xl font-semibold text-primary mb-4">Find Us</h3>
               <iframe
                 src="https://maps.google.com/maps?q=Cliberduche%20Corporation%2C%203rd%20floor%2C%20CBD%20building%2C%20Lot%203739%20National%20Highway%2C%20Cabuyao%20City%2C%204025%20Laguna&output=embed"

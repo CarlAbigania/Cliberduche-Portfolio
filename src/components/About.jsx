@@ -45,7 +45,7 @@ const About = () => {
             <div className="grid sm:grid-cols-2 gap-6 mt-6">
               {features.map((feat, i) => (
                 <div key={i} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center">
+                  <div className="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-md shadow-primary/30">
                     <i className={`fas ${feat.icon}`}></i>
                   </div>
                   <div>
@@ -59,11 +59,13 @@ const About = () => {
 
           {/* Image */}
           <div>
-            <img
-              src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-              alt="About Cliberduche"
-              className="w-full h-80 object-cover rounded-lg shadow-lg"
-            />
+            <div className="rounded-xl border border-primary/10 bg-white p-3 shadow-lg">
+              <img
+                src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                alt="About Cliberduche"
+                className="w-full h-80 object-cover rounded-lg"
+              />
+            </div>
           </div>
         </div>
       </div>

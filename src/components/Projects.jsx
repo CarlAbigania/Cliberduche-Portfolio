@@ -84,7 +84,8 @@ const Projects = () => {
         {/* Section Title */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-mont font-semibold text-primary mb-2">Our Projects</h2>
-          <p className="text-dark">Selected highlights across commercial and industrial developments</p>
+          <p className="text-gray">Selected highlights across commercial and industrial developments</p>
+          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
         </div>
 
         {/* Filter Buttons */}
@@ -96,7 +97,7 @@ const Projects = () => {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 activeFilter === filter.key
                   ? 'bg-primary text-white border border-primary'
-                  : 'bg-white text-dark border border-gray-300 hover:bg-primary hover:text-white'
+                  : 'bg-white text-dark border border-primary/20 hover:bg-primary hover:text-white'
               }`}
             >
               {filter.label}
@@ -109,14 +110,14 @@ const Projects = () => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-lg transition-all"
+              className="bg-white rounded-lg shadow-md border border-primary/10 overflow-hidden hover:-translate-y-2 hover:shadow-lg transition-all"
             >
               <div
                 className="h-56 bg-cover bg-center"
                 style={{ backgroundImage: `url(${project.img})` }}
               ></div>
               <div className="p-5">
-                <span className="inline-block px-2 py-1 bg-secondary text-white text-xs font-semibold rounded mb-2">
+                <span className="inline-block px-2 py-1 bg-secondary text-primary text-xs font-semibold rounded mb-2">
                   {project.tag}
                 </span>
                 <h3 className="font-mont font-semibold text-lg text-dark mb-2">{project.title}</h3>

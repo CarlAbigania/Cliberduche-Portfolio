@@ -9,9 +9,10 @@ const Resources = () => {
           <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-2">
             Our Resources
           </h2>
-          <p className="text-dark text-base md:text-lg">
+          <p className="text-gray text-base md:text-lg">
             Substantial material reserves and modern equipment fleet
           </p>
+          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
         </div>
 
         {/* Stats */}
@@ -40,13 +41,13 @@ const Resources = () => {
           ].map((stat, i) => (
             <div
               key={i}
-              className="bg-white rounded-lg p-6 shadow-md text-center hover:shadow-lg transition-shadow"
+              className="bg-white rounded-lg p-6 shadow-md text-center border border-primary/10 hover:shadow-lg transition-shadow"
             >
               <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
                 {stat.number}
               </div>
               <h3 className="text-lg font-semibold text-dark">{stat.label}</h3>
-              <p className="text-gray-600 text-sm mt-1">{stat.desc}</p>
+              <p className="text-gray text-sm mt-1">{stat.desc}</p>
             </div>
           ))}
         </div>
@@ -60,7 +61,7 @@ const Resources = () => {
 
         <div className="space-y-8">
           {/* Calamba Site */}
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+          <div className="bg-white p-6 rounded-lg shadow-md border border-primary/10 hover:shadow-lg transition-shadow">
             <h4 className="text-xl md:text-2xl font-semibold text-dark mb-3">
               Calamba City Site
             </h4>
@@ -81,7 +82,7 @@ const Resources = () => {
           </div>
 
           {/* Silang Site */}
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+          <div className="bg-white p-6 rounded-lg shadow-md border border-primary/10 hover:shadow-lg transition-shadow">
             <h4 className="text-xl md:text-2xl font-semibold text-dark mb-3">
               Silang, Cavite Site
             </h4>

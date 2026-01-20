@@ -15,10 +15,10 @@ const Header = () => {
         {/* Desktop Nav */}
         <nav className="hidden md:block">
           <ul className="flex space-x-8">
-            {['Home', 'About', 'Services', 'Projects', 'Resources', 'Contact'].map((item) => (
+            {['Home', 'About', 'Story', 'Mission & Vision', 'Services', 'Resources', 'Suppliers', 'Projects', 'Equipment', 'Safety', 'Contact'].map((item) => (
               <li key={item}>
                 <a
-                  href={`#${item.toLowerCase()}`}
+                  href={`#${item.toLowerCase().replace(/\s+&\s+|\s+/g, '-')}`}
                   className="text-dark font-medium hover:text-secondary transition-colors"
                 >
                   {item}
@@ -44,10 +44,10 @@ const Header = () => {
   }`}
 >
   <ul className="flex flex-col p-6 space-y-3">
-    {['Home', 'About', 'Services', 'Projects', 'Resources', 'Contact'].map((item) => (
+    {['Home', 'About', 'Story', 'Mission & Vision', 'Services', 'Resources', 'Suppliers', 'Projects', 'Equipment', 'Safety', 'Contact'].map((item) => (
       <li key={item}>
         <a
-          href={`#${item.toLowerCase()}`}
+          href={`#${item.toLowerCase().replace(/\s+&\s+|\s+/g, '-')}`}
           className="text-dark hover:text-secondary block font-medium"
           onClick={() => setMobileMenuOpen(false)}
         >

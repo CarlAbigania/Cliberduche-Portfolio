@@ -15,14 +15,16 @@ const Services = () => {
       id="services"
       className="py-20 bg-fixed bg-cover bg-center"
       style={{
-        backgroundImage: "url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+        backgroundImage:
+          "linear-gradient(rgba(8, 55, 124, 0.78), rgba(8, 55, 124, 0.78)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
       }}
     >
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-mont font-semibold text-white">Our Services</h2>
-          <p className="text-white mt-2">Integrated services from sourcing to execution</p>
+          <p className="text-white/80 mt-2">Integrated services from sourcing to execution</p>
+          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
         </div>
 
         {/* Services Grid */}
@@ -30,7 +32,7 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white/90 backdrop-blur-sm rounded-lg p-8 shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
+              className="bg-white/95 backdrop-blur-sm rounded-lg p-8 shadow-lg border border-white/60 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
             >
               <div className="text-primary text-4xl mb-6 flex items-center justify-center">
                 <i className={`fas ${service.icon}`}></i>

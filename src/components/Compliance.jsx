@@ -32,9 +32,9 @@ const Compliance = () => {
           {items.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg p-5 shadow-sm border border-gray-100 flex items-center gap-3"
+              className="bg-white rounded-lg p-5 shadow-sm border border-primary/10 flex items-center gap-3"
             >
-              <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/20">
                 <i className="fas fa-check"></i>
               </div>
               <p className="text-dark font-medium">{item}</p>
