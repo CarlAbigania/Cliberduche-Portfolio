@@ -17,7 +17,7 @@ const About = () => {
             About Our Company
           </h2>
           <p className="text-gray text-base">
-            Providing excellence in construction and land development since 2018
+            One-stop shop for backfill sourcing, land development, and civil works since 2018
           </p>
           {/* Underline */}
           <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
@@ -28,15 +28,17 @@ const About = () => {
           {/* Text & Features */}
           <div className="space-y-6">
             <h3 className="text-2xl md:text-3xl font-mont font-semibold text-dark">
-              Our Story
+              Company Overview
             </h3>
             <p className="text-gray leading-relaxed">
-              Cliberduche Corporation was established in 2018, born out of the dream to provide
-              the best for family without leaving the country...
+              Cliberduche Corporation is a full-scale land development and civil works contractor
+              serving CALABARZON and beyond. We supply high-quality backfill materials (sub-base,
+              aggregates, mixed soil, and boulders), execute site development, and deliver civil
+              works with a compliance-led, safety-first approach.
             </p>
             <p className="text-gray leading-relaxed">
-              Our name CLIBERDUCHE stands for the surnames of our founders: CLImaco, BERonilla,
-              and PiaDUCHE...
+              Established in 2018 and registered with the SEC on November 28, 2018, we operate as
+              a one-stop shop with in-house assets and a network of qualified professionals.
             </p>
 
             {/* Features */}

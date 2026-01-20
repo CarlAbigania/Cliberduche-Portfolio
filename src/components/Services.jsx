@@ -2,12 +2,12 @@ import React from 'react';
 
 const Services = () => {
   const services = [
-    { icon: 'fa-mountain', title: 'Backfill Sourcing', desc: 'Providing the best quality backfill materials as specified by clients including sub-base, aggregates and boulders.' },
-    { icon: 'fa-tractor', title: 'Land Development', desc: 'Comprehensive land development including clearing, cutting, leveling, RCP and PVC pipe laying.' },
-    { icon: 'fa-hard-hat', title: 'Site Management', desc: 'Professional site management ensuring projects are completed on time and within budget.' },
-    { icon: 'fa-tools', title: 'Equipment Leasing', desc: 'Heavy equipment leasing including dump trucks, bulldozers, excavators, compactors and more.' },
-    { icon: 'fa-road', title: 'Civil Works', desc: 'Building bridges, concrete roads, gutters, ripraps, easement, and slope protection projects.' },
-    { icon: 'fa-clipboard-check', title: 'Project Consultation', desc: 'Expert project management consultation for both horizontal and vertical construction projects.' },
+    { icon: 'fa-mountain', title: 'Backfill Sourcing', desc: 'Sub-base, aggregates, mixed soil, and boulders with lab-tested quality.' },
+    { icon: 'fa-tractor', title: 'Land Development', desc: 'Clearing, cutting, leveling, and pipe laying for site readiness.' },
+    { icon: 'fa-hard-hat', title: 'Site Management', desc: 'Professional field supervision aligned with safety and delivery targets.' },
+    { icon: 'fa-tools', title: 'Equipment Leasing', desc: 'Dump trucks, bulldozers, excavators, compactors, and support units.' },
+    { icon: 'fa-road', title: 'Civil Works', desc: 'Bridges, concrete roads, ripraps, drainage, and slope protection.' },
+    { icon: 'fa-clipboard-check', title: 'Project Consultation', desc: 'Consultation for horizontal and vertical development projects.' },
   ];
 
   return (
@@ -22,7 +22,7 @@ const Services = () => {
         {/* Section Title */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-mont font-semibold text-white">Our Services</h2>
-          <p className="text-white mt-2">Comprehensive construction and development solutions</p>
+          <p className="text-white mt-2">Integrated services from sourcing to execution</p>
         </div>
 
         {/* Services Grid */}

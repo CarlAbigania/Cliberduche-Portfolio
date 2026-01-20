@@ -13,7 +13,7 @@ const Contact = () => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-3">Contact Us</h2>
-          <p className="text-dark">Get in touch for your land development and construction needs</p>
+          <p className="text-dark">Reach us for backfill sourcing, site development, and civil works inquiries</p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-10">
@@ -34,6 +34,11 @@ const Contact = () => {
                 icon: 'fa-envelope',
                 title: 'Email Address',
                 content: 'cliberduche.corp@yahoo.com',
+              },
+              {
+                icon: 'fa-map-marked-alt',
+                title: 'Service Coverage',
+                content: 'CALABARZON region and beyond',
               },
               {
                 icon: 'fa-clock',

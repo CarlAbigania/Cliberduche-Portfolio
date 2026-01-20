@@ -11,6 +11,7 @@ const Projects = () => {
       title: 'MDI - Mercator Holdings Project 2026',
       desc: 'Embankment, diversion road, retaining wall, drainage, pavement, and electrical post lights.',
       location: 'Calamba, Laguna',
+      highlight: 'Scope: embankment + roadworks + drainage + electrical',
       category: ['ongoing', 'laguna'],
     },
     {
@@ -20,6 +21,7 @@ const Projects = () => {
       title: 'WDV Phase 4 Tanza, Cavite 2026',
       desc: 'Retaining wall and perimeter fence construction for residential development.',
       location: 'Tanza, Cavite',
+      highlight: 'Scope: retaining wall + perimeter fence',
       category: ['ongoing', 'cavite'],
     },
     {
@@ -27,8 +29,9 @@ const Projects = () => {
       img: 'images/37.png',
       tag: 'Completed',
       title: 'Silang, Cavite Project 2021',
-      desc: 'Leveling and compaction, drainage, road network, riprap, bridge, rectification over 18.3 hectares.',
+      desc: 'Leveling and compaction, drainage, road network, riprap, bridge, rectification.',
       location: 'Silang, Cavite',
+      highlight: 'Area: 18.3 hectares',
       category: ['completed', 'cavite'],
     },
     {
@@ -38,6 +41,7 @@ const Projects = () => {
       title: 'Pier 2 North Harbour 2026',
       desc: 'Reconstruction of bridge, pavement, lagoon, embankment, drainage, water & electrical works.',
       location: 'North Harbour, Manila',
+      highlight: 'Scope: bridge + pavement + utilities',
       category: ['ongoing'],
     },
     {
@@ -47,6 +51,7 @@ const Projects = () => {
       title: 'Residential Development Laguna 2023',
       desc: 'Land preparation and infrastructure development for residential project.',
       location: 'Sta. Rosa, Laguna',
+      highlight: 'Site development & infrastructure',
       category: ['completed', 'laguna'],
     },
     {
@@ -56,6 +61,7 @@ const Projects = () => {
       title: 'Commercial Complex Cavite 2025',
       desc: 'Site development and civil works for commercial building.',
       location: 'Dasmariñas, Cavite',
+      highlight: 'Civil works & site readiness',
       category: ['ongoing', 'cavite'],
     },
   ];
@@ -78,7 +84,7 @@ const Projects = () => {
         {/* Section Title */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-mont font-semibold text-primary mb-2">Our Projects</h2>
-          <p className="text-dark">From small to large commercial and industrial projects</p>
+          <p className="text-dark">Selected highlights across commercial and industrial developments</p>
         </div>
 
         {/* Filter Buttons */}
@@ -115,6 +121,7 @@ const Projects = () => {
                 </span>
                 <h3 className="font-mont font-semibold text-lg text-dark mb-2">{project.title}</h3>
                 <p className="text-gray-600 text-sm mb-2">{project.desc}</p>
+                <p className="text-primary text-sm font-medium mb-2">{project.highlight}</p>
                 <p className="text-dark font-medium text-sm">
                   <strong>Location:</strong> {project.location}
                 </p>
