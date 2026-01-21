@@ -35,32 +35,32 @@ const EquipmentFleet = () => {
   ];
 
   return (
-    <section id="equipment" className="py-20 bg-white">
+    <section id="equipment" className="py-16 md:py-20 bg-white">
       <div className="max-w-container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-3">
+        <div className="section-title mb-20">
+          <h2 className="text-primary mb-4">
             Equipment & Fleet
           </h2>
-          <p className="text-gray text-base md:text-lg">
+          <p className="text-gray text-lg max-w-2xl mx-auto">
             Modern equipment assets supporting large-scale site development
           </p>
-          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+          <div className="section-title-underline"></div>
         </div>
 
         {/* Fleet Summary */}
-        <div className="mb-16">
-          <h3 className="text-2xl md:text-3xl font-mont font-semibold text-dark mb-8 text-center">
+        <div className="mb-20">
+          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-12 text-center">
             Fleet Overview
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {fleet.map((item, index) => (
               <div
                 key={index}
-                className="border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+                className="premium-card p-10 text-center hover:border-primary/50"
               >
-                <p className="text-sm uppercase tracking-wide text-gray-500 mb-2">{item.label}</p>
-                <p className="text-2xl font-mont font-semibold text-primary">{item.value}</p>
-                <p className="text-sm text-gray-600 mt-2">{item.desc}</p>
+                <p className="text-xs uppercase tracking-widest font-bold text-gray mb-4">{item.label}</p>
+                <p className="text-4xl md:text-5xl font-mont font-bold text-primary mb-4">{item.value}</p>
+                <p className="text-gray text-base">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -68,29 +68,29 @@ const EquipmentFleet = () => {
 
         {/* Detailed Equipment Inventory */}
         <div>
-          <h3 className="text-2xl md:text-3xl font-mont font-semibold text-dark mb-8 text-center">
+          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-16 text-center">
             Detailed Equipment Inventory
           </h3>
-          <div className="space-y-10">
+          <div className="space-y-16">
             <div>
-              <h4 className="text-xl font-mont font-semibold text-dark mb-4">Dump Trucks</h4>
+              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-8">Dump Trucks</h4>
               <div className="overflow-x-auto bg-white border border-primary/10 rounded-xl shadow-md">
-                <table className="min-w-full text-left text-sm">
+                <table className="min-w-full text-left text-sm md:text-base">
                   <thead className="bg-primary text-white">
                     <tr>
-                      <th className="px-4 py-3 font-semibold">No.</th>
-                      <th className="px-4 py-3 font-semibold">Model / Make</th>
-                      <th className="px-4 py-3 font-semibold">Plate Number</th>
-                      <th className="px-4 py-3 font-semibold">Capacity (kg)</th>
+                      <th className="px-6 py-4 font-mont font-bold">No.</th>
+                      <th className="px-6 py-4 font-mont font-bold">Model / Make</th>
+                      <th className="px-6 py-4 font-mont font-bold">Plate Number</th>
+                      <th className="px-6 py-4 font-mont font-bold">Capacity (kg)</th>
                     </tr>
                   </thead>
                   <tbody>
                     {dumpTrucks.map((row, index) => (
-                      <tr key={row.no} className={index % 2 ? 'bg-light' : 'bg-white'}>
-                        <td className="px-4 py-3 font-semibold text-dark">{row.no}</td>
-                        <td className="px-4 py-3 text-gray">{row.model}</td>
-                        <td className="px-4 py-3 text-gray">{row.plate}</td>
-                        <td className="px-4 py-3 text-gray">{row.capacity}</td>
+                      <tr key={row.no} className={`border-t ${index % 2 ? 'bg-light' : 'bg-white'} hover:bg-blue-50 transition-colors`}>
+                        <td className="px-6 py-4 font-semibold text-dark">{row.no}</td>
+                        <td className="px-6 py-4 text-gray">{row.model}</td>
+                        <td className="px-6 py-4 text-gray font-mono">{row.plate}</td>
+                        <td className="px-6 py-4 text-gray">{row.capacity}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -99,24 +99,24 @@ const EquipmentFleet = () => {
             </div>
 
             <div>
-              <h4 className="text-xl font-mont font-semibold text-dark mb-4">Heavy Equipment</h4>
+              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-8">Heavy Equipment</h4>
               <div className="overflow-x-auto bg-white border border-primary/10 rounded-xl shadow-md">
-                <table className="min-w-full text-left text-sm">
+                <table className="min-w-full text-left text-sm md:text-base">
                   <thead className="bg-primary text-white">
                     <tr>
-                      <th className="px-4 py-3 font-semibold">Type of Equipment</th>
-                      <th className="px-4 py-3 font-semibold">No. of Units</th>
-                      <th className="px-4 py-3 font-semibold">Model</th>
-                      <th className="px-4 py-3 font-semibold">Capacity</th>
+                      <th className="px-6 py-4 font-mont font-bold">Type of Equipment</th>
+                      <th className="px-6 py-4 font-mont font-bold">No. of Units</th>
+                      <th className="px-6 py-4 font-mont font-bold">Model</th>
+                      <th className="px-6 py-4 font-mont font-bold">Capacity</th>
                     </tr>
                   </thead>
                   <tbody>
                     {heavyEquipment.map((row, index) => (
-                      <tr key={row.type + index} className={index % 2 ? 'bg-light' : 'bg-white'}>
-                        <td className="px-4 py-3 font-semibold text-dark">{row.type}</td>
-                        <td className="px-4 py-3 text-gray">{row.units}</td>
-                        <td className="px-4 py-3 text-gray">{row.model}</td>
-                        <td className="px-4 py-3 text-gray">{row.capacity}</td>
+                      <tr key={row.type + index} className={`border-t ${index % 2 ? 'bg-light' : 'bg-white'} hover:bg-blue-50 transition-colors`}>
+                        <td className="px-6 py-4 font-semibold text-dark">{row.type}</td>
+                        <td className="px-6 py-4 text-gray text-center">{row.units}</td>
+                        <td className="px-6 py-4 text-gray">{row.model}</td>
+                        <td className="px-6 py-4 text-gray">{row.capacity}</td>
                       </tr>
                     ))}
                   </tbody>

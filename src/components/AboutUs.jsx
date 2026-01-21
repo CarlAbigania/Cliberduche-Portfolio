@@ -44,60 +44,60 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="py-16 bg-light">
+    <section id="about" className="py-16 md:py-20 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-12 relative">
-          <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-3">
+        <div className="section-title mb-20">
+          <h2 className="text-primary mb-4">
             About Cliberduche Corporation
           </h2>
-          <p className="text-gray text-base">
+          <p className="text-gray text-lg md:text-xl max-w-2xl mx-auto">
             One-stop shop for backfill sourcing, land development, and civil works since 2018
           </p>
           {/* Underline */}
-          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+          <div className="section-title-underline"></div>
         </div>
 
         {/* Company Overview */}
-        <div className="mb-16">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h3 className="text-2xl md:text-3xl font-mont font-semibold text-dark">
+        <div className="mb-24">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div className="space-y-8">
+              <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark">
                 Company Overview
               </h3>
-              <p className="text-gray leading-relaxed">
+              <p className="text-gray text-lg leading-relaxed">
                 Cliberduche Corporation is a full-scale land development and civil works contractor
                 serving CALABARZON and beyond. We supply high-quality backfill materials (sub-base,
                 aggregates, mixed soil, and boulders), execute site development, and deliver civil
                 works with a compliance-led, safety-first approach.
               </p>
-              <p className="text-gray leading-relaxed">
+              <p className="text-gray text-lg leading-relaxed">
                 Established in 2018 and registered with the SEC on November 28, 2018, we operate as
                 a one-stop shop with in-house assets and a network of qualified professionals.
               </p>
 
               {/* Features */}
-              <div className="grid sm:grid-cols-2 gap-6 mt-6">
+              <div className="grid sm:grid-cols-2 gap-6 mt-10">
                 {features.map((feat, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-md shadow-primary/30">
-                      <i className={`fas ${feat.icon}`}></i>
+                  <div key={i} className="flex items-start gap-5 group">
+                    <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-lg group-hover:shadow-primary/50 transition-all duration-300">
+                      <i className={`fas ${feat.icon} text-lg`}></i>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-dark">{feat.title}</h4>
-                      <p className="text-gray text-sm">{feat.desc}</p>
+                      <h4 className="font-semibold text-dark text-lg">{feat.title}</h4>
+                      <p className="text-gray text-base mt-1">{feat.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="text-xl font-mont font-semibold text-dark mb-4">Key Milestones</h4>
-              <ul className="space-y-4">
+            <div className="premium-card p-8 md:p-10">
+              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-8">Key Milestones</h4>
+              <ul className="space-y-6">
                 {highlights.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="mt-1 h-3 w-3 rounded-full bg-secondary"></span>
-                    <span className="text-gray text-sm leading-relaxed">{item}</span>
+                  <li key={index} className="flex items-start gap-4">
+                    <span className="mt-2 h-3 w-3 rounded-full bg-secondary flex-shrink-0"></span>
+                    <span className="text-gray text-base leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -106,113 +106,113 @@ const AboutUs = () => {
         </div>
 
         {/* Mission & Vision */}
-        <div className="mb-16">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-2">
+        <div className="mb-24">
+          <div className="text-center mb-16">
+            <h3 className="text-primary mb-4">
               Mission & Vision
             </h3>
-            <p className="text-gray text-base md:text-lg">
+            <p className="text-gray text-lg max-w-2xl mx-auto">
               Guiding principles that shape our work and long-term direction
             </p>
-            <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+            <div className="section-title-underline"></div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {missionVision.map((item, index) => (
               <div
                 key={index}
-                className="bg-white border border-primary/10 rounded-xl p-8 shadow-md"
+                className="premium-card p-10 border-l-4 border-secondary"
               >
-                <h4 className="text-2xl font-mont font-semibold text-primary mb-4">
+                <h4 className="text-2xl md:text-3xl font-mont font-bold text-primary mb-6">
                   {item.title}
                 </h4>
-                <p className="text-gray leading-relaxed">{item.desc}</p>
+                <p className="text-gray text-lg leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Key Statistics */}
-        <div className="mb-16">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-mont font-semibold text-primary mb-2">Key Statistics</h3>
-            <p className="text-gray">Our capabilities at a glance</p>
-            <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+        <div className="mb-24">
+          <div className="text-center mb-16">
+            <h3 className="text-primary mb-4">Key Statistics</h3>
+            <p className="text-gray text-lg">Our capabilities at a glance</p>
+            <div className="section-title-underline"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="border border-primary/10 bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow text-center">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray mb-3">Years in Operation</p>
-              <p className="text-2xl font-mont font-semibold text-primary">2018–Present</p>
-              <p className="text-sm text-gray mt-3">Registered November 28, 2018</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="premium-card p-8 text-center hover:border-secondary/50">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray font-semibold mb-4">Years in Operation</p>
+              <p className="text-3xl md:text-4xl font-mont font-bold text-primary">2018–Now</p>
+              <p className="text-sm text-gray mt-4">Registered November 28, 2018</p>
             </div>
-            <div className="border border-primary/10 bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow text-center">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray mb-3">Backfill Resources</p>
-              <p className="text-2xl font-mont font-semibold text-primary">22.2M+ cu.m.</p>
-              <p className="text-sm text-gray mt-3">Calamba + Silang sites combined</p>
+            <div className="premium-card p-8 text-center hover:border-secondary/50">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray font-semibold mb-4">Backfill Resources</p>
+              <p className="text-3xl md:text-4xl font-mont font-bold text-primary">22.2M+</p>
+              <p className="text-sm text-gray mt-4">Cu.m. at both sites</p>
             </div>
-            <div className="border border-primary/10 bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow text-center">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray mb-3">Coverage</p>
-              <p className="text-2xl font-mont font-semibold text-primary">CALABARZON+</p>
-              <p className="text-sm text-gray mt-3">Laguna, Cavite, and beyond</p>
+            <div className="premium-card p-8 text-center hover:border-secondary/50">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray font-semibold mb-4">Coverage</p>
+              <p className="text-3xl md:text-4xl font-mont font-bold text-primary">CALABARZON+</p>
+              <p className="text-sm text-gray mt-4">Laguna, Cavite, beyond</p>
             </div>
-            <div className="border border-primary/10 bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow text-center">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray mb-3">Service Scope</p>
-              <p className="text-2xl font-mont font-semibold text-primary">One-Stop Shop</p>
-              <p className="text-sm text-gray mt-3">Backfill to civil works</p>
+            <div className="premium-card p-8 text-center hover:border-secondary/50">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray font-semibold mb-4">Service Scope</p>
+              <p className="text-3xl md:text-4xl font-mont font-bold text-primary">One-Stop</p>
+              <p className="text-sm text-gray mt-4">Backfill to civil works</p>
             </div>
           </div>
         </div>
 
         {/* Core Values */}
-        <div>
+        <div className="mb-24">
           <div className="text-center mb-16">
-            <h3 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-2">Our Core Values</h3>
+            <h3 className="text-primary mb-4">Our Core Values</h3>
             <p className="text-gray text-lg">The foundation of everything we do</p>
-            <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+            <div className="section-title-underline"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {coreValues.map((value, i) => (
               <div
                 key={i}
-                className="bg-white p-8 rounded-lg shadow-md text-center transition-transform hover:-translate-y-2"
+                className="premium-card p-10 text-center"
               >
-                <div className="text-primary text-5xl mb-6">
+                <div className="text-primary text-6xl mb-8 h-20 flex items-center justify-center">
                   <i className={`fas ${value.icon}`}></i>
                 </div>
-                <h4 className="text-xl md:text-2xl font-mont font-semibold mb-4">{value.title}</h4>
-                <p className="text-dark text-base leading-relaxed">{value.desc}</p>
+                <h4 className="text-2xl md:text-3xl font-mont font-bold mb-6">{value.title}</h4>
+                <p className="text-dark text-base md:text-lg leading-relaxed">{value.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mt-16">
-          <div className="bg-primary text-white rounded-lg p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-mont font-semibold mb-4">Partner with Cliberduche Corporation</h3>
-            <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+        <div className="text-center mt-24">
+          <div className="bg-gradient-to-r from-primary to-accent text-white rounded-2xl p-12 md:p-16 max-w-4xl mx-auto shadow-premium">
+            <h3 className="text-3xl md:text-4xl font-mont font-bold mb-6">Partner with Cliberduche Corporation</h3>
+            <p className="text-white/90 mb-10 max-w-2xl mx-auto text-lg">
               Experience our commitment to quality, safety, and timely delivery. Let's discuss your project needs.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="#rfq"
-                className="bg-secondary text-primary font-semibold py-3 px-8 rounded shadow-lg shadow-secondary/30 hover:shadow-secondary/50 hover:-translate-y-0.5 transition-all"
+                className="btn-primary"
               >
                 Get Free Quote
               </a>
               <a
                 href="mailto:cliberduche.corp@yahoo.com"
-                className="border-2 border-white/60 text-white bg-white/10 hover:bg-white hover:text-primary font-semibold py-3 px-8 rounded transition-all"
+                className="btn-secondary"
               >
                 Email Us
               </a>
               <a
                 href="tel:+63495466107"
-                className="border-2 border-white/60 text-white bg-white/10 hover:bg-white hover:text-primary font-semibold py-3 px-8 rounded transition-all"
+                className="btn-secondary"
               >
-                Call +63 49 546-6107
+                Call Now
               </a>
             </div>
           </div>

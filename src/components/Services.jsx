@@ -13,51 +13,51 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="py-16 bg-fixed bg-cover bg-center"
+      className="py-16 md:py-20 bg-fixed bg-cover bg-center relative"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(8, 55, 124, 0.78), rgba(8, 55, 124, 0.78)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+          "linear-gradient(rgba(8, 55, 124, 0.82), rgba(8, 55, 124, 0.82)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
       }}
     >
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-mont font-semibold text-white">Our Services</h2>
-          <p className="text-white/80 mt-2">Integrated services from sourcing to execution</p>
-          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+        <div className="text-center mb-20">
+          <h2 className="text-white mb-4">Our Services</h2>
+          <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto">Integrated services from sourcing to execution</p>
+          <div className="block w-20 h-1 bg-secondary mx-auto mt-6 rounded"></div>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white/95 backdrop-blur-sm rounded-lg p-8 shadow-lg border border-white/60 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
+              className="bg-white/95 backdrop-blur-md rounded-xl p-10 shadow-lg border border-white/60 hover:shadow-2xl hover:-translate-y-3 transition-all duration-300 group"
             >
-              <div className="text-primary text-4xl mb-6 flex items-center justify-center">
+              <div className="text-primary text-5xl mb-8 h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <i className={`fas ${service.icon}`}></i>
               </div>
-              <h3 className="text-xl md:text-2xl font-mont font-semibold mb-3 text-dark">{service.title}</h3>
-              <p className="text-gray-700 leading-relaxed">{service.desc}</p>
+              <h3 className="text-xl md:text-2xl font-mont font-bold mb-4 text-dark">{service.title}</h3>
+              <p className="text-gray text-base md:text-lg leading-relaxed">{service.desc}</p>
             </div>
           ))}
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mt-12">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-mont font-semibold text-white mb-4">Ready to Start Your Project?</h3>
-            <p className="text-white/90 mb-6">Get a customized quote for your land development or civil works needs</p>
+        <div className="text-center mt-20">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-12 md:p-16 max-w-3xl mx-auto border border-white/30">
+            <h3 className="text-3xl md:text-4xl font-mont font-bold text-white mb-6">Ready to Start Your Project?</h3>
+            <p className="text-white/90 mb-10 text-lg">Get a customized quote for your land development or civil works needs</p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="#rfq"
-                className="bg-secondary text-primary font-semibold py-3 px-8 rounded shadow-lg shadow-secondary/30 hover:shadow-secondary/50 hover:-translate-y-0.5 transition-all"
+                className="btn-primary"
               >
                 Request Quote
               </a>
               <a
                 href="tel:+63495466107"
-                className="border-2 border-white/60 text-white bg-white/10 hover:bg-white hover:text-primary font-semibold py-3 px-8 rounded transition-all"
+                className="btn-secondary"
               >
                 Call Now
               </a>

@@ -29,39 +29,43 @@ const MeetOurTeam = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-24 md:py-32 bg-white">
       <div className="max-w-container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-2">Meet Our Team</h2>
-          <p className="text-gray">Experienced professionals dedicated to your project's success</p>
-          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+        <div className="section-title mb-20">
+          <h2 className="text-primary mb-4">Meet Our Team</h2>
+          <p className="text-gray text-lg max-w-2xl mx-auto">Experienced professionals dedicated to your project's success</p>
+          <div className="section-title-underline"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-20">
           {teamMembers.map((member, index) => (
-            <div key={index} className="text-center">
-              <div className="relative mb-4">
+            <div key={index} className="text-center group">
+              <div className="relative mb-8">
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-32 h-32 rounded-full mx-auto object-cover shadow-md"
+                  className="w-40 h-40 rounded-xl mx-auto object-cover shadow-lg shadow-primary/20 group-hover:shadow-lg group-hover:shadow-primary/40 transition-all duration-300"
                 />
-                <div className="absolute inset-0 rounded-full bg-primary/10 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <div className="text-primary font-semibold">View Profile</div>
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/80 to-accent/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                  <div className="text-white font-mont font-bold text-center px-4">
+                    <p className="text-lg">Learn More</p>
+                  </div>
                 </div>
               </div>
-              <h3 className="text-xl font-mont font-semibold text-dark mb-1">{member.name}</h3>
-              <p className="text-secondary font-medium mb-3">{member.position}</p>
-              <p className="text-gray text-sm leading-relaxed">{member.bio}</p>
+              <h3 className="text-2xl font-mont font-bold text-dark mb-2">{member.name}</h3>
+              <p className="text-secondary font-mont font-bold mb-4 text-base">{member.position}</p>
+              <p className="text-gray text-base leading-relaxed">{member.bio}</p>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-gray mb-6">Our team combines decades of experience with innovative approaches</p>
+        <div className="text-center bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-12 md:p-16">
+          <p className="text-gray text-lg md:text-xl mb-8 font-medium max-w-2xl mx-auto">
+            Our team combines decades of experience with innovative approaches to deliver excellence
+          </p>
           <a
             href="#contact"
-            className="bg-primary text-white px-8 py-3 rounded-lg shadow-md hover:bg-primary-dark transition-colors font-medium"
+            className="btn-primary inline-block text-lg"
           >
             Work With Our Team
           </a>

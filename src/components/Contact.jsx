@@ -8,18 +8,18 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-light">
+    <section id="contact" className="py-16 md:py-20 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-3">Contact Us</h2>
-          <p className="text-gray">Reach us for backfill sourcing, site development, and civil works inquiries</p>
-          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+        <div className="section-title mb-20">
+          <h2 className="text-primary mb-4">Contact Us</h2>
+          <p className="text-gray text-lg max-w-2xl mx-auto">Reach us for backfill sourcing, site development, and civil works inquiries</p>
+          <div className="section-title-underline"></div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-10">
+        <div className="flex flex-col lg:flex-row gap-16">
           {/* Contact Info */}
-          <div className="lg:w-1/2 space-y-6">
+          <div className="lg:w-1/2 space-y-10">
             {[
               {
                 icon: 'fa-map-marker-alt',
@@ -47,51 +47,59 @@ const Contact = () => {
                 content: 'Monday - Friday: 8:00 AM - 6:00 PM\nSaturday: 8:00 AM - 12:00 PM',
               },
             ].map((item, i) => (
-              <div key={i} className="flex items-start gap-4">
-                <div className="w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full flex-shrink-0 mt-1">
-                  <i className={`fas ${item.icon}`}></i>
+              <div key={i} className="flex items-start gap-6 group">
+                <div className="w-16 h-16 flex items-center justify-center bg-gradient-to-br from-primary to-accent text-white rounded-lg shadow-lg shadow-primary/30 group-hover:shadow-lg group-hover:shadow-primary/50 transition-all duration-300 flex-shrink-0">
+                  <i className={`fas ${item.icon} text-xl`}></i>
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-dark mb-1">{item.title}</h4>
-                  <p className="text-gray whitespace-pre-line">{item.content}</p>
+                  <h4 className="text-lg md:text-xl font-mont font-bold text-dark mb-2">{item.title}</h4>
+                  <p className="text-gray whitespace-pre-line text-base leading-relaxed">{item.content}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Contact Form + Map */}
-          <div className="lg:w-1/2 space-y-8">
+          <div className="lg:w-1/2 space-y-10">
             {/* Form */}
-            <div className="bg-white p-8 rounded-lg shadow-md border border-primary/10">
-              <h3 className="text-xl font-semibold text-primary mb-6">Send us a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Subject"
-                  className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-                <textarea
-                  placeholder="Your Message"
-                  rows="5"
-                  className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary resize-y"
-                  required
-                ></textarea>
+            <div className="premium-card p-10">
+              <h3 className="text-2xl md:text-3xl font-mont font-bold text-primary mb-8">Send us a Message</h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    className="w-full px-4 py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    className="w-full px-4 py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Subject"
+                    className="w-full px-4 py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                    required
+                  />
+                </div>
+                <div>
+                  <textarea
+                    placeholder="Your Message"
+                    rows="5"
+                    className="w-full px-4 py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 resize-none"
+                    required
+                  ></textarea>
+                </div>
                 <button
                   type="submit"
-                  className="bg-secondary text-primary font-semibold px-6 py-3 rounded shadow-md shadow-secondary/30 hover:-translate-y-0.5 transition-all"
+                  className="btn-primary w-full md:w-auto text-center"
                 >
                   Send Message
                 </button>
@@ -99,13 +107,13 @@ const Contact = () => {
             </div>
 
             {/* Map */}
-            <div className="bg-white p-8 rounded-lg shadow-md border border-primary/10">
-              <h3 className="text-xl font-semibold text-primary mb-4">Find Us</h3>
+            <div className="premium-card p-10">
+              <h3 className="text-2xl md:text-3xl font-mont font-bold text-primary mb-6">Find Us</h3>
               <iframe
                 src="https://maps.google.com/maps?q=Cliberduche%20Corporation%2C%203rd%20floor%2C%20CBD%20building%2C%20Lot%203739%20National%20Highway%2C%20Cabuyao%20City%2C%204025%20Laguna&output=embed"
                 width="100%"
-                height="300"
-                className="rounded-md shadow-inner"
+                height="350"
+                className="rounded-lg shadow-md"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"

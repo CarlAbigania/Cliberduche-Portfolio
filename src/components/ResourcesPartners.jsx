@@ -33,21 +33,21 @@ const ResourcesPartners = () => {
   ];
 
   return (
-    <section id="resources" className="py-16 bg-light">
+    <section id="resources" className="py-16 md:py-20 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-2">
+        <div className="section-title mb-20">
+          <h2 className="text-primary mb-4">
             Resources & Partners
           </h2>
-          <p className="text-gray text-base md:text-lg">
+          <p className="text-gray text-lg max-w-2xl mx-auto">
             Our assets and trusted partners supporting project success
           </p>
-          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+          <div className="section-title-underline"></div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-20">
           {[
             {
               number: '20M+',
@@ -72,98 +72,102 @@ const ResourcesPartners = () => {
           ].map((stat, i) => (
             <div
               key={i}
-              className="bg-white rounded-lg p-6 shadow-md text-center border border-primary/10 hover:shadow-lg transition-shadow"
+              className="premium-card p-8 text-center hover:border-secondary/50"
             >
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+              <div className="text-4xl md:text-5xl font-mont font-bold text-primary mb-4">
                 {stat.number}
               </div>
-              <h3 className="text-lg font-semibold text-dark">{stat.label}</h3>
-              <p className="text-gray text-sm mt-1">{stat.desc}</p>
+              <h3 className="text-lg md:text-xl font-mont font-bold text-dark mb-2">{stat.label}</h3>
+              <p className="text-gray text-base mt-2">{stat.desc}</p>
             </div>
           ))}
         </div>
 
         {/* Land Development Sites */}
-        <div className="mb-16">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-mont font-semibold text-primary">
+        <div className="mb-20">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-mont font-bold text-primary mb-4">
               Land Development Sites
             </h3>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-10">
             {/* Calamba Site */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-primary/10 hover:shadow-lg transition-shadow">
-              <h4 className="text-xl md:text-2xl font-semibold text-dark mb-3">
+            <div className="premium-card p-10 border-l-4 border-secondary">
+              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6">
                 Calamba City Site
               </h4>
-              <p>
-                <strong>Coordinates:</strong> 14°08'32.0"N 121°09'37.0"E
-              </p>
-              <p>
-                <strong>Address:</strong> 45R6+V4J Calamba, Laguna
-              </p>
-              <p>
-                <strong>Capacity:</strong> Approximately 20 million cubic meters of
-                backfilling materials
-              </p>
-              <p>
-                Covering 7 lots with a total volume of 19,580,004.6 cubic meters of
-                excess backfill materials (Jastifias).
-              </p>
+              <div className="space-y-3 text-gray text-base md:text-lg">
+                <p>
+                  <strong className="text-dark">Coordinates:</strong> 14°08'32.0"N 121°09'37.0"E
+                </p>
+                <p>
+                  <strong className="text-dark">Address:</strong> 45R6+V4J Calamba, Laguna
+                </p>
+                <p>
+                  <strong className="text-dark">Capacity:</strong> Approximately 20 million cubic meters of
+                  backfilling materials
+                </p>
+                <p>
+                  Covering 7 lots with a total volume of 19,580,004.6 cubic meters of
+                  excess backfill materials (Jastifias).
+                </p>
+              </div>
             </div>
 
             {/* Silang Site */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-primary/10 hover:shadow-lg transition-shadow">
-              <h4 className="text-xl md:text-2xl font-semibold text-dark mb-3">
+            <div className="premium-card p-10 border-l-4 border-secondary">
+              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6">
                 Silang, Cavite Site
               </h4>
-              <p>
-                <strong>Coordinates:</strong> 14°15'02"N 120°59'12"E
-              </p>
-              <p>
-                <strong>Address:</strong> Sabutan, 7X2P+6MF Silang, Cavite
-              </p>
-              <p>
-                <strong>Capacity:</strong> Approximately 2.2 million cubic meters of
-                backfilling materials
-              </p>
-              <p>
-                Covering 5 lots with a total volume of 2,241,000 cubic meters of
-                excess backfill materials (Sitikis).
-              </p>
+              <div className="space-y-3 text-gray text-base md:text-lg">
+                <p>
+                  <strong className="text-dark">Coordinates:</strong> 14°15'02"N 120°59'12"E
+                </p>
+                <p>
+                  <strong className="text-dark">Address:</strong> Sabutan, 7X2P+6MF Silang, Cavite
+                </p>
+                <p>
+                  <strong className="text-dark">Capacity:</strong> Approximately 2.2 million cubic meters of
+                  backfilling materials
+                </p>
+                <p>
+                  Covering 5 lots with a total volume of 2,241,000 cubic meters of
+                  excess backfill materials (Sitikis).
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Supplier Network */}
         <div>
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-mont font-semibold text-primary">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-mont font-bold text-primary mb-4">
               Supplier Network
             </h3>
-            <p className="text-gray">Trusted partners supporting materials and operational readiness</p>
+            <p className="text-gray text-lg">Trusted partners supporting materials and operational readiness</p>
           </div>
 
           <div className="overflow-x-auto bg-white border border-primary/10 rounded-xl shadow-md">
-            <table className="min-w-full text-left text-sm">
+            <table className="min-w-full text-left text-sm md:text-base">
               <thead className="bg-primary text-white">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">Company</th>
-                  <th className="px-4 py-3 font-semibold">Address</th>
-                  <th className="px-4 py-3 font-semibold">Contact No.</th>
-                  <th className="px-4 py-3 font-semibold">Contact Person</th>
-                  <th className="px-4 py-3 font-semibold">Supplier Of</th>
+                  <th className="px-6 py-4 font-mont font-bold">Company</th>
+                  <th className="px-6 py-4 font-mont font-bold">Address</th>
+                  <th className="px-6 py-4 font-mont font-bold">Contact No.</th>
+                  <th className="px-6 py-4 font-mont font-bold">Contact Person</th>
+                  <th className="px-6 py-4 font-mont font-bold">Supplier Of</th>
                 </tr>
               </thead>
               <tbody>
                 {suppliers.map((row, index) => (
-                  <tr key={row.company} className={index % 2 ? 'bg-light' : 'bg-white'}>
-                    <td className="px-4 py-3 font-semibold text-dark">{row.company}</td>
-                    <td className="px-4 py-3 text-gray">{row.address}</td>
-                    <td className="px-4 py-3 text-gray">{row.contact}</td>
-                    <td className="px-4 py-3 text-gray">{row.person}</td>
-                    <td className="px-4 py-3 text-gray">{row.supply}</td>
+                  <tr key={row.company} className={`border-t ${index % 2 ? 'bg-light' : 'bg-white'} hover:bg-blue-50 transition-colors`}>
+                    <td className="px-6 py-4 font-semibold text-dark">{row.company}</td>
+                    <td className="px-6 py-4 text-gray">{row.address}</td>
+                    <td className="px-6 py-4 text-gray">{row.contact}</td>
+                    <td className="px-6 py-4 text-gray">{row.person}</td>
+                    <td className="px-6 py-4 text-gray font-semibold">{row.supply}</td>
                   </tr>
                 ))}
               </tbody>

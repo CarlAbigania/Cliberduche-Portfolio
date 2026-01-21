@@ -24,36 +24,35 @@ const ComplianceSafety = () => {
   ];
 
   return (
-    <section id="compliance" className="py-20 bg-light">
+    <section id="compliance" className="py-16 md:py-20 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-12 relative">
-          <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-3">
+        <div className="section-title mb-20">
+          <h2 className="text-primary mb-4">
             Compliance & Safety
           </h2>
-          <p className="text-gray text-base">
+          <p className="text-gray text-lg max-w-2xl mx-auto">
             Legal compliance, certifications, and unwavering safety commitment
           </p>
-          {/* Underline */}
-          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+          <div className="section-title-underline"></div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 mb-12">
+        <div className="grid lg:grid-cols-2 gap-16 mb-20">
           {/* Compliance Registrations */}
           <div>
-            <h3 className="text-2xl md:text-3xl font-mont font-semibold text-dark mb-8">
+            <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10">
               Government Registrations & Permits
             </h3>
             <div className="grid grid-cols-1 gap-4">
               {complianceItems.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-lg p-4 shadow-sm border border-primary/10 flex items-center gap-3"
+                  className="premium-card p-5 flex items-center gap-4 hover:border-secondary/50"
                 >
-                  <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/20">
-                    <i className="fas fa-check text-sm"></i>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/30">
+                    <i className="fas fa-check-circle text-sm"></i>
                   </div>
-                  <p className="text-dark font-medium text-sm">{item}</p>
+                  <p className="text-dark font-semibold text-base">{item}</p>
                 </div>
               ))}
             </div>
@@ -61,32 +60,32 @@ const ComplianceSafety = () => {
 
           {/* Safety Commitment */}
           <div>
-            <h3 className="text-2xl md:text-3xl font-mont font-semibold text-dark mb-8">
+            <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10">
               Safety Commitment
             </h3>
-            <div className="bg-white border border-primary/10 rounded-xl p-6 shadow-md mb-6">
-              <p className="text-gray leading-relaxed mb-4">
+            <div className="premium-card border-l-4 border-secondary p-10 mb-8">
+              <p className="text-gray text-lg leading-relaxed mb-6">
                 CLIBERDUCHE CORPORATION is vitally interested in its employees' health and safety.
                 Protecting employees from injury or occupational disease is a major, continuing
                 objective. As President, I personally promise that every reasonable precaution will be
                 taken to protect our workers. Hiring experienced Safety Officers and maintaining strict
                 safety practices before, during, and after project execution is a core commitment.
               </p>
-              <p className="text-gray leading-relaxed">
+              <p className="text-gray text-lg leading-relaxed">
                 Commitment to health and safety must form an integral part of this organization from
                 the president to the workers. Signed November 2018.
               </p>
             </div>
 
-            <div className="bg-light border border-primary/10 rounded-xl p-6 shadow-md">
-              <h4 className="text-xl font-mont font-semibold text-dark mb-4">
+            <div className="premium-card border-l-4 border-secondary p-10">
+              <h4 className="text-2xl font-mont font-bold text-dark mb-6">
                 Safety Principles
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {safetyCommitments.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-secondary"></span>
-                    <span className="text-gray text-sm leading-relaxed">{item}</span>
+                  <li key={index} className="flex items-start gap-4">
+                    <span className="mt-2 h-3 w-3 rounded-full bg-secondary flex-shrink-0"></span>
+                    <span className="text-gray text-base leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -95,33 +94,31 @@ const ComplianceSafety = () => {
         </div>
 
         {/* Certifications Gallery */}
-        <div>
-          <h3 className="text-2xl md:text-3xl font-mont font-semibold text-dark mb-6 text-center">
+        <div className="mb-20">
+          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-12 text-center">
             Certificate Gallery
           </h3>
-          <div className="text-center py-12">
-            <div className="bg-gray-100 p-8 rounded-lg max-w-md mx-auto">
-              <i className="fas fa-certificate text-4xl text-gray-400 mb-4"></i>
-              <p className="text-gray-600">Certificate images will be added here once validated.</p>
+          <div className="text-center py-16">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-16 rounded-xl max-w-2xl mx-auto border-2 border-primary/20">
+              <i className="fas fa-certificate text-6xl text-primary/30 mb-6"></i>
+              <p className="text-gray text-lg">Certificate images will be added here once validated.</p>
             </div>
           </div>
         </div>
 
         {/* Document Downloads */}
-        <div className="mt-12">
-          <h3 className="text-2xl md:text-3xl font-mont font-semibold text-dark mb-6 text-center">
+        <div className="text-center">
+          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10">
             Document Downloads
           </h3>
-          <div className="flex justify-center">
-            <a
-              href="/Company Profile 2026.pdf"
-              download="Company_Profile_2026.pdf"
-              className="bg-primary text-white px-6 py-3 rounded-lg shadow-md hover:bg-primary-dark transition-colors flex items-center gap-2"
-            >
-              <i className="fas fa-download"></i>
-              Download Company Profile PDF
-            </a>
-          </div>
+          <a
+            href="/Company Profile 2026.pdf"
+            download="Company_Profile_2026.pdf"
+            className="btn-primary inline-flex items-center gap-3 text-lg"
+          >
+            <i className="fas fa-download text-xl"></i>
+            Download Company Profile PDF
+          </a>
         </div>
       </div>
     </section>

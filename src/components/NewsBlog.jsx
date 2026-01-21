@@ -29,50 +29,54 @@ const NewsBlog = () => {
   ];
 
   return (
-    <section className="py-20 bg-light">
+    <section className="py-24 md:py-32 bg-light">
       <div className="max-w-container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-2">Latest News & Updates</h2>
-          <p className="text-gray">Stay informed about our latest projects and industry developments</p>
-          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+        <div className="section-title mb-20">
+          <h2 className="text-primary mb-4">Latest News & Updates</h2>
+          <p className="text-gray text-lg max-w-2xl mx-auto">Stay informed about our latest projects and industry developments</p>
+          <div className="section-title-underline"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
           {newsItems.map((item) => (
-            <article key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <article key={item.id} className="premium-card overflow-hidden group">
               <div
-                className="h-48 bg-cover bg-center"
+                className="h-56 bg-cover bg-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300"
                 style={{ backgroundImage: `url(${item.image})` }}
-              ></div>
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-semibold text-secondary bg-secondary/10 px-2 py-1 rounded">
+              >
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
+              </div>
+              <div className="p-8">
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <span className="text-xs font-mont font-bold text-secondary bg-secondary/15 px-3 py-1 rounded-full uppercase">
                     {item.category}
                   </span>
-                  <time className="text-xs text-gray-500">{new Date(item.date).toLocaleDateString()}</time>
+                  <time className="text-xs text-gray font-semibold">{new Date(item.date).toLocaleDateString()}</time>
                 </div>
-                <h3 className="text-xl font-mont font-semibold text-dark mb-3 hover:text-primary transition-colors">
+                <h3 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4 group-hover:text-primary transition-colors duration-300 line-clamp-2">
                   {item.title}
                 </h3>
-                <p className="text-gray text-sm leading-relaxed mb-4">
+                <p className="text-gray text-base leading-relaxed mb-6 line-clamp-3">
                   {item.excerpt}
                 </p>
                 <a
                   href="#"
-                  className="text-primary font-medium text-sm hover:text-primary-dark transition-colors"
+                  className="inline-flex items-center text-primary font-bold hover:text-accent transition-all duration-300 group/link"
                 >
-                  Read More →
+                  Read More
+                  <i className="fas fa-arrow-right ml-2 group-hover/link:translate-x-1 transition-transform duration-300"></i>
                 </a>
               </div>
             </article>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center">
           <a
             href="#contact"
-            className="bg-primary text-white px-8 py-3 rounded-lg shadow-md hover:bg-primary-dark transition-colors font-medium"
+            className="btn-primary inline-block text-lg"
           >
+            <i className="fas fa-bell mr-2"></i>
             Subscribe for Updates
           </a>
         </div>

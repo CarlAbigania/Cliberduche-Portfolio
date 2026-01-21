@@ -131,27 +131,27 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-16 bg-light">
+    <section id="projects" className="py-16 md:py-20 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-mont font-semibold text-primary mb-2">Our Projects</h2>
-          <p className="text-gray">Selected highlights across commercial and industrial developments</p>
-          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+        <div className="section-title mb-20">
+          <h2 className="text-primary mb-4">Our Projects</h2>
+          <p className="text-gray text-lg max-w-2xl mx-auto">Selected highlights across commercial and industrial developments</p>
+          <div className="section-title-underline"></div>
         </div>
 
         {/* Interactive Project Map */}
         <ProjectMap projects={projects} onProjectClick={handleProjectClick} />
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
           {filters.map((filter) => (
             <button
               key={filter.key}
               onClick={() => setActiveFilter(filter.key)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                 activeFilter === filter.key
-                  ? 'bg-primary text-white border border-primary'
+                  ? 'bg-primary text-white border border-primary shadow-lg shadow-primary/30'
                   : 'bg-white text-dark border border-primary/20 hover:bg-primary hover:text-white'
               }`}
             >
@@ -161,29 +161,31 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-white rounded-lg shadow-md border border-primary/10 overflow-hidden hover:-translate-y-2 hover:shadow-lg transition-all"
+              className="premium-card overflow-hidden"
             >
               <div
-                className="h-56 bg-cover bg-center"
+                className="h-64 bg-cover bg-center relative overflow-hidden group"
                 style={{ backgroundImage: `url(${project.img})` }}
-              ></div>
-              <div className="p-5">
-                <span className="inline-block px-2 py-1 bg-secondary text-primary text-xs font-semibold rounded mb-2">
+              >
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300"></div>
+              </div>
+              <div className="p-8">
+                <span className="inline-block px-3 py-1 bg-secondary text-primary text-xs font-bold rounded-full mb-4 uppercase">
                   {project.tag}
                 </span>
-                <h3 className="font-mont font-semibold text-lg text-dark mb-2">{project.title}</h3>
-                <p className="text-gray-600 text-sm mb-2">{project.desc}</p>
-                <p className="text-primary text-sm font-medium mb-2">{project.highlight}</p>
-                <p className="text-dark font-medium text-sm mb-3">
+                <h3 className="font-mont font-bold text-lg md:text-xl text-dark mb-3">{project.title}</h3>
+                <p className="text-gray text-base mb-3 line-clamp-2">{project.desc}</p>
+                <p className="text-primary text-sm font-semibold mb-4">{project.highlight}</p>
+                <p className="text-dark font-semibold text-sm mb-6">
                   <strong>Location:</strong> {project.location}
                 </p>
                 <button
                   onClick={() => handleProjectClick(project)}
-                  className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors text-sm font-medium"
+                  className="w-full btn-dark py-2 text-base"
                 >
                   View Case Study
                 </button>
@@ -193,13 +195,13 @@ const Projects = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mt-12">
-          <div className="bg-primary text-white rounded-lg p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-mont font-semibold mb-4">Have a Similar Project?</h3>
-            <p className="text-white/90 mb-6">Let's discuss how we can bring your vision to life with our proven expertise</p>
+        <div className="text-center mb-24">
+          <div className="bg-gradient-to-r from-primary to-accent text-white rounded-2xl p-12 md:p-16 max-w-4xl mx-auto shadow-premium">
+            <h3 className="text-3xl md:text-4xl font-mont font-bold mb-6">Have a Similar Project?</h3>
+            <p className="text-white/90 mb-10 max-w-2xl mx-auto text-lg">Let's discuss how we can bring your vision to life with our proven expertise</p>
             <a
               href="#rfq"
-              className="bg-secondary text-primary font-semibold py-3 px-8 rounded shadow-lg shadow-secondary/30 hover:shadow-secondary/50 hover:-translate-y-0.5 transition-all inline-block"
+              className="btn-primary inline-block"
             >
               Start Your Project
             </a>
@@ -208,75 +210,77 @@ const Projects = () => {
 
         {/* Case Study Modal */}
         {showModal && selectedProject && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-2xl font-mont font-semibold text-dark">{selectedProject.title}</h3>
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+            <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+              <div className="p-8 md:p-10">
+                <div className="flex justify-between items-start mb-8">
+                  <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark pr-8">{selectedProject.title}</h3>
                   <button
                     onClick={closeModal}
-                    className="text-gray-500 hover:text-dark text-2xl"
+                    className="text-gray-400 hover:text-dark text-3xl font-light flex-shrink-0"
                   >
-                    &times;
+                    ×
                   </button>
                 </div>
                 <div
-                  className="h-64 bg-cover bg-center rounded-lg mb-4"
+                  className="h-80 bg-cover bg-center rounded-xl mb-8 shadow-md"
                   style={{ backgroundImage: `url(${selectedProject.img})` }}
                 ></div>
-                <div className="space-y-4">
+                <div className="space-y-8">
                   <div>
-                    <h4 className="font-semibold text-dark">Project Overview</h4>
-                    <p className="text-gray">{selectedProject.desc}</p>
+                    <h4 className="font-mont font-bold text-dark text-xl mb-3">Project Overview</h4>
+                    <p className="text-gray text-lg leading-relaxed">{selectedProject.desc}</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-mont font-bold text-dark text-lg mb-2">Location</h4>
+                      <p className="text-gray text-base">{selectedProject.location}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-mont font-bold text-dark text-lg mb-2">Status</h4>
+                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
+                        selectedProject.tag === 'Ongoing' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
+                      }`}>
+                        {selectedProject.tag}
+                      </span>
+                    </div>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-dark">Location</h4>
-                    <p className="text-gray">{selectedProject.location}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-dark">Scope & Highlights</h4>
-                    <p className="text-gray">{selectedProject.highlight}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-dark">Status</h4>
-                    <span className={`inline-block px-2 py-1 rounded text-sm font-medium ${
-                      selectedProject.tag === 'Ongoing' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
-                    }`}>
-                      {selectedProject.tag}
-                    </span>
+                    <h4 className="font-mont font-bold text-dark text-xl mb-3">Scope & Highlights</h4>
+                    <p className="text-gray text-lg leading-relaxed">{selectedProject.highlight}</p>
                   </div>
                   {selectedProject.metrics && (
                     <div>
-                      <h4 className="font-semibold text-dark">Project Metrics</h4>
-                      <div className="grid grid-cols-3 gap-4 mt-2">
+                      <h4 className="font-mont font-bold text-dark text-xl mb-6">Project Metrics</h4>
+                      <div className="grid grid-cols-3 gap-6 bg-light p-6 rounded-lg">
                         <div className="text-center">
-                          <div className="text-2xl font-bold text-primary">{selectedProject.metrics.area}</div>
-                          <div className="text-sm text-gray">Area</div>
+                          <div className="text-3xl font-mont font-bold text-primary">{selectedProject.metrics.area}</div>
+                          <div className="text-sm text-gray font-semibold mt-2">Area</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-2xl font-bold text-primary">{selectedProject.metrics.duration}</div>
-                          <div className="text-sm text-gray">Duration</div>
+                          <div className="text-3xl font-mont font-bold text-primary">{selectedProject.metrics.duration}</div>
+                          <div className="text-sm text-gray font-semibold mt-2">Duration</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-2xl font-bold text-primary">{selectedProject.metrics.value}</div>
-                          <div className="text-sm text-gray">Value</div>
+                          <div className="text-3xl font-mont font-bold text-primary">{selectedProject.metrics.value}</div>
+                          <div className="text-sm text-gray font-semibold mt-2">Value</div>
                         </div>
                       </div>
                     </div>
                   )}
-                  <div>
-                    <h4 className="font-semibold text-dark">Case Study Details</h4>
-                    <p className="text-gray">
+                  <div className="bg-blue-50 border border-primary/20 rounded-lg p-6">
+                    <h4 className="font-mont font-bold text-dark text-xl mb-3">Case Study Details</h4>
+                    <p className="text-gray text-base leading-relaxed">
                       This project demonstrates Cliberduche Corporation's expertise in {selectedProject.category.includes('ongoing') ? 'ongoing' : 'completed'} civil engineering works.
                       Our team utilized advanced equipment and followed strict safety protocols to deliver high-quality results within the specified timeline.
                       The project involved close collaboration with clients and stakeholders to ensure all requirements were met.
                     </p>
                   </div>
                 </div>
-                <div className="mt-6 flex justify-end">
+                <div className="mt-10 flex justify-end">
                   <button
                     onClick={closeModal}
-                    className="bg-primary text-white py-2 px-6 rounded-lg hover:bg-primary-dark transition-colors"
+                    className="btn-dark py-3"
                   >
                     Close
                   </button>

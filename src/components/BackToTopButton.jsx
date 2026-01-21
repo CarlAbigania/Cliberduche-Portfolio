@@ -27,17 +27,16 @@ const BackToTopButton = () => {
     <button
       onClick={scrollToTop}
       className={`
-        fixed bottom-6 right-6 w-12 h-12 
-        bg-primary text-white rounded-full 
-        shadow-lg flex items-center justify-center 
+        fixed bottom-8 right-8 w-14 h-14 
+        bg-gradient-to-br from-primary to-accent text-white rounded-full 
+        shadow-lg shadow-primary/40 flex items-center justify-center 
         opacity-0 invisible transition-all duration-300 
-        z-50
+        z-50 hover:shadow-xl hover:shadow-primary/60 hover:-translate-y-2
         ${isVisible ? 'opacity-100 visible' : ''}
-        hover:bg-secondary hover:-translate-y-1
       `}
       aria-label="Back to top"
     >
-      <i className="fas fa-arrow-up"></i>
+      <i className="fas fa-arrow-up text-lg"></i>
     </button>
   );
 };
