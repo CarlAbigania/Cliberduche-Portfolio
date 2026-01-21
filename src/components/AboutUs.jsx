@@ -47,7 +47,7 @@ const AboutUs = () => {
     <section id="about" className="py-16 md:py-20 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="section-title mb-20">
+        <div className="section-title mb-12">
           <h2 className="text-primary mb-4">
             About Cliberduche Corporation
           </h2>
@@ -59,8 +59,8 @@ const AboutUs = () => {
         </div>
 
         {/* Company Overview */}
-        <div className="mb-24">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
+        <div className="mb-16">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="space-y-8">
               <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark">
                 Company Overview

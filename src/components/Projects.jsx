@@ -131,10 +131,10 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-16 md:py-20 bg-light">
+    <section id="projects" className="py-12 md:py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="section-title mb-20">
+        <div className="section-title mb-12">
           <h2 className="text-primary mb-4">Our Projects</h2>
           <p className="text-gray text-lg max-w-2xl mx-auto">Selected highlights across commercial and industrial developments</p>
           <div className="section-title-underline"></div>
@@ -144,7 +144,7 @@ const Projects = () => {
         <ProjectMap projects={projects} onProjectClick={handleProjectClick} />
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
           {filters.map((filter) => (
             <button
               key={filter.key}
@@ -161,19 +161,19 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
               className="premium-card overflow-hidden"
             >
               <div
-                className="h-64 bg-cover bg-center relative overflow-hidden group"
+                className="h-48 bg-cover bg-center relative overflow-hidden group"
                 style={{ backgroundImage: `url(${project.img})` }}
               >
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300"></div>
               </div>
-              <div className="p-8">
+              <div className="p-6">
                 <span className="inline-block px-3 py-1 bg-secondary text-primary text-xs font-bold rounded-full mb-4 uppercase">
                   {project.tag}
                 </span>
@@ -195,7 +195,7 @@ const Projects = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mb-24">
+        <div className="text-center mb-16">
           <a
             href="#rfq"
             className="btn-primary inline-block text-lg px-10 py-4"

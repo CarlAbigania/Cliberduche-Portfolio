@@ -13,7 +13,7 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="py-16 md:py-20 bg-fixed bg-cover bg-center relative"
+      className="py-12 md:py-16 bg-fixed bg-cover bg-center relative"
       style={{
         backgroundImage:
           "linear-gradient(rgba(8, 55, 124, 0.82), rgba(8, 55, 124, 0.82)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
@@ -21,18 +21,18 @@ const Services = () => {
     >
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <h2 className="text-white mb-4">Our Services</h2>
           <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto">Integrated services from sourcing to execution</p>
           <div className="block w-20 h-1 bg-secondary mx-auto mt-6 rounded"></div>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white/95 backdrop-blur-md rounded-xl p-10 shadow-lg border border-white/60 hover:shadow-2xl hover:-translate-y-3 transition-all duration-300 group"
+              className="bg-white/95 backdrop-blur-md rounded-xl p-7 shadow-lg border border-white/60 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group"
             >
               <div className="text-primary text-5xl mb-8 h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <i className={`fas ${service.icon}`}></i>
@@ -44,7 +44,7 @@ const Services = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mt-20">
+        <div className="text-center mt-14">
           <a
             href="#rfq"
             className="btn-primary text-lg px-10 py-4"

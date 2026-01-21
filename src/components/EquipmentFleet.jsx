@@ -37,7 +37,7 @@ const EquipmentFleet = () => {
   return (
     <section id="equipment" className="py-16 md:py-20 bg-white">
       <div className="max-w-container mx-auto px-4">
-        <div className="section-title mb-20">
+        <div className="section-title mb-12">
           <h2 className="text-primary mb-4">
             Equipment & Fleet
           </h2>
@@ -48,15 +48,15 @@ const EquipmentFleet = () => {
         </div>
 
         {/* Fleet Summary */}
-        <div className="mb-20">
-          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-12 text-center">
+        <div className="mb-16">
+          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10 text-center">
             Fleet Overview
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {fleet.map((item, index) => (
               <div
                 key={index}
-                className="premium-card p-10 text-center hover:border-primary/50"
+                className="premium-card p-7 text-center hover:border-primary/50"
               >
                 <p className="text-xs uppercase tracking-widest font-bold text-gray mb-4">{item.label}</p>
                 <p className="text-4xl md:text-5xl font-mont font-bold text-primary mb-4">{item.value}</p>
@@ -68,12 +68,12 @@ const EquipmentFleet = () => {
 
         {/* Detailed Equipment Inventory */}
         <div>
-          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-16 text-center">
+          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-12 text-center">
             Detailed Equipment Inventory
           </h3>
-          <div className="space-y-16">
+          <div className="space-y-12">
             <div>
-              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-8">Dump Trucks</h4>
+              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6">Dump Trucks</h4>
               <div className="overflow-x-auto bg-white border border-primary/10 rounded-xl shadow-md">
                 <table className="min-w-full text-left text-sm md:text-base">
                   <thead className="bg-primary text-white">
