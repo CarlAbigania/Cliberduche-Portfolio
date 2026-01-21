@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ComplianceSafety = () => {
+  const [selectedCert, setSelectedCert] = useState(null);
+
   const complianceItems = [
-    'Securities and Exchange Commission (SEC)',
-    'Bureau of Internal Revenue (BIR)',
-    'Social Security System (SSS)',
-    'PhilHealth',
-    'Pag-IBIG Fund',
-    "Mayor's Permit 2025",
-    'Fire Safety Inspection Permit',
-    'Sanitary Permit',
-    'PCAB License',
-    'Environmental Compliance Certificate (ECC)',
-    'Insurance Certificate & Guarantee',
+    { name: 'Securities and Exchange Commission (SEC)', image: 'images/sec-cert.png', icon: 'fa-file-contract' },
+    { name: 'Bureau of Internal Revenue (BIR)', image: 'images/bir-cert.png', icon: 'fa-receipt' },
+    { name: 'Social Security System (SSS)', image: 'images/sss-cert.png', icon: 'fa-id-card' },
+    { name: 'PhilHealth', image: 'images/philhealth-cert.png', icon: 'fa-hospital' },
+    { name: 'Pag-IBIG Fund', image: 'images/pagibig-cert.png', icon: 'fa-home' },
+    { name: "Mayor's Permit 2025", image: 'images/mayors-permit.png', icon: 'fa-badge' },
+    { name: 'Fire Safety Inspection Permit', image: 'images/fire-safety-cert.png', icon: 'fa-fire' },
+    { name: 'Sanitary Permit', image: 'images/sanitary-cert.png', icon: 'fa-shield-alt' },
+    { name: 'PCAB License', image: 'images/pcab-cert.png', icon: 'fa-certificate' },
+    { name: 'Environmental Compliance Certificate (ECC)', image: 'images/ecc-cert.png', icon: 'fa-leaf' },
+    { name: 'Insurance Certificate & Guarantee', image: 'images/insurance-cert.png', icon: 'fa-lock' },
   ];
 
   const safetyCommitments = [
@@ -45,15 +47,17 @@ const ComplianceSafety = () => {
             </h3>
             <div className="grid grid-cols-1 gap-4">
               {complianceItems.map((item, index) => (
-                <div
+                <button
                   key={index}
-                  className="premium-card p-5 flex items-center gap-4 hover:border-secondary/50"
+                  onClick={() => setSelectedCert(item)}
+                  className="premium-card p-5 flex items-center gap-4 hover:border-secondary/50 hover:shadow-lg hover:bg-blue-50/30 transition-all duration-300 cursor-pointer text-left group"
                 >
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/30">
-                    <i className="fas fa-check-circle text-sm"></i>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/30 group-hover:scale-110 transition-transform">
+                    <i className={`fas ${item.icon} text-sm`}></i>
                   </div>
-                  <p className="text-dark font-semibold text-base">{item}</p>
-                </div>
+                  <p className="text-dark font-semibold text-base flex-1">{item.name}</p>
+                  <i className="fas fa-external-link-alt text-primary/60 group-hover:text-primary text-xs"></i>
+                </button>
               ))}
             </div>
           </div>
@@ -93,18 +97,42 @@ const ComplianceSafety = () => {
           </div>
         </div>
 
-        {/* Certifications Gallery */}
-        <div className="mb-20">
-          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-12 text-center">
-            Certificate Gallery
-          </h3>
-          <div className="text-center py-16">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-16 rounded-xl max-w-2xl mx-auto border-2 border-primary/20">
-              <i className="fas fa-certificate text-6xl text-primary/30 mb-6"></i>
-              <p className="text-gray text-lg">Certificate images will be added here once validated.</p>
+        {/* Certificate Modal */}
+        {selectedCert && (
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+            <div className="bg-white rounded-2xl max-w-3xl w-full shadow-2xl overflow-hidden">
+              <div className="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 className="text-2xl font-mont font-bold text-dark">{selectedCert.name}</h3>
+                <button
+                  onClick={() => setSelectedCert(null)}
+                  className="text-gray-400 hover:text-dark text-3xl font-light transition-colors"
+                >
+                  ×
+                </button>
+              </div>
+              <div className="p-8">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl overflow-hidden">
+                  <img
+                    src={selectedCert.image}
+                    alt={selectedCert.name}
+                    className="w-full h-auto object-contain max-h-[60vh]"
+                    onError={(e) => {
+                      e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0e7ff" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" font-family="Arial" font-size="16" fill="%236366f1"%3ECertificate Image%3C/text%3E%3C/svg%3E';
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="p-6 border-t border-gray-200 flex justify-end">
+                <button
+                  onClick={() => setSelectedCert(null)}
+                  className="btn-dark py-2 px-6"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
       </div>
     </section>
