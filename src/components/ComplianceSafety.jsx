@@ -106,20 +106,6 @@ const ComplianceSafety = () => {
           </div>
         </div>
 
-        {/* Document Downloads */}
-        <div className="text-center">
-          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10">
-            Document Downloads
-          </h3>
-          <a
-            href="/Company Profile 2026.pdf"
-            download="Company_Profile_2026.pdf"
-            className="btn-primary inline-flex items-center gap-3 text-lg"
-          >
-            <i className="fas fa-download text-xl"></i>
-            Download Company Profile PDF
-          </a>
-        </div>
       </div>
     </section>
   );
