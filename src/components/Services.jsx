@@ -45,24 +45,12 @@ const Services = () => {
 
         {/* CTA Section */}
         <div className="text-center mt-20">
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-12 md:p-16 max-w-3xl mx-auto border border-white/30">
-            <h3 className="text-3xl md:text-4xl font-mont font-bold text-white mb-6">Ready to Start Your Project?</h3>
-            <p className="text-white/90 mb-10 text-lg">Get a customized quote for your land development or civil works needs</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="#rfq"
-                className="btn-primary"
-              >
-                Request Quote
-              </a>
-              <a
-                href="tel:+63495466107"
-                className="btn-secondary"
-              >
-                Call Now
-              </a>
-            </div>
-          </div>
+          <a
+            href="#rfq"
+            className="btn-primary text-lg px-10 py-4"
+          >
+            Get Your Quote
+          </a>
         </div>
       </div>
     </section>

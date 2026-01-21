@@ -196,16 +196,12 @@ const Projects = () => {
 
         {/* CTA Section */}
         <div className="text-center mb-24">
-          <div className="bg-gradient-to-r from-primary to-accent text-white rounded-2xl p-12 md:p-16 max-w-4xl mx-auto shadow-premium">
-            <h3 className="text-3xl md:text-4xl font-mont font-bold mb-6">Have a Similar Project?</h3>
-            <p className="text-white/90 mb-10 max-w-2xl mx-auto text-lg">Let's discuss how we can bring your vision to life with our proven expertise</p>
-            <a
-              href="#rfq"
-              className="btn-primary inline-block"
-            >
-              Start Your Project
-            </a>
-          </div>
+          <a
+            href="#rfq"
+            className="btn-primary inline-block text-lg px-10 py-4"
+          >
+            Start Your Project
+          </a>
         </div>
 
         {/* Case Study Modal */}

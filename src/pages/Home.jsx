@@ -21,9 +21,9 @@ const Home = () => {
         <AboutUs />
         <Services />
         <Projects />
-        <ResourcesPartners />
         <EquipmentFleet />
         <ComplianceSafety />
+        <ResourcesPartners />
         <RFQWorkflow />
         <Contact />
       </main>

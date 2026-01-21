@@ -22,16 +22,16 @@ const Hero = () => {
         </p>
         <div className="flex flex-wrap justify-center gap-4 mb-10">
           <a
-            href="#contact"
+            href="#rfq"
             className="btn-primary"
           >
-            Request Quotation
+            Request Quote Now
           </a>
           <a
-            href="#projects"
+            href="#contact"
             className="btn-secondary"
           >
-            View Projects
+            Get in Touch
           </a>
         </div>
         <p className="text-sm text-white/80 mt-10">
