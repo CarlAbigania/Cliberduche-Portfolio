@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import logo from '/images/logo.png';
 import Sidebar from './Sidebar';
 
 const Header = () => {
@@ -33,7 +32,7 @@ const Header = () => {
       <header className="bg-white dark:bg-gray-900 shadow-md shadow-primary/10 dark:shadow-primary/5 fixed w-full top-0 z-50 transition-colors duration-300">
         {/* Main Header */}
         <div className="max-w-container mx-auto px-4 py-3 flex justify-between items-center">
-          {/* Left Section: Logo & Sidebar Toggle */}
+          {/* Left Section: Sidebar Toggle */}
           <div className="flex items-center gap-3">
             {/* Sidebar Toggle Button */}
             <button
@@ -43,28 +42,7 @@ const Header = () => {
             >
               <i className={`fas fa-${sidebarOpen ? 'times' : 'bars'}`}></i>
             </button>
-
-            {/* Logo */}
-            <div className="logo flex items-center flex-shrink-0">
-              <img src={logo} alt="Cliberduche Corporation Logo" className="h-12 w-auto hover:scale-105 transition-transform duration-300" />
-            </div>
           </div>
-
-          {/* Desktop Nav */}
-          <nav className="hidden lg:block flex-grow mx-8">
-            <ul className="flex space-x-0.5 justify-center">
-              {['About', 'Services', 'Projects', 'Equipment', 'Compliance', 'RFQ', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase().replace(/\s+&\s+|\s+/g, '-')}`}
-                    className="text-dark dark:text-gray-300 text-sm font-semibold hover:text-primary dark:hover:text-primary transition-all duration-300 px-2.5 py-2 rounded-lg hover:bg-primary/5 dark:hover:bg-gray-800"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
 
           {/* Right Section: Social Media, Dark Mode, Mobile Menu */}
           <div className="flex items-center gap-4">
@@ -131,7 +109,7 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden text-dark dark:text-white text-2xl hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110"
+              className="sm:hidden text-dark dark:text-white text-2xl hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-ellipsis-v'}`}></i>
@@ -141,13 +119,13 @@ const Header = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`lg:hidden fixed top-[70px] left-0 right-0 bg-white dark:bg-gray-900 shadow-lg transform transition-all duration-300 ${
+          className={`sm:hidden fixed top-[70px] left-0 right-0 bg-white dark:bg-gray-900 shadow-lg transform transition-all duration-300 ${
             mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
           }`}
         >
           <div className="p-6 space-y-4 border-t border-gray-200 dark:border-gray-800">
             {/* Social Media Links (Mobile) */}
-            <div className="sm:hidden">
+            <div>
               <h4 className="text-sm font-semibold text-dark dark:text-white mb-3">Follow Us</h4>
               <div className="flex items-center gap-4">
                 <a
@@ -192,24 +170,6 @@ const Header = () => {
                 </a>
               </div>
             </div>
-
-            {/* Navigation Links */}
-            <nav>
-              <h4 className="text-sm font-semibold text-dark dark:text-white mb-3">Navigation</h4>
-              <ul className="flex flex-col space-y-2">
-                {['About', 'Services', 'Projects', 'Equipment', 'Compliance', 'RFQ', 'Contact'].map((item) => (
-                  <li key={item}>
-                    <a
-                      href={`#${item.toLowerCase().replace(/\s+&\s+|\s+/g, '-')}`}
-                      className="text-dark dark:text-gray-300 hover:text-primary dark:hover:text-primary block font-medium px-4 py-2 rounded-lg hover:bg-primary/5 dark:hover:bg-gray-800 transition-all duration-300"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
           </div>
         </div>
       </header>
