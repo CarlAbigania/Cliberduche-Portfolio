@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="hero relative mt-[70px] py-32 md:py-40 text-center text-white bg-center bg-cover animate-moveBackground"
+      className="hero relative py-32 md:py-40 text-center text-white bg-center bg-cover animate-moveBackground"
       style={{
         backgroundImage: `linear-gradient(rgba(8, 55, 124, 0.82), rgba(8, 55, 124, 0.82)), url(${heroImage})`,
       }}
