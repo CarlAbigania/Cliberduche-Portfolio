@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from './Sidebar';
 
-const Header = ({ sidebarOpen, setSidebarOpen }) => {
+const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -28,21 +27,12 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
 
   return (
     <>
-      <header className={`bg-white dark:bg-gray-900 shadow-md shadow-primary/10 dark:shadow-primary/5 fixed top-0 z-50 transition-all duration-300 ${
-        sidebarOpen ? 'left-64 right-0' : 'left-20 right-0'
-      }`}>
+      <header className="bg-white dark:bg-gray-900 shadow-md shadow-primary/10 dark:shadow-primary/5 fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16">
         {/* Main Header */}
         <div className="max-w-container mx-auto px-4 py-3 flex justify-between items-center">
-          {/* Left Section: Sidebar Toggle */}
+          {/* Left Section: Logo */}
           <div className="flex items-center gap-3">
-            {/* Sidebar Toggle Button */}
-            <button
-              className="text-dark dark:text-white text-2xl hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              title="Toggle Sidebar"
-            >
-              <i className={`fas fa-${sidebarOpen ? 'times' : 'bars'}`}></i>
-            </button>
+            {/* Empty left section - logo is in sidebar */}
           </div>
 
           {/* Right Section: Social Media, Dark Mode, Mobile Menu */}
@@ -174,9 +164,6 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
           </div>
         </div>
       </header>
-
-      {/* Sidebar Navigation */}
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </>
   );
 };

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
 import Hero from '../components/Hero';
 import AboutUs from '../components/AboutUs';
 import Services from '../components/Services';
@@ -17,14 +18,11 @@ import NewsBlog from '../components/NewsBlog';
 import TrustSocialProof from '../components/TrustSocialProof';
 
 const Home = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
     <>
-      <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <main className={`transition-all duration-300 ${
-        sidebarOpen ? 'ml-64' : 'ml-20'
-      }`}>
+      <Header />
+      <Sidebar />
+      <main className="transition-all duration-300 ml-64 pt-16">
         <section id="hero">
           <Hero />
         </section>
