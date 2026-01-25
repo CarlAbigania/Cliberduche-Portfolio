@@ -57,8 +57,8 @@ const Sidebar = ({ isOpen, onClose }) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-screen bg-white dark:bg-gray-900 shadow-lg transition-transform duration-300 z-50 w-64 overflow-y-auto pt-20 md:pt-24 md:translate-x-0 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed left-0 top-0 h-screen bg-white dark:bg-gray-900 shadow-lg transition-all duration-300 z-40 w-64 overflow-y-auto pt-20 md:pt-24 md:translate-x-0 ${
+          isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
         <nav className="p-6">

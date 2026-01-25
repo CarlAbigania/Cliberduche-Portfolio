@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import AboutUs from '../components/AboutUs';
@@ -17,10 +17,16 @@ import NewsBlog from '../components/NewsBlog';
 import TrustSocialProof from '../components/TrustSocialProof';
 
 const Home = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <>
-      <Header />
-      <main>
+      <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <main className={`transition-all duration-300 ${
+        sidebarOpen ? 'ml-64' : 'ml-0'
+      }`} style={{
+        marginTop: '70px',
+      }}>
         <section id="hero">
           <Hero />
         </section>

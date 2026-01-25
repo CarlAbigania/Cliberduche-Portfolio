@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 
-const Header = () => {
+const Header = ({ sidebarOpen, setSidebarOpen }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
   // Initialize dark mode from localStorage
@@ -29,7 +28,9 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-white dark:bg-gray-900 shadow-md shadow-primary/10 dark:shadow-primary/5 fixed w-full top-0 z-50 transition-colors duration-300">
+      <header className={`bg-white dark:bg-gray-900 shadow-md shadow-primary/10 dark:shadow-primary/5 fixed top-0 z-50 transition-all duration-300 ${
+        sidebarOpen ? 'left-64 right-0' : 'left-0 right-0'
+      }`}>
         {/* Main Header */}
         <div className="max-w-container mx-auto px-4 py-3 flex justify-between items-center">
           {/* Left Section: Sidebar Toggle */}
@@ -178,6 +179,11 @@ const Header = () => {
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </>
   );
+};
+
+Header.defaultProps = {
+  sidebarOpen: false,
+  setSidebarOpen: () => {},
 };
 
 export default Header;
