@@ -22,7 +22,7 @@ const Home = () => {
     <>
       <Header />
       <Sidebar />
-      <main className="transition-all duration-300 ml-64 pt-16">
+      <main className="transition-all duration-300 ml-64 pt-16 ease-out">
         <section id="hero">
           <Hero />
         </section>
