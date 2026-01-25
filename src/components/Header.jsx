@@ -78,17 +78,26 @@ const Header = () => {
           </div>
 
           {/* Right Section: CTA, Social, Dark Mode, Mobile Menu */}
-          <div className="flex items-center gap-4">
-            {/* Contact CTA Button (Desktop) */}
-            <button
-              onClick={handleContactClick}
-              className="hidden md:block px-4 py-2 bg-gradient-to-r from-primary to-accent text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/40 transition-all duration-300 hover:scale-105"
-            >
-              Get in Touch
-            </button>
+          <div className="flex items-center gap-5">
+            {/* Group 1: Download Button */}
+            <div className="flex items-center gap-3">
+              {/* Download Portfolio Button (Desktop) */}
+              <a
+                href="/portfolio.pdf"
+                download="Cliberduche_Portfolio.pdf"
+                className="hidden md:inline-flex items-center gap-2 px-4 py-2 border-2 border-primary text-primary dark:text-blue-400 dark:border-blue-400 text-sm font-semibold rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-all duration-300"
+                title="Download Portfolio PDF"
+              >
+                <i className="fas fa-download text-sm"></i>
+                Download
+              </a>
+            </div>
 
-            {/* Social Media Links (Desktop) */}
-            <div className="hidden md:flex items-center gap-3">
+            {/* Divider 1 */}
+            <div className="hidden md:block w-px h-6 bg-primary/50 dark:bg-primary/70"></div>
+
+            {/* Group 2: Social Media Links (Desktop) */}
+            <div className="hidden md:flex items-center gap-4">
               <a
                 href="https://www.facebook.com/cliberduche"
                 target="_blank"
@@ -118,10 +127,10 @@ const Header = () => {
               </a>
             </div>
 
-            {/* Divider */}
-            <div className="hidden md:block w-px h-6 bg-gray-300 dark:bg-gray-600"></div>
+            {/* Divider 2 */}
+            <div className="hidden md:block w-px h-6 bg-primary/50 dark:bg-primary/70"></div>
 
-            {/* Dark Mode Toggle */}
+            {/* Group 3: Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
               className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-yellow-400 text-lg transition-all duration-300 hover:scale-110"
@@ -147,6 +156,16 @@ const Header = () => {
           }`}
         >
           <div className="p-6 space-y-4">
+            {/* Mobile Download Portfolio Button */}
+            <a
+              href="/portfolio.pdf"
+              download="Cliberduche_Portfolio.pdf"
+              className="flex items-center justify-center gap-2 w-full px-4 py-3 border-2 border-primary text-primary dark:text-blue-400 dark:border-blue-400 font-semibold rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-all duration-300 text-center"
+            >
+              <i className="fas fa-download"></i>
+              Download Portfolio
+            </a>
+
             {/* Mobile Contact Button */}
             <button
               onClick={handleContactClick}
