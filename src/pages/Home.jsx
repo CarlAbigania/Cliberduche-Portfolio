@@ -23,7 +23,7 @@ const Home = () => {
     <>
       <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <main className={`transition-all duration-300 ${
-        sidebarOpen ? 'ml-64' : 'ml-0'
+        sidebarOpen ? 'ml-64' : 'ml-20'
       }`} style={{
         marginTop: '70px',
       }}>

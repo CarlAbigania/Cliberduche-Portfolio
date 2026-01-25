@@ -29,7 +29,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <>
       <header className={`bg-white dark:bg-gray-900 shadow-md shadow-primary/10 dark:shadow-primary/5 fixed top-0 z-50 transition-all duration-300 ${
-        sidebarOpen ? 'left-64 right-0' : 'left-0 right-0'
+        sidebarOpen ? 'left-64 right-0' : 'left-20 right-0'
       }`}>
         {/* Main Header */}
         <div className="max-w-container mx-auto px-4 py-3 flex justify-between items-center">
