@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import logo from '/images/logo.png';
 
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -49,30 +48,6 @@ const Sidebar = () => {
     <>
       {/* Sidebar */}
       <aside className="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-gradient-to-b from-white via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 shadow-2xl shadow-black/10 dark:shadow-black/30 z-30 overflow-hidden flex flex-col">
-        {/* Logo Section */}
-        <div className="relative bg-gradient-to-br from-primary via-primary to-accent overflow-hidden py-6 px-4">
-          {/* Background decorative elements */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -mr-20 -mt-20"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white rounded-full -ml-16 -mb-16"></div>
-          </div>
-
-          {/* Logo Container */}
-          <div className="relative flex items-center justify-center">
-            <div className="flex items-center justify-center rounded-lg bg-white/10 backdrop-blur-md p-3 ring-1 ring-white/20">
-              <img 
-                src={logo} 
-                alt="Cliberduche Logo" 
-                className="h-11 w-auto drop-shadow-lg"
-              />
-            </div>
-          </div>
-
-        </div>
-
-        {/* Divider */}
-        <div className="h-1 bg-gradient-to-r from-primary/0 via-primary/30 to-primary/0 dark:via-primary/40"></div>
-
         {/* Navigation Section */}
         <nav className="flex-1 overflow-y-auto scrollbar-hide p-4">
           <div className="mb-6">
