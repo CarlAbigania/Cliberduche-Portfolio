@@ -4,6 +4,7 @@ const Sidebar = ({ onCollapsedChange }) => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   // Notify parent when collapse state changes
   const toggleCollapsed = () => {
@@ -29,27 +30,46 @@ const Sidebar = ({ onCollapsedChange }) => {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navigationLinks.map(link => link.id);
-      
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const element = document.getElementById(sections[i]);
-        if (element && element.offsetTop <= window.scrollY + 100) {
-          setActiveSection(sections[i]);
-          break;
-        }
-      }
+    // Use Intersection Observer for accurate and performant section detection
+    const observerOptions = {
+      root: null,
+      rootMargin: '-50% 0px -50% 0px',
+      threshold: 0
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    const sections = navigationLinks.map(link => link.id);
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      sections.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
+  }, [navigationLinks]);
 
   const handleNavClick = (id) => {
     const element = document.getElementById(id);
     if (element) {
+      // Don't set activeSection immediately - let scroll listener handle it
       element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(id);
     }
   };
 
