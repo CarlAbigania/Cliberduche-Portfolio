@@ -1,9 +1,9 @@
 import React from 'react';
 const logo = '/images/logo.png';
 
-const Footer = () => {
+const Footer = ({ isSidebarCollapsed = false }) => {
   return (
-    <footer className="bg-dark text-white pt-20 md:pt-24 pb-8">
+    <footer className={`transition-all duration-300 bg-dark text-white pt-20 md:pt-24 pb-8 ease-out ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
       <div className="max-w-container mx-auto px-4">
         {/* Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-8 mb-16">

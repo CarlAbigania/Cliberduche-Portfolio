@@ -65,7 +65,7 @@ const Home = () => {
           <Contact />
         </section>
       </main>
-      <Footer />
+      <Footer isSidebarCollapsed={isSidebarCollapsed} />
       <BackToTopButton />
     </>
   );
