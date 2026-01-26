@@ -5,11 +5,21 @@ const Sidebar = ({ onCollapsedChange }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [showTextContent, setShowTextContent] = useState(true);
 
   // Notify parent when collapse state changes
   const toggleCollapsed = () => {
     const newState = !isCollapsed;
     setIsCollapsed(newState);
+    
+    // When expanding, delay text appearance for smooth transition
+    if (!newState) {
+      setShowTextContent(false);
+      setTimeout(() => setShowTextContent(true), 150);
+    } else {
+      setShowTextContent(true);
+    }
+    
     onCollapsedChange?.(newState);
   };
 
@@ -84,7 +94,9 @@ const Sidebar = ({ onCollapsedChange }) => {
           isCollapsed ? 'justify-center' : 'justify-between'
         }`}>
           {!isCollapsed && (
-            <h3 className="text-xs font-bold text-primary dark:text-secondary uppercase tracking-widest">
+            <h3 className={`text-xs font-bold text-primary dark:text-secondary uppercase tracking-widest transition-all duration-300 ${
+              showTextContent ? 'opacity-100 max-w-full' : 'opacity-0 max-w-0'
+            }`}>
               Navigation
             </h3>
           )}
@@ -122,11 +134,13 @@ const Sidebar = ({ onCollapsedChange }) => {
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-accent rounded-r-lg animate-pulse" style={{animationDuration: '2s'}}></div>
                   )}
                   
-                  <i className={`fas ${link.icon} w-5 text-center transition-all duration-300 ${
+                  <i className={`fas ${link.icon} w-5 flex-shrink-0 text-center transition-all duration-300 ${
                     activeSection === link.id ? 'scale-110' : 'group-hover:scale-110'
                   }`}></i>
                   {!isCollapsed && (
-                    <span className="font-medium flex-1 text-left">{link.label}</span>
+                    <span className={`font-medium flex-1 text-left whitespace-nowrap overflow-hidden transition-all duration-300 ${
+                      showTextContent ? 'opacity-100 max-w-full' : 'opacity-0 max-w-0'
+                    }`}>{link.label}</span>
                   )}
                   
                   {/* Collapsed State Tooltip */}
@@ -151,7 +165,9 @@ const Sidebar = ({ onCollapsedChange }) => {
               </div>
             )}
             {!isCollapsed && (
-              <span className="text-xs font-bold text-center text-gray-900 dark:text-white tracking-wide leading-tight">
+              <span className={`text-xs font-bold text-center text-gray-900 dark:text-white tracking-wide leading-tight transition-all duration-300 ${
+                showTextContent ? 'opacity-100 max-w-full' : 'opacity-0 max-w-0'
+              }`}>
                 Cliberduche Corp.
               </span>
             )}
