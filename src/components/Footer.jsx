@@ -1,31 +1,38 @@
 import React from 'react';
-const logo = '/images/logo.png';
+const logo = '/images/logo2.png';
 
 const Footer = ({ isSidebarCollapsed = false }) => {
   return (
-    <footer className={`transition-all duration-300 bg-dark text-white pt-20 md:pt-24 pb-8 ease-out ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
+    <footer className={`transition-all duration-300 bg-gradient-to-b from-dark via-dark to-dark text-white pt-12 md:pt-16 pb-6 ease-out ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
       <div className="max-w-container mx-auto px-4">
+        {/* Top Decorative Line */}
+        <div className="h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent mb-12"></div>
+
         {/* Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-8 mb-16">
-          {/* Company Info */}
-          <div>
-            <h3 className="text-lg font-mont font-bold mb-6 pb-4 border-b-2 border-secondary">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-8">
+          {/* Company Info - Featured */}
+          <div className="lg:col-span-1">
+            <div className="mb-2">
+              <img src={logo} alt="Cliberduche" className="h-10 w-auto mb-3" />
+            </div>
+            <h3 className="text-xl font-mont font-bold mb-3 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
               CLIBERDUCHE CORP.
             </h3>
-            <p className="text-gray-400 leading-relaxed text-sm">
-              One-stop shop for backfill sourcing, land development, and civil works with a safety-first approach since 2018.
+            <p className="text-gray-300 leading-relaxed text-sm font-light">
+              One-stop shop for backfill sourcing, land development, and civil works with a safety-first approach.
             </p>
+            <p className="text-gray-400 text-xs mt-3">Est. 2018</p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-mont font-bold mb-6 border-b-2 border-secondary pb-4">Quick Links</h3>
-            <ul className="space-y-3 text-gray-400 text-sm">
+            <h4 className="text-sm font-mont font-bold mb-4 text-secondary uppercase tracking-widest">Quick Links</h4>
+            <ul className="space-y-3 text-gray-300 text-sm">
               {['About', 'Services', 'Projects', 'Equipment', 'Compliance'].map((item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase().replace(/\s+&\s+|\s+/g, '-')}`}
-                    className="hover:text-secondary transition-all duration-300 inline-block"
+                    className="hover:text-secondary transition-all duration-300 inline-block hover:translate-x-1"
                   >
                     {item}
                   </a>
@@ -36,13 +43,13 @@ const Footer = ({ isSidebarCollapsed = false }) => {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-mont font-bold mb-6 border-b-2 border-secondary pb-4">Services</h3>
-            <ul className="space-y-3 text-gray-400 text-sm">
+            <h4 className="text-sm font-mont font-bold mb-6 text-secondary uppercase tracking-widest">Services</h4>
+            <ul className="space-y-3 text-gray-300 text-sm">
               {['Backfill Sourcing', 'Land Development', 'Civil Works', 'Equipment Leasing', 'Site Management'].map((item) => (
                 <li key={item}>
                   <a
                     href="#services"
-                    className="hover:text-secondary transition-all duration-300 inline-block"
+                    className="hover:text-secondary transition-all duration-300 inline-block hover:translate-x-1"
                   >
                     {item}
                   </a>
@@ -53,66 +60,54 @@ const Footer = ({ isSidebarCollapsed = false }) => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-mont font-bold mb-6 border-b-2 border-secondary pb-4">Contact</h3>
-            <ul className="space-y-3 text-gray-400 text-sm">
-              <li>
-                <a href="tel:+63495466107" className="hover:text-secondary transition-all duration-300">
-                  <strong>Phone:</strong> +63 49 546-6107
+            <h4 className="text-sm font-mont font-bold mb-6 text-secondary uppercase tracking-widest">Contact</h4>
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-start gap-3">
+                <i className="fas fa-phone text-secondary mt-0.5 flex-shrink-0"></i>
+                <a href="tel:+63495466107" className="text-gray-300 hover:text-secondary transition-all duration-300">
+                  +63 49 546-6107
                 </a>
               </li>
-              <li>
-                <a href="mailto:cliberduche.corp@yahoo.com" className="hover:text-secondary transition-all duration-300">
-                  <strong>Email:</strong> cliberduche.corp@yahoo.com
+              <li className="flex items-start gap-3">
+                <i className="fas fa-envelope text-secondary mt-0.5 flex-shrink-0"></i>
+                <a href="mailto:cliberduche.corp@yahoo.com" className="text-gray-300 hover:text-secondary transition-all duration-300">
+                  cliberduche.corp@yahoo.com
                 </a>
               </li>
-              <li>
-                <span className="text-gray-400"><strong>Hours:</strong> Mon-Fri 8AM-6PM</span>
+              <li className="flex items-start gap-3">
+                <i className="fas fa-clock text-secondary mt-0.5 flex-shrink-0"></i>
+                <span className="text-gray-300">Mon-Fri 8AM-6PM</span>
               </li>
             </ul>
           </div>
 
           {/* Social Links */}
           <div>
-            <h3 className="text-lg font-mont font-bold mb-6 border-b-2 border-secondary pb-4">Follow Us</h3>
+            <h4 className="text-sm font-mont font-bold mb-6 text-secondary uppercase tracking-widest">Follow Us</h4>
             <div className="flex space-x-3 mb-6">
-              {['facebook-f', 'linkedin-in', 'instagram'].map((social) => (
+              {[
+                { icon: 'facebook-f', url: '#', label: 'Facebook' },
+                { icon: 'linkedin-in', url: '#', label: 'LinkedIn' },
+                { icon: 'instagram', url: '#', label: 'Instagram' }
+              ].map((social) => (
                 <a
-                  key={social}
-                  href="#"
-                  className="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-secondary hover:text-primary transition-all duration-300 shadow-md hover:shadow-lg text-sm"
+                  key={social.icon}
+                  href={social.url}
+                  title={social.label}
+                  className="w-11 h-11 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-secondary/30 transition-all duration-300 hover:scale-110 text-sm"
                 >
-                  <i className={`fab fa-${social}`}></i>
+                  <i className={`fab fa-${social.icon}`}></i>
                 </a>
               ))}
             </div>
-            <a href="#contact" className="text-secondary hover:text-white transition-all text-sm font-semibold">
-              Get in Touch →
+            <a href="#contact" className="inline-flex items-center gap-2 text-secondary hover:text-white transition-all text-sm font-semibold group">
+              Get in Touch
+              <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform duration-300"></i>
             </a>
           </div>
         </div>
 
-        {/* Document Download */}
-        <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl p-8 md:p-10 mb-12 border border-primary/20">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-lg md:text-xl font-mont font-bold text-white mb-2">Company Profile</h3>
-              <p className="text-gray-300 text-sm">View our compliance documentation and corporate profile.</p>
-            </div>
-            <a
-              href="Company Profile 2026.pdf"
-              className="inline-flex items-center justify-center bg-secondary hover:bg-[#6fb31f] text-primary px-6 py-3 rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap flex-shrink-0"
-            >
-              <i className="fas fa-download mr-2"></i>
-              Download PDF
-            </a>
-          </div>
-        </div>
 
-        {/* Copyright */}
-        <div className="text-center text-gray-400 text-sm border-t border-gray-700 pt-8">
-          <p>&copy; 2026 Cliberduche Corporation. All Rights Reserved. | Registered with SEC: November 28, 2018</p>
-          <p className="mt-3">Professional Land Development & Civil Works Services in CALABARZON</p>
-        </div>
       </div>
     </footer>
   );
