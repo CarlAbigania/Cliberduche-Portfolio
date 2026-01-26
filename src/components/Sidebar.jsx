@@ -114,7 +114,7 @@ const Sidebar = ({ onCollapsedChange }) => {
         </div>
 
         {/* Navigation Section */}
-        <nav className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent dark:scrollbar-thumb-primary/50 p-3">
+        <nav className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent dark:scrollbar-thumb-primary/50 p-3">
           <ul className="space-y-0.5">
             {navigationLinks.map((link, index) => (
               <li key={link.id}>
