@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Hero from '../components/Hero';
@@ -18,11 +18,13 @@ import NewsBlog from '../components/NewsBlog';
 import TrustSocialProof from '../components/TrustSocialProof';
 
 const Home = () => {
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
   return (
     <>
       <Header />
-      <Sidebar />
-      <main className="transition-all duration-300 ml-64 pt-16 ease-out">
+      <Sidebar onCollapsedChange={setIsSidebarCollapsed} />
+      <main className={`transition-all duration-300 pt-16 ease-out ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
         <section id="hero">
           <Hero />
         </section>

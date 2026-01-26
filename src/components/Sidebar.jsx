@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
-const Sidebar = () => {
+const Sidebar = ({ onCollapsedChange }) => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
+
+  // Notify parent when collapse state changes
+  const toggleCollapsed = () => {
+    const newState = !isCollapsed;
+    setIsCollapsed(newState);
+    onCollapsedChange?.(newState);
+  };
 
   const navigationLinks = [
     { id: 'hero', label: 'Home', icon: 'fa-home' },
@@ -62,7 +69,7 @@ const Sidebar = () => {
             </h3>
           )}
           <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            onClick={toggleCollapsed}
             className={`p-2.5 rounded-lg transition-all duration-300 text-primary dark:text-secondary active:scale-95 ${
               isCollapsed 
                 ? 'hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 dark:hover:bg-gray-800 hover:scale-110' 
