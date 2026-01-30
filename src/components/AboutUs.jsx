@@ -149,38 +149,6 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* Key Statistics */}
-        <div className="mb-24">
-          <div className="text-center mb-16">
-            <h3 className="text-primary mb-4">Key Statistics</h3>
-            <p className="text-gray text-lg">Our capabilities at a glance</p>
-            <div className="section-title-underline"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="premium-card p-8 text-center hover:border-secondary/50">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray font-semibold mb-4">Years in Operation</p>
-              <p className="text-3xl md:text-4xl font-mont font-bold text-primary">2018–Now</p>
-              <p className="text-sm text-gray mt-4">Registered November 28, 2018</p>
-            </div>
-            <div className="premium-card p-8 text-center hover:border-secondary/50">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray font-semibold mb-4">Backfill Resources</p>
-              <p className="text-3xl md:text-4xl font-mont font-bold text-primary">22.2M+</p>
-              <p className="text-sm text-gray mt-4">Cu.m. at both sites</p>
-            </div>
-            <div className="premium-card p-8 text-center hover:border-secondary/50">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray font-semibold mb-4">Coverage</p>
-              <p className="text-3xl md:text-4xl font-mont font-bold text-primary">CALABARZON+</p>
-              <p className="text-sm text-gray mt-4">Laguna, Cavite, beyond</p>
-            </div>
-            <div className="premium-card p-8 text-center hover:border-secondary/50">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray font-semibold mb-4">Service Scope</p>
-              <p className="text-3xl md:text-4xl font-mont font-bold text-primary">One-Stop</p>
-              <p className="text-sm text-gray mt-4">Backfill to civil works</p>
-            </div>
-          </div>
-        </div>
-
         {/* Core Values */}
         <div className="mb-24">
           <div className="text-center mb-16">
