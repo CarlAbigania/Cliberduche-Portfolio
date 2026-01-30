@@ -182,12 +182,6 @@ const AboutUs = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="#rfq"
-                className="btn-primary"
-              >
-                Get Free Quote
-              </a>
-              <a
                 href="mailto:cliberduche.corp@yahoo.com"
                 className="btn-secondary"
               >
