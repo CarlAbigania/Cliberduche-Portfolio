@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const RFQWorkflow = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,7 +11,10 @@ const RFQWorkflow = () => {
     projectType: '',
     description: '',
     timeline: '',
-    budget: ''
+    budget: '',
+    access_key: 'ae88c5f7-55e9-4244-93b8-ce9342a3d184',
+    to_email: 'cliberduche@gmail.com',
+    from_name: 'CLIBERDUCHE RFQ'
   });
 
   const handleChange = (e) => {
@@ -23,21 +27,42 @@ const RFQWorkflow = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitMessage('');
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
 
-    alert('RFQ submitted successfully! We will contact you soon.');
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      phone: '',
-      projectType: '',
-      description: '',
-      timeline: '',
-      budget: ''
-    });
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitMessage('✓ RFQ submitted successfully! We will contact you soon.');
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          projectType: '',
+          description: '',
+          timeline: '',
+          budget: '',
+          access_key: formData.access_key,
+          to_email: formData.to_email,
+          from_name: formData.from_name
+        });
+      } else {
+        setSubmitMessage('✗ Error submitting form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmitMessage('✗ Error submitting form. Please try again.');
+    }
+
     setIsSubmitting(false);
   };
 
@@ -178,6 +203,15 @@ const RFQWorkflow = () => {
                   </>
                 )}
               </button>
+              {submitMessage && (
+                <div className={`p-4 rounded-lg text-center font-mont font-bold ${
+                  submitMessage.includes('✓') 
+                    ? 'bg-green-100 text-green-800' 
+                    : 'bg-red-100 text-red-800'
+                }`}>
+                  {submitMessage}
+                </div>
+              )}
             </form>
           </div>
 
