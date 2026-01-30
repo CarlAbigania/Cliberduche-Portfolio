@@ -2,10 +2,10 @@ import React from 'react';
 
 const AboutUs = () => {
   const features = [
-    { icon: 'fa-check', title: 'Quality Materials', desc: 'High-quality backfill and aggregates' },
-    { icon: 'fa-shield-alt', title: 'Safety First', desc: 'Committed to highest safety standards' },
-    { icon: 'fa-leaf', title: 'Eco-Friendly', desc: 'Sustainable development practices' },
-    { icon: 'fa-handshake', title: 'Client Focused', desc: 'Dedicated to customer satisfaction' },
+    { icon: 'fa-check', title: 'Quality Materials' },
+    { icon: 'fa-shield-alt', title: 'Safety First' },
+    { icon: 'fa-leaf', title: 'Eco-Friendly' },
+    { icon: 'fa-handshake', title: 'Client Focused' },
   ];
 
   const highlights = [
@@ -79,13 +79,12 @@ const AboutUs = () => {
               {/* Features */}
               <div className="grid sm:grid-cols-2 gap-6 mt-10">
                 {features.map((feat, i) => (
-                  <div key={i} className="flex items-start gap-5 group">
+                  <div key={i} className="flex items-center gap-5 group">
                     <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-lg group-hover:shadow-primary/50 transition-all duration-300">
                       <i className={`fas ${feat.icon} text-lg`}></i>
                     </div>
                     <div>
                       <h4 className="font-semibold text-dark text-lg">{feat.title}</h4>
-                      <p className="text-gray text-base mt-1">{feat.desc}</p>
                     </div>
                   </div>
                 ))}
