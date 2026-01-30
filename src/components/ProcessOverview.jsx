@@ -39,16 +39,16 @@ const ProcessOverview = () => {
   };
 
   return (
-    <section id="process" className="py-20 bg-light">
+    <section id="process" className="py-12 md:py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-mont font-semibold text-primary mb-3">
+        <div className="section-title text-center mb-12">
+          <h2 className="text-primary mb-4">
             Operational Process (MQP)
           </h2>
           <p className="text-gray text-base md:text-lg">
             A structured workflow that ensures quality, safety, and delivery precision
           </p>
-          <span className="block w-20 h-1 bg-secondary mx-auto mt-4 rounded"></span>
+          <div className="section-title-underline"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

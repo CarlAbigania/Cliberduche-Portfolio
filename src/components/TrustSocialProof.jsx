@@ -32,10 +32,10 @@ const TrustSocialProof = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-light">
+    <section className="py-12 md:py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="section-title mb-20">
+        <div className="section-title text-center mb-12">
           <h2 className="text-primary mb-4">
             Trust & Social Proof
           </h2>
@@ -46,8 +46,8 @@ const TrustSocialProof = () => {
         </div>
 
         {/* Client Logos */}
-        <div className="mb-20">
-          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-12 text-center">
+        <div className="mb-12">
+          <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4 text-center">
             Trusted by Industry Leaders
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
@@ -68,7 +68,7 @@ const TrustSocialProof = () => {
 
         {/* Testimonials */}
         <div>
-          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-14 text-center">
+          <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4 text-center">
             Client Feedback
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">

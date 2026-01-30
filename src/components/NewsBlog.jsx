@@ -29,15 +29,15 @@ const NewsBlog = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-light">
+    <section className="py-12 md:py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
-        <div className="section-title mb-20">
+        <div className="section-title text-center mb-12">
           <h2 className="text-primary mb-4">Latest News & Updates</h2>
           <p className="text-gray text-lg max-w-2xl mx-auto">Stay informed about our latest projects and industry developments</p>
           <div className="section-title-underline"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
           {newsItems.map((item) => (
             <article key={item.id} className="premium-card overflow-hidden group">
               <div
@@ -53,7 +53,7 @@ const NewsBlog = () => {
                   </span>
                   <time className="text-xs text-gray font-semibold">{new Date(item.date).toLocaleDateString()}</time>
                 </div>
-                <h3 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4 group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                <h3 className="text-lg md:text-xl font-mont font-bold text-dark mb-4 group-hover:text-primary transition-colors duration-300 line-clamp-2">
                   {item.title}
                 </h3>
                 <p className="text-gray text-base leading-relaxed mb-6 line-clamp-3">

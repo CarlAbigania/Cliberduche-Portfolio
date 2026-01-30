@@ -21,10 +21,9 @@ const Services = () => {
     >
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-12">
+        <div className="section-title text-center mb-12">
           <h2 className="text-white mb-4">Our Services</h2>
-          <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto">Integrated services from sourcing to execution</p>
-          <div className="block w-20 h-1 bg-secondary mx-auto mt-6 rounded"></div>
+          <div className="section-title-underline"></div>
         </div>
 
         {/* Services Grid */}

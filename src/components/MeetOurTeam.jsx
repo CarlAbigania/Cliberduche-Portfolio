@@ -29,15 +29,15 @@ const MeetOurTeam = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-white">
+    <section className="py-12 md:py-16 bg-white">
       <div className="max-w-container mx-auto px-4">
-        <div className="section-title mb-20">
+        <div className="section-title text-center mb-12">
           <h2 className="text-primary mb-4">Meet Our Team</h2>
           <p className="text-gray text-lg max-w-2xl mx-auto">Experienced professionals dedicated to your project's success</p>
           <div className="section-title-underline"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {teamMembers.map((member, index) => (
             <div key={index} className="text-center group">
               <div className="relative mb-8">

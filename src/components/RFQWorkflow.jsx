@@ -42,10 +42,10 @@ const RFQWorkflow = () => {
   };
 
   return (
-    <section id="rfq" className="py-16 md:py-20 bg-light">
+    <section id="rfq" className="py-12 md:py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="section-title mb-20">
+        <div className="section-title text-center mb-12">
           <h2 className="text-primary mb-4">
             Request for Quote (RFQ) Workflow
           </h2>
@@ -58,7 +58,7 @@ const RFQWorkflow = () => {
         <div className="grid md:grid-cols-2 gap-16">
           {/* RFQ Form */}
           <div>
-            <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4">
               Submit Your RFQ
             </h3>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -183,7 +183,7 @@ const RFQWorkflow = () => {
 
           {/* Workflow Steps */}
           <div className="mt-10 md:mt-0">
-            <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10">RFQ Process Workflow</h3>
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4">RFQ Process Workflow</h3>
             <div className="space-y-8">
               {[
                 { num: 1, title: 'Submit RFQ', desc: 'Fill out the form with your project details' },

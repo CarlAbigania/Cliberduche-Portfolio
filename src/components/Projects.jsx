@@ -13,7 +13,7 @@ const ProjectMap = ({ projects, onProjectClick }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-      <h3 className="text-xl font-mont font-semibold text-dark mb-4 text-center">Project Locations Map</h3>
+      <h3 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4 text-center">Project Locations Map</h3>
       <div className="relative">
         <img
           src="https://images.unsplash.com/photo-1559628376-f2b5d2e5c6e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
@@ -134,7 +134,7 @@ const Projects = () => {
     <section id="projects" className="py-12 md:py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="section-title mb-12">
+        <div className="section-title text-center mb-12">
           <h2 className="text-primary mb-4">Our Projects</h2>
           <p className="text-gray text-lg max-w-2xl mx-auto">Selected highlights across commercial and industrial developments</p>
           <div className="section-title-underline"></div>
@@ -144,7 +144,7 @@ const Projects = () => {
         <ProjectMap projects={projects} onProjectClick={handleProjectClick} />
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
           {filters.map((filter) => (
             <button
               key={filter.key}
@@ -161,7 +161,7 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
@@ -177,7 +177,7 @@ const Projects = () => {
                 <span className="inline-block px-3 py-1 bg-secondary text-primary text-xs font-bold rounded-full mb-4 uppercase">
                   {project.tag}
                 </span>
-                <h3 className="font-mont font-bold text-lg md:text-xl text-dark mb-3">{project.title}</h3>
+                <h3 className="text-lg md:text-xl font-mont font-bold text-dark mb-3">{project.title}</h3>
                 <p className="text-gray text-base mb-3 line-clamp-2">{project.desc}</p>
                 <p className="text-primary text-sm font-semibold mb-4">{project.highlight}</p>
                 <p className="text-dark font-semibold text-sm mb-6">
@@ -195,7 +195,7 @@ const Projects = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mb-16">
+        <div className="text-center">
           <a
             href="#rfq"
             className="btn-primary inline-block text-lg px-10 py-4"
@@ -210,7 +210,7 @@ const Projects = () => {
             <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
               <div className="p-8 md:p-10">
                 <div className="flex justify-between items-start mb-8">
-                  <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark pr-8">{selectedProject.title}</h3>
+                  <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark pr-8">{selectedProject.title}</h3>
                   <button
                     onClick={closeModal}
                     className="text-gray-400 hover:text-dark text-3xl font-light flex-shrink-0"
@@ -224,16 +224,16 @@ const Projects = () => {
                 ></div>
                 <div className="space-y-8">
                   <div>
-                    <h4 className="font-mont font-bold text-dark text-xl mb-3">Project Overview</h4>
+                    <h4 className="font-mont font-bold text-dark text-xl md:text-2xl mb-4">Project Overview</h4>
                     <p className="text-gray text-lg leading-relaxed">{selectedProject.desc}</p>
                   </div>
                   <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-mont font-bold text-dark text-lg mb-2">Location</h4>
+                      <h4 className="font-mont font-bold text-dark text-base mb-2">Location</h4>
                       <p className="text-gray text-base">{selectedProject.location}</p>
                     </div>
                     <div>
-                      <h4 className="font-mont font-bold text-dark text-lg mb-2">Status</h4>
+                      <h4 className="font-mont font-bold text-dark text-base mb-2">Status</h4>
                       <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
                         selectedProject.tag === 'Ongoing' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
                       }`}>
@@ -242,12 +242,12 @@ const Projects = () => {
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-mont font-bold text-dark text-xl mb-3">Scope & Highlights</h4>
+                    <h4 className="font-mont font-bold text-dark text-xl md:text-2xl mb-4">Scope & Highlights</h4>
                     <p className="text-gray text-lg leading-relaxed">{selectedProject.highlight}</p>
                   </div>
                   {selectedProject.metrics && (
                     <div>
-                      <h4 className="font-mont font-bold text-dark text-xl mb-6">Project Metrics</h4>
+                      <h4 className="font-mont font-bold text-dark text-xl md:text-2xl mb-4">Project Metrics</h4>
                       <div className="grid grid-cols-3 gap-6 bg-light p-6 rounded-lg">
                         <div className="text-center">
                           <div className="text-3xl font-mont font-bold text-primary">{selectedProject.metrics.area}</div>
@@ -265,7 +265,7 @@ const Projects = () => {
                     </div>
                   )}
                   <div className="bg-blue-50 border border-primary/20 rounded-lg p-6">
-                    <h4 className="font-mont font-bold text-dark text-xl mb-3">Case Study Details</h4>
+                    <h4 className="font-mont font-bold text-dark text-xl md:text-2xl mb-4">Case Study Details</h4>
                     <p className="text-gray text-base leading-relaxed">
                       This project demonstrates Cliberduche Corporation's expertise in {selectedProject.category.includes('ongoing') ? 'ongoing' : 'completed'} civil engineering works.
                       Our team utilized advanced equipment and followed strict safety protocols to deliver high-quality results within the specified timeline.

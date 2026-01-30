@@ -35,9 +35,9 @@ const EquipmentFleet = () => {
   ];
 
   return (
-    <section id="equipment" className="py-16 md:py-20 bg-white">
+    <section id="equipment" className="py-12 md:py-16 bg-white">
       <div className="max-w-container mx-auto px-4">
-        <div className="section-title mb-12">
+        <div className="section-title text-center mb-12">
           <h2 className="text-primary mb-4">
             Equipment & Fleet
           </h2>
@@ -48,8 +48,8 @@ const EquipmentFleet = () => {
         </div>
 
         {/* Fleet Summary */}
-        <div className="mb-16">
-          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10 text-center">
+        <div className="mb-12">
+          <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4 text-center">
             Fleet Overview
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -68,12 +68,12 @@ const EquipmentFleet = () => {
 
         {/* Detailed Equipment Inventory */}
         <div>
-          <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-12 text-center">
+          <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4 text-center">
             Detailed Equipment Inventory
           </h3>
           <div className="space-y-12">
             <div>
-              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6">Dump Trucks</h4>
+              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4">Dump Trucks</h4>
               <div className="overflow-x-auto bg-white border border-primary/10 rounded-xl shadow-md">
                 <table className="min-w-full text-left text-sm md:text-base">
                   <thead className="bg-primary text-white">
@@ -99,7 +99,7 @@ const EquipmentFleet = () => {
             </div>
 
             <div>
-              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-8">Heavy Equipment</h4>
+              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4">Heavy Equipment</h4>
               <div className="overflow-x-auto bg-white border border-primary/10 rounded-xl shadow-md">
                 <table className="min-w-full text-left text-sm md:text-base">
                   <thead className="bg-primary text-white">

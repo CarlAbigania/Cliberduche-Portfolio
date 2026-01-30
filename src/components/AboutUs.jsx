@@ -52,7 +52,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="py-16 md:py-20 bg-light">
+    <section id="about" className="py-12 md:py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title mb-12">
@@ -67,10 +67,10 @@ const AboutUs = () => {
         </div>
 
         {/* Company Overview */}
-        <div className="mb-16">
+        <div className="mb-12">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="space-y-8">
-              <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark">
+              <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark">
                 Company Overview
               </h3>
               <p className="text-gray text-lg leading-relaxed">
@@ -99,7 +99,7 @@ const AboutUs = () => {
               </div>
             </div>
             <div className="premium-card p-8 md:p-10">
-              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-8">Key Milestones</h4>
+              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4">Key Milestones</h4>
               <ul className="space-y-6">
                 {highlights.map((item, index) => (
                   <li key={index} className="flex items-start gap-4">
@@ -113,15 +113,11 @@ const AboutUs = () => {
         </div>
 
         {/* Mission & Vision */}
-        <div className="mb-12 md:mb-24">
-          <div className="text-center mb-12 md:mb-16">
-            <h3 className="text-primary mb-3 md:mb-4">
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark">
               Mission & Vision
             </h3>
-            <p className="text-gray text-base md:text-lg max-w-2xl mx-auto">
-              Guiding principles that shape our work and long-term direction
-            </p>
-            <div className="section-title-underline"></div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
@@ -130,7 +126,7 @@ const AboutUs = () => {
                 key={index}
                 className="premium-card p-6 md:p-10 border-l-4 border-secondary"
               >
-                <h4 className="text-xl md:text-2xl font-mont font-bold text-primary mb-4 md:mb-6">
+                <h4 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4">
                   {item.title}
                 </h4>
                 <p id={`mission-desc-${index}`} className={`text-gray text-base md:text-lg leading-tight ${expanded[index] ? '' : 'clamp-4'}`}>
@@ -150,11 +146,9 @@ const AboutUs = () => {
         </div>
 
         {/* Core Values */}
-        <div className="mb-24">
-          <div className="text-center mb-16">
-            <h3 className="text-primary mb-4">Our Core Values</h3>
-            <p className="text-gray text-lg">The foundation of everything we do</p>
-            <div className="section-title-underline"></div>
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark">Our Core Values</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -166,7 +160,7 @@ const AboutUs = () => {
                 <div className="text-primary text-6xl mb-8 h-20 flex items-center justify-center">
                   <i className={`fas ${value.icon}`}></i>
                 </div>
-                <h4 className="text-2xl md:text-3xl font-mont font-bold mb-6">{value.title}</h4>
+                <h4 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4">{value.title}</h4>
                 <p className="text-dark text-base md:text-lg leading-relaxed">{value.desc}</p>
               </div>
             ))}
@@ -176,7 +170,7 @@ const AboutUs = () => {
         {/* CTA Section */}
         <div className="text-center mt-24">
           <div className="bg-gradient-to-r from-primary to-accent text-white rounded-2xl p-12 md:p-16 max-w-4xl mx-auto shadow-premium">
-            <h3 className="text-3xl md:text-4xl font-mont font-bold mb-6">Partner with Cliberduche Corporation</h3>
+            <h3 className="text-2xl md:text-3xl font-mont font-bold mb-6">Partner with Cliberduche Corporation</h3>
             <p className="text-white/90 mb-10 max-w-2xl mx-auto text-lg">
               Experience our commitment to quality, safety, and timely delivery. Let's discuss your project needs.
             </p>

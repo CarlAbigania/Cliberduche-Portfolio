@@ -8,10 +8,10 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-20 bg-light">
+    <section id="contact" className="py-12 md:py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Header */}
-        <div className="section-title mb-20">
+        <div className="section-title text-center mb-20">
           <h2 className="text-primary mb-4">Contact Us</h2>
           <p className="text-gray text-lg max-w-2xl mx-auto">Reach us for backfill sourcing, site development, and civil works inquiries</p>
           <div className="section-title-underline"></div>

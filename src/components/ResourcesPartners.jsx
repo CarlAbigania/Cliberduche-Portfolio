@@ -33,10 +33,10 @@ const ResourcesPartners = () => {
   ];
 
   return (
-    <section id="resources" className="py-16 md:py-20 bg-light">
+    <section id="resources" className="py-12 md:py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="section-title mb-20">
+        <div className="section-title text-center mb-12">
           <h2 className="text-primary mb-4">
             Resources & Partners
           </h2>
@@ -47,7 +47,7 @@ const ResourcesPartners = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {[
             {
               number: '20M+',
@@ -84,9 +84,9 @@ const ResourcesPartners = () => {
         </div>
 
         {/* Land Development Sites */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-mont font-bold text-primary mb-4">
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4">
               Land Development Sites
             </h3>
           </div>
@@ -94,7 +94,7 @@ const ResourcesPartners = () => {
           <div className="space-y-10">
             {/* Calamba Site */}
             <div className="premium-card p-10 border-l-4 border-secondary">
-              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6">
+              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4">
                 Calamba City Site
               </h4>
               <div className="space-y-3 text-gray text-base md:text-lg">
@@ -117,7 +117,7 @@ const ResourcesPartners = () => {
 
             {/* Silang Site */}
             <div className="premium-card p-10 border-l-4 border-secondary">
-              <h4 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6">
+              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4">
                 Silang, Cavite Site
               </h4>
               <div className="space-y-3 text-gray text-base md:text-lg">
@@ -143,10 +143,9 @@ const ResourcesPartners = () => {
         {/* Supplier Network */}
         <div>
           <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-mont font-bold text-primary mb-4">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4">
               Supplier Network
             </h3>
-            <p className="text-gray text-lg">Trusted partners supporting materials and operational readiness</p>
           </div>
 
           <div className="overflow-x-auto bg-white border border-primary/10 rounded-xl shadow-md">
