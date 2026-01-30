@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Sidebar = ({ onCollapsedChange }) => {
   const [activeSection, setActiveSection] = useState('hero');
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [showTextContent, setShowTextContent] = useState(true);

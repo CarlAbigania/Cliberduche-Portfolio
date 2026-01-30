@@ -18,7 +18,7 @@ import NewsBlog from '../components/NewsBlog';
 import TrustSocialProof from '../components/TrustSocialProof';
 
 const Home = () => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
 
   return (
     <>
