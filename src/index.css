@@ -83,5 +83,13 @@
   .fade-in-left {
     animation: slideInLeft 0.6s ease-out;
   }
+
+  /* Clamp utility for long paragraphs (works without Tailwind plugin) */
+  .clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 

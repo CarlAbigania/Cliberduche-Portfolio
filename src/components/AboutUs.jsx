@@ -25,6 +25,14 @@ const AboutUs = () => {
     },
   ];
 
+  // Local state for expanding/collapsing Mission & Vision descriptions
+  const [expanded, setExpanded] = React.useState(() => missionVision.map(() => false));
+  const toggleExpanded = (i) => setExpanded((prev) => {
+    const copy = [...prev];
+    copy[i] = !copy[i];
+    return copy;
+  });
+
   const coreValues = [
     {
       icon: 'fa-award',
@@ -105,27 +113,37 @@ const AboutUs = () => {
         </div>
 
         {/* Mission & Vision */}
-        <div className="mb-24">
-          <div className="text-center mb-16">
-            <h3 className="text-primary mb-4">
+        <div className="mb-12 md:mb-24">
+          <div className="text-center mb-12 md:mb-16">
+            <h3 className="text-primary mb-3 md:mb-4">
               Mission & Vision
             </h3>
-            <p className="text-gray text-lg max-w-2xl mx-auto">
+            <p className="text-gray text-base md:text-lg max-w-2xl mx-auto">
               Guiding principles that shape our work and long-term direction
             </p>
             <div className="section-title-underline"></div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
             {missionVision.map((item, index) => (
               <div
                 key={index}
-                className="premium-card p-10 border-l-4 border-secondary"
+                className="premium-card p-6 md:p-10 border-l-4 border-secondary"
               >
-                <h4 className="text-2xl md:text-3xl font-mont font-bold text-primary mb-6">
+                <h4 className="text-xl md:text-2xl font-mont font-bold text-primary mb-4 md:mb-6">
                   {item.title}
                 </h4>
-                <p className="text-gray text-lg leading-relaxed">{item.desc}</p>
+                <p id={`mission-desc-${index}`} className={`text-gray text-base md:text-lg leading-tight ${expanded[index] ? '' : 'clamp-4'}`}>
+                  {item.desc}
+                </p>
+                <button
+                  onClick={() => toggleExpanded(index)}
+                  aria-expanded={expanded[index]}
+                  aria-controls={`mission-desc-${index}`}
+                  className="mt-3 inline-block text-secondary font-semibold hover:text-accent focus:outline-none"
+                >
+                  {expanded[index] ? 'Show less' : 'Read more'}
+                </button>
               </div>
             ))}
           </div>
