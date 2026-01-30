@@ -39,7 +39,7 @@ const ProcessOverview = () => {
   };
 
   return (
-    <section id="process" className="py-12 md:py-16 bg-light">
+    <section id="process" className="py-12 md:py-16 bg-white">
       <div className="max-w-container mx-auto px-4">
         <div className="section-title text-center mb-12">
           <h2 className="text-primary mb-4">
