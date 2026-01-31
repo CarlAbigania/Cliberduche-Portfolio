@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const RFQWorkflow = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,6 +16,16 @@ const RFQWorkflow = () => {
     to_email: 'cliberduche@gmail.com',
     from_name: 'CLIBERDUCHE RFQ'
   });
+
+  // Auto-clear message after 4 seconds
+  useEffect(() => {
+    if (submitMessage) {
+      const timer = setTimeout(() => {
+        setSubmitMessage('');
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitMessage]);
 
   const handleChange = (e) => {
     setFormData({
