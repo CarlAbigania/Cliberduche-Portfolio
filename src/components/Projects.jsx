@@ -1,44 +1,5 @@
 import React, { useState } from 'react';
 
-const ProjectMap = ({ projects, onProjectClick }) => {
-  // Simple map with markers for project locations
-  const locations = {
-    'Calamba, Laguna': { x: 45, y: 55 },
-    'Tanza, Cavite': { x: 35, y: 45 },
-    'Silang, Cavite': { x: 30, y: 50 },
-    'North Harbour, Manila': { x: 50, y: 40 },
-    'Sta. Rosa, Laguna': { x: 40, y: 50 },
-    'Dasmariñas, Cavite': { x: 32, y: 48 },
-  };
-
-  return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-      <h3 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4 text-center">Project Locations Map</h3>
-      <div className="relative">
-        <img
-          src="https://images.unsplash.com/photo-1559628376-f2b5d2e5c6e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-          alt="Luzon Map"
-          className="w-full h-64 object-cover rounded-lg"
-        />
-        {projects.map((project) => {
-          const loc = locations[project.location];
-          if (!loc) return null;
-          return (
-            <button
-              key={project.id}
-              onClick={() => onProjectClick(project)}
-              className="absolute w-4 h-4 bg-red-500 rounded-full border-2 border-white shadow-md hover:w-6 hover:h-6 transition-all"
-              style={{ left: `${loc.x}%`, top: `${loc.y}%` }}
-              title={project.title}
-            ></button>
-          );
-        })}
-      </div>
-      <p className="text-center text-gray text-sm mt-2">Click on markers to view project details</p>
-    </div>
-  );
-};
-
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
@@ -139,9 +100,6 @@ const Projects = () => {
           <p className="text-gray text-lg max-w-2xl mx-auto">Selected highlights across commercial and industrial developments</p>
           <div className="section-title-underline"></div>
         </div>
-
-        {/* Interactive Project Map */}
-        <ProjectMap projects={projects} onProjectClick={handleProjectClick} />
 
         {/* Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-8">
