@@ -121,7 +121,7 @@ const Sidebar = ({ onCollapsedChange }) => {
                   onMouseEnter={() => setHoveredItem(link.id)}
                   onMouseLeave={() => setHoveredItem(null)}
                   onClick={() => handleNavClick(link.id)}
-                  className={`w-full relative flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'} px-3 py-2.5 text-sm rounded-lg transition-all duration-200 group ${
+                  className={`w-full relative flex items-center gap-3 px-3 py-2.5 h-10 text-sm rounded-lg transition-all duration-200 group ${isCollapsed ? 'justify-center' : ''} ${
                     activeSection === link.id
                       ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/30 dark:shadow-primary/20'
                       : 'text-gray-700 dark:text-gray-300 hover:bg-primary/5 dark:hover:bg-gray-800/50 hover:text-primary dark:hover:text-secondary'
