@@ -33,7 +33,7 @@ const ResourcesPartners = () => {
   ];
 
   return (
-    <section id="resources" className="py-12 md:py-16 bg-light">
+    <section id="resources" className="py-12 md:py-16 bg-white">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title text-center mb-12">

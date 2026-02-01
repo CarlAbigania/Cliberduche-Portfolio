@@ -33,7 +33,6 @@ const Sidebar = ({ onCollapsedChange }) => {
     { id: 'projects', label: 'Projects', icon: 'fa-project-diagram' },
     { id: 'team', label: 'Our Team', icon: 'fa-users' },
     { id: 'compliance', label: 'Compliance & Safety', icon: 'fa-shield-alt' },
-    { id: 'trust', label: 'Trust & Social Proof', icon: 'fa-star' },
     { id: 'resources', label: 'Resources & Partners', icon: 'fa-link' },
     { id: 'blog', label: 'News & Blog', icon: 'fa-newspaper' },
     { id: 'contact', label: 'Contact', icon: 'fa-envelope' },

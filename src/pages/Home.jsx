@@ -15,7 +15,6 @@ import BackToTopButton from '../components/BackToTopButton';
 import ProcessOverview from '../components/ProcessOverview';
 import MeetOurTeam from '../components/MeetOurTeam';
 import NewsBlog from '../components/NewsBlog';
-import TrustSocialProof from '../components/TrustSocialProof';
 
 const Home = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
@@ -51,9 +50,6 @@ const Home = () => {
         </section>
         <section id="compliance">
           <ComplianceSafety />
-        </section>
-        <section id="trust">
-          <TrustSocialProof />
         </section>
         <section id="resources">
           <ResourcesPartners />
