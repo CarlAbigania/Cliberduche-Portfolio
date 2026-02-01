@@ -4,17 +4,17 @@ const ComplianceSafety = () => {
   const [selectedCert, setSelectedCert] = useState(null);
 
   const complianceItems = [
-    { name: 'Securities and Exchange Commission (SEC)', image: 'images/sec-cert.png', icon: 'fa-file-contract' },
-    { name: 'Bureau of Internal Revenue (BIR)', image: 'images/bir-cert.png', icon: 'fa-receipt' },
-    { name: 'Social Security System (SSS)', image: 'images/sss-cert.png', icon: 'fa-id-card' },
-    { name: 'PhilHealth', image: 'images/philhealth-cert.png', icon: 'fa-hospital' },
-    { name: 'Pag-IBIG Fund', image: 'images/pagibig-cert.png', icon: 'fa-home' },
-    { name: "Mayor's Permit 2025", image: 'images/mayors-permit.png', icon: 'fa-badge' },
-    { name: 'Fire Safety Inspection Permit', image: 'images/fire-safety-cert.png', icon: 'fa-fire' },
-    { name: 'Sanitary Permit', image: 'images/sanitary-cert.png', icon: 'fa-shield-alt' },
-    { name: 'PCAB License', image: 'images/pcab-cert.png', icon: 'fa-certificate' },
-    { name: 'Insurance Certificate & Guarantee', image: 'images/insurance-cert.png', icon: 'fa-lock' },
-    { name: 'Environmental Compliance Certificate (ECC)', image: 'images/ecc-cert.png', icon: 'fa-leaf' },
+    { name: 'Securities and Exchange Commission (SEC)', image: 'images/permits/securities-and-exchange-commision.png', icon: 'fa-file-contract' },
+    { name: 'Bureau of Internal Revenue (BIR)', image: 'images/permits/BIR.png', icon: 'fa-receipt' },
+    { name: 'Social Security System (SSS)', image: 'images/permits/SSS.png', icon: 'fa-id-card' },
+    { name: 'PhilHealth', image: 'images/permits/philhealth.png', icon: 'fa-hospital' },
+    { name: 'Pag-IBIG Fund', image: 'images/permits/pagibig-fund.png', icon: 'fa-home' },
+    { name: "Mayor's Permit 2026", image: 'images/permits/mayors2026.png', icon: 'fa-stamp' },
+    { name: 'Fire Safety Inspection Permit', image: 'images/permits/fire-safety-inspection.png', icon: 'fa-fire' },
+    { name: 'Sanitary Permit', image: 'images/permits/sanitary.png', icon: 'fa-shield-alt' },
+    { name: 'PCAB License', image: 'images/permits/pcab-license.png', icon: 'fa-certificate' },
+    { name: 'Insurance Certificate & Guarantee', image: 'images/permits/insurance-certificate.png', icon: 'fa-lock' },
+    { name: 'Environmental Compliance Certificate (ECC)', image: 'images/permits/ECC.png', icon: 'fa-leaf' },
   ];
 
   const safetyCommitments = [
