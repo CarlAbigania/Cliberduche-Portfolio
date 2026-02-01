@@ -9,7 +9,7 @@
 
   /* Arrowless Scrollbar */
   ::-webkit-scrollbar {
-    width: 20px;
+    width: 11px;
   }
 
   ::-webkit-scrollbar-track {
