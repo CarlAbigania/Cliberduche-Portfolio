@@ -1,10 +1,71 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Contact = () => {
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    access_key: 'ae88c5f7-55e9-4244-93b8-ce9342a3d184',
+    to_email: 'cliberduche@gmail.com',
+    from_name: 'CLIBERDUCHE Contact'
+  });
+
+  // Auto-clear message after 4 seconds
+  useEffect(() => {
+    if (submitMessage) {
+      const timer = setTimeout(() => {
+        setSubmitMessage('');
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitMessage]);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Form submitted! (In real app, connect to backend)');
-    e.target.reset();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitMessage('✓ Message sent successfully! We will contact you soon.');
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+          access_key: formData.access_key,
+          to_email: formData.to_email,
+          from_name: formData.from_name
+        });
+      } else {
+        setSubmitMessage('✗ Error submitting form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmitMessage('✗ Error submitting form. Please try again.');
+    }
+
+    setIsSubmitting(false);
   };
 
   return (
@@ -68,7 +129,10 @@ const Contact = () => {
                 <div>
                   <input
                     type="text"
+                    name="name"
                     placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
                     className="w-full px-4 py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                     required
                   />
@@ -76,7 +140,10 @@ const Contact = () => {
                 <div>
                   <input
                     type="email"
+                    name="email"
                     placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full px-4 py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                     required
                   />
@@ -84,25 +151,51 @@ const Contact = () => {
                 <div>
                   <input
                     type="text"
+                    name="subject"
                     placeholder="Subject"
+                    value={formData.subject}
+                    onChange={handleChange}
                     className="w-full px-4 py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                     required
                   />
                 </div>
                 <div>
                   <textarea
+                    name="message"
                     placeholder="Your Message"
                     rows="5"
+                    value={formData.message}
+                    onChange={handleChange}
                     className="w-full px-4 py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 resize-none"
                     required
                   ></textarea>
                 </div>
                 <button
                   type="submit"
-                  className="btn-primary w-full md:w-auto text-center"
+                  disabled={isSubmitting}
+                  className="btn-primary w-full md:w-auto text-center disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <i className="fas fa-spinner fa-spin mr-2"></i>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-paper-plane mr-2"></i>
+                      Send Message
+                    </>
+                  )}
                 </button>
+                {submitMessage && (
+                  <div className={`p-4 rounded-lg text-center font-mont font-bold ${
+                    submitMessage.includes('✓') 
+                      ? 'bg-green-100 text-green-800' 
+                      : 'bg-red-100 text-red-800'
+                  }`}>
+                    {submitMessage}
+                  </div>
+                )}
               </form>
             </div>
 
