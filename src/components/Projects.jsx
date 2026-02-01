@@ -4,31 +4,13 @@ const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
 
   const projects = [
     {
       id: 1,
-      img: 'images/36.png',
-      tag: 'Completed',
-      title: 'Land Development Site - 1',
-      desc: 'Infrastructure development and site preparation.',
-      location: '',
-      highlight: 'Scope: Land development and site preparation',
-      category: ['completed'],
-    },
-    {
-      id: 2,
-      img: 'images/37.png',
-      tag: 'Completed',
-      title: 'Land Development Site - 2',
-      desc: 'Infrastructure development and site preparation.',
-      location: '',
-      highlight: 'Scope: Land development and site preparation',
-      category: ['completed'],
-    },
-    {
-      id: 3,
-      img: 'images/39.png',
+      img: 'images/mdi-project-2019.png',
       tag: 'Completed',
       title: 'MDI - Project 2019',
       desc: 'Civil engineering and infrastructure works.',
@@ -37,8 +19,8 @@ const Projects = () => {
       category: ['completed'],
     },
     {
-      id: 4,
-      img: 'images/37.png',
+      id: 2,
+      img: 'images/silang,cavite2021.png',
       tag: 'Completed',
       title: 'Silang, Cavite Project 2021',
       desc: 'Leveling and compaction, drainage, road network, riprap, bridge, rectification.',
@@ -47,8 +29,8 @@ const Projects = () => {
       category: ['completed'],
     },
     {
-      id: 5,
-      img: 'images/42.png',
+      id: 3,
+      img: 'images/cbd-building2019.png',
       tag: 'Completed',
       title: 'CBD Building Project 2019',
       desc: 'Commercial building development and construction.',
@@ -57,8 +39,8 @@ const Projects = () => {
       category: ['completed'],
     },
     {
-      id: 6,
-      img: 'images/36.png',
+      id: 4,
+      img: 'images/mdi-mercator-holdings2025p1.png',
       tag: 'Completed',
       title: 'MDI - Mercator Holding Project 2025',
       desc: 'Embankment, diversion road, retaining wall, drainage, pavement, and infrastructure works.',
@@ -68,8 +50,8 @@ const Projects = () => {
       metrics: { area: '50 hectares', duration: '12 months', value: '₱25M' },
     },
     {
-      id: 7,
-      img: 'images/36.png',
+      id: 5,
+      img: 'images/mdi-mercator-holdings.png',
       tag: 'Ongoing',
       title: 'MDI - Mercator Holdings Project',
       desc: 'Embankment, diversion road, retaining wall, drainage, pavement, and electrical post lights.',
@@ -78,8 +60,8 @@ const Projects = () => {
       category: ['ongoing'],
     },
     {
-      id: 8,
-      img: 'images/42.png',
+      id: 6,
+      img: 'images/pier2-north-harbour.png',
       tag: 'Ongoing',
       title: 'Pier 2 North Harbour',
       desc: 'Reconstruction of bridge, pavement, lagoon, embankment, drainage, water & electrical works.',
@@ -88,8 +70,8 @@ const Projects = () => {
       category: ['ongoing'],
     },
     {
-      id: 9,
-      img: 'images/43.png',
+      id: 7,
+      img: 'images/wdv-phas4-tanza,cavite.png',
       tag: 'Ongoing',
       title: 'WDV Phase 4 Tanza, Cavite',
       desc: 'Retaining wall and perimeter fence construction for residential development.',
@@ -102,6 +84,27 @@ const Projects = () => {
   const filteredProjects = activeFilter === 'all'
     ? projects
     : projects.filter(project => project.category.includes(activeFilter));
+
+  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedProjects = filteredProjects.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      handlePageChange(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      handlePageChange(currentPage + 1);
+    }
+  };
 
   const filters = [
     { key: 'all', label: 'All Projects' },
@@ -134,7 +137,10 @@ const Projects = () => {
           {filters.map((filter) => (
             <button
               key={filter.key}
-              onClick={() => setActiveFilter(filter.key)}
+              onClick={() => {
+                setActiveFilter(filter.key);
+                setCurrentPage(1);
+              }}
               className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                 activeFilter === filter.key
                   ? 'bg-primary text-white border border-primary shadow-lg shadow-primary/30'
@@ -147,11 +153,11 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredProjects.map((project) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12" style={{ gridAutoRows: 'minmax(0, 1fr)' }}>
+          {paginatedProjects.map((project) => (
             <div
               key={project.id}
-              className="premium-card overflow-hidden"
+              className="premium-card overflow-hidden flex flex-col min-h-[550px]"
             >
               <div
                 className="h-48 bg-cover bg-center relative overflow-hidden group"
@@ -159,19 +165,19 @@ const Projects = () => {
               >
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300"></div>
               </div>
-              <div className="p-6">
-                <span className="inline-block px-3 py-1 bg-secondary text-primary text-xs font-bold rounded-full mb-4 uppercase">
+              <div className="p-6 flex flex-col flex-grow">
+                <span className="inline-block w-fit px-3 py-1 bg-secondary text-primary text-xs font-bold rounded-full mb-4 uppercase">
                   {project.tag}
                 </span>
                 <h3 className="text-lg md:text-xl font-mont font-bold text-dark mb-3">{project.title}</h3>
                 <p className="text-gray text-base mb-3 line-clamp-2">{project.desc}</p>
                 <p className="text-primary text-sm font-semibold mb-4">{project.highlight}</p>
-                <p className="text-dark font-semibold text-sm mb-6">
+                <p className="text-dark font-semibold text-sm mb-6 flex-grow">
                   <strong>Location:</strong> {project.location}
                 </p>
                 <button
                   onClick={() => handleProjectClick(project)}
-                  className="w-full btn-dark py-2 text-base"
+                  className="w-full btn-dark py-2 text-base mt-auto"
                 >
                   View Case Study
                 </button>
@@ -179,6 +185,50 @@ const Projects = () => {
             </div>
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mb-12">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                handlePreviousPage();
+              }}
+              disabled={currentPage === 1}
+              className="px-4 py-2 rounded text-sm font-semibold bg-white text-dark border border-primary/20 hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+            >
+              Previous
+            </button>
+            
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(page);
+                }}
+                className={`px-3 py-2 rounded text-sm font-semibold transition-all duration-300 ${
+                  currentPage === page
+                    ? 'bg-primary text-white border border-primary shadow-lg shadow-primary/30'
+                    : 'bg-white text-dark border border-primary/20 hover:bg-primary hover:text-white'
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+            
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                handleNextPage();
+              }}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 rounded text-sm font-semibold bg-white text-dark border border-primary/20 hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+            >
+              Next
+            </button>
+          </div>
+        )}
 
         {/* CTA Section */}
         <div className="text-center">
@@ -204,10 +254,13 @@ const Projects = () => {
                     ×
                   </button>
                 </div>
-                <div
-                  className="h-80 bg-cover bg-center rounded-xl mb-8 shadow-md"
-                  style={{ backgroundImage: `url(${selectedProject.img})` }}
-                ></div>
+                <div className="mb-8 rounded-xl overflow-hidden shadow-md bg-gray-100 flex items-center justify-center">
+                  <img 
+                    src={selectedProject.img} 
+                    alt={selectedProject.title}
+                    className="w-full h-auto max-h-96 object-contain"
+                  />
+                </div>
                 <div className="space-y-8">
                   <div>
                     <h4 className="font-mont font-bold text-dark text-xl md:text-2xl mb-4">Project Overview</h4>
