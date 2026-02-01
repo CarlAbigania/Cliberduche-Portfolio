@@ -166,30 +166,6 @@ const AboutUs = () => {
             ))}
           </div>
         </div>
-
-        {/* CTA Section */}
-        <div className="text-center mt-24">
-          <div className="bg-gradient-to-r from-primary to-accent text-white rounded-2xl p-12 md:p-16 max-w-4xl mx-auto shadow-premium">
-            <h3 className="text-2xl md:text-3xl font-mont font-bold mb-6">Partner with Cliberduche Corporation</h3>
-            <p className="text-white/90 mb-10 max-w-2xl mx-auto text-lg">
-              Experience our commitment to quality, safety, and timely delivery. Let's discuss your project needs.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="mailto:cliberduche.corp@yahoo.com"
-                className="btn-secondary"
-              >
-                Email Us
-              </a>
-              <a
-                href="tel:+63495466107"
-                className="btn-secondary"
-              >
-                Call Now
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
