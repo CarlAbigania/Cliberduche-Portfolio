@@ -13,8 +13,8 @@ const ComplianceSafety = () => {
     { name: 'Fire Safety Inspection Permit', image: 'images/fire-safety-cert.png', icon: 'fa-fire' },
     { name: 'Sanitary Permit', image: 'images/sanitary-cert.png', icon: 'fa-shield-alt' },
     { name: 'PCAB License', image: 'images/pcab-cert.png', icon: 'fa-certificate' },
-    { name: 'Environmental Compliance Certificate (ECC)', image: 'images/ecc-cert.png', icon: 'fa-leaf' },
     { name: 'Insurance Certificate & Guarantee', image: 'images/insurance-cert.png', icon: 'fa-lock' },
+    { name: 'Environmental Compliance Certificate (ECC)', image: 'images/ecc-cert.png', icon: 'fa-leaf' },
   ];
 
   const safetyCommitments = [
