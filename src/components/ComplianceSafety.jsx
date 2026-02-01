@@ -29,7 +29,7 @@ const ComplianceSafety = () => {
     <section id="compliance" className="py-12 md:py-16 bg-light">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
-        <div className="section-title text-center mb-20">
+        <div className="section-title text-center mb-12">
           <h2 className="text-primary mb-4">
             Compliance & Safety
           </h2>
@@ -39,7 +39,7 @@ const ComplianceSafety = () => {
           <div className="section-title-underline"></div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-12">
           {/* Compliance Registrations */}
           <div>
             <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10">

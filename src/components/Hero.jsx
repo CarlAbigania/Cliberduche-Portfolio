@@ -1,5 +1,4 @@
 import React from 'react';
-import heroImage from '/images/team.png';
 
 const Hero = () => {
   return (
@@ -7,7 +6,7 @@ const Hero = () => {
       id="home"
       className="hero relative py-32 md:py-40 text-center text-white bg-center bg-cover animate-moveBackground"
       style={{
-        backgroundImage: `linear-gradient(rgba(8, 55, 124, 0.82), rgba(8, 55, 124, 0.82)), url(${heroImage})`,
+        backgroundImage: `linear-gradient(rgba(8, 55, 124, 0.82), rgba(8, 55, 124, 0.82)), url('/images/compony provided/office.jpg')`,
       }}
     >
       <div className="max-w-4xl mx-auto px-4 animate-fadeIn">

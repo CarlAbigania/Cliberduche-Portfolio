@@ -90,10 +90,10 @@ const RFQWorkflow = () => {
           <div className="section-title-underline"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-16">
+        <div className="grid md:grid-cols-2 gap-12">
           {/* RFQ Form */}
-          <div>
-            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4">
+          <div className="premium-card p-10">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-primary mb-8">
               Submit Your RFQ
             </h3>
             <form onSubmit={handleSubmit} className="space-y-6">
