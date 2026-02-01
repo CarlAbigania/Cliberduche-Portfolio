@@ -9,7 +9,7 @@ const Footer = ({ isSidebarCollapsed = false }) => {
         <div className="h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent mb-12"></div>
 
         {/* Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8">
           {/* Company Info - Featured */}
           <div className="lg:col-span-1">
             <div className="mb-2">
@@ -32,23 +32,6 @@ const Footer = ({ isSidebarCollapsed = false }) => {
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase().replace(/\s+&\s+|\s+/g, '-')}`}
-                    className="hover:text-secondary transition-all duration-300 inline-block hover:translate-x-1"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="text-sm font-mont font-bold mb-6 text-secondary uppercase tracking-widest">Services</h4>
-            <ul className="space-y-3 text-gray-300 text-sm">
-              {['Backfill Sourcing', 'Land Development', 'Civil Works', 'Equipment Leasing', 'Site Management'].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#services"
                     className="hover:text-secondary transition-all duration-300 inline-block hover:translate-x-1"
                   >
                     {item}
