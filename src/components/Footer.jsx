@@ -3,7 +3,7 @@ const logo = '/images/logo2.png';
 
 const Footer = ({ isSidebarCollapsed = false }) => {
   return (
-    <footer className={`transition-all duration-300 bg-gradient-to-b from-dark via-dark to-dark text-white pt-12 md:pt-16 pb-6 ease-out ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
+    <footer className={`transition-all duration-300 bg-gradient-to-b from-dark via-dark to-dark dark:from-gray-900 dark:via-gray-900 dark:to-black text-white pt-12 md:pt-16 pb-6 ease-out ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
       <div className="max-w-container mx-auto px-4">
         {/* Top Decorative Line */}
         <div className="h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent mb-12"></div>
@@ -11,7 +11,7 @@ const Footer = ({ isSidebarCollapsed = false }) => {
         {/* Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8">
           {/* Company Info - Featured */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 fade-in-up">
             <div className="mb-2">
               <img src={logo} alt="Cliberduche" className="h-10 w-auto mb-3" />
             </div>
@@ -25,14 +25,14 @@ const Footer = ({ isSidebarCollapsed = false }) => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="fade-in-up" style={{ animationDelay: '0.1s' }}>
             <h4 className="text-sm font-mont font-bold mb-4 text-secondary uppercase tracking-widest">Quick Links</h4>
             <ul className="space-y-3 text-gray-300 text-sm">
-              {['About', 'Services', 'Projects', 'Equipment', 'Compliance'].map((item) => (
-                <li key={item}>
+              {['About', 'Services', 'Projects', 'Equipment', 'Compliance'].map((item, i) => (
+                <li key={item} className="fade-in-up" style={{ animationDelay: `${0.1 + i * 0.05}s` }}>
                   <a
                     href={`#${item.toLowerCase().replace(/\s+&\s+|\s+/g, '-')}`}
-                    className="hover:text-secondary transition-all duration-300 inline-block hover:translate-x-1"
+                    className="hover:text-secondary transition-all duration-300 inline-block hover:translate-x-1 underline-animate"
                   >
                     {item}
                   </a>
@@ -42,16 +42,16 @@ const Footer = ({ isSidebarCollapsed = false }) => {
           </div>
 
           {/* Contact Info */}
-          <div>
+          <div className="fade-in-up" style={{ animationDelay: '0.2s' }}>
             <h4 className="text-sm font-mont font-bold mb-6 text-secondary uppercase tracking-widest">Contact</h4>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-3">
+              <li className="flex items-start gap-3 hover:translate-x-1 transition-all duration-300">
                 <i className="fas fa-phone text-secondary mt-0.5 flex-shrink-0"></i>
                 <a href="tel:+63495466107" className="text-gray-300 hover:text-secondary transition-all duration-300">
                   +63 49 546-6107
                 </a>
               </li>
-              <li className="flex items-start gap-3">
+              <li className="flex items-start gap-3 hover:translate-x-1 transition-all duration-300">
                 <i className="fas fa-envelope text-secondary mt-0.5 flex-shrink-0"></i>
                 <a href="mailto:cliberduche.corp@yahoo.com" className="text-gray-300 hover:text-secondary transition-all duration-300">
                   cliberduche.corp@yahoo.com
@@ -65,25 +65,26 @@ const Footer = ({ isSidebarCollapsed = false }) => {
           </div>
 
           {/* Social Links */}
-          <div>
+          <div className="fade-in-up" style={{ animationDelay: '0.3s' }}>
             <h4 className="text-sm font-mont font-bold mb-6 text-secondary uppercase tracking-widest">Follow Us</h4>
             <div className="flex space-x-3 mb-6">
               {[
                 { icon: 'facebook-f', url: '#', label: 'Facebook' },
                 { icon: 'linkedin-in', url: '#', label: 'LinkedIn' },
                 { icon: 'instagram', url: '#', label: 'Instagram' }
-              ].map((social) => (
+              ].map((social, i) => (
                 <a
                   key={social.icon}
                   href={social.url}
                   title={social.label}
-                  className="w-11 h-11 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-secondary/30 transition-all duration-300 hover:scale-110 text-sm"
+                  className="w-11 h-11 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-secondary/30 transition-all duration-300 hover:scale-110 text-sm fade-in-up float-animation"
+                  style={{ animationDelay: `${0.3 + i * 0.05}s` }}
                 >
                   <i className={`fab fa-${social.icon}`}></i>
                 </a>
               ))}
             </div>
-            <a href="#contact" className="inline-flex items-center gap-2 text-secondary hover:text-white transition-all text-sm font-semibold group">
+            <a href="#contact" className="inline-flex items-center gap-2 text-secondary hover:text-white transition-all text-sm font-semibold group underline-animate">
               Get in Touch
               <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform duration-300"></i>
             </a>
