@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const Projects = () => {
+  // Refs for animations
+  const titleRef = useScrollAnimation({ threshold: 0.2 });
+  const descRef = useScrollAnimation({ threshold: 0.2 });
+  const filtersRef = useScrollAnimation({ threshold: 0.2 });
+  const paginationRef = useScrollAnimation({ threshold: 0.2 });
+  const ctaRef = useScrollAnimation({ threshold: 0.2 });
+
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -127,13 +135,13 @@ const Projects = () => {
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
-          <h2 className="text-primary dark:text-blue-400 mb-4 fade-in-up">Our Projects</h2>
-          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto fade-in-up" style={{ animationDelay: '0.1s' }}>Selected highlights across commercial and industrial developments</p>
+          <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>Our Projects</h2>
+          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>Selected highlights across commercial and industrial developments</p>
           <div className="section-title-underline"></div>
         </div>
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-8 fade-in-up" style={{ animationDelay: '0.2s' }}>
+        <div className="flex flex-wrap justify-center gap-3 mb-8 scroll-fade-up" ref={filtersRef}>
           {filters.map((filter) => (
             <button
               key={filter.key}
@@ -157,7 +165,7 @@ const Projects = () => {
           {paginatedProjects.map((project, index) => (
             <div
               key={project.id}
-              className="premium-card overflow-hidden flex flex-col min-h-[550px] fade-in-up scale-in hover:shadow-2xl transition-all duration-300 group"
+              className="premium-card overflow-hidden flex flex-col min-h-[550px] hover:shadow-2xl transition-all duration-300 group"
               style={{ animationDelay: `${(index % 3) * 0.1}s` }}
             >
               <div
@@ -196,7 +204,7 @@ const Projects = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 mb-12 fade-in-up">
+          <div className="flex justify-center items-center gap-2 mb-12 scroll-fade-up" ref={paginationRef}>
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -239,7 +247,7 @@ const Projects = () => {
         )}
 
         {/* CTA Section */}
-        <div className="text-center fade-in-up">
+        <div className="text-center scroll-fade-up" ref={ctaRef}>
           <a
             href="#rfq"
             className="btn-primary inline-block text-lg px-10 py-4"
