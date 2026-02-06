@@ -77,14 +77,14 @@ const RFQWorkflow = () => {
   };
 
   return (
-    <section id="rfq" className="py-12 md:py-16 bg-light">
+    <section id="rfq" className="py-12 md:py-16 bg-white dark:bg-gray-900">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
-          <h2 className="text-primary mb-4">
+          <h2 className="text-primary dark:text-blue-400 mb-4 fade-in-up">
             Request for Quote (RFQ) Workflow
           </h2>
-          <p className="text-gray text-lg max-w-2xl mx-auto">
+          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto fade-in-up" style={{ animationDelay: '0.1s' }}>
             Submit your project requirements and get a customized quote
           </p>
           <div className="section-title-underline"></div>
@@ -92,65 +92,65 @@ const RFQWorkflow = () => {
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* RFQ Form */}
-          <div className="premium-card p-10">
-            <h3 className="text-2xl md:text-3xl font-mont font-bold text-primary mb-8">
+          <div className="premium-card p-10 fade-in-left">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-primary dark:text-blue-400 mb-8">
               Submit Your RFQ
             </h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-dark font-mont font-bold mb-3">Full Name *</label>
+                  <label className="block text-dark dark:text-white font-mont font-bold mb-3">Full Name *</label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:border-primary dark:focus:border-blue-400 focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                   />
                 </div>
                 <div>
-                  <label className="block text-dark font-mont font-bold mb-3">Email *</label>
+                  <label className="block text-dark dark:text-white font-mont font-bold mb-3">Email *</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:border-primary dark:focus:border-blue-400 focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                   />
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-dark font-mont font-bold mb-3">Company</label>
+                  <label className="block text-dark dark:text-white font-mont font-bold mb-3">Company</label>
                   <input
                     type="text"
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:border-primary dark:focus:border-blue-400 focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                   />
                 </div>
                 <div>
-                  <label className="block text-dark font-mont font-bold mb-3">Phone</label>
+                  <label className="block text-dark dark:text-white font-mont font-bold mb-3">Phone</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:border-primary dark:focus:border-blue-400 focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-dark font-mont font-bold mb-3">Project Type *</label>
+                <label className="block text-dark dark:text-white font-mont font-bold mb-3">Project Type *</label>
                 <select
                   name="projectType"
                   value={formData.projectType}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                  className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:border-primary dark:focus:border-blue-400 focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                 >
                   <option value="">Select Project Type</option>
                   <option value="land-development">Land Development</option>
@@ -161,37 +161,37 @@ const RFQWorkflow = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-dark font-mont font-bold mb-3">Project Description *</label>
+                <label className="block text-dark dark:text-white font-mont font-bold mb-3">Project Description *</label>
                 <textarea
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
                   required
                   rows="4"
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 resize-none"
+                  className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:border-primary dark:focus:border-blue-400 focus:ring-4 focus:ring-primary/10 transition-all duration-300 resize-none"
                   placeholder="Describe your project requirements..."
                 ></textarea>
               </div>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-dark font-mont font-bold mb-3">Timeline</label>
+                  <label className="block text-dark dark:text-white font-mont font-bold mb-3">Timeline</label>
                   <input
                     type="text"
                     name="timeline"
                     value={formData.timeline}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:border-primary dark:focus:border-blue-400 focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                     placeholder="e.g., 3-6 months"
                   />
                 </div>
                 <div>
-                  <label className="block text-dark font-mont font-bold mb-3">Budget Range</label>
+                  <label className="block text-dark dark:text-white font-mont font-bold mb-3">Budget Range</label>
                   <input
                     type="text"
                     name="budget"
                     value={formData.budget}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:border-primary dark:focus:border-blue-400 focus:ring-4 focus:ring-primary/10 transition-all duration-300"
                     placeholder="e.g., PHP 1M - 5M"
                   />
                 </div>
@@ -214,10 +214,10 @@ const RFQWorkflow = () => {
                 )}
               </button>
               {submitMessage && (
-                <div className={`p-4 rounded-lg text-center font-mont font-bold ${
+                <div className={`p-4 rounded-lg text-center font-mont font-bold animate-fadeIn ${
                   submitMessage.includes('✓') 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-red-100 text-red-800'
+                    ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300' 
+                    : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
                 }`}>
                   {submitMessage}
                 </div>
@@ -226,22 +226,22 @@ const RFQWorkflow = () => {
           </div>
 
           {/* Workflow Steps */}
-          <div className="mt-10 md:mt-0">
-            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4">RFQ Process Workflow</h3>
+          <div className="fade-in-right">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-4">RFQ Process Workflow</h3>
             <div className="space-y-8">
               {[
-                { num: 1, title: 'Submit RFQ', desc: 'Fill out the form with your project details' },
-                { num: 2, title: 'Review & Analysis', desc: 'Our team reviews your requirements' },
-                { num: 3, title: 'Custom Quote', desc: 'Receive a tailored proposal' },
-                { num: 4, title: 'Project Execution', desc: 'Begin collaboration on your project' },
-              ].map((step) => (
-                <div key={step.num} className="flex items-start gap-6 group">
-                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-primary to-accent text-white rounded-full flex items-center justify-center font-mont font-bold text-2xl shadow-lg shadow-primary/30 group-hover:shadow-lg group-hover:shadow-primary/50 transition-all duration-300">
+                { num: 1, title: 'Submit RFQ', desc: 'Fill out the form with your project details', icon: 'fa-clipboard' },
+                { num: 2, title: 'Review & Analysis', desc: 'Our team reviews your requirements', icon: 'fa-magnifying-glass' },
+                { num: 3, title: 'Custom Quote', desc: 'Receive a tailored proposal', icon: 'fa-file-invoice-dollar' },
+                { num: 4, title: 'Project Execution', desc: 'Begin collaboration on your project', icon: 'fa-handshake' },
+              ].map((step, index) => (
+                <div key={step.num} className="flex items-start gap-6 group fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-primary to-accent text-white rounded-full flex items-center justify-center font-mont font-bold text-2xl shadow-lg shadow-primary/30 dark:shadow-primary/50 group-hover:shadow-lg group-hover:shadow-primary/50 dark:group-hover:shadow-primary/70 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12">
                     {step.num}
                   </div>
                   <div className="pt-2">
-                    <h5 className="text-xl md:text-2xl font-mont font-bold text-dark mb-2">{step.title}</h5>
-                    <p className="text-gray text-base leading-relaxed">{step.desc}</p>
+                    <h5 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-2 group-hover:text-secondary transition-colors">{step.title}</h5>
+                    <p className="text-gray dark:text-gray-400 text-base leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               ))}

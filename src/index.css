@@ -74,34 +74,54 @@
 }
 
 @layer components {
+  /* Section Titles - Enhanced */
   .section-title {
     @apply text-center mb-16;
   }
 
   .section-title-underline {
-    @apply block w-20 h-1 bg-secondary mx-auto mt-6 rounded;
+    @apply block w-20 h-1 bg-gradient-to-r from-secondary via-secondary to-secondary/50 mx-auto mt-6 rounded-full;
   }
 
+  /* Premium Cards with Enhanced Styling */
   .premium-card {
-    @apply bg-white rounded-xl shadow-md border border-primary/10 hover:shadow-xl hover:-translate-y-2 transition-all duration-300;
+    @apply bg-white rounded-xl shadow-md border border-primary/10 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 transition-all duration-300;
   }
 
+  /* Buttons - Enhanced with Better Interactions */
   .btn-primary {
-    @apply bg-secondary text-primary font-semibold py-3 px-8 rounded shadow-lg shadow-secondary/30 hover:shadow-secondary/50 hover:-translate-y-1 transition-all duration-300;
+    @apply bg-gradient-to-r from-secondary to-secondary/90 text-primary font-semibold py-3 px-8 rounded-lg shadow-lg shadow-secondary/30 hover:shadow-secondary/50 hover:-translate-y-1 transition-all duration-300 active:translate-y-0 relative overflow-hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .btn-primary:hover::before {
+    left: 100%;
   }
 
   .btn-secondary {
-    @apply border-2 border-white/60 text-white bg-white/10 hover:bg-white hover:text-primary font-semibold py-3 px-8 rounded transition-all duration-300;
+    @apply border-2 border-white/60 text-white bg-white/10 backdrop-blur-sm hover:bg-white hover:text-primary hover:border-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 active:scale-95;
   }
 
   .btn-dark {
-    @apply bg-primary text-white font-semibold py-3 px-8 rounded hover:bg-accent transition-all duration-300;
+    @apply bg-gradient-to-r from-primary to-accent text-white font-semibold py-3 px-8 rounded-lg hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300;
   }
 
+  /* Gradient Text */
   .gradient-text {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent bg-size-200 animate-gradientShift;
   }
 
+  /* Animation Utilities */
   .fade-in-up {
     animation: slideInUp 0.6s ease-out;
   }
@@ -110,12 +130,154 @@
     animation: slideInLeft 0.6s ease-out;
   }
 
-  /* Clamp utility for long paragraphs (works without Tailwind plugin) */
+  .fade-in-right {
+    animation: slideInRight 0.6s ease-out;
+  }
+
+  .fade-in-bounce {
+    animation: bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .scale-in {
+    animation: scaleUp 0.5s ease-out;
+  }
+
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Staggered Animation Classes */
+  .animate-stagger-1 {
+    animation-delay: 0.1s;
+  }
+
+  .animate-stagger-2 {
+    animation-delay: 0.2s;
+  }
+
+  .animate-stagger-3 {
+    animation-delay: 0.3s;
+  }
+
+  .animate-stagger-4 {
+    animation-delay: 0.4s;
+  }
+
+  .animate-stagger-5 {
+    animation-delay: 0.5s;
+  }
+
+  /* Interactive Elements */
+  .interactive-element {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .interactive-element:hover {
+    @apply transform hover:scale-105;
+  }
+
+  /* Subtle Glow Effects */
+  .glow-accent {
+    @apply shadow-lg shadow-secondary/20 dark:shadow-secondary/30;
+  }
+
+  .glow-primary {
+    @apply shadow-lg shadow-primary/20 dark:shadow-primary/30;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10;
+  }
+
+  /* Smooth Underline Animation */
+  .underline-animate {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .underline-animate::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #80D12A;
+    transition: width 0.3s ease;
+  }
+
+  .underline-animate:hover::after {
+    width: 100%;
+  }
+
+  /* Clamp utility for long paragraphs */
   .clamp-4 {
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Splash Screen Animations */
+  @keyframes splashSlideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes splashBounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes splashShimmer {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  @keyframes splashFloat {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-slideInUp {
+    animation: splashSlideInUp 0.8s ease-out forwards;
+  }
+
+  .animate-bounceIn {
+    animation: splashBounceIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .animate-shimmer {
+    animation: splashShimmer 2s ease-in-out infinite;
+    background-size: 200% 100%;
+  }
+
+  .animate-float {
+    animation: splashFloat 4s ease-in-out infinite;
   }
 }
 

@@ -39,13 +39,13 @@ const ProcessOverview = () => {
   };
 
   return (
-    <section id="process" className="py-12 md:py-16 bg-white">
+    <section id="process" className="py-12 md:py-16 bg-gray-50 dark:bg-gray-800/50">
       <div className="max-w-container mx-auto px-4">
         <div className="section-title text-center mb-12">
-          <h2 className="text-primary mb-4">
+          <h2 className="text-primary dark:text-blue-400 mb-4 fade-in-up">
             Operational Process (MQP)
           </h2>
-          <p className="text-gray text-base md:text-lg">
+          <p className="text-gray dark:text-gray-400 text-base md:text-lg fade-in-up" style={{ animationDelay: '0.1s' }}>
             A structured workflow that ensures quality, safety, and delivery precision
           </p>
           <div className="section-title-underline"></div>
@@ -56,12 +56,13 @@ const ProcessOverview = () => {
             index <= maxExpandedStep + 1 && (
               <div
                 key={index}
-                className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow min-h-40 relative"
+                className="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-gray-700 cursor-pointer hover:shadow-xl hover:-translate-y-1 hover:border-primary/50 transition-all duration-300 min-h-40 relative fade-in-up scale-in group"
                 onClick={() => handleToggle(index)}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {index <= maxExpandedStep ? (
                   <>
-                    <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-semibold mb-4">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center font-semibold mb-4 group-hover:scale-110 transition-transform duration-300">
                       {index + 1}
                     </div>
                     {index === maxExpandedStep && maxExpandedStep > 0 && (
@@ -75,12 +76,12 @@ const ProcessOverview = () => {
                         ✕
                       </button>
                     )}
-                    <h3 className="text-lg font-semibold text-dark mb-2">{step.title}</h3>
-                    <p className="text-gray text-sm leading-relaxed">{step.desc}</p>
+                    <h3 className="text-lg font-semibold text-dark dark:text-white mb-2 group-hover:text-secondary transition-colors">{step.title}</h3>
+                    <p className="text-gray dark:text-gray-400 text-sm leading-relaxed">{step.desc}</p>
                   </>
                 ) : (
                   <div className="flex items-center justify-center h-full">
-                    <span className="text-4xl font-light text-primary">+</span>
+                    <span className="text-4xl font-light text-primary dark:text-blue-400 group-hover:scale-125 transition-transform duration-300">+</span>
                   </div>
                 )}
               </div>
