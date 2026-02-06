@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const ProcessOverview = () => {
   const [maxExpandedStep, setMaxExpandedStep] = useState(0);
+
+  // Refs for animations
+  const titleRef = useScrollAnimation({ threshold: 0.2 });
+  const descRef = useScrollAnimation({ threshold: 0.2 });
+  const step1Ref = useScrollAnimation({ threshold: 0.2 });
+  const step2Ref = useScrollAnimation({ threshold: 0.2 });
+  const step3Ref = useScrollAnimation({ threshold: 0.2 });
+  const step4Ref = useScrollAnimation({ threshold: 0.2 });
+  const step5Ref = useScrollAnimation({ threshold: 0.2 });
+  const step6Ref = useScrollAnimation({ threshold: 0.2 });
+  const step7Ref = useScrollAnimation({ threshold: 0.2 });
 
   const steps = [
     {
@@ -42,24 +54,27 @@ const ProcessOverview = () => {
     <section id="process" className="py-12 md:py-16 bg-gray-50 dark:bg-gray-800/50">
       <div className="max-w-container mx-auto px-4">
         <div className="section-title text-center mb-12">
-          <h2 className="text-primary dark:text-blue-400 mb-4 fade-in-up">
+          <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>
             Operational Process (MQP)
           </h2>
-          <p className="text-gray dark:text-gray-400 text-base md:text-lg fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-gray dark:text-gray-400 text-base md:text-lg scroll-fade-up" ref={descRef}>
             A structured workflow that ensures quality, safety, and delivery precision
           </p>
           <div className="section-title-underline"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {steps.map((step, index) => (
-            index <= maxExpandedStep + 1 && (
-              <div
-                key={index}
-                className="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-gray-700 cursor-pointer hover:shadow-xl hover:-translate-y-1 hover:border-primary/50 transition-all duration-300 min-h-40 relative fade-in-up scale-in group"
-                onClick={() => handleToggle(index)}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
+          {steps.map((step, index) => {
+            const stepRefs = [step1Ref, step2Ref, step3Ref, step4Ref, step5Ref, step6Ref, step7Ref];
+            return (
+              index <= maxExpandedStep + 1 && (
+                <div
+                  key={index}
+                  ref={stepRefs[index]}
+                  className="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-gray-700 cursor-pointer hover:shadow-xl hover:-translate-y-1 hover:border-primary/50 transition-all duration-300 min-h-40 relative group"
+                  onClick={() => handleToggle(index)}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
                 {index <= maxExpandedStep ? (
                   <>
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center font-semibold mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -85,8 +100,9 @@ const ProcessOverview = () => {
                   </div>
                 )}
               </div>
-            )
-          ))}
+              )
+            );
+          })}
         </div>
       </div>
     </section>
