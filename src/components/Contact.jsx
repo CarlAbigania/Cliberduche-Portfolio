@@ -69,7 +69,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-12 md:py-16 bg-white dark:bg-gray-900">
+    <section id="contact" className="py-12 md:py-16 bg-light dark:bg-gray-800">
       <div className="max-w-container mx-auto px-4">
         {/* Section Header */}
         <div className="section-title text-center mb-12">
