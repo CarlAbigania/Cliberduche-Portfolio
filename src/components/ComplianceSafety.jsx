@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const ComplianceSafety = () => {
   const [selectedCert, setSelectedCert] = useState(null);
+
+  // Refs for scroll animations
+  const titleRef = useScrollAnimation({ threshold: 0.2 });
+  const descRef = useScrollAnimation({ threshold: 0.2 });
+  const registrationsHeadingRef = useScrollAnimation({ threshold: 0.2 });
+  const safetyHeadingRef = useScrollAnimation({ threshold: 0.2 });
+  const commitmentCardRef = useScrollAnimation({ threshold: 0.2 });
+  const principlesHeadingRef = useScrollAnimation({ threshold: 0.2 });
+  const principlesCardRef = useScrollAnimation({ threshold: 0.2 });
 
   const complianceItems = [
     { name: 'Securities and Exchange Commission (SEC)', image: 'images/permits/securities-and-exchange-commision.png', icon: 'fa-file-contract' },
@@ -30,10 +40,10 @@ const ComplianceSafety = () => {
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
-          <h2 className="text-primary mb-4">
+          <h2 className="text-primary mb-4 scroll-fade-up" ref={titleRef}>
             Compliance & Safety
           </h2>
-          <p className="text-gray text-lg max-w-2xl mx-auto">
+          <p className="text-gray text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>
             Legal compliance, certifications, and unwavering safety commitment
           </p>
           <div className="section-title-underline"></div>
@@ -42,7 +52,7 @@ const ComplianceSafety = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Compliance Registrations */}
           <div>
-            <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10">
+            <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10 scroll-fade-up" ref={registrationsHeadingRef}>
               Government Registrations & Permits
             </h3>
             <div className="grid grid-cols-1 gap-4">
@@ -64,10 +74,10 @@ const ComplianceSafety = () => {
 
           {/* Safety Commitment */}
           <div>
-            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6 scroll-fade-up" ref={safetyHeadingRef}>
               Safety Commitment
             </h3>
-            <div className="premium-card border-l-4 border-secondary p-10 mb-8">
+            <div className="premium-card border-l-4 border-secondary p-10 mb-8 scroll-fade-up" ref={commitmentCardRef}>
               <p className="text-gray text-lg leading-relaxed mb-6">
                 CLIBERDUCHE CORPORATION is vitally interested in its employees' health and safety.
                 Protecting employees from injury or occupational disease is a major, continuing
@@ -81,8 +91,8 @@ const ComplianceSafety = () => {
               </p>
             </div>
 
-            <div className="premium-card border-l-4 border-secondary p-10">
-              <h4 className="text-2xl font-mont font-bold text-dark mb-6">
+            <div className="premium-card border-l-4 border-secondary p-10 scroll-fade-up" ref={principlesCardRef}>
+              <h4 className="text-2xl font-mont font-bold text-dark mb-6 scroll-fade-up" ref={principlesHeadingRef}>
                 Safety Principles
               </h4>
               <ul className="space-y-4">
