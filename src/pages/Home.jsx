@@ -14,7 +14,6 @@ import Footer from '../components/Footer';
 import BackToTopButton from '../components/BackToTopButton';
 import ProcessOverview from '../components/ProcessOverview';
 import MeetOurTeam from '../components/MeetOurTeam';
-import NewsBlog from '../components/NewsBlog';
 
 const Home = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
@@ -53,9 +52,6 @@ const Home = () => {
         </section>
         <section id="resources">
           <ResourcesPartners />
-        </section>
-        <section id="blog">
-          <NewsBlog />
         </section>
         <section id="contact">
           <Contact />
