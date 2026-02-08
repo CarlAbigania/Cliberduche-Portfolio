@@ -74,6 +74,11 @@
 }
 
 @layer components {
+  /* Disable transitions utility */
+  .no-transition {
+    transition: none !important;
+  }
+
   /* Section Titles - Enhanced */
   .section-title {
     @apply text-center mb-16;

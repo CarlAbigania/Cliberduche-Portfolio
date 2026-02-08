@@ -1,9 +1,9 @@
 import React from 'react';
 const logo = '/images/logo2.png';
 
-const Footer = ({ isSidebarCollapsed = false }) => {
+const Footer = () => {
   return (
-    <footer className={`transition-all duration-300 bg-gradient-to-b from-dark via-dark to-dark dark:from-gray-900 dark:via-gray-900 dark:to-black text-white pt-12 md:pt-16 pb-6 ease-out ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
+    <footer className="transition-all duration-300 bg-gradient-to-b from-dark via-dark to-dark dark:from-gray-900 dark:via-gray-900 dark:to-black text-white pt-12 md:pt-16 pb-6 ease-out">
       <div className="max-w-container mx-auto px-4">
         {/* Top Decorative Line */}
         <div className="h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent mb-12"></div>

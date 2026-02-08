@@ -1,27 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-const Sidebar = ({ onCollapsedChange }) => {
+const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('hero');
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [showTextContent, setShowTextContent] = useState(true);
+  const [bubblePos, setBubblePos] = useState({ xPx: 32, y: 32 }); // xPx: pixels from left, y: pixels from bottom
+  const [isDragging, setIsDragging] = useState(false);
+  const [hasMovedSingnificantly, setHasMovedSignificantly] = useState(false);
+  const [isSnapping, setIsSnapping] = useState(false);
+  const bubbleRef = useRef(null);
+  const dragPosRef = useRef({ xPx: 32, y: 32 }); // Track position during drag without re-render
+  const dragStartRef = useRef({ x: 0, y: 0 });
 
-  // Notify parent when collapse state changes
-  const toggleCollapsed = () => {
-    const newState = !isCollapsed;
-    setIsCollapsed(newState);
-    
-    // When expanding, delay text appearance for smooth transition
-    if (!newState) {
-      setShowTextContent(false);
-      setTimeout(() => setShowTextContent(true), 150);
-    } else {
-      setShowTextContent(true);
-    }
-    
-    onCollapsedChange?.(newState);
-  };
+  const DRAG_THRESHOLD = 5; // Pixels threshold to distinguish click from drag
 
   const navigationLinks = [
     { id: 'hero', label: 'Home', icon: 'fa-home' },
@@ -76,77 +67,194 @@ const Sidebar = ({ onCollapsedChange }) => {
   const handleNavClick = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      // Don't set activeSection immediately - let scroll listener handle it
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsMenuOpen(false);
   };
+
+  const handleMouseDown = (e) => {
+    if (e.button !== 0) return; // Only left mouse button
+    setIsDragging(true);
+    setHasMovedSignificantly(false);
+    dragStartRef.current = { x: e.clientX, y: e.clientY };
+    dragPosRef.current = { xPx: parseFloat(bubbleRef.current.style.left || 32), y: parseFloat(bubbleRef.current.style.bottom || 32) };
+    
+    // Remove transition during drag
+    bubbleRef.current.style.transition = 'none';
+    
+    // Attach listeners immediately
+    document.addEventListener('mousemove', onMouseMoveHandler);
+    document.addEventListener('mouseup', onMouseUpHandler);
+  };
+
+  const onMouseMoveHandler = useCallback((e) => {
+    if (!dragStartRef.current || !bubbleRef.current) return;
+
+    const deltaX = e.clientX - dragStartRef.current.x;
+    const deltaY = e.clientY - dragStartRef.current.y;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    // Update position directly without state
+    if (distance > DRAG_THRESHOLD) {
+      let newX = dragPosRef.current.xPx + deltaX;
+      newX = Math.max(0, Math.min(newX, window.innerWidth - 64));
+
+      let newY = dragPosRef.current.y - deltaY;
+      newY = Math.max(32, Math.min(newY, window.innerHeight - 96));
+
+      bubbleRef.current.style.left = `${newX}px`;
+      bubbleRef.current.style.bottom = `${newY}px`;
+    }
+  }, []);
+
+  const onMouseUpHandler = useCallback(() => {
+    // Remove listeners immediately
+    document.removeEventListener('mousemove', onMouseMoveHandler);
+    document.removeEventListener('mouseup', onMouseUpHandler);
+    
+    setIsDragging(false);
+    
+    // Get final position
+    const finalX = parseFloat(bubbleRef.current?.style.left || 32);
+    const finalY = parseFloat(bubbleRef.current?.style.bottom || 32);
+    
+    // Check if it was a drag or just a click
+    const wasDrag = Math.abs(finalX - dragPosRef.current.xPx) > DRAG_THRESHOLD || 
+                    Math.abs(finalY - dragPosRef.current.y) > DRAG_THRESHOLD;
+    
+    if (wasDrag) {
+      // Re-enable transition for snap animation
+      bubbleRef.current.style.transition = 'all 0.3s ease-out';
+      
+      // Snap to nearest side
+      const midpoint = window.innerWidth / 2;
+      const isCloserToLeft = finalX < midpoint;
+      const targetX = isCloserToLeft ? 32 : window.innerWidth - 96;
+      
+      setIsSnapping(true);
+      setBubblePos({ xPx: targetX, y: finalY });
+      dragPosRef.current = { xPx: targetX, y: finalY };
+      
+      setTimeout(() => setIsSnapping(false), 300);
+    } else {
+      // It was just a click
+      // Re-enable transition
+      bubbleRef.current.style.transition = 'all 0.3s ease-out';
+      
+      setIsMenuOpen(prev => !prev);
+      // Sync position with state
+      setBubblePos({ xPx: finalX, y: finalY });
+    }
+    
+    setHasMovedSignificantly(false);
+  }, []);
+
+  // Initialize and update bubble position when snapping
+  useEffect(() => {
+    if (bubbleRef.current) {
+      bubbleRef.current.style.left = `${bubblePos.xPx}px`;
+      bubbleRef.current.style.bottom = `${bubblePos.y}px`;
+      dragPosRef.current = { ...bubblePos };
+    }
+  }, [bubblePos]);
+
+  // Initialize bubble position on mount
+  useEffect(() => {
+    if (bubbleRef.current) {
+      bubbleRef.current.style.left = '32px';
+      bubbleRef.current.style.bottom = '32px';
+    }
+  }, []);
+
+  // Cleanup event listeners on unmount
+  useEffect(() => {
+    return () => {
+      document.removeEventListener('mousemove', onMouseMoveHandler);
+      document.removeEventListener('mouseup', onMouseUpHandler);
+    };
+  }, [onMouseMoveHandler, onMouseUpHandler]);
 
   return (
     <>
-      {/* Sidebar */}
-      <aside className={`fixed left-0 top-16 h-[calc(100vh-64px)] bg-gradient-to-b from-white via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 shadow-2xl shadow-black/10 dark:shadow-black/30 z-30 overflow-hidden flex flex-col transition-all duration-300 border-r border-gray-200 dark:border-gray-700 ${
-        isCollapsed ? 'w-20' : 'w-64'
-      }`}>
-        {/* Toggle Button */}
-        <div className={`flex items-center px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900/50 transition-all duration-300 ${
-          isCollapsed ? 'justify-center' : 'justify-between'
-        }`}>
-          {!isCollapsed && (
-            <h3 className={`text-xs font-bold text-primary dark:text-secondary uppercase tracking-widest transition-all duration-300 ${
-              showTextContent ? 'opacity-100 max-w-full' : 'opacity-0 max-w-0'
-            }`}>
-              Navigation
-            </h3>
-          )}
+      {/* Floating Bubble Button */}
+      <button
+        ref={bubbleRef}
+        onMouseDown={handleMouseDown}
+        className={`fixed w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 z-40 flex items-center justify-center active:scale-95 ${
+          isDragging ? 'cursor-grabbing no-transition' : 'cursor-grab transition-all duration-300 hover:scale-110'
+        } ${
+          isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
+        }`}
+        title="Open Navigation (Draggable)"
+      >
+        <i className={`fas fa-${isMenuOpen ? 'times' : 'bars'} text-xl transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`}></i>
+      </button>
+
+      {/* Navigation Modal Overlay */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 transition-opacity duration-300"
+          onClick={() => setIsMenuOpen(false)}
+        ></div>
+      )}
+
+      {/* Left Sidebar Navigation - Floating */}
+      <div
+        className={`fixed left-8 top-20 h-[calc(100vh-120px)] w-72 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-950 rounded-2xl shadow-2xl shadow-black/25 dark:shadow-black/50 overflow-hidden z-40 transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50 ${
+          isMenuOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-96 opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Header */}
+        <div className="bg-gradient-to-r from-primary via-primary to-accent text-white p-6 flex items-center justify-between sticky top-0 z-10 shadow-lg shadow-primary/20 dark:shadow-primary/10">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
+              <i className="fas fa-bars text-white"></i>
+            </div>
+            <h3 className="text-lg font-mont font-bold tracking-wide">Navigation</h3>
+          </div>
           <button
-            onClick={toggleCollapsed}
-            className={`p-2.5 rounded-lg transition-all duration-300 text-primary dark:text-secondary active:scale-95 ${
-              isCollapsed 
-                ? 'hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 dark:hover:bg-gray-800 hover:scale-110' 
-                : 'hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 dark:hover:bg-gray-800 hover:scale-110 ml-auto'
-            }`}
-            title={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+            onClick={() => setIsMenuOpen(false)}
+            className="text-white hover:bg-white/20 rounded-lg p-2 transition-all duration-200 hover:scale-110 active:scale-95"
           >
-            <i className={`fas fa-chevron-${isCollapsed ? 'right' : 'left'} text-sm transition-transform duration-300`}></i>
+            <i className="fas fa-times text-lg"></i>
           </button>
         </div>
 
-        {/* Navigation Section */}
-        <nav className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent dark:scrollbar-thumb-primary/50 p-3">
-          <ul className="space-y-0.5">
-            {navigationLinks.map((link, index) => (
+        {/* Navigation Links */}
+        <nav className="overflow-y-auto h-[calc(100vh-120px)] scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-700 dark:scrollbar-track-gray-800/30">
+          <ul className="space-y-2 p-5">
+            {navigationLinks.map((link) => (
               <li key={link.id}>
                 <button
                   onMouseEnter={() => setHoveredItem(link.id)}
                   onMouseLeave={() => setHoveredItem(null)}
                   onClick={() => handleNavClick(link.id)}
-                  className={`w-full relative flex items-center gap-3 px-3 py-2.5 h-10 text-sm rounded-lg transition-all duration-200 group ${isCollapsed ? 'justify-center' : ''} ${
+                  className={`w-full relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${
                     activeSection === link.id
-                      ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/30 dark:shadow-primary/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-primary/5 dark:hover:bg-gray-800/50 hover:text-primary dark:hover:text-secondary'
+                      ? 'bg-gradient-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/40 dark:shadow-primary/20 scale-105 origin-left'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 dark:hover:bg-gray-800/40 hover:text-primary dark:hover:text-secondary hover:shadow-md hover:shadow-primary/10'
                   }`}
-                  title={isCollapsed ? link.label : ''}
                 >
-                  {/* Left Active Indicator */}
-                  {activeSection === link.id && !isCollapsed && (
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-accent rounded-r-lg animate-pulse" style={{animationDuration: '2s'}}></div>
-                  )}
+                  {/* Background animation */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
-                  <i className={`fas ${link.icon} w-5 flex-shrink-0 text-center transition-all duration-300 ${
-                    activeSection === link.id ? 'scale-110' : 'group-hover:scale-110'
-                  }`}></i>
-                  {!isCollapsed && (
-                    <span className={`font-medium flex-1 text-left whitespace-nowrap overflow-hidden transition-all duration-300 ${
-                      showTextContent ? 'opacity-100 max-w-full' : 'opacity-0 max-w-0'
-                    }`}>{link.label}</span>
-                  )}
+                  {/* Icon */}
+                  <div className={`relative flex-shrink-0 w-5 h-5 flex items-center justify-center transition-all duration-300 ${
+                    activeSection === link.id 
+                      ? 'scale-125 text-white' 
+                      : 'text-gray-600 dark:text-gray-400 group-hover:scale-125 group-hover:text-primary dark:group-hover:text-secondary'
+                  }`}>
+                    <i className={`fas ${link.icon}`}></i>
+                  </div>
                   
-                  {/* Collapsed State Tooltip */}
-                  {isCollapsed && hoveredItem === link.id && (
-                    <div className="absolute left-24 bg-gray-900 dark:bg-gray-700 text-white text-xs py-1 px-3 rounded-lg whitespace-nowrap z-50 pointer-events-none animate-fadeIn">
-                      {link.label}
-                      <div className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-gray-900 dark:border-r-gray-700"></div>
-                    </div>
+                  {/* Label */}
+                  <span className={`font-medium flex-1 text-left transition-all duration-300 ${
+                    activeSection === link.id ? 'text-white' : 'text-gray-700 dark:text-gray-300'
+                  }`}>{link.label}</span>
+                  
+                  {/* Active indicator dot */}
+                  {activeSection === link.id && (
+                    <div className="relative flex-shrink-0 w-2.5 h-2.5 rounded-full bg-white shadow-lg shadow-white/50 animate-pulse"></div>
                   )}
                 </button>
               </li>
@@ -154,24 +262,7 @@ const Sidebar = ({ onCollapsedChange }) => {
           </ul>
         </nav>
 
-        {/* Footer Section */}
-        <div className="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900/50 p-4 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-2">
-            {isCollapsed && (
-              <div className="text-primary dark:text-secondary transition-all duration-300">
-                <i className="fas fa-building text-lg"></i>
-              </div>
-            )}
-            {!isCollapsed && (
-              <span className={`text-xs font-bold text-center text-gray-900 dark:text-white tracking-wide leading-tight transition-all duration-300 ${
-                showTextContent ? 'opacity-100 max-w-full' : 'opacity-0 max-w-0'
-              }`}>
-                Cliberduche Corp.
-              </span>
-            )}
-          </div>
-        </div>
-      </aside>
+      </div>
     </>
   );
 };

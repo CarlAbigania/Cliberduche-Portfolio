@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Hero from '../components/Hero';
@@ -16,13 +16,11 @@ import ProcessOverview from '../components/ProcessOverview';
 import MeetOurTeam from '../components/MeetOurTeam';
 
 const Home = () => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
-
   return (
     <>
       <Header />
-      <Sidebar onCollapsedChange={setIsSidebarCollapsed} />
-      <main className={`transition-all duration-300 pt-16 ease-out ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
+      <Sidebar />
+      <main className="pt-16">
         <section id="hero">
           <Hero />
         </section>
@@ -57,7 +55,7 @@ const Home = () => {
           <Contact />
         </section>
       </main>
-      <Footer isSidebarCollapsed={isSidebarCollapsed} />
+      <Footer />
       <BackToTopButton />
     </>
   );
