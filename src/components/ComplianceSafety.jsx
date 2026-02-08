@@ -37,7 +37,7 @@ const ComplianceSafety = () => {
   ];
 
   return (
-    <section id="compliance" className="py-12 md:py-16 bg-light">
+    <section id="compliance" className="py-12 md:py-16 bg-light dark:bg-gray-800/50">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title text-center mb-12">

@@ -98,7 +98,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section - Copyright & Back to Top */}
-        <div className="border-t border-gray-700/40 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="border-t border-gray-700/40 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Copyright */}
           <div className="text-center md:text-left">
             <p className="text-gray-400 text-sm">
@@ -106,13 +106,10 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Back to Top Button - Enhanced */}
-          <div className="flex items-center gap-4 group">
-            <span className="text-gray-300 text-base font-medium group-hover:text-secondary transition-colors duration-300 tracking-wide">Back to top</span>
-            <div className="relative">
-              <BackToTopButton />
-              <div className="absolute -inset-2 bg-gradient-to-r from-secondary/30 to-accent/30 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
-            </div>
+          {/* Back to Top Button */}
+          <div className="flex items-center gap-2">
+            <span className="text-gray-400 text-sm">Back to top</span>
+            <BackToTopButton />
           </div>
         </div>
 
