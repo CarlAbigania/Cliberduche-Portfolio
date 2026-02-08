@@ -46,17 +46,7 @@ const Header = () => {
 
   return (
     <>
-      <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16 ${
-        scrolled
-          ? 'bg-white dark:bg-gray-900 shadow-lg shadow-primary/10 dark:shadow-primary/15'
-          : 'bg-white/95 dark:bg-gray-900/95 shadow-md shadow-primary/5 dark:shadow-primary/10'
-      } border-b border-gray-200 dark:border-gray-700 backdrop-blur-md`}>
-        {/* Decorative top line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-60"></div>
-        
-        {/* Subtle bottom accent line */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-        
+      <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16 bg-transparent`}>
         {/* Main Header Content */}
         <div className="max-w-container mx-auto px-4 sm:px-6 h-full flex items-center justify-between relative z-10">
           

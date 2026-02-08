@@ -19,7 +19,7 @@ const Home = () => {
     <>
       <Header />
       <Sidebar />
-      <main className="pt-16">
+      <main>
         <section id="hero">
           <Hero />
         </section>

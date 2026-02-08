@@ -5,37 +5,15 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-  }
-
-  /* Arrowless Scrollbar */
-  ::-webkit-scrollbar {
-    width: 11px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: rgba(15, 74, 161, 0.08);
-    border-radius: 10px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #0F4AA1;
-    border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #08377C;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
-  }
-
-  ::-webkit-scrollbar-button {
-    display: none;
+    margin: 0;
+    padding: 0;
   }
 
   body {
-    @apply bg-light text-dark antialiased font-sans;
+    @apply text-dark antialiased font-sans;
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
   }
 
   ::selection {
