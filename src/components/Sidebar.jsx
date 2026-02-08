@@ -240,7 +240,7 @@ const Sidebar = () => {
         </div>
 
         {/* Navigation Links */}
-        <nav className="overflow-y-auto h-[calc(100vh-120px)] scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-700 dark:scrollbar-track-gray-800/30">
+        <nav className="overflow-y-auto h-[calc(100vh-120px)] scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-700 dark:scrollbar-track-gray-800/30 backdrop-blur-md bg-white/40 dark:bg-gray-800/40">
           <ul className="space-y-2 p-5">
             {navigationLinks.map((link) => (
               <li key={link.id}>
