@@ -69,7 +69,6 @@ const Sidebar = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMenuOpen(false);
   };
 
   const handleMouseDown = (e) => {
@@ -100,7 +99,8 @@ const Sidebar = () => {
       newX = Math.max(0, Math.min(newX, window.innerWidth - 64));
 
       let newY = dragPosRef.current.y - deltaY;
-      newY = Math.max(32, Math.min(newY, window.innerHeight - 96));
+      // Prevent bubble from overlapping header (64px) + margin (32px)
+      newY = Math.max(32, Math.min(newY, window.innerHeight - 160));
 
       bubbleRef.current.style.left = `${newX}px`;
       bubbleRef.current.style.bottom = `${newY}px`;
@@ -131,9 +131,12 @@ const Sidebar = () => {
       const isCloserToLeft = finalX < midpoint;
       const targetX = isCloserToLeft ? 32 : window.innerWidth - 96;
       
+      // Ensure Y position respects header constraint
+      const constrainedY = Math.max(32, Math.min(finalY, window.innerHeight - 160));
+      
       setIsSnapping(true);
-      setBubblePos({ xPx: targetX, y: finalY });
-      dragPosRef.current = { xPx: targetX, y: finalY };
+      setBubblePos({ xPx: targetX, y: constrainedY });
+      dragPosRef.current = { xPx: targetX, y: constrainedY };
       
       setTimeout(() => setIsSnapping(false), 300);
     } else {
@@ -190,10 +193,10 @@ const Sidebar = () => {
         <i className={`fas fa-${isMenuOpen ? 'times' : 'bars'} text-xl transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`}></i>
       </button>
 
-      {/* Navigation Modal Overlay */}
+      {/* Navigation Modal Overlay - No overlay effect */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 transition-opacity duration-300"
+          className="fixed inset-0 z-30 transition-opacity duration-300"
           onClick={() => setIsMenuOpen(false)}
         ></div>
       )}
