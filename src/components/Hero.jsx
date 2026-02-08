@@ -6,7 +6,7 @@ const Hero = () => {
       id="home"
       className="hero relative py-32 md:py-40 text-center text-white bg-center bg-cover"
       style={{
-        backgroundImage: `linear-gradient(135deg, rgba(8, 55, 124, 0.85) 0%, rgba(15, 74, 161, 0.80) 50%, rgba(8, 55, 124, 0.85) 100%), url('/images/compony provided/office.jpg')`,
+        backgroundImage: `linear-gradient(135deg, rgba(60, 60, 60, 0.75) 0%, rgba(70, 70, 70, 0.70) 50%, rgba(60, 60, 60, 0.75) 100%), url('/images/compony provided/office.jpg')`,
         backgroundAttachment: 'fixed',
       }}
     >

@@ -28,8 +28,7 @@ const Services = () => {
       id="services"
       className="py-12 md:py-16 bg-fixed bg-cover bg-center relative"
       style={{
-        backgroundImage:
-          "linear-gradient(rgba(8, 55, 124, 0.82), rgba(8, 55, 124, 0.82)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+        backgroundImage: "linear-gradient(rgba(60, 60, 60, 0.72), rgba(60, 60, 60, 0.72)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
       }}
     >
       <div className="max-w-container mx-auto px-4">
