@@ -1,5 +1,7 @@
 import React from 'react';
 import BackToTopButton from './BackToTopButton';
+import { MdPhone, MdMailOutline, MdSchedule, MdArrowForward } from 'react-icons/md';
+import { FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
 const logo = '/images/logo2.png';
 
 const Footer = () => {
@@ -47,19 +49,19 @@ const Footer = () => {
             <h4 className="text-sm font-mont font-bold mb-6 text-secondary uppercase tracking-widest">Contact</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3 hover:translate-x-1 transition-all duration-300">
-                <i className="fas fa-phone text-secondary mt-0.5 flex-shrink-0"></i>
+                <MdPhone className="text-secondary mt-0.5 flex-shrink-0" />
                 <a href="tel:+63495466107" className="text-gray-300 hover:text-secondary transition-all duration-300">
                   +63 49 546-6107
                 </a>
               </li>
               <li className="flex items-start gap-3 hover:translate-x-1 transition-all duration-300">
-                <i className="fas fa-envelope text-secondary mt-0.5 flex-shrink-0"></i>
+                <MdMailOutline className="text-secondary mt-0.5 flex-shrink-0" />
                 <a href="mailto:cliberduche.corp@yahoo.com" className="text-gray-300 hover:text-secondary transition-all duration-300">
                   cliberduche.corp@yahoo.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <i className="fas fa-clock text-secondary mt-0.5 flex-shrink-0"></i>
+                <MdSchedule className="text-secondary mt-0.5 flex-shrink-0" />
                 <span className="text-gray-300">Mon-Fri 8AM-6PM</span>
               </li>
             </ul>
@@ -70,24 +72,27 @@ const Footer = () => {
             <h4 className="text-sm font-mont font-bold mb-6 text-secondary uppercase tracking-widest">Follow Us</h4>
             <div className="flex space-x-3 mb-6">
               {[
-                { icon: 'facebook-f', url: '#', label: 'Facebook' },
-                { icon: 'linkedin-in', url: '#', label: 'LinkedIn' },
-                { icon: 'instagram', url: '#', label: 'Instagram' }
-              ].map((social, i) => (
-                <a
-                  key={social.icon}
-                  href={social.url}
-                  title={social.label}
-                  className="w-11 h-11 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-secondary/30 transition-all duration-300 hover:scale-110 text-sm fade-in-up float-animation"
-                  style={{ animationDelay: `${0.3 + i * 0.05}s` }}
-                >
-                  <i className={`fab fa-${social.icon}`}></i>
-                </a>
-              ))}
+                { icon: FaFacebook, url: '#', label: 'Facebook' },
+                { icon: FaLinkedin, url: '#', label: 'LinkedIn' },
+                { icon: FaInstagram, url: '#', label: 'Instagram' }
+              ].map((social, i) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    title={social.label}
+                    className="w-11 h-11 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-secondary/30 transition-all duration-300 hover:scale-110 text-sm fade-in-up"
+                    style={{ animationDelay: `${0.3 + i * 0.05}s` }}
+                  >
+                    <Icon />
+                  </a>
+                );
+              })}
             </div>
             <a href="#contact" className="inline-flex items-center gap-2 text-secondary hover:text-white transition-all text-sm font-semibold group underline-animate">
               Get in Touch
-              <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform duration-300"></i>
+              <MdArrowForward className="group-hover:translate-x-1 transition-transform duration-300" />
             </a>
           </div>
         </div>

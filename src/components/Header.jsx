@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from '/images/logo2.png';
+import { MdDownload, MdLightMode, MdNightlight, MdMenu, MdClose } from 'react-icons/md';
+import { FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -78,7 +80,7 @@ const Header = () => {
                 className="hidden md:inline-flex items-center gap-2 px-4 py-2 border-2 border-primary text-primary dark:text-blue-400 dark:border-blue-400 text-sm font-semibold rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-all duration-300"
                 title="Download Portfolio PDF"
               >
-                <i className="fas fa-download text-sm"></i>
+                <MdDownload className="text-sm" />
                 Download
               </a>
             </div>
@@ -95,7 +97,7 @@ const Header = () => {
                 className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110"
                 title="Facebook"
               >
-                <i className="fab fa-facebook-f text-sm"></i>
+                <FaFacebook className="text-sm" />
               </a>
               <a
                 href="https://www.linkedin.com/company/cliberduche"
@@ -104,7 +106,7 @@ const Header = () => {
                 className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110"
                 title="LinkedIn"
               >
-                <i className="fab fa-linkedin-in text-sm"></i>
+                <FaLinkedin className="text-sm" />
               </a>
               <a
                 href="https://www.instagram.com/cliberduche"
@@ -113,7 +115,7 @@ const Header = () => {
                 className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110"
                 title="Instagram"
               >
-                <i className="fab fa-instagram text-sm"></i>
+                <FaInstagram className="text-sm" />
               </a>
             </div>
 
@@ -126,7 +128,7 @@ const Header = () => {
               className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-yellow-400 text-lg transition-all duration-300 hover:scale-110"
               title={darkMode ? 'Light Mode' : 'Dark Mode'}
             >
-              <i className={`fas fa-${darkMode ? 'sun' : 'moon'}`}></i>
+              {darkMode ? <MdLightMode /> : <MdNightlight />}
             </button>
 
             {/* Mobile Menu Button */}
@@ -134,7 +136,7 @@ const Header = () => {
               className="md:hidden text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-xl transition-all duration-300 hover:scale-110"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+              {mobileMenuOpen ? <MdClose /> : <MdMenu />}
             </button>
           </div>
         </div>
@@ -152,7 +154,7 @@ const Header = () => {
               download="Cliberduche_Portfolio.pdf"
               className="flex items-center justify-center gap-2 w-full px-4 py-3 border-2 border-primary text-primary dark:text-blue-400 dark:border-blue-400 font-semibold rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-all duration-300 text-center"
             >
-              <i className="fas fa-download"></i>
+              <MdDownload />
               Download Portfolio
             </a>
 
@@ -174,7 +176,7 @@ const Header = () => {
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110 text-lg"
                 >
-                  <i className="fab fa-facebook-f"></i>
+                  <FaFacebook />
                 </a>
                 <a
                   href="https://www.linkedin.com/company/cliberduche"
@@ -182,7 +184,7 @@ const Header = () => {
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110 text-lg"
                 >
-                  <i className="fab fa-linkedin-in"></i>
+                  <FaLinkedin />
                 </a>
                 <a
                   href="https://www.instagram.com/cliberduche"
@@ -190,7 +192,7 @@ const Header = () => {
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110 text-lg"
                 >
-                  <i className="fab fa-instagram"></i>
+                  <FaInstagram />
                 </a>
               </div>
             </div>

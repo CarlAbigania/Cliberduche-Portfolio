@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { MdLocationOn, MdCallReceived, MdMailOutline, MdMap, MdSchedule, MdAutorenew, MdSms } from 'react-icons/md';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,6 +23,15 @@ const Contact = () => {
       return () => clearTimeout(timer);
     }
   }, [submitMessage]);
+
+  // Icon mapping for contact info
+  const iconMap = {
+    'fa-map-marker-alt': MdLocationOn,
+    'fa-phone': MdCallReceived,
+    'fa-envelope': MdMailOutline,
+    'fa-map-marked-alt': MdMap,
+    'fa-clock': MdSchedule,
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -110,7 +120,7 @@ const Contact = () => {
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-6 group fade-in-left" style={{ animationDelay: `${i * 0.1}s` }}>
                 <div className="w-16 h-16 flex items-center justify-center bg-gradient-to-br from-primary to-accent text-white rounded-lg shadow-lg shadow-primary/30 dark:shadow-primary/50 group-hover:shadow-lg group-hover:shadow-primary/50 dark:group-hover:shadow-primary/70 transition-all duration-300 flex-shrink-0 group-hover:scale-110 group-hover:rotate-6">
-                  <i className={`fas ${item.icon} text-xl`}></i>
+                  {iconMap[item.icon] && React.createElement(iconMap[item.icon], { className: 'text-xl' })}
                 </div>
                 <div>
                   <h4 className="text-lg md:text-xl font-mont font-bold text-dark dark:text-white mb-2 group-hover:text-secondary transition-colors">{item.title}</h4>
@@ -177,12 +187,12 @@ const Contact = () => {
                 >
                   {isSubmitting ? (
                     <>
-                      <i className="fas fa-spinner fa-spin mr-2"></i>
+                      <MdAutorenew className="inline mr-2 animate-spin" />
                       Sending...
                     </>
                   ) : (
                     <>
-                      <i className="fas fa-paper-plane mr-2"></i>
+                      <MdSms className="inline mr-2" />
                       Send Message
                     </>
                   )}

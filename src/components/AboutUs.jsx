@@ -1,5 +1,6 @@
 import React from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { MdVerified, MdSecurity, MdRecycling, MdGroupWork, MdStars, MdPeopleOutline, MdAutoAwesome, MdRemoveRedEye } from 'react-icons/md';
 
 const AboutUs = () => {
   // Individual refs for scroll animations
@@ -24,10 +25,10 @@ const AboutUs = () => {
   const value3Ref = useScrollAnimation({ threshold: 0.2 });
 
   const features = [
-    { icon: 'fa-check', title: 'Quality Materials' },
-    { icon: 'fa-shield-alt', title: 'Safety First' },
-    { icon: 'fa-leaf', title: 'Eco-Friendly' },
-    { icon: 'fa-handshake', title: 'Client Focused' },
+    { icon: 'fa-check', title: 'Quality Materials', reactIcon: MdVerified },
+    { icon: 'fa-shield-alt', title: 'Safety First', reactIcon: MdSecurity },
+    { icon: 'fa-leaf', title: 'Eco-Friendly', reactIcon: MdRecycling },
+    { icon: 'fa-handshake', title: 'Client Focused', reactIcon: MdGroupWork },
   ];
 
   const highlights = [
@@ -58,16 +59,19 @@ const AboutUs = () => {
     {
       icon: 'fa-award',
       title: 'Quality',
+      reactIcon: MdStars,
       desc: 'Ensuring projects are of high quality and paired with local standards to be competitive in the national and local market scene.',
     },
     {
       icon: 'fa-shield-alt',
       title: 'Safety',
+      reactIcon: MdSecurity,
       desc: 'Ensuring safety at work site, safety of projects and safety of personnel through rigorous safety practices before and after execution of projects.',
     },
     {
       icon: 'fa-handshake',
       title: 'Integrity',
+      reactIcon: MdPeopleOutline,
       desc: 'Ensuring compliance with existing laws covering the construction industry, reliable workforce and our timely delivery of projects.',
     },
   ];
@@ -111,7 +115,7 @@ const AboutUs = () => {
                   return (
                     <div key={i} className="flex items-center gap-5 group scroll-scale" ref={refs[i]}>
                       <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-lg group-hover:shadow-primary/50 dark:shadow-primary/50 dark:group-hover:shadow-primary/70 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
-                        <i className={`fas ${feat.icon} text-lg`}></i>
+                        {feat.reactIcon && React.createElement(feat.reactIcon, { className: 'text-lg' })}
                       </div>
                       <div>
                         <h4 className="font-semibold text-dark dark:text-white text-lg group-hover:text-secondary transition-colors">{feat.title}</h4>
@@ -156,11 +160,11 @@ const AboutUs = () => {
                   className="bg-white rounded-xl shadow-md border border-primary/10 p-6 md:p-10 border-l-4 border-secondary dark:bg-gray-800 scroll-rotate"
                   ref={refs[index]}
                 >
-                  <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4 flex items-center gap-3">
-                    {index === 0 ? <i className="fas fa-bullseye text-secondary"></i> : <i className="fas fa-eye text-secondary"></i>}
+                  <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4 flex items-center justify-start gap-3">
+                    {index === 0 ? <MdAutoAwesome className="text-secondary" /> : <MdRemoveRedEye className="text-secondary" />}
                     {item.title}
                   </h4>
-                  <p id={`mission-desc-${index}`} className={`text-gray dark:text-gray-400 text-base md:text-lg leading-relaxed ${expanded[index] ? '' : 'clamp-4'}`}>
+                  <p id={`mission-desc-${index}`} className={`text-gray dark:text-gray-400 text-base md:text-lg leading-relaxed text-left ${expanded[index] ? '' : 'clamp-4'}`}>
                     {item.desc}
                   </p>
                   <button
@@ -192,8 +196,8 @@ const AboutUs = () => {
                   className="premium-card p-10 text-center hover:shadow-xl hover:-translate-y-2 scroll-scale"
                   ref={refs[i]}
                 >
-                  <div className="text-secondary dark:text-green-400 text-6xl mb-8 h-20 flex items-center justify-center group-hover:scale-125 transition-transform duration-300 float-animation">
-                    <i className={`fas ${value.icon}`}></i>
+                  <div className="text-secondary dark:text-green-400 text-6xl mb-8 h-20 flex items-center justify-center group-hover:scale-125 transition-transform duration-300">
+                    {value.reactIcon && React.createElement(value.reactIcon)}
                   </div>
                   <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4 hover:text-secondary transition-colors">{value.title}</h4>
                   <p className="text-gray dark:text-gray-400 text-base md:text-lg leading-relaxed">{value.desc}</p>

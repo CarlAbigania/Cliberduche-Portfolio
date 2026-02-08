@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { MdHome, MdInfoOutline, MdBuild, MdChecklist, MdNoteAlt, MdLocalShipping, MdFolderOpen, MdPeople, MdShield, MdLink, MdEmail, MdMenu, MdClose } from 'react-icons/md';
 
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -13,6 +14,21 @@ const Sidebar = () => {
   const dragStartRef = useRef({ x: 0, y: 0 });
 
   const DRAG_THRESHOLD = 5; // Pixels threshold to distinguish click from drag
+
+  // Icon mapping for navigation links
+  const iconMap = {
+    'fa-home': MdHome,
+    'fa-info-circle': MdInfoOutline,
+    'fa-cogs': MdBuild,
+    'fa-tasks': MdChecklist,
+    'fa-file-alt': MdNoteAlt,
+    'fa-truck': MdLocalShipping,
+    'fa-project-diagram': MdFolderOpen,
+    'fa-users': MdPeople,
+    'fa-shield-alt': MdShield,
+    'fa-link': MdLink,
+    'fa-envelope': MdEmail,
+  };
 
   const navigationLinks = [
     { id: 'hero', label: 'Home', icon: 'fa-home' },
@@ -190,7 +206,7 @@ const Sidebar = () => {
         }`}
         title="Open Navigation (Draggable)"
       >
-        <i className={`fas fa-${isMenuOpen ? 'times' : 'bars'} text-xl transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`}></i>
+        {isMenuOpen ? <MdClose className="text-xl transition-transform duration-300 rotate-90" /> : <MdMenu className="text-xl transition-transform duration-300" />}
       </button>
 
       {/* Navigation Modal Overlay - No overlay effect */}
@@ -211,7 +227,7 @@ const Sidebar = () => {
         <div className="bg-gradient-to-r from-primary via-primary to-accent text-white p-6 flex items-center justify-between sticky top-0 z-10 shadow-lg shadow-primary/20 dark:shadow-primary/10">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
-              <i className="fas fa-bars text-white"></i>
+              <MdMenu className="text-white" />
             </div>
             <h3 className="text-lg font-mont font-bold tracking-wide">Navigation</h3>
           </div>
@@ -219,7 +235,7 @@ const Sidebar = () => {
             onClick={() => setIsMenuOpen(false)}
             className="text-white hover:bg-white/20 rounded-lg p-2 transition-all duration-200 hover:scale-110 active:scale-95"
           >
-            <i className="fas fa-times text-lg"></i>
+            <MdClose className="text-lg" />
           </button>
         </div>
 
@@ -247,7 +263,7 @@ const Sidebar = () => {
                       ? 'scale-125 text-white' 
                       : 'text-gray-600 dark:text-gray-400 group-hover:scale-125 group-hover:text-primary dark:group-hover:text-secondary'
                   }`}>
-                    <i className={`fas ${link.icon}`}></i>
+                    {iconMap[link.icon] && React.createElement(iconMap[link.icon])}
                   </div>
                   
                   {/* Label */}

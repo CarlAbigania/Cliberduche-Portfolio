@@ -1,5 +1,6 @@
 import React from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { MdTerrain, MdAgriculture, MdWorkHistory, MdHandyman, MdConstruction, MdPendingActions } from 'react-icons/md';
 
 const Services = () => {
   // Refs for main sections
@@ -13,6 +14,16 @@ const Services = () => {
   const service4Ref = useScrollAnimation({ threshold: 0.2 });
   const service5Ref = useScrollAnimation({ threshold: 0.2 });
   const service6Ref = useScrollAnimation({ threshold: 0.2 });
+
+  // Icon mapping
+  const iconMap = {
+    'fa-mountain': MdTerrain,
+    'fa-tractor': MdAgriculture,
+    'fa-hard-hat': MdWorkHistory,
+    'fa-tools': MdHandyman,
+    'fa-road': MdConstruction,
+    'fa-clipboard-check': MdPendingActions,
+  };
 
   const services = [
     { icon: 'fa-mountain', title: 'Backfill Sourcing', desc: 'Sub-base, aggregates, mixed soil, and boulders with lab-tested quality.' },
@@ -49,8 +60,8 @@ const Services = () => {
                 className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl p-7 shadow-lg border border-white/60 dark:border-gray-700/60 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group scroll-fade-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="text-secondary text-5xl mb-8 h-16 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 float-animation">
-                  <i className={`fas ${service.icon}`}></i>
+                <div className="text-secondary text-5xl mb-8 h-16 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                  {iconMap[service.icon] && React.createElement(iconMap[service.icon])}
                 </div>
                 <h3 className="text-xl md:text-2xl font-mont font-bold mb-4 text-dark dark:text-white group-hover:text-secondary transition-colors duration-300">{service.title}</h3>
                 <p className="text-gray dark:text-gray-400 text-base md:text-lg leading-relaxed">{service.desc}</p>

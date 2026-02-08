@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { MdVerified, MdReceipt, MdDocumentScanner, MdLocalHospital, MdHouse, MdWorkspacePremium, MdLocalFireDepartment, MdVerifiedUser, MdOpenInNew, MdEco } from 'react-icons/md';
 
 const ComplianceSafety = () => {
   const [selectedCert, setSelectedCert] = useState(null);
@@ -14,17 +15,17 @@ const ComplianceSafety = () => {
   const principlesCardRef = useScrollAnimation({ threshold: 0.2 });
 
   const complianceItems = [
-    { name: 'Securities and Exchange Commission (SEC)', image: 'images/permits/securities-and-exchange-commision.png', icon: 'fa-file-contract' },
-    { name: 'Bureau of Internal Revenue (BIR)', image: 'images/permits/BIR.png', icon: 'fa-receipt' },
-    { name: 'Social Security System (SSS)', image: 'images/permits/SSS.png', icon: 'fa-id-card' },
-    { name: 'PhilHealth', image: 'images/permits/philhealth.png', icon: 'fa-hospital' },
-    { name: 'Pag-IBIG Fund', image: 'images/permits/pagibig-fund.png', icon: 'fa-home' },
-    { name: "Mayor's Permit 2026", image: 'images/permits/mayors2026.png', icon: 'fa-stamp' },
-    { name: 'Fire Safety Inspection Permit', image: 'images/permits/fire-safety-inspection.png', icon: 'fa-fire' },
-    { name: 'Sanitary Permit', image: 'images/permits/sanitary.png', icon: 'fa-shield-alt' },
-    { name: 'PCAB License', image: 'images/permits/pcab-license.png', icon: 'fa-certificate' },
-    { name: 'Insurance Certificate & Guarantee', image: 'images/permits/insurance-certificate.png', icon: 'fa-lock' },
-    { name: 'Environmental Compliance Certificate (ECC)', image: 'images/permits/ECC.png', icon: 'fa-leaf' },
+    { name: 'Securities and Exchange Commission (SEC)', image: 'images/permits/securities-and-exchange-commision.png', icon: 'fa-file-contract', reactIcon: MdDocumentScanner },
+    { name: 'Bureau of Internal Revenue (BIR)', image: 'images/permits/BIR.png', icon: 'fa-receipt', reactIcon: MdReceipt },
+    { name: 'Social Security System (SSS)', image: 'images/permits/SSS.png', icon: 'fa-id-card', reactIcon: MdVerified },
+    { name: 'PhilHealth', image: 'images/permits/philhealth.png', icon: 'fa-hospital', reactIcon: MdLocalHospital },
+    { name: 'Pag-IBIG Fund', image: 'images/permits/pagibig-fund.png', icon: 'fa-home', reactIcon: MdHouse },
+    { name: "Mayor's Permit 2026", image: 'images/permits/mayors2026.png', icon: 'fa-stamp', reactIcon: MdWorkspacePremium },
+    { name: 'Fire Safety Inspection Permit', image: 'images/permits/fire-safety-inspection.png', icon: 'fa-fire', reactIcon: MdLocalFireDepartment },
+    { name: 'Sanitary Permit', image: 'images/permits/sanitary.png', icon: 'fa-shield-alt', reactIcon: MdVerifiedUser },
+    { name: 'PCAB License', image: 'images/permits/pcab-license.png', icon: 'fa-certificate', reactIcon: MdWorkspacePremium },
+    { name: 'Insurance Certificate & Guarantee', image: 'images/permits/insurance-certificate.png', icon: 'fa-lock', reactIcon: MdVerifiedUser },
+    { name: 'Environmental Compliance Certificate (ECC)', image: 'images/permits/ECC.png', icon: 'fa-leaf', reactIcon: MdEco },
   ];
 
   const safetyCommitments = [
@@ -63,10 +64,10 @@ const ComplianceSafety = () => {
                   className="premium-card p-5 flex items-center gap-4 hover:border-secondary/50 hover:shadow-lg hover:bg-blue-50/30 transition-all duration-300 cursor-pointer text-left group"
                 >
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/30 group-hover:scale-110 transition-transform">
-                    <i className={`fas ${item.icon} text-sm`}></i>
+                    {item.reactIcon && React.createElement(item.reactIcon, { className: 'text-sm' })}
                   </div>
                   <p className="text-dark font-semibold text-base flex-1">{item.name}</p>
-                  <i className="fas fa-external-link-alt text-primary/60 group-hover:text-primary text-xs"></i>
+                  <MdOpenInNew className="text-primary/60 group-hover:text-primary text-xs" />
                 </button>
               ))}
             </div>

@@ -21,6 +21,28 @@
     color: #10243E;
   }
 
+  /* Custom Scrollbar - Remove Arrows */
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-mont font-semibold;
     letter-spacing: -0.5px;

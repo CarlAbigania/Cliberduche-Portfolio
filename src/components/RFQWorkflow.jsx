@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { MdAutorenew, MdSms, MdAssignment, MdSearch, MdReceiptLong, MdHandshake } from 'react-icons/md';
 
 const RFQWorkflow = () => {
   // Refs for animations
@@ -37,6 +38,14 @@ const RFQWorkflow = () => {
       return () => clearTimeout(timer);
     }
   }, [submitMessage]);
+
+  // Icon mapping for workflow steps
+  const iconMap = {
+    'fa-clipboard': MdAssignment,
+    'fa-magnifying-glass': MdSearch,
+    'fa-file-invoice-dollar': MdReceiptLong,
+    'fa-handshake': MdHandshake,
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -214,12 +223,12 @@ const RFQWorkflow = () => {
               >
                 {isSubmitting ? (
                   <>
-                    <i className="fas fa-spinner fa-spin mr-3"></i>
+                    <MdAutorenew className="inline mr-3 animate-spin" />
                     Submitting...
                   </>
                 ) : (
                   <>
-                    <i className="fas fa-paper-plane mr-2"></i>
+                    <MdSms className="inline mr-2" />
                     Submit RFQ
                   </>
                 )}

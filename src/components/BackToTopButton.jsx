@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdArrowUpward } from 'react-icons/md';
 
 const BackToTopButton = () => {
   const scrollToTop = () => {
@@ -15,7 +16,7 @@ const BackToTopButton = () => {
       aria-label="Back to top"
       title="Back to top"
     >
-      <i className="fas fa-arrow-up text-sm"></i>
+      <MdArrowUpward className="text-lg" />
     </button>
   );
 };
