@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { MdAutorenew, MdSms, MdAssignment, MdSearch, MdReceiptLong, MdHandshake } from 'react-icons/md';
 
 const RFQWorkflow = () => {
+  // Refs for animations
+  const titleRef = useScrollAnimation({ threshold: 0.2 });
+  const descRef = useScrollAnimation({ threshold: 0.2 });
+  const formRef = useScrollAnimation({ threshold: 0.2 });
+  const workflowRef = useScrollAnimation({ threshold: 0.2 });
+  const step1Ref = useScrollAnimation({ threshold: 0.2 });
+  const step2Ref = useScrollAnimation({ threshold: 0.2 });
+  const step3Ref = useScrollAnimation({ threshold: 0.2 });
+  const step4Ref = useScrollAnimation({ threshold: 0.2 });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
   const [formData, setFormData] = useState({
@@ -26,6 +38,14 @@ const RFQWorkflow = () => {
       return () => clearTimeout(timer);
     }
   }, [submitMessage]);
+
+  // Icon mapping for workflow steps
+  const iconMap = {
+    'fa-clipboard': MdAssignment,
+    'fa-magnifying-glass': MdSearch,
+    'fa-file-invoice-dollar': MdReceiptLong,
+    'fa-handshake': MdHandshake,
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -77,14 +97,14 @@ const RFQWorkflow = () => {
   };
 
   return (
-    <section id="rfq" className="py-12 md:py-16 bg-white dark:bg-gray-900">
+    <section id="rfq" className="py-12 md:py-16 bg-light dark:bg-gray-800/50">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
-          <h2 className="text-primary dark:text-blue-400 mb-4 fade-in-up">
+          <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>
             Request for Quote (RFQ) Workflow
           </h2>
-          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>
             Submit your project requirements and get a customized quote
           </p>
           <div className="section-title-underline"></div>
@@ -92,7 +112,7 @@ const RFQWorkflow = () => {
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* RFQ Form */}
-          <div className="premium-card p-10 fade-in-left">
+          <div className="premium-card p-10 scroll-fade-left" ref={formRef}>
             <h3 className="text-2xl md:text-3xl font-mont font-bold text-primary dark:text-blue-400 mb-8">
               Submit Your RFQ
             </h3>
@@ -203,12 +223,12 @@ const RFQWorkflow = () => {
               >
                 {isSubmitting ? (
                   <>
-                    <i className="fas fa-spinner fa-spin mr-3"></i>
+                    <MdAutorenew className="inline mr-3 animate-spin" />
                     Submitting...
                   </>
                 ) : (
                   <>
-                    <i className="fas fa-paper-plane mr-2"></i>
+                    <MdSms className="inline mr-2" />
                     Submit RFQ
                   </>
                 )}
@@ -226,7 +246,7 @@ const RFQWorkflow = () => {
           </div>
 
           {/* Workflow Steps */}
-          <div className="fade-in-right">
+          <div className="scroll-fade-right" ref={workflowRef}>
             <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-4">RFQ Process Workflow</h3>
             <div className="space-y-8">
               {[
@@ -234,8 +254,10 @@ const RFQWorkflow = () => {
                 { num: 2, title: 'Review & Analysis', desc: 'Our team reviews your requirements', icon: 'fa-magnifying-glass' },
                 { num: 3, title: 'Custom Quote', desc: 'Receive a tailored proposal', icon: 'fa-file-invoice-dollar' },
                 { num: 4, title: 'Project Execution', desc: 'Begin collaboration on your project', icon: 'fa-handshake' },
-              ].map((step, index) => (
-                <div key={step.num} className="flex items-start gap-6 group fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+              ].map((step, index) => {
+                const stepRefs = [step1Ref, step2Ref, step3Ref, step4Ref];
+                return (
+                <div key={step.num} ref={stepRefs[index]} className="flex items-start gap-6 group scroll-fade-up" style={{ animationDelay: `${index * 0.1}s` }}>
                   <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-primary to-accent text-white rounded-full flex items-center justify-center font-mont font-bold text-2xl shadow-lg shadow-primary/30 dark:shadow-primary/50 group-hover:shadow-lg group-hover:shadow-primary/50 dark:group-hover:shadow-primary/70 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12">
                     {step.num}
                   </div>
@@ -244,7 +266,8 @@ const RFQWorkflow = () => {
                     <p className="text-gray dark:text-gray-400 text-base leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
-              ))}
+              );
+              })}
             </div>
           </div>
         </div>

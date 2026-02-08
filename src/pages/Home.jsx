@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Hero from '../components/Hero';
@@ -11,19 +11,15 @@ import ComplianceSafety from '../components/ComplianceSafety';
 import RFQWorkflow from '../components/RFQWorkflow';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import BackToTopButton from '../components/BackToTopButton';
 import ProcessOverview from '../components/ProcessOverview';
 import MeetOurTeam from '../components/MeetOurTeam';
-import NewsBlog from '../components/NewsBlog';
 
 const Home = () => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
-
   return (
     <>
       <Header />
-      <Sidebar onCollapsedChange={setIsSidebarCollapsed} />
-      <main className={`transition-all duration-300 pt-16 ease-out ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
+      <Sidebar />
+      <main>
         <section id="hero">
           <Hero />
         </section>
@@ -54,15 +50,11 @@ const Home = () => {
         <section id="resources">
           <ResourcesPartners />
         </section>
-        <section id="blog">
-          <NewsBlog />
-        </section>
         <section id="contact">
           <Contact />
         </section>
       </main>
-      <Footer isSidebarCollapsed={isSidebarCollapsed} />
-      <BackToTopButton />
+      <Footer />
     </>
   );
 };

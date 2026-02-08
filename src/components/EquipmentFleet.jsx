@@ -1,6 +1,21 @@
 import React from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const EquipmentFleet = () => {
+  // Refs for animations
+  const titleRef = useScrollAnimation({ threshold: 0.2 });
+  const descRef = useScrollAnimation({ threshold: 0.2 });
+  const overviewHeadingRef = useScrollAnimation({ threshold: 0.2 });
+  const fleet1Ref = useScrollAnimation({ threshold: 0.2 });
+  const fleet2Ref = useScrollAnimation({ threshold: 0.2 });
+  const fleet3Ref = useScrollAnimation({ threshold: 0.2 });
+  const fleet4Ref = useScrollAnimation({ threshold: 0.2 });
+  const fleet5Ref = useScrollAnimation({ threshold: 0.2 });
+  const fleet6Ref = useScrollAnimation({ threshold: 0.2 });
+  const inventoryHeadingRef = useScrollAnimation({ threshold: 0.2 });
+  const dumpTrucksRef = useScrollAnimation({ threshold: 0.2 });
+  const heavyEquipmentRef = useScrollAnimation({ threshold: 0.2 });
+
   const fleet = [
     { label: 'Dump Trucks', value: '9 units', desc: '8,000–12,500 kg capacities' },
     { label: 'Compactors', value: '2 units', desc: '10–12 tons' },
@@ -38,10 +53,10 @@ const EquipmentFleet = () => {
     <section id="equipment" className="py-12 md:py-16 bg-white dark:bg-gray-900">
       <div className="max-w-container mx-auto px-4">
         <div className="section-title text-center mb-12">
-          <h2 className="text-primary dark:text-blue-400 mb-4 fade-in-up">
+          <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>
             Equipment & Fleet
           </h2>
-          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>
             Modern equipment assets supporting large-scale site development
           </p>
           <div className="section-title-underline"></div>
@@ -49,31 +64,35 @@ const EquipmentFleet = () => {
 
         {/* Fleet Summary */}
         <div className="mb-12">
-          <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-4 text-center fade-in-up">
+          <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-4 text-center scroll-fade-up" ref={overviewHeadingRef}>
             Fleet Overview
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {fleet.map((item, index) => (
+            {fleet.map((item, index) => {
+              const fleetRefs = [fleet1Ref, fleet2Ref, fleet3Ref, fleet4Ref, fleet5Ref, fleet6Ref];
+              return (
               <div
                 key={index}
-                className="premium-card p-7 text-center hover:border-primary/50 hover:shadow-xl hover:-translate-y-2 fade-in-up scale-in group"
+                ref={fleetRefs[index]}
+                className="premium-card p-7 text-center hover:border-primary/50 hover:shadow-xl hover:-translate-y-2 scroll-fade-up group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <p className="text-xs uppercase tracking-widest font-bold text-gray dark:text-gray-400 mb-4">{item.label}</p>
                 <p className="text-4xl md:text-5xl font-mont font-bold text-secondary dark:text-green-400 mb-4 group-hover:scale-110 transition-transform duration-300">{item.value}</p>
                 <p className="text-gray dark:text-gray-400 text-base">{item.desc}</p>
               </div>
-            ))}
+            );
+            })}
           </div>
         </div>
 
         {/* Detailed Equipment Inventory */}
-        <div className="fade-in-up">
+        <div className="scroll-fade-up" ref={inventoryHeadingRef}>
           <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-4 text-center">
             Detailed Equipment Inventory
           </h3>
           <div className="space-y-12">
-            <div>
+            <div ref={dumpTrucksRef}>
               <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">Dump Trucks</h4>
               <div className="overflow-x-auto bg-white dark:bg-gray-800 border border-primary/10 dark:border-primary/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
                 <table className="min-w-full text-left text-sm md:text-base">
@@ -99,7 +118,7 @@ const EquipmentFleet = () => {
               </div>
             </div>
 
-            <div>
+            <div ref={heavyEquipmentRef}>
               <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">Heavy Equipment</h4>
               <div className="overflow-x-auto bg-white dark:bg-gray-800 border border-primary/10 dark:border-primary/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
                 <table className="min-w-full text-left text-sm md:text-base">

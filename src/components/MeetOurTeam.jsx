@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const MeetOurTeam = () => {
+  // Refs for scroll animations
+  const titleRef = useScrollAnimation({ threshold: 0.2 });
+  const descRef = useScrollAnimation({ threshold: 0.2 });
+  const ctaRef = useScrollAnimation({ threshold: 0.2 });
   const departments = [
     {
       name: 'Executive Management',
@@ -119,8 +124,8 @@ const MeetOurTeam = () => {
     <section className="py-8 md:py-12 bg-white dark:bg-gray-900">
       <div className="max-w-container mx-auto px-4">
         <div className="section-title text-center mb-8">
-          <h2 className="text-primary dark:text-blue-400 mb-4">Meet Our Team</h2>
-          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto">Experienced professionals dedicated to your project's success</p>
+          <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>Meet Our Team</h2>
+          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>Experienced professionals dedicated to your project's success</p>
           <div className="section-title-underline"></div>
         </div>
 
@@ -167,7 +172,7 @@ const MeetOurTeam = () => {
           </div>
         ))}
 
-        <div className="text-center bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 dark:from-primary/10 dark:via-secondary/10 dark:to-accent/10 rounded-xl p-8 md:p-12 mt-8 border border-primary/10 dark:border-primary/20 fade-in-up">
+        <div className="text-center bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 dark:from-primary/10 dark:via-secondary/10 dark:to-accent/10 rounded-xl p-8 md:p-12 mt-8 border border-primary/10 dark:border-primary/20 scroll-fade-up" ref={ctaRef}>
           <p className="text-gray dark:text-gray-400 text-lg md:text-xl mb-8 font-medium max-w-2xl mx-auto">
             Our team combines decades of experience with innovative approaches to deliver excellence
           </p>

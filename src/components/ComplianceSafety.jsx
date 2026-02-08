@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { MdVerified, MdReceipt, MdDocumentScanner, MdLocalHospital, MdHouse, MdWorkspacePremium, MdLocalFireDepartment, MdVerifiedUser, MdOpenInNew, MdEco } from 'react-icons/md';
 
 const ComplianceSafety = () => {
   const [selectedCert, setSelectedCert] = useState(null);
 
+  // Refs for scroll animations
+  const titleRef = useScrollAnimation({ threshold: 0.2 });
+  const descRef = useScrollAnimation({ threshold: 0.2 });
+  const registrationsHeadingRef = useScrollAnimation({ threshold: 0.2 });
+  const safetyHeadingRef = useScrollAnimation({ threshold: 0.2 });
+  const commitmentCardRef = useScrollAnimation({ threshold: 0.2 });
+  const principlesHeadingRef = useScrollAnimation({ threshold: 0.2 });
+  const principlesCardRef = useScrollAnimation({ threshold: 0.2 });
+
   const complianceItems = [
-    { name: 'Securities and Exchange Commission (SEC)', image: 'images/permits/securities-and-exchange-commision.png', icon: 'fa-file-contract' },
-    { name: 'Bureau of Internal Revenue (BIR)', image: 'images/permits/BIR.png', icon: 'fa-receipt' },
-    { name: 'Social Security System (SSS)', image: 'images/permits/SSS.png', icon: 'fa-id-card' },
-    { name: 'PhilHealth', image: 'images/permits/philhealth.png', icon: 'fa-hospital' },
-    { name: 'Pag-IBIG Fund', image: 'images/permits/pagibig-fund.png', icon: 'fa-home' },
-    { name: "Mayor's Permit 2026", image: 'images/permits/mayors2026.png', icon: 'fa-stamp' },
-    { name: 'Fire Safety Inspection Permit', image: 'images/permits/fire-safety-inspection.png', icon: 'fa-fire' },
-    { name: 'Sanitary Permit', image: 'images/permits/sanitary.png', icon: 'fa-shield-alt' },
-    { name: 'PCAB License', image: 'images/permits/pcab-license.png', icon: 'fa-certificate' },
-    { name: 'Insurance Certificate & Guarantee', image: 'images/permits/insurance-certificate.png', icon: 'fa-lock' },
-    { name: 'Environmental Compliance Certificate (ECC)', image: 'images/permits/ECC.png', icon: 'fa-leaf' },
+    { name: 'Securities and Exchange Commission (SEC)', image: 'images/permits/securities-and-exchange-commision.png', icon: 'fa-file-contract', reactIcon: MdDocumentScanner },
+    { name: 'Bureau of Internal Revenue (BIR)', image: 'images/permits/BIR.png', icon: 'fa-receipt', reactIcon: MdReceipt },
+    { name: 'Social Security System (SSS)', image: 'images/permits/SSS.png', icon: 'fa-id-card', reactIcon: MdVerified },
+    { name: 'PhilHealth', image: 'images/permits/philhealth.png', icon: 'fa-hospital', reactIcon: MdLocalHospital },
+    { name: 'Pag-IBIG Fund', image: 'images/permits/pagibig-fund.png', icon: 'fa-home', reactIcon: MdHouse },
+    { name: "Mayor's Permit 2026", image: 'images/permits/mayors2026.png', icon: 'fa-stamp', reactIcon: MdWorkspacePremium },
+    { name: 'Fire Safety Inspection Permit', image: 'images/permits/fire-safety-inspection.png', icon: 'fa-fire', reactIcon: MdLocalFireDepartment },
+    { name: 'Sanitary Permit', image: 'images/permits/sanitary.png', icon: 'fa-shield-alt', reactIcon: MdVerifiedUser },
+    { name: 'PCAB License', image: 'images/permits/pcab-license.png', icon: 'fa-certificate', reactIcon: MdWorkspacePremium },
+    { name: 'Insurance Certificate & Guarantee', image: 'images/permits/insurance-certificate.png', icon: 'fa-lock', reactIcon: MdVerifiedUser },
+    { name: 'Environmental Compliance Certificate (ECC)', image: 'images/permits/ECC.png', icon: 'fa-leaf', reactIcon: MdEco },
   ];
 
   const safetyCommitments = [
@@ -26,14 +37,14 @@ const ComplianceSafety = () => {
   ];
 
   return (
-    <section id="compliance" className="py-12 md:py-16 bg-light">
+    <section id="compliance" className="py-12 md:py-16 bg-light dark:bg-gray-800/50">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
-          <h2 className="text-primary mb-4">
+          <h2 className="text-primary mb-4 scroll-fade-up" ref={titleRef}>
             Compliance & Safety
           </h2>
-          <p className="text-gray text-lg max-w-2xl mx-auto">
+          <p className="text-gray text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>
             Legal compliance, certifications, and unwavering safety commitment
           </p>
           <div className="section-title-underline"></div>
@@ -42,7 +53,7 @@ const ComplianceSafety = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Compliance Registrations */}
           <div>
-            <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10">
+            <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10 scroll-fade-up" ref={registrationsHeadingRef}>
               Government Registrations & Permits
             </h3>
             <div className="grid grid-cols-1 gap-4">
@@ -53,10 +64,10 @@ const ComplianceSafety = () => {
                   className="premium-card p-5 flex items-center gap-4 hover:border-secondary/50 hover:shadow-lg hover:bg-blue-50/30 transition-all duration-300 cursor-pointer text-left group"
                 >
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/30 group-hover:scale-110 transition-transform">
-                    <i className={`fas ${item.icon} text-sm`}></i>
+                    {item.reactIcon && React.createElement(item.reactIcon, { className: 'text-sm' })}
                   </div>
                   <p className="text-dark font-semibold text-base flex-1">{item.name}</p>
-                  <i className="fas fa-external-link-alt text-primary/60 group-hover:text-primary text-xs"></i>
+                  <MdOpenInNew className="text-primary/60 group-hover:text-primary text-xs" />
                 </button>
               ))}
             </div>
@@ -64,10 +75,10 @@ const ComplianceSafety = () => {
 
           {/* Safety Commitment */}
           <div>
-            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6 scroll-fade-up" ref={safetyHeadingRef}>
               Safety Commitment
             </h3>
-            <div className="premium-card border-l-4 border-secondary p-10 mb-8">
+            <div className="premium-card border-l-4 border-secondary p-10 mb-8 scroll-fade-up" ref={commitmentCardRef}>
               <p className="text-gray text-lg leading-relaxed mb-6">
                 CLIBERDUCHE CORPORATION is vitally interested in its employees' health and safety.
                 Protecting employees from injury or occupational disease is a major, continuing
@@ -81,8 +92,8 @@ const ComplianceSafety = () => {
               </p>
             </div>
 
-            <div className="premium-card border-l-4 border-secondary p-10">
-              <h4 className="text-2xl font-mont font-bold text-dark mb-6">
+            <div className="premium-card border-l-4 border-secondary p-10 scroll-fade-up" ref={principlesCardRef}>
+              <h4 className="text-2xl font-mont font-bold text-dark mb-6 scroll-fade-up" ref={principlesHeadingRef}>
                 Safety Principles
               </h4>
               <ul className="space-y-4">
