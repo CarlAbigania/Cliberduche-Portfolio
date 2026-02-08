@@ -11,7 +11,6 @@ import ComplianceSafety from '../components/ComplianceSafety';
 import RFQWorkflow from '../components/RFQWorkflow';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import BackToTopButton from '../components/BackToTopButton';
 import ProcessOverview from '../components/ProcessOverview';
 import MeetOurTeam from '../components/MeetOurTeam';
 
@@ -56,7 +55,6 @@ const Home = () => {
         </section>
       </main>
       <Footer />
-      <BackToTopButton />
     </>
   );
 };

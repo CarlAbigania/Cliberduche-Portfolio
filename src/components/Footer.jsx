@@ -1,4 +1,5 @@
 import React from 'react';
+import BackToTopButton from './BackToTopButton';
 const logo = '/images/logo2.png';
 
 const Footer = () => {
@@ -91,6 +92,21 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Bottom Section - Copyright & Back to Top */}
+        <div className="border-t border-gray-700/40 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Copyright */}
+          <div className="text-center md:text-left">
+            <p className="text-gray-400 text-sm">
+              &copy; {new Date().getFullYear()} <span className="text-secondary font-semibold">Cliberduche Corporation</span>. All rights reserved.
+            </p>
+          </div>
+
+          {/* Back to Top Button */}
+          <div className="flex items-center gap-2">
+            <span className="text-gray-400 text-sm">Back to top</span>
+            <BackToTopButton />
+          </div>
+        </div>
 
       </div>
     </footer>
