@@ -34,7 +34,9 @@ const Hero = () => {
             View Projects
           </a>
           <a
-            href="#resources"
+            href="https://drive.google.com/drive/folders/1QFFNjs4s6DDpD4ncV1n4AXV5HPU7MMxk?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-secondary text-base md:text-lg hover:scale-105"
           >
             Our Archives
