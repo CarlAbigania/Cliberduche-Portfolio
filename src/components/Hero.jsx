@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="hero relative min-h-screen flex items-center justify-center text-center text-white bg-center bg-cover"
+      className="hero relative min-h-screen flex items-center justify-center text-center text-white bg-center bg-cover overflow-hidden"
       style={{
         backgroundImage: `linear-gradient(135deg, rgba(60, 60, 60, 0.75) 0%, rgba(70, 70, 70, 0.70) 50%, rgba(60, 60, 60, 0.75) 100%), url('/images/compony provided/office.jpg')`,
         backgroundAttachment: 'fixed',

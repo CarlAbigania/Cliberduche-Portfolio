@@ -1,8 +1,16 @@
 import React from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useThreeParticles, particleShapes3D } from '../hooks/useThreeParticles';
 import { MdVerified, MdSecurity, MdRecycling, MdGroupWork, MdStars, MdPeopleOutline, MdAutoAwesome, MdRemoveRedEye } from 'react-icons/md';
 
 const AboutUs = () => {
+  // 3D particle animation background
+  const { canvasRef } = useThreeParticles({
+    particleCount: 1500,
+    particleColor: '#3b82f6',
+    getTargetPositions: particleShapes3D.cLiberducheInfinityLogo,
+  });
+
   // Individual refs for scroll animations
   const titleRef = useScrollAnimation({ threshold: 0.3 });
   const headingRef = useScrollAnimation({ threshold: 0.2 });
@@ -77,8 +85,19 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="py-12 md:py-16 bg-white dark:bg-gray-900">
-      <div className="max-w-container mx-auto px-4">
+    <section id="about" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden">
+      {/* 3D Particle Background */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'block',
+        }}
+      />
+
+      <div className="max-w-container mx-auto px-4 relative z-10">
         {/* Section Title */}
         <div className="section-title mb-12 scroll-fade-up" ref={titleRef}>
           <h2 className="text-primary dark:text-blue-400 mb-4">
@@ -126,19 +145,22 @@ const AboutUs = () => {
               </div>
             </div>
 
-            <div className="premium-card p-8 md:p-10 scroll-fade-right" ref={milestonesRef}>
-              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">Key Milestones</h4>
-              <ul className="space-y-6">
-                {highlights.map((item, index) => {
-                  const refs = [milestone1Ref, milestone2Ref, milestone3Ref];
-                  return (
-                    <li key={index} className="flex items-start gap-4 scroll-fade-up" ref={refs[index]}>
-                      <span className="mt-2 h-3 w-3 rounded-full bg-gradient-to-br from-secondary to-accent flex-shrink-0 shadow-md shadow-secondary/50"></span>
-                      <span className="text-gray dark:text-gray-400 text-base leading-relaxed">{item}</span>
-                    </li>
-                  );
-                })}
-              </ul>
+            <div className="space-y-6">
+              {/* Key Milestones */}
+              <div className="premium-card p-8 md:p-10 scroll-fade-right" ref={milestonesRef}>
+                <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">Key Milestones</h4>
+                <ul className="space-y-6">
+                  {highlights.map((item, index) => {
+                    const refs = [milestone1Ref, milestone2Ref, milestone3Ref];
+                    return (
+                      <li key={index} className="flex items-start gap-4 scroll-fade-up" ref={refs[index]}>
+                        <span className="mt-2 h-3 w-3 rounded-full bg-gradient-to-br from-secondary to-accent flex-shrink-0 shadow-md shadow-secondary/50"></span>
+                        <span className="text-gray dark:text-gray-400 text-base leading-relaxed">{item}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
