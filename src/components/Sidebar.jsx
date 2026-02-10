@@ -35,13 +35,11 @@ const Sidebar = () => {
     { id: 'about', label: 'About Us', icon: 'fa-info-circle' },
     { id: 'services', label: 'Services', icon: 'fa-cogs' },
     { id: 'process', label: 'Process Overview', icon: 'fa-tasks' },
-    { id: 'rfq', label: 'RFQ Workflow', icon: 'fa-file-alt' },
     { id: 'equipment', label: 'Equipment Fleet', icon: 'fa-truck' },
     { id: 'projects', label: 'Projects', icon: 'fa-project-diagram' },
     { id: 'team', label: 'Our Team', icon: 'fa-users' },
     { id: 'compliance', label: 'Compliance & Safety', icon: 'fa-shield-alt' },
     { id: 'resources', label: 'Resources & Partners', icon: 'fa-link' },
-    { id: 'contact', label: 'Contact', icon: 'fa-envelope' },
   ];
 
   useEffect(() => {

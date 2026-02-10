@@ -90,10 +90,6 @@ const Footer = () => {
                 );
               })}
             </div>
-            <a href="#contact" className="inline-flex items-center gap-2 text-secondary hover:text-white transition-all text-sm font-semibold group underline-animate">
-              Get in Touch
-              <MdArrowForward className="group-hover:translate-x-1 transition-transform duration-300" />
-            </a>
           </div>
         </div>
 

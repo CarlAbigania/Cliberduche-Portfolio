@@ -246,15 +246,7 @@ const Projects = () => {
           </div>
         )}
 
-        {/* CTA Section */}
-        <div className="text-center scroll-fade-up" ref={ctaRef}>
-          <a
-            href="#rfq"
-            className="btn-primary inline-block text-lg px-10 py-4"
-          >
-            Start Your Project
-          </a>
-        </div>
+
 
         {/* Case Study Modal */}
         {showModal && selectedProject && (
@@ -335,13 +327,6 @@ const Projects = () => {
                   >
                     Close
                   </button>
-                  <a
-                    href="#rfq"
-                    onClick={closeModal}
-                    className="btn-primary py-3"
-                  >
-                    Request Quote
-                  </a>
                 </div>
               </div>
             </div>

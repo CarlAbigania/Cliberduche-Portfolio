@@ -26,20 +26,7 @@ const Hero = () => {
         <p className="text-lg md:text-xl mb-12 leading-relaxed text-white/90 max-w-2xl mx-auto drop-shadow fade-in-up" style={{ animationDelay: '0.4s' }}>
           Backfill sourcing, land development, and civil works excellence since 2018.
         </p>
-        <div className="flex flex-wrap justify-center gap-4 fade-in-up" style={{ animationDelay: '0.6s' }}>
-          <a
-            href="#rfq"
-            className="btn-primary text-base md:text-lg hover:scale-105"
-          >
-            Request Quote Now
-          </a>
-          <a
-            href="#contact"
-            className="btn-secondary text-base md:text-lg hover:scale-105"
-          >
-            Get in Touch
-          </a>
-        </div>
+        <div className="flex flex-wrap justify-center gap-4 fade-in-up" style={{ animationDelay: '0.6s' }}></div>
       </div>
     </section>
   );

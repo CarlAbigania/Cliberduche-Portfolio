@@ -172,17 +172,7 @@ const MeetOurTeam = () => {
           </div>
         ))}
 
-        <div className="text-center bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 dark:from-primary/10 dark:via-secondary/10 dark:to-accent/10 rounded-xl p-8 md:p-12 mt-8 border border-primary/10 dark:border-primary/20 scroll-fade-up" ref={ctaRef}>
-          <p className="text-gray dark:text-gray-400 text-lg md:text-xl mb-8 font-medium max-w-2xl mx-auto">
-            Our team combines decades of experience with innovative approaches to deliver excellence
-          </p>
-          <a
-            href="#contact"
-            className="btn-primary inline-block text-lg"
-          >
-            Work With Our Team
-          </a>
-        </div>
+
       </div>
     </section>
   );

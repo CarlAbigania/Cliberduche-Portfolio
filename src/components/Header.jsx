@@ -38,14 +38,6 @@ const Header = () => {
     }
   };
 
-  const handleContactClick = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    }
-  };
-
   return (
     <>
       <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16 bg-transparent`}>
@@ -157,14 +149,6 @@ const Header = () => {
               <MdDownload />
               Download Portfolio
             </a>
-
-            {/* Mobile Contact Button */}
-            <button
-              onClick={handleContactClick}
-              className="w-full px-4 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/40 transition-all duration-300 text-center"
-            >
-              Get in Touch
-            </button>
 
             {/* Mobile Social Media Links */}
             <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
