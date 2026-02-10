@@ -131,7 +131,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-12 md:py-16 bg-light dark:bg-gray-800/50">
+    <section id="projects" className="py-12 md:py-16 bg-white dark:bg-gray-900">
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
@@ -246,15 +246,7 @@ const Projects = () => {
           </div>
         )}
 
-        {/* CTA Section */}
-        <div className="text-center scroll-fade-up" ref={ctaRef}>
-          <a
-            href="#rfq"
-            className="btn-primary inline-block text-lg px-10 py-4"
-          >
-            Start Your Project
-          </a>
-        </div>
+
 
         {/* Case Study Modal */}
         {showModal && selectedProject && (
@@ -335,13 +327,6 @@ const Projects = () => {
                   >
                     Close
                   </button>
-                  <a
-                    href="#rfq"
-                    onClick={closeModal}
-                    className="btn-primary py-3"
-                  >
-                    Request Quote
-                  </a>
                 </div>
               </div>
             </div>

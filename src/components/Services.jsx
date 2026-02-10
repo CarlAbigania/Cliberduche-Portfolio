@@ -70,15 +70,7 @@ const Services = () => {
           })}
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center mt-14 scroll-fade-up" ref={ctaRef}>
-          <a
-            href="#rfq"
-            className="btn-primary text-lg px-10 py-4 inline-block"
-          >
-            Get Your Quote
-          </a>
-        </div>
+
       </div>
     </section>
   );

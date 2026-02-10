@@ -28,16 +28,18 @@ const Hero = () => {
         </p>
         <div className="flex flex-wrap justify-center gap-4 fade-in-up" style={{ animationDelay: '0.6s' }}>
           <a
-            href="#rfq"
+            href="#projects"
             className="btn-primary text-base md:text-lg hover:scale-105"
           >
-            Request Quote Now
+            View Projects
           </a>
           <a
-            href="#contact"
+            href="https://drive.google.com/drive/folders/1QFFNjs4s6DDpD4ncV1n4AXV5HPU7MMxk?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-secondary text-base md:text-lg hover:scale-105"
           >
-            Get in Touch
+            Our Archives
           </a>
         </div>
       </div>

@@ -38,12 +38,8 @@ const Header = () => {
     }
   };
 
-  const handleContactClick = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    }
+  const handleLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -53,7 +49,11 @@ const Header = () => {
         <div className="max-w-container mx-auto px-4 sm:px-6 h-full flex items-center justify-between relative z-10">
           
           {/* Left Section: Logo & Company Info */}
-          <div className="flex items-center gap-4 min-w-0">
+          <button 
+            onClick={handleLogoClick}
+            className="flex items-center gap-4 min-w-0 cursor-pointer hover:opacity-80 transition-opacity duration-300 bg-transparent border-none p-0"
+            title="Back to top"
+          >
             <div className="relative flex items-center justify-center">
               <img 
                 src={logo} 
@@ -67,7 +67,7 @@ const Header = () => {
               <h1 className="text-sm font-bold text-gray-900 dark:text-white leading-none">Cliberduche</h1>
               <p className="text-xs text-primary dark:text-blue-400 font-semibold">Corporation</p>
             </div>
-          </div>
+          </button>
 
           {/* Right Section: CTA, Social, Dark Mode, Mobile Menu */}
           <div className="flex items-center gap-5">
@@ -158,14 +158,6 @@ const Header = () => {
               Download Portfolio
             </a>
 
-            {/* Mobile Contact Button */}
-            <button
-              onClick={handleContactClick}
-              className="w-full px-4 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-primary/40 transition-all duration-300 text-center"
-            >
-              Get in Touch
-            </button>
-
             {/* Mobile Social Media Links */}
             <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
               <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-4">Follow Us</h4>
@@ -201,11 +193,6 @@ const Header = () => {
       </header>
     </>
   );
-};
-
-Header.defaultProps = {
-  sidebarOpen: false,
-  setSidebarOpen: () => {},
 };
 
 export default Header;

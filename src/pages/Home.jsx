@@ -8,8 +8,6 @@ import Projects from '../components/Projects';
 import ResourcesPartners from '../components/ResourcesPartners';
 import EquipmentFleet from '../components/EquipmentFleet';
 import ComplianceSafety from '../components/ComplianceSafety';
-import RFQWorkflow from '../components/RFQWorkflow';
-import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import ProcessOverview from '../components/ProcessOverview';
 import MeetOurTeam from '../components/MeetOurTeam';
@@ -29,17 +27,14 @@ const Home = () => {
         <section id="services">
           <Services />
         </section>
-        <section id="process">
-          <ProcessOverview />
-        </section>
-        <section id="rfq">
-          <RFQWorkflow />
+        <section id="projects">
+          <Projects />
         </section>
         <section id="equipment">
           <EquipmentFleet />
         </section>
-        <section id="projects">
-          <Projects />
+        <section id="process">
+          <ProcessOverview />
         </section>
         <section id="team">
           <MeetOurTeam />
@@ -49,9 +44,6 @@ const Home = () => {
         </section>
         <section id="resources">
           <ResourcesPartners />
-        </section>
-        <section id="contact">
-          <Contact />
         </section>
       </main>
       <Footer />
