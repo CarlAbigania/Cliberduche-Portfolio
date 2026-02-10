@@ -38,6 +38,10 @@ const Header = () => {
     }
   };
 
+  const handleLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16 bg-transparent`}>
@@ -45,7 +49,11 @@ const Header = () => {
         <div className="max-w-container mx-auto px-4 sm:px-6 h-full flex items-center justify-between relative z-10">
           
           {/* Left Section: Logo & Company Info */}
-          <div className="flex items-center gap-4 min-w-0">
+          <button 
+            onClick={handleLogoClick}
+            className="flex items-center gap-4 min-w-0 cursor-pointer hover:opacity-80 transition-opacity duration-300 bg-transparent border-none p-0"
+            title="Back to top"
+          >
             <div className="relative flex items-center justify-center">
               <img 
                 src={logo} 
@@ -59,7 +67,7 @@ const Header = () => {
               <h1 className="text-sm font-bold text-gray-900 dark:text-white leading-none">Cliberduche</h1>
               <p className="text-xs text-primary dark:text-blue-400 font-semibold">Corporation</p>
             </div>
-          </div>
+          </button>
 
           {/* Right Section: CTA, Social, Dark Mode, Mobile Menu */}
           <div className="flex items-center gap-5">
@@ -185,11 +193,6 @@ const Header = () => {
       </header>
     </>
   );
-};
-
-Header.defaultProps = {
-  sidebarOpen: false,
-  setSidebarOpen: () => {},
 };
 
 export default Header;
