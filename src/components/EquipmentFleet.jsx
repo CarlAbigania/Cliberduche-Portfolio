@@ -50,7 +50,7 @@ const EquipmentFleet = () => {
   ];
 
   return (
-    <section id="equipment" className="py-12 md:py-16 bg-white dark:bg-gray-900">
+    <section id="equipment" className="py-12 md:py-16 bg-light dark:bg-gray-800/50">
       <div className="max-w-container mx-auto px-4">
         <div className="section-title text-center mb-12">
           <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>
