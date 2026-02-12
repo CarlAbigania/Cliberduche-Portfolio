@@ -121,7 +121,7 @@ const MeetOurTeam = () => {
   };
 
   return (
-    <section className="py-8 md:py-12 bg-light dark:bg-gray-800/50">
+    <section className="py-8 md:py-12 bg-stone-100 dark:bg-stone-900/20">
       <div className="max-w-container mx-auto px-4">
         <div className="section-title text-center mb-8">
           <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>Meet Our Team</h2>

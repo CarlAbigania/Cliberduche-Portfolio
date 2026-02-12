@@ -133,7 +133,7 @@ const Projects = () => {
   return (
     <section id="projects" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden">
       {/* Decorative background element - bottom-left */}
-      <div className="absolute bottom-0 left-0 w-[450px] h-48 bg-light dark:bg-gray-800/50 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[450px] h-48 bg-stone-100 dark:bg-stone-900/20 -skew-x-12 pointer-events-none" />
       <div className="max-w-container mx-auto px-4 relative z-10">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
