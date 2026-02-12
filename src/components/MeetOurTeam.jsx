@@ -163,27 +163,27 @@ const MeetOurTeam = () => {
           </div>
 
           {/* Carousel Navigation */}
-          <div className="flex items-center justify-center gap-4 md:gap-6 mt-6">
+          <div className="flex items-center justify-center gap-3 md:gap-5 mt-4">
             <button
               onClick={handlePrevDept}
-              className="p-2 md:p-3 rounded-full bg-primary hover:bg-primary/80 text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
+              className="p-2 md:p-2.5 rounded-full bg-primary hover:bg-primary/80 text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
               aria-label="Previous Department"
             >
-              <svg className="w-5 h-5 md:w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 md:w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
 
             {/* Indicators */}
-            <div className="flex gap-3">
+            <div className="flex gap-2.5">
               {departments.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentDeptIndex(index)}
-                  className={`h-3 md:h-4 rounded-full transition-all duration-300 ${
+                  className={`h-2.5 md:h-3.5 rounded-full transition-all duration-300 ${
                     index === currentDeptIndex
-                      ? 'bg-primary w-8 md:w-10'
-                      : 'w-3 md:w-4 bg-primary/30 hover:bg-primary/60'
+                      ? 'bg-primary w-7 md:w-9'
+                      : 'w-2.5 md:w-3.5 bg-primary/30 hover:bg-primary/60'
                   }`}
                   aria-label={`Go to department ${index + 1}`}
                 />
@@ -192,17 +192,17 @@ const MeetOurTeam = () => {
 
             <button
               onClick={handleNextDept}
-              className="p-2 md:p-3 rounded-full bg-primary hover:bg-primary/80 text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
+              className="p-2 md:p-2.5 rounded-full bg-primary hover:bg-primary/80 text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
               aria-label="Next Department"
             >
-              <svg className="w-5 h-5 md:w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 md:w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
           </div>
 
           {/* Department Counter */}
-          <div className="text-center mt-4">
+          <div className="text-center mt-3">
             <p className="text-gray dark:text-gray-400 text-xs md:text-sm font-semibold">
               Department {currentDeptIndex + 1} of {departments.length}
             </p>
