@@ -53,7 +53,7 @@ const ProcessOverview = () => {
   return (
     <section id="process" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 12 }}>
       {/* Decorative background element - top-left */}
-      <div className="absolute top-0 left-0 w-[450px] h-48 bg-stone-100 dark:bg-stone-900/20 skew-x-12 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-[450px] h-48 bg-amber-50 dark:bg-amber-950/15 skew-x-12 pointer-events-none" />
       <div className="max-w-container mx-auto px-4 relative z-10">
         <div className="section-title text-center mb-12">
           <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>

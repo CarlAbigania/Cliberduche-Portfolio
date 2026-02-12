@@ -110,6 +110,34 @@ export const useScrollAnimated3DBuilding = (containerRef, isVisible = true) => {
       opacity: 0.6,
     });
 
+    // Metallic paint material for better realism
+    const metallicYellow = new THREE.MeshStandardMaterial({
+      color: 0xFFCC00,
+      metalness: 0.4,
+      roughness: 0.3,
+    });
+
+    // Bolt/rivet material
+    const boltMaterial = new THREE.MeshPhongMaterial({
+      color: 0x444444,
+      shininess: 50,
+      specular: 0x666666,
+    });
+
+    // Chain material
+    const chainMaterial = new THREE.MeshPhongMaterial({
+      color: 0x2a2a2a,
+      shininess: 30,
+      specular: 0x555555,
+    });
+
+    // Concrete material for base
+    const concreteMaterial = new THREE.MeshPhongMaterial({
+      color: 0x4a4a4a,
+      shininess: 10,
+      specular: 0x333333,
+    });
+
     // ===== TOWER/MAST - Enhanced Lattice Structure =====
     const mastHeight = 5;
     
@@ -356,17 +384,73 @@ export const useScrollAnimated3DBuilding = (containerRef, isVisible = true) => {
     hook.receiveShadow = true;
     craneGroup.add(hook);
 
+    // ===== CARGO/LOAD BEING LIFTED =====
+    // Container box
+    const cargoGeometry = new THREE.BoxGeometry(0.6, 0.5, 0.6);
+    const cargoMaterial = new THREE.MeshPhongMaterial({
+      color: 0xFF6B35,
+      shininess: 30,
+      specular: 0xFFAA66,
+    });
+    const cargo = new THREE.Mesh(cargoGeometry, cargoMaterial);
+    cargo.position.y = -0.8;
+    cargo.position.x = trolleyPosition;
+    cargo.castShadow = true;
+    cargo.receiveShadow = true;
+    craneGroup.add(cargo);
+
+    // Cargo lifting straps
+    for (let i = 0; i < 4; i++) {
+      const strapGeometry = new THREE.BoxGeometry(0.05, 0.6, 0.05);
+      const strapMaterial = new THREE.MeshPhongMaterial({
+        color: 0x333333,
+        shininess: 20,
+      });
+      const strap = new THREE.Mesh(strapGeometry, strapMaterial);
+      strap.position.y = -0.1;
+      strap.position.x = trolleyPosition + (i < 2 ? 0.25 : -0.25);
+      strap.position.z = (i % 2 === 0 ? 0.25 : -0.25);
+      strap.castShadow = true;
+      strap.receiveShadow = true;
+      craneGroup.add(strap);
+    }
+
     // ===== BASE PLATFORM =====
     const baseGeometry = new THREE.BoxGeometry(2, 0.4, 2);
     const baseMaterial = new THREE.MeshPhongMaterial({
-      color: 0x332211,
-      shininess: 20,
+      color: 0x4a4a4a,
+      shininess: 10,
     });
     const base = new THREE.Mesh(baseGeometry, baseMaterial);
     base.position.y = -2.7;
     base.castShadow = true;
     base.receiveShadow = true;
     craneGroup.add(base);
+
+    // Base reinforcement (concrete foundation layers)
+    const foundationGeometry = new THREE.BoxGeometry(2.3, 0.2, 2.3);
+    const foundation = new THREE.Mesh(foundationGeometry, baseMaterial);
+    foundation.position.y = -3.0;
+    foundation.castShadow = true;
+    foundation.receiveShadow = true;
+    craneGroup.add(foundation);
+
+    // Base corner reinforcements
+    for (let i = 0; i < 4; i++) {
+      const angle = (i * Math.PI) / 2;
+      const x = Math.cos(angle) * 0.9;
+      const z = Math.sin(angle) * 0.9;
+      
+      const reinforcementGeometry = new THREE.BoxGeometry(0.15, 0.5, 0.15);
+      const reinforcement = new THREE.Mesh(reinforcementGeometry, new THREE.MeshPhongMaterial({
+        color: 0x555555,
+        shininess: 40,
+      }));
+      reinforcement.position.set(x, -2.45, z);
+      reinforcement.castShadow = true;
+      reinforcement.receiveShadow = true;
+      craneGroup.add(reinforcement);
+    }
 
     // Base safety markings (red and white stripes)
     const whiteMaterial = new THREE.MeshPhongMaterial({
@@ -384,41 +468,47 @@ export const useScrollAnimated3DBuilding = (containerRef, isVisible = true) => {
     }
 
     const craneRef = craneGroup;
-    craneGroup.scale.set(0.8, 0.8, 0.8);
+    craneGroup.scale.set(1.5, 1.5, 1.5);
     scene.add(craneGroup);
 
     // ===== ENHANCED PHOTOREALISTIC LIGHTING =====
-    // Increased ambient for overall visibility
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    // Ambient light - soft and subtle
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambientLight);
 
-    // Primary directional light (Golden hour sunlight)
-    const sunLight = new THREE.DirectionalLight(0xFFD700, 1.5);
-    sunLight.position.set(8, 10, 5);
+    // Primary directional light (Golden hour sunlight) - stronger
+    const sunLight = new THREE.DirectionalLight(0xFFD700, 2);
+    sunLight.position.set(10, 12, 8);
     sunLight.castShadow = true;
     sunLight.shadow.mapSize.width = 4096;
     sunLight.shadow.mapSize.height = 4096;
-    sunLight.shadow.camera.left = -15;
-    sunLight.shadow.camera.right = 15;
-    sunLight.shadow.camera.top = 15;
-    sunLight.shadow.camera.bottom = -15;
-    sunLight.shadow.bias = -0.0001;
+    sunLight.shadow.camera.left = -20;
+    sunLight.shadow.camera.right = 20;
+    sunLight.shadow.camera.top = 20;
+    sunLight.shadow.camera.bottom = -20;
+    sunLight.shadow.bias = -0.0002;
+    sunLight.shadow.normalBias = 0.02;
     scene.add(sunLight);
 
-    // Warm orange fill light (Golden hour atmosphere)
-    const warmFillLight = new THREE.PointLight(0xFFA500, 1);
-    warmFillLight.position.set(-8, 6, -5);
+    // Warm orange fill light - enhanced
+    const warmFillLight = new THREE.PointLight(0xFFA500, 1.5);
+    warmFillLight.position.set(-10, 8, -6);
     scene.add(warmFillLight);
 
-    // Cool backlight for contrast and realism
-    const coolBackLight = new THREE.DirectionalLight(0x4488FF, 0.8);
-    coolBackLight.position.set(-10, 8, -8);
+    // Cool backlight for contrast
+    const coolBackLight = new THREE.DirectionalLight(0x4488FF, 1.2);
+    coolBackLight.position.set(-12, 10, -10);
     scene.add(coolBackLight);
 
-    // Soft rim light for crane edges
-    const rimLight = new THREE.PointLight(0xFFFFFF, 0.6);
-    rimLight.position.set(0, 5, -10);
+    // Soft rim light for edges
+    const rimLight = new THREE.PointLight(0xFFFFFF, 0.8);
+    rimLight.position.set(0, 6, -12);
     scene.add(rimLight);
+
+    // Ground reflection light
+    const groundLight = new THREE.PointLight(0xFFFFFF, 0.5);
+    groundLight.position.set(0, -1, 0);
+    scene.add(groundLight);
 
     // No background - transparent
     scene.background = null;
@@ -439,15 +529,24 @@ export const useScrollAnimated3DBuilding = (containerRef, isVisible = true) => {
       const time = Date.now() * 0.0003;
       const scrollProgress = scrollYRef.current * 0.0005;
 
-      // Crane rotation based on scroll
+      // Crane rotation based on scroll - main rotation
       craneGroup.rotation.y = scrollProgress;
       
-      // Gentle wobble
-      craneGroup.rotation.x = Math.sin(time * 0.5) * 0.05;
-      craneGroup.rotation.z = Math.cos(time * 0.4) * 0.03;
+      // Realistic wobble and sway - like a real crane in wind
+      const windSway = Math.sin(time * 0.3) * 0.08;
+      const wobble = Math.cos(time * 0.5) * 0.04;
       
-      // Add slight swaying motion like a real crane
-      craneGroup.rotation.x += Math.sin(time * 0.3) * 0.02;
+      craneGroup.rotation.x = windSway;
+      craneGroup.rotation.z = wobble + Math.sin(time * 0.2) * 0.03;
+      
+      // Add slight position sway
+      craneGroup.position.y = Math.sin(time * 0.4) * 0.05;
+      craneGroup.position.x = Math.cos(time * 0.35) * 0.03;
+      
+      // Camera slight orbit for better view
+      const cameraOrbit = scrollProgress * 0.3;
+      cameraRef.current.position.x = 4 + Math.sin(cameraOrbit) * 1;
+      cameraRef.current.position.z = 4 + Math.cos(cameraOrbit) * 1;
 
       renderer.render(scene, camera);
     };

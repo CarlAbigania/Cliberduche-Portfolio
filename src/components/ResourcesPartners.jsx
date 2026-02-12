@@ -61,7 +61,7 @@ const ResourcesPartners = () => {
       <section 
         ref={sectionRef}
         id="resources" 
-        className="py-12 md:py-16 bg-stone-100 dark:bg-stone-900/20 relative overflow-hidden"
+        className="py-12 md:py-16 bg-amber-50 dark:bg-amber-950/15 relative overflow-hidden"
         style={{ position: 'relative', zIndex: 10 }}
       >
 
