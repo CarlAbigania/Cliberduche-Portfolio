@@ -85,7 +85,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden">
+    <section id="about" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 12 }}>
       {/* 3D Particle Background */}
       <canvas
         ref={canvasRef}

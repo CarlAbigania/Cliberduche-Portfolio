@@ -40,6 +40,8 @@ const Services = () => {
       className="py-12 md:py-16 bg-fixed bg-cover bg-center relative"
       style={{
         backgroundImage: "linear-gradient(rgba(60, 60, 60, 0.72), rgba(60, 60, 60, 0.72)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+        position: 'relative',
+        zIndex: 12,
       }}
     >
       <div className="max-w-container mx-auto px-4">
