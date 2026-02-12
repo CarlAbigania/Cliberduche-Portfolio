@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useScrollAnimated3DBuilding } from '../hooks/useScrollAnimated3DBuilding';
 
 const ResourcesPartners = () => {
+  const buildingContainer = useRef(null);
+  const sectionRef = useRef(null);
+  
+  useScrollAnimated3DBuilding(buildingContainer, true);
+
   const suppliers = [
     {
       company: 'D.E. Abesamis Builders, Inc.',
@@ -33,8 +39,33 @@ const ResourcesPartners = () => {
   ];
 
   return (
-    <section id="resources" className="py-12 md:py-16 bg-light dark:bg-gray-800/50">
-      <div className="max-w-container mx-auto px-4">
+    <>
+      {/* 3D Building Model - Follows Screen while Scrolling through Section */}
+      <div
+        ref={buildingContainer}
+        className="pointer-events-none"
+        style={{
+          position: 'fixed',
+          top: 0,
+          right: -600,
+          width: '100vw',
+          height: '100vh',
+          zIndex: 11,
+          opacity: 1,
+          visibility: 'visible',
+          pointerEvents: 'none',
+          overflow: 'hidden',
+        }}
+      />
+
+      <section 
+        ref={sectionRef}
+        id="resources" 
+        className="py-12 md:py-16 bg-amber-50 dark:bg-amber-950/15 relative overflow-hidden"
+        style={{ position: 'relative', zIndex: 10 }}
+      >
+
+      <div className="max-w-container mx-auto px-4 relative">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
           <h2 className="text-primary mb-4">
@@ -175,6 +206,7 @@ const ResourcesPartners = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
