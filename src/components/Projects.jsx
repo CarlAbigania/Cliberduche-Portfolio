@@ -206,7 +206,7 @@ const Projects = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 mb-12 scroll-fade-up" ref={paginationRef}>
+          <div className="flex justify-center items-center gap-2 scroll-fade-up" ref={paginationRef}>
             <button
               onClick={(e) => {
                 e.preventDefault();
