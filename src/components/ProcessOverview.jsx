@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const ProcessOverview = () => {
-  const [maxExpandedStep, setMaxExpandedStep] = useState(0);
+  const [maxExpandedStep, setMaxExpandedStep] = useState(1);
 
   // Refs for animations
   const titleRef = useScrollAnimation({ threshold: 0.2 });
