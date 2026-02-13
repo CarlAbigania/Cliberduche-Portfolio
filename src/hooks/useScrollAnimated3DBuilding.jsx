@@ -386,7 +386,7 @@ export const useScrollAnimated3DBuilding = (containerRef, isVisible = true) => {
 
     // ===== CARGO/LOAD BEING LIFTED =====
     // Container box
-    const cargoGeometry = new THREE.BoxGeometry(0.6, 0.5, 0.6);
+    const cargoGeometry = new THREE.BoxGeometry(0.5, 0.4, 0.5);
     const cargoMaterial = new THREE.MeshPhongMaterial({
       color: 0xFF6B35,
       shininess: 30,
@@ -401,15 +401,15 @@ export const useScrollAnimated3DBuilding = (containerRef, isVisible = true) => {
 
     // Cargo lifting straps
     for (let i = 0; i < 4; i++) {
-      const strapGeometry = new THREE.BoxGeometry(0.05, 0.6, 0.05);
+      const strapGeometry = new THREE.BoxGeometry(0.05, 0.5, 0.05);
       const strapMaterial = new THREE.MeshPhongMaterial({
         color: 0x333333,
         shininess: 20,
       });
       const strap = new THREE.Mesh(strapGeometry, strapMaterial);
       strap.position.y = -0.1;
-      strap.position.x = trolleyPosition + (i < 2 ? 0.25 : -0.25);
-      strap.position.z = (i % 2 === 0 ? 0.25 : -0.25);
+      strap.position.x = trolleyPosition + (i < 2 ? 0.2 : -0.2);
+      strap.position.z = (i % 2 === 0 ? 0.2 : -0.2);
       strap.castShadow = true;
       strap.receiveShadow = true;
       craneGroup.add(strap);
@@ -468,7 +468,7 @@ export const useScrollAnimated3DBuilding = (containerRef, isVisible = true) => {
     }
 
     const craneRef = craneGroup;
-    craneGroup.scale.set(1.5, 1.5, 1.5);
+    craneGroup.scale.set(0.8, 0.8, 0.8);
     scene.add(craneGroup);
 
     // ===== ENHANCED PHOTOREALISTIC LIGHTING =====
