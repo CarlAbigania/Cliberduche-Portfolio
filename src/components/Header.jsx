@@ -20,7 +20,8 @@ const Header = () => {
   // Track scroll for header effect
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      // Add background when scrolled past hero section (full viewport height)
+      setScrolled(window.scrollY > window.innerHeight);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -44,7 +45,7 @@ const Header = () => {
 
   return (
     <>
-      <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16 bg-transparent`}>
+      <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16 ${scrolled ? 'bg-white dark:bg-gray-900 shadow-md' : 'bg-transparent'}`}>
         {/* Main Header Content */}
         <div className="max-w-container mx-auto px-4 sm:px-6 h-full flex items-center justify-between relative z-10">
           
