@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import ModalPortal from './ModalPortal';
 import { MdVerified, MdReceipt, MdDocumentScanner, MdLocalHospital, MdHouse, MdWorkspacePremium, MdLocalFireDepartment, MdVerifiedUser, MdOpenInNew, MdEco } from 'react-icons/md';
 
 const ComplianceSafety = () => {
@@ -37,7 +38,7 @@ const ComplianceSafety = () => {
   ];
 
   return (
-    <section id="compliance" className="py-12 md:py-16 bg-white dark:bg-gray-900" style={{ position: 'relative', zIndex: 10 }}>
+    <section id="compliance" className="py-12 md:py-16 bg-white dark:bg-gray-900" style={{ position: 'relative', zIndex: 15 }}>
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
@@ -109,11 +110,11 @@ const ComplianceSafety = () => {
         </div>
 
         {/* Certificate Modal */}
-        {selectedCert && (
+        <ModalPortal isOpen={!!selectedCert}>
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
             <div className="bg-white rounded-2xl max-w-3xl w-full shadow-2xl overflow-hidden">
               <div className="flex justify-between items-center p-6 border-b border-gray-200">
-                <h3 className="text-2xl font-mont font-bold text-dark">{selectedCert.name}</h3>
+                <h3 className="text-2xl font-mont font-bold text-dark">{selectedCert?.name}</h3>
                 <button
                   onClick={() => setSelectedCert(null)}
                   className="text-gray-400 hover:text-dark text-3xl font-light transition-colors"
@@ -124,8 +125,8 @@ const ComplianceSafety = () => {
               <div className="p-8">
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl overflow-hidden">
                   <img
-                    src={selectedCert.image}
-                    alt={selectedCert.name}
+                    src={selectedCert?.image}
+                    alt={selectedCert?.name}
                     className="w-full h-auto object-contain max-h-[60vh]"
                     onError={(e) => {
                       e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e0e7ff" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" font-family="Arial" font-size="16" fill="%236366f1"%3ECertificate Image%3C/text%3E%3C/svg%3E';
@@ -143,7 +144,7 @@ const ComplianceSafety = () => {
               </div>
             </div>
           </div>
-        )}
+        </ModalPortal>
 
       </div>
     </section>
