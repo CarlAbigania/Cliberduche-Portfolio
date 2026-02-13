@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import ModalPortal from './ModalPortal';
 
 const Projects = () => {
   // Refs for animations
@@ -131,7 +132,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 12 }}>
+    <section id="projects" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
       {/* Decorative background element - bottom-left */}
       <div className="absolute bottom-0 left-0 w-[450px] h-48 bg-amber-50 dark:bg-amber-950/15 -skew-x-12 pointer-events-none" />
       <div className="max-w-container mx-auto px-4 relative z-10">
@@ -251,12 +252,12 @@ const Projects = () => {
 
 
         {/* Case Study Modal */}
-        {showModal && selectedProject && (
+        <ModalPortal isOpen={showModal && !!selectedProject}>
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-fadeIn">
             <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scaleUp">
               <div className="p-8 md:p-10">
                 <div className="flex justify-between items-start mb-8">
-                  <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white pr-8">{selectedProject.title}</h3>
+                  <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white pr-8">{selectedProject?.title}</h3>
                   <button
                     onClick={closeModal}
                     className="text-gray-400 hover:text-dark dark:hover:text-white text-3xl font-light flex-shrink-0 transition-colors"
@@ -266,48 +267,48 @@ const Projects = () => {
                 </div>
                 <div className="mb-8 rounded-xl overflow-hidden shadow-md bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
                   <img 
-                    src={selectedProject.img} 
-                    alt={selectedProject.title}
+                    src={selectedProject?.img} 
+                    alt={selectedProject?.title}
                     className="w-full h-auto max-h-96 object-contain"
                   />
                 </div>
                 <div className="space-y-8">
                   <div>
                     <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl mb-4">Project Overview</h4>
-                    <p className="text-gray dark:text-gray-400 text-lg leading-relaxed">{selectedProject.desc}</p>
+                    <p className="text-gray dark:text-gray-400 text-lg leading-relaxed">{selectedProject?.desc}</p>
                   </div>
                   <div className="grid grid-cols-2 gap-6">
                     <div>
                       <h4 className="font-mont font-bold text-dark dark:text-white text-base mb-2">Location</h4>
-                      <p className="text-gray dark:text-gray-400 text-base">{selectedProject.location || 'General Area'}</p>
+                      <p className="text-gray dark:text-gray-400 text-base">{selectedProject?.location || 'General Area'}</p>
                     </div>
                     <div>
                       <h4 className="font-mont font-bold text-dark dark:text-white text-base mb-2">Status</h4>
                       <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
-                        selectedProject.tag === 'Ongoing' ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300' : 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                        selectedProject?.tag === 'Ongoing' ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300' : 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
                       }`}>
-                        {selectedProject.tag}
+                        {selectedProject?.tag}
                       </span>
                     </div>
                   </div>
                   <div>
                     <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl mb-4">Scope & Highlights</h4>
-                    <p className="text-gray dark:text-gray-400 text-lg leading-relaxed">{selectedProject.highlight}</p>
+                    <p className="text-gray dark:text-gray-400 text-lg leading-relaxed">{selectedProject?.highlight}</p>
                   </div>
-                  {selectedProject.metrics && (
+                  {selectedProject?.metrics && (
                     <div>
                       <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl mb-4">Project Metrics</h4>
                       <div className="grid grid-cols-3 gap-6 bg-light dark:bg-gray-700 p-6 rounded-lg">
                         <div className="text-center">
-                          <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject.metrics.area}</div>
+                          <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject?.metrics?.area}</div>
                           <div className="text-sm text-gray dark:text-gray-400 font-semibold mt-2">Area</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject.metrics.duration}</div>
+                          <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject?.metrics?.duration}</div>
                           <div className="text-sm text-gray dark:text-gray-400 font-semibold mt-2">Duration</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject.metrics.value}</div>
+                          <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject?.metrics?.value}</div>
                           <div className="text-sm text-gray dark:text-gray-400 font-semibold mt-2">Value</div>
                         </div>
                       </div>
@@ -316,7 +317,7 @@ const Projects = () => {
                   <div className="bg-blue-50 dark:bg-blue-900/20 border border-primary/20 dark:border-primary/30 rounded-lg p-6">
                     <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl mb-4">Case Study Details</h4>
                     <p className="text-gray dark:text-gray-400 text-base leading-relaxed">
-                      This project demonstrates Cliberduche Corporation's expertise in {selectedProject.category.includes('ongoing') ? 'ongoing' : 'completed'} civil engineering works.
+                      This project demonstrates Cliberduche Corporation's expertise in {selectedProject?.category?.includes('ongoing') ? 'ongoing' : 'completed'} civil engineering works.
                       Our team utilized advanced equipment and followed strict safety protocols to deliver high-quality results within the specified timeline.
                       The project involved close collaboration with clients and stakeholders to ensure all requirements were met.
                     </p>
@@ -333,7 +334,7 @@ const Projects = () => {
               </div>
             </div>
           </div>
-        )}
+        </ModalPortal>
       </div>
     </section>
   );

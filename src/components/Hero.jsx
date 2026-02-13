@@ -9,7 +9,7 @@ const Hero = () => {
         backgroundImage: `linear-gradient(135deg, rgba(60, 60, 60, 0.75) 0%, rgba(70, 70, 70, 0.70) 50%, rgba(60, 60, 60, 0.75) 100%), url('/images/compony provided/office.jpg')`,
         backgroundAttachment: 'fixed',
         position: 'relative',
-        zIndex: 12,
+        zIndex: 15,
       }}
     >
       {/* Animated Background Orbs */}
