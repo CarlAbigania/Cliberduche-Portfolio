@@ -134,7 +134,7 @@ const Projects = () => {
   return (
     <section id="projects" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
       {/* Decorative background element - bottom-left */}
-      <div className="absolute bottom-0 left-0 w-[450px] h-48 bg-amber-50 dark:bg-amber-950/15 -skew-x-12 pointer-events-none" />
+      <div className="absolute bottom-0 -left-5 w-[450px] h-48 bg-amber-100 dark:bg-amber-950/25 -skew-x-12 pointer-events-none" />
       <div className="max-w-container mx-auto px-4 relative z-10">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
