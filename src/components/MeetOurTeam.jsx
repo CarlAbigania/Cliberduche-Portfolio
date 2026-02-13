@@ -122,7 +122,7 @@ const MeetOurTeam = () => {
   const currentDepartment = departments[currentDeptIndex];
 
   return (
-    <section className="bg-amber-50 dark:bg-amber-950/15 py-12 md:py-16" style={{ position: 'relative', zIndex: 15 }}>
+    <section className="bg-amber-100 dark:bg-amber-950/25 py-12 md:py-16" style={{ position: 'relative', zIndex: 15 }}>
       {/* Header */}
       <div className="max-w-container mx-auto px-4">
         <div className="section-title text-center mb-12">
