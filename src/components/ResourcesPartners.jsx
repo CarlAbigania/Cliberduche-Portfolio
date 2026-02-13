@@ -1,11 +1,31 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useScrollAnimated3DBuilding } from '../hooks/useScrollAnimated3DBuilding';
 
 const ResourcesPartners = () => {
   const buildingContainer = useRef(null);
   const sectionRef = useRef(null);
+  const [isModelVisible, setIsModelVisible] = useState(true);
   
   useScrollAnimated3DBuilding(buildingContainer, true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+
+      const sectionRect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Hide the 3D model if the section bottom is within 200px of viewport bottom (approaching footer)
+      if (sectionRect.bottom <= windowHeight) {
+        setIsModelVisible(false);
+      } else {
+        setIsModelVisible(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const suppliers = [
     {
@@ -51,10 +71,11 @@ const ResourcesPartners = () => {
           width: '100vw',
           height: '100vh',
           zIndex: 11,
-          opacity: 1,
-          visibility: 'visible',
+          opacity: isModelVisible ? 1 : 0,
+          visibility: isModelVisible ? 'visible' : 'hidden',
           pointerEvents: 'none',
           overflow: 'hidden',
+          transition: 'opacity 0.3s ease, visibility 0.3s ease',
         }}
       />
 
