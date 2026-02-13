@@ -164,7 +164,7 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12" style={{ gridAutoRows: 'minmax(0, 1fr)' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" style={{ gridAutoRows: 'minmax(0, 1fr)' }}>
           {paginatedProjects.map((project, index) => (
             <div
               key={project.id}
@@ -207,7 +207,7 @@ const Projects = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 scroll-fade-up" ref={paginationRef}>
+          <div className="flex justify-center items-center gap-2 scroll-fade-up mt-12" ref={paginationRef}>
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -254,68 +254,99 @@ const Projects = () => {
         {/* Case Study Modal */}
         <ModalPortal isOpen={showModal && !!selectedProject}>
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-fadeIn">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scaleUp">
-              <div className="p-8 md:p-10">
-                <div className="flex justify-between items-start mb-8">
-                  <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white pr-8">{selectedProject?.title}</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scaleUp border border-primary/10 dark:border-primary/20">
+              {/* Header with gradient background */}
+              <div className="bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border-b border-primary/10 dark:border-primary/20 p-8 md:p-10">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white">{selectedProject?.title}</h3>
+                    <p className="text-primary dark:text-blue-400 font-semibold text-sm mt-2">{selectedProject?.highlight}</p>
+                  </div>
                   <button
                     onClick={closeModal}
-                    className="text-gray-400 hover:text-dark dark:hover:text-white text-3xl font-light flex-shrink-0 transition-colors"
+                    className="text-primary dark:text-blue-400 hover:bg-primary/10 dark:hover:bg-blue-400/10 hover:text-primary dark:hover:text-blue-400 text-3xl font-light flex-shrink-0 transition-all w-10 h-10 flex items-center justify-center rounded-lg"
                   >
                     ×
                   </button>
                 </div>
-                <div className="mb-8 rounded-xl overflow-hidden shadow-md bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+              </div>
+
+              {/* Content */}
+              <div className="p-8 md:p-10">
+                {/* Project Image */}
+                <div className="mb-10 rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center border border-primary/5 dark:border-primary/10">
                   <img 
                     src={selectedProject?.img} 
                     alt={selectedProject?.title}
-                    className="w-full h-auto max-h-96 object-contain"
+                    className="w-full h-auto max-h-96 object-contain p-4"
                   />
                 </div>
+
                 <div className="space-y-8">
+                  {/* Overview Section */}
                   <div>
-                    <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl mb-4">Project Overview</h4>
-                    <p className="text-gray dark:text-gray-400 text-lg leading-relaxed">{selectedProject?.desc}</p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="font-mont font-bold text-dark dark:text-white text-base mb-2">Location</h4>
-                      <p className="text-gray dark:text-gray-400 text-base">{selectedProject?.location || 'General Area'}</p>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-1 h-6 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+                      <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl">Project Overview</h4>
                     </div>
-                    <div>
-                      <h4 className="font-mont font-bold text-dark dark:text-white text-base mb-2">Status</h4>
-                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
-                        selectedProject?.tag === 'Ongoing' ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300' : 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                    <p className="text-gray dark:text-gray-400 text-lg leading-relaxed bg-white/40 dark:bg-gray-900/20 p-4 rounded-lg">{selectedProject?.desc}</p>
+                  </div>
+
+                  {/* Location & Status */}
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="bg-light dark:bg-gray-700/30 p-4 rounded-lg border border-primary/10 dark:border-primary/20">
+                      <h4 className="font-mont font-bold text-dark dark:text-white text-sm uppercase tracking-wider mb-2">📍 Location</h4>
+                      <p className="text-gray dark:text-gray-400 text-base font-semibold">{selectedProject?.location || 'General Area'}</p>
+                    </div>
+                    <div className="bg-light dark:bg-gray-700/30 p-4 rounded-lg border border-primary/10 dark:border-primary/20">
+                      <h4 className="font-mont font-bold text-dark dark:text-white text-sm uppercase tracking-wider mb-2">✓ Status</h4>
+                      <span className={`inline-block px-4 py-2 rounded-lg text-sm font-semibold ${
+                        selectedProject?.tag === 'Ongoing' ? 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-200 border border-yellow-300 dark:border-yellow-700' : 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200 border border-green-300 dark:border-green-700'
                       }`}>
                         {selectedProject?.tag}
                       </span>
                     </div>
                   </div>
+
+                  {/* Scope & Highlights */}
                   <div>
-                    <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl mb-4">Scope & Highlights</h4>
-                    <p className="text-gray dark:text-gray-400 text-lg leading-relaxed">{selectedProject?.highlight}</p>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-1 h-6 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+                      <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl">Scope & Highlights</h4>
+                    </div>
+                    <p className="text-gray dark:text-gray-400 text-lg leading-relaxed bg-white/40 dark:bg-gray-900/20 p-4 rounded-lg border-l-4 border-primary dark:border-blue-400">{selectedProject?.highlight}</p>
                   </div>
+
+                  {/* Metrics */}
                   {selectedProject?.metrics && (
                     <div>
-                      <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl mb-4">Project Metrics</h4>
-                      <div className="grid grid-cols-3 gap-6 bg-light dark:bg-gray-700 p-6 rounded-lg">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-1 h-6 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+                        <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl">Project Metrics</h4>
+                      </div>
+                      <div className="grid grid-cols-3 gap-6 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 p-6 rounded-lg border border-primary/10 dark:border-primary/20">
                         <div className="text-center">
                           <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject?.metrics?.area}</div>
-                          <div className="text-sm text-gray dark:text-gray-400 font-semibold mt-2">Area</div>
+                          <div className="text-xs text-gray dark:text-gray-400 font-semibold mt-2 uppercase tracking-widest">Area</div>
                         </div>
-                        <div className="text-center">
+                        <div className="text-center border-l border-r border-primary/20 dark:border-primary/30">
                           <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject?.metrics?.duration}</div>
-                          <div className="text-sm text-gray dark:text-gray-400 font-semibold mt-2">Duration</div>
+                          <div className="text-xs text-gray dark:text-gray-400 font-semibold mt-2 uppercase tracking-widest">Duration</div>
                         </div>
                         <div className="text-center">
                           <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject?.metrics?.value}</div>
-                          <div className="text-sm text-gray dark:text-gray-400 font-semibold mt-2">Value</div>
+                          <div className="text-xs text-gray dark:text-gray-400 font-semibold mt-2 uppercase tracking-widest">Value</div>
                         </div>
                       </div>
                     </div>
                   )}
-                  <div className="bg-blue-50 dark:bg-blue-900/20 border border-primary/20 dark:border-primary/30 rounded-lg p-6">
-                    <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl mb-4">Case Study Details</h4>
+
+                  {/* Case Study Details */}
+                  <div className="bg-gradient-to-br from-primary/10 to-accent/10 dark:from-primary/10 dark:to-accent/10 border-l-4 border-primary dark:border-blue-400 rounded-lg p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-2xl">📋</span>
+                      <h4 className="font-mont font-bold text-dark dark:text-white text-lg">Case Study Details</h4>
+                    </div>
                     <p className="text-gray dark:text-gray-400 text-base leading-relaxed">
                       This project demonstrates Cliberduche Corporation's expertise in {selectedProject?.category?.includes('ongoing') ? 'ongoing' : 'completed'} civil engineering works.
                       Our team utilized advanced equipment and followed strict safety protocols to deliver high-quality results within the specified timeline.
@@ -323,10 +354,12 @@ const Projects = () => {
                     </p>
                   </div>
                 </div>
-                <div className="mt-10 flex justify-end gap-3">
+
+                {/* Footer */}
+                <div className="mt-10 pt-8 border-t border-primary/10 dark:border-primary/20 flex justify-end gap-3">
                   <button
                     onClick={closeModal}
-                    className="px-8 py-3 bg-gray-200 dark:bg-gray-700 text-dark dark:text-white font-semibold rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300"
+                    className="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
                   >
                     Close
                   </button>
