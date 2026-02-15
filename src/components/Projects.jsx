@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useTheme } from '../hooks/useTheme';
 import ModalPortal from './ModalPortal';
 
 const Projects = () => {
+  const { isDarkMode } = useTheme();
   // Refs for animations
   const titleRef = useScrollAnimation({ threshold: 0.2 });
   const descRef = useScrollAnimation({ threshold: 0.2 });
@@ -157,14 +159,14 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
+    <section id="projects" className="py-12 md:py-16 bg-white dark:bg-slate-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
       {/* Decorative background element - bottom-left */}
-      <div className="absolute bottom-0 -left-5 w-[450px] h-48 bg-amber-100 dark:bg-amber-950/25 -skew-x-12 pointer-events-none" />
+      <div className="absolute bottom-0 -left-5 w-[450px] h-48 bg-amber-100 dark:bg-slate-800/30 -skew-x-12 pointer-events-none" />
       <div className="max-w-container mx-auto px-4 relative z-10">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
           <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>Our Projects</h2>
-          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>Selected highlights across commercial and industrial developments</p>
+          <p className="text-gray dark:text-gray-100 text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>Selected highlights across commercial and industrial developments</p>
           <div className="section-title-underline"></div>
         </div>
 
@@ -180,7 +182,7 @@ const Projects = () => {
               className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                 activeFilter === filter.key
                   ? 'bg-gradient-to-r from-primary to-accent text-white border border-primary shadow-lg shadow-primary/30 hover:shadow-secondary/50'
-                  : 'bg-white dark:bg-gray-800 text-dark dark:text-white border border-primary/20 dark:border-primary/30 hover:bg-primary hover:text-white hover:-translate-y-1'
+                  : 'bg-white dark:bg-slate-800/80 text-dark dark:text-white border border-primary/20 dark:border-slate-700/60 hover:bg-primary hover:text-white hover:-translate-y-1 dark:hover:bg-primary'
               }`}
             >
               {filter.label}
@@ -193,7 +195,7 @@ const Projects = () => {
           {paginatedProjects.map((project, index) => (
             <div
               key={project.id}
-              className="premium-card overflow-hidden flex flex-col min-h-[550px] hover:shadow-2xl transition-all duration-300 group"
+              className="bg-white dark:bg-slate-800/80 overflow-hidden flex flex-col min-h-[550px] rounded-xl shadow-lg dark:shadow-xl dark:shadow-black/50 dark:border dark:border-slate-700/60 hover:shadow-2xl dark:hover:shadow-2xl dark:hover:shadow-black/60 transition-all duration-300 group"
               style={{ animationDelay: `${(index % 3) * 0.1}s` }}
             >
               <div
@@ -214,9 +216,9 @@ const Projects = () => {
                   {project.tag}
                 </span>
                 <h3 className="text-lg md:text-xl font-mont font-bold text-dark dark:text-white mb-3 group-hover:text-secondary transition-colors">{project.title}</h3>
-                <p className="text-gray dark:text-gray-400 text-base mb-3 line-clamp-2">{project.desc}</p>
-                <p className="text-primary dark:text-blue-400 text-sm font-semibold mb-4">{project.highlight}</p>
-                <p className="text-dark dark:text-gray-400 font-semibold text-sm mb-6 flex-grow">
+                <p className="text-gray dark:text-gray-100 text-base mb-3 line-clamp-2">{project.desc}</p>
+                <p className="text-primary dark:text-green-400 text-sm font-semibold mb-4">{project.highlight}</p>
+                <p className="text-dark dark:text-gray-100 font-semibold text-sm mb-6 flex-grow">
                   <strong>Location:</strong> {project.location || 'General Area'}
                 </p>
                 <button
@@ -238,7 +240,7 @@ const Projects = () => {
                 handlePreviousPage();
               }}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded text-sm font-semibold bg-white dark:bg-gray-800 text-dark dark:text-white border border-primary/20 dark:border-primary/30 hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+              className="px-4 py-2 rounded text-sm font-semibold bg-white dark:bg-slate-800/80 text-dark dark:text-white border border-primary/20 dark:border-slate-700/60 hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
             >
               Previous
             </button>
@@ -253,7 +255,7 @@ const Projects = () => {
                 className={`px-3 py-2 rounded text-sm font-semibold transition-all duration-300 ${
                   currentPage === page
                     ? 'bg-gradient-to-r from-primary to-accent text-white border border-primary shadow-lg shadow-primary/30'
-                    : 'bg-white dark:bg-gray-800 text-dark dark:text-white border border-primary/20 dark:border-primary/30 hover:bg-primary hover:text-white'
+                    : 'bg-white dark:bg-slate-800/80 text-dark dark:text-white border border-primary/20 dark:border-slate-700/60 hover:bg-primary hover:text-white'
                 }`}
               >
                 {page}
@@ -266,7 +268,7 @@ const Projects = () => {
                 handleNextPage();
               }}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 rounded text-sm font-semibold bg-white dark:bg-gray-800 text-dark dark:text-white border border-primary/20 dark:border-primary/30 hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+              className="px-4 py-2 rounded text-sm font-semibold bg-white dark:bg-slate-800/80 text-dark dark:text-white border border-primary/20 dark:border-slate-700/60 hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
             >
               Next
             </button>
@@ -275,17 +277,17 @@ const Projects = () => {
         {/* Case Study Modal */}
         <ModalPortal isOpen={showModal && !!selectedProject}>
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-fadeIn">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scaleUp border border-primary/10 dark:border-primary/20">
+            <div className="bg-white dark:bg-slate-800/95 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scaleUp border border-primary/10 dark:border-slate-700/60">
               {/* Header with gradient background */}
-              <div className="bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border-b border-primary/10 dark:border-primary/20 p-8 md:p-10">
+              <div className="bg-gradient-to-r from-primary/5 to-accent/5 dark:from-slate-700/50 dark:to-slate-700/30 border-b border-primary/10 dark:border-slate-700/60 p-8 md:p-10">
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white">{selectedProject?.title}</h3>
-                    <p className="text-primary dark:text-blue-400 font-semibold text-sm mt-2">{selectedProject?.highlight}</p>
+                    <p className="text-primary dark:text-green-400 font-semibold text-sm mt-2">{selectedProject?.highlight}</p>
                   </div>
                   <button
                     onClick={closeModal}
-                    className="text-primary dark:text-blue-400 hover:bg-primary/10 dark:hover:bg-blue-400/10 hover:text-primary dark:hover:text-blue-400 text-3xl font-light flex-shrink-0 transition-all w-10 h-10 flex items-center justify-center rounded-lg"
+                    className="text-primary dark:text-green-400 hover:bg-primary/10 dark:hover:bg-green-400/10 hover:text-primary dark:hover:text-green-400 text-3xl font-light flex-shrink-0 transition-all w-10 h-10 flex items-center justify-center rounded-lg"
                   >
                     ×
                   </button>
@@ -310,16 +312,16 @@ const Projects = () => {
                       <div className="w-1 h-6 bg-gradient-to-b from-primary to-accent rounded-full"></div>
                       <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl">Project Overview</h4>
                     </div>
-                    <p className="text-gray dark:text-gray-400 text-lg leading-relaxed bg-white/40 dark:bg-gray-900/20 p-4 rounded-lg">{selectedProject?.desc}</p>
+                    <p className="text-gray dark:text-gray-100 text-lg leading-relaxed bg-white/40 dark:bg-slate-700/30 p-4 rounded-lg">{selectedProject?.desc}</p>
                   </div>
 
                   {/* Location & Status */}
                   <div className="grid grid-cols-2 gap-6">
-                    <div className="bg-light dark:bg-gray-700/30 p-4 rounded-lg border border-primary/10 dark:border-primary/20">
+                    <div className="bg-light dark:bg-slate-700/40 p-4 rounded-lg border border-primary/10 dark:border-slate-700/60">
                       <h4 className="font-mont font-bold text-dark dark:text-white text-sm uppercase tracking-wider mb-2">📍 Location</h4>
-                      <p className="text-gray dark:text-gray-400 text-base font-semibold">{selectedProject?.location || 'General Area'}</p>
+                      <p className="text-gray dark:text-gray-100 text-base font-semibold">{selectedProject?.location || 'General Area'}</p>
                     </div>
-                    <div className="bg-light dark:bg-gray-700/30 p-4 rounded-lg border border-primary/10 dark:border-primary/20">
+                    <div className="bg-light dark:bg-slate-700/40 p-4 rounded-lg border border-primary/10 dark:border-slate-700/60">
                       <h4 className="font-mont font-bold text-dark dark:text-white text-sm uppercase tracking-wider mb-2">✓ Status</h4>
                       <span className={`inline-block px-4 py-2 rounded-lg text-sm font-semibold ${
                         selectedProject?.tag === 'Ongoing' ? 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-200 border border-yellow-300 dark:border-yellow-700' : 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200 border border-green-300 dark:border-green-700'
@@ -335,7 +337,7 @@ const Projects = () => {
                       <div className="w-1 h-6 bg-gradient-to-b from-primary to-accent rounded-full"></div>
                       <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl">Scope & Highlights</h4>
                     </div>
-                    <p className="text-gray dark:text-gray-400 text-lg leading-relaxed bg-white/40 dark:bg-gray-900/20 p-4 rounded-lg border-l-4 border-primary dark:border-blue-400">{selectedProject?.highlight}</p>
+                    <p className="text-gray dark:text-gray-100 text-lg leading-relaxed bg-white/40 dark:bg-slate-700/30 p-4 rounded-lg border-l-4 border-primary dark:border-blue-400">{selectedProject?.highlight}</p>
                   </div>
 
                   {/* Metrics */}
@@ -345,30 +347,30 @@ const Projects = () => {
                         <div className="w-1 h-6 bg-gradient-to-b from-primary to-accent rounded-full"></div>
                         <h4 className="font-mont font-bold text-dark dark:text-white text-xl md:text-2xl">Project Metrics</h4>
                       </div>
-                      <div className="grid grid-cols-3 gap-6 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 p-6 rounded-lg border border-primary/10 dark:border-primary/20">
+                      <div className="grid grid-cols-3 gap-6 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-slate-700/30 dark:to-slate-700/20 p-6 rounded-lg border border-primary/10 dark:border-slate-700/60">
                         <div className="text-center">
                           <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject?.metrics?.area}</div>
-                          <div className="text-xs text-gray dark:text-gray-400 font-semibold mt-2 uppercase tracking-widest">Area</div>
+                          <div className="text-xs text-gray dark:text-gray-100 font-semibold mt-2 uppercase tracking-widest">Area</div>
                         </div>
-                        <div className="text-center border-l border-r border-primary/20 dark:border-primary/30">
+                        <div className="text-center border-l border-r border-primary/20 dark:border-slate-700/60">
                           <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject?.metrics?.duration}</div>
-                          <div className="text-xs text-gray dark:text-gray-400 font-semibold mt-2 uppercase tracking-widest">Duration</div>
+                          <div className="text-xs text-gray dark:text-gray-100 font-semibold mt-2 uppercase tracking-widest">Duration</div>
                         </div>
                         <div className="text-center">
                           <div className="text-3xl font-mont font-bold text-primary dark:text-blue-400">{selectedProject?.metrics?.value}</div>
-                          <div className="text-xs text-gray dark:text-gray-400 font-semibold mt-2 uppercase tracking-widest">Value</div>
+                          <div className="text-xs text-gray dark:text-gray-100 font-semibold mt-2 uppercase tracking-widest">Value</div>
                         </div>
                       </div>
                     </div>
                   )}
 
                   {/* Case Study Details */}
-                  <div className="bg-gradient-to-br from-primary/10 to-accent/10 dark:from-primary/10 dark:to-accent/10 border-l-4 border-primary dark:border-blue-400 rounded-lg p-6">
+                  <div className="bg-gradient-to-br from-primary/10 to-accent/10 dark:from-slate-700/30 dark:to-slate-700/20 border-l-4 border-primary dark:border-blue-400 rounded-lg p-6">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-2xl">📋</span>
                       <h4 className="font-mont font-bold text-dark dark:text-white text-lg">Case Study Details</h4>
                     </div>
-                    <p className="text-gray dark:text-gray-400 text-base leading-relaxed">
+                    <p className="text-gray dark:text-gray-100 text-base leading-relaxed">
                       This project demonstrates Cliberduche Corporation's expertise in {selectedProject?.category?.includes('ongoing') ? 'ongoing' : 'completed'} civil engineering works.
                       Our team utilized advanced equipment and followed strict safety protocols to deliver high-quality results within the specified timeline.
                       The project involved close collaboration with clients and stakeholders to ensure all requirements were met.
@@ -377,7 +379,7 @@ const Projects = () => {
                 </div>
 
                 {/* Footer */}
-                <div className="mt-10 pt-8 border-t border-primary/10 dark:border-primary/20 flex justify-end gap-3">
+                <div className="mt-10 pt-8 border-t border-primary/10 dark:border-slate-700/60 flex justify-end gap-3">
                   <button
                     onClick={closeModal}
                     className="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
