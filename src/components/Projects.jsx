@@ -14,7 +14,27 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+
+  // Handle responsive items per page
+  React.useEffect(() => {
+    const handleResize = () => {
+      // Desktop (>= 1024px): 3 items per page
+      // Tablet (640px - 1023px): 4 items per page
+      // Mobile (< 640px): 3 items per page
+      if (window.innerWidth >= 1024) {
+        setItemsPerPage(3);
+      } else if (window.innerWidth >= 640) {
+        setItemsPerPage(4);
+      } else {
+        setItemsPerPage(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Reset page when filter changes
   React.useEffect(() => {
