@@ -5,8 +5,19 @@ const ResourcesPartners = () => {
   const buildingContainer = useRef(null);
   const sectionRef = useRef(null);
   const [isModelVisible, setIsModelVisible] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
   
-  useScrollAnimated3DBuilding(buildingContainer, true);
+  useScrollAnimated3DBuilding(buildingContainer, isDesktop);
+
+  // Handle responsive 3D model visibility
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
