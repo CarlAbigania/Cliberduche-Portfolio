@@ -71,7 +71,7 @@ const Header = () => {
             </div>
 
             {/* Divider 1 */}
-            <div className="hidden md:block w-px h-6 bg-gray-300 dark:bg-slate-700"></div>
+            <div className="hidden md:block w-px h-6 bg-black/30 dark:bg-slate-500"></div>
 
             {/* Group 2: Social Media Links (Desktop) */}
             <div className="hidden md:flex items-center gap-4">
@@ -105,7 +105,7 @@ const Header = () => {
             </div>
 
             {/* Divider 2 */}
-            <div className="hidden md:block w-px h-6 bg-gray-300 dark:bg-slate-700"></div>
+            <div className="hidden md:block w-px h-6 bg-black/30 dark:bg-slate-500"></div>
 
             {/* Group 3: Dark Mode Toggle */}
             <button
