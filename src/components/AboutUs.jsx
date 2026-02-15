@@ -4,6 +4,18 @@ import { useThreeParticles, particleShapes3D } from '../hooks/useThreeParticles'
 import { MdVerified, MdSecurity, MdRecycling, MdGroupWork, MdStars, MdPeopleOutline, MdAutoAwesome, MdRemoveRedEye } from 'react-icons/md';
 
 const AboutUs = () => {
+  const [isDesktop, setIsDesktop] = React.useState(window.innerWidth >= 1024);
+
+  // Handle responsive particle visibility
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // 3D particle animation background
   const { canvasRef } = useThreeParticles({
     particleCount: 1500,
@@ -86,16 +98,18 @@ const AboutUs = () => {
 
   return (
     <section id="about" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
-      {/* 3D Particle Background */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'block',
-        }}
-      />
+      {/* 3D Particle Background - Desktop Only */}
+      {isDesktop && (
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'block',
+          }}
+        />
+      )}
 
       <div className="max-w-container mx-auto px-4 relative z-10">
         {/* Section Title */}
