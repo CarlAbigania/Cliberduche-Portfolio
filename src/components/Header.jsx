@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useTheme } from '../hooks/useTheme';
 import logo from '/images/logo2.png';
 import { MdDownload, MdLightMode, MdNightlight, MdMenu, MdClose } from 'react-icons/md';
 import { FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Header = () => {
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  // Initialize dark mode from localStorage
-  useEffect(() => {
-    const isDark = localStorage.getItem('darkMode') === 'true';
-    setDarkMode(isDark);
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    }
-  }, []);
 
   // Track scroll for header effect
   useEffect(() => {
@@ -27,25 +19,17 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Toggle dark mode
-  const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    localStorage.setItem('darkMode', newDarkMode);
-    if (newDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  };
-
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <>
-      <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16 ${scrolled ? 'bg-white dark:bg-gray-900 shadow-md' : 'bg-transparent'}`}>
+      <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16 ${
+        scrolled 
+          ? 'bg-white dark:bg-slate-900 shadow-lg dark:shadow-xl dark:shadow-black/30' 
+          : 'bg-transparent'
+      }`}>
         {/* Main Header Content */}
         <div className="max-w-container mx-auto px-4 sm:px-6 h-full flex items-center justify-between relative z-10">
           
@@ -87,7 +71,7 @@ const Header = () => {
             </div>
 
             {/* Divider 1 */}
-            <div className="hidden md:block w-px h-6 bg-primary/50 dark:bg-primary/70"></div>
+            <div className="hidden md:block w-px h-6 bg-gray-300 dark:bg-slate-700"></div>
 
             {/* Group 2: Social Media Links (Desktop) */}
             <div className="hidden md:flex items-center gap-4">
@@ -95,7 +79,7 @@ const Header = () => {
                 href="https://www.facebook.com/cliberduche"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110"
+                className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110"
                 title="Facebook"
               >
                 <FaFacebook className="text-sm" />
@@ -104,7 +88,7 @@ const Header = () => {
                 href="https://www.linkedin.com/company/cliberduche"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110"
+                className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110"
                 title="LinkedIn"
               >
                 <FaLinkedin className="text-sm" />
@@ -113,7 +97,7 @@ const Header = () => {
                 href="https://www.instagram.com/cliberduche"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110"
+                className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110"
                 title="Instagram"
               >
                 <FaInstagram className="text-sm" />
@@ -121,20 +105,20 @@ const Header = () => {
             </div>
 
             {/* Divider 2 */}
-            <div className="hidden md:block w-px h-6 bg-primary/50 dark:bg-primary/70"></div>
+            <div className="hidden md:block w-px h-6 bg-gray-300 dark:bg-slate-700"></div>
 
             {/* Group 3: Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-yellow-400 text-lg transition-all duration-300 hover:scale-110"
-              title={darkMode ? 'Light Mode' : 'Dark Mode'}
+              className="text-gray-600 dark:text-yellow-300 hover:text-primary dark:hover:text-yellow-400 text-lg transition-all duration-300 hover:scale-110 p-2 rounded-lg dark:hover:bg-slate-800"
+              title={isDarkMode ? 'Light Mode' : 'Dark Mode'}
             >
-              {darkMode ? <MdLightMode /> : <MdNightlight />}
+              {isDarkMode ? <MdLightMode /> : <MdNightlight />}
             </button>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-xl transition-all duration-300 hover:scale-110"
+              className="md:hidden text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-xl transition-all duration-300 hover:scale-110 p-2 rounded-lg dark:hover:bg-slate-800"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <MdClose /> : <MdMenu />}
@@ -144,7 +128,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden fixed top-16 left-0 right-0 bg-white dark:bg-gray-900 shadow-lg border-b border-gray-200 dark:border-gray-700 transform transition-all duration-300 backdrop-blur-md ${
+          className={`md:hidden fixed top-16 left-0 right-0 bg-white dark:bg-slate-900 shadow-lg dark:shadow-xl dark:shadow-black/40 border-b border-gray-200 dark:border-slate-800 transform transition-all duration-300 backdrop-blur-md ${
             mobileMenuOpen ? 'translate-y-0 opacity-100 visible' : '-translate-y-full opacity-0 invisible'
           }`}
         >
@@ -160,14 +144,14 @@ const Header = () => {
             </a>
 
             {/* Mobile Social Media Links */}
-            <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-              <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-4">Follow Us</h4>
+            <div className="pt-4 border-t border-gray-200 dark:border-slate-800">
+              <h4 className="text-xs font-bold text-primary dark:text-blue-400 uppercase tracking-wider mb-4">Follow Us</h4>
               <div className="flex items-center gap-5">
                 <a
                   href="https://www.facebook.com/cliberduche"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110 text-lg"
+                  className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110 text-lg"
                 >
                   <FaFacebook />
                 </a>
@@ -175,7 +159,7 @@ const Header = () => {
                   href="https://www.linkedin.com/company/cliberduche"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110 text-lg"
+                  className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110 text-lg"
                 >
                   <FaLinkedin />
                 </a>
@@ -183,7 +167,7 @@ const Header = () => {
                   href="https://www.instagram.com/cliberduche"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:scale-110 text-lg"
+                  className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110 text-lg"
                 >
                   <FaInstagram />
                 </a>
