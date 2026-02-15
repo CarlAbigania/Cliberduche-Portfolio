@@ -1,9 +1,11 @@
 import React from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useThreeParticles, particleShapes3D } from '../hooks/useThreeParticles';
+import { useTheme } from '../hooks/useTheme';
 import { MdVerified, MdSecurity, MdRecycling, MdGroupWork, MdStars, MdPeopleOutline, MdAutoAwesome, MdRemoveRedEye } from 'react-icons/md';
 
 const AboutUs = () => {
+  const { isDarkMode } = useTheme();
   const [isDesktop, setIsDesktop] = React.useState(window.innerWidth >= 1024);
 
   // Handle responsive particle visibility
@@ -16,10 +18,12 @@ const AboutUs = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // 3D particle animation background
+  // 3D particle animation background - adjust color based on dark mode
+  const particleColor = isDarkMode ? '#60a5fa' : '#3b82f6';
   const { canvasRef } = useThreeParticles({
     particleCount: 1500,
-    particleColor: '#3b82f6',
+    particleColor,
+    isDarkMode,
     getTargetPositions: particleShapes3D.cLiberducheInfinityLogo,
   });
 
@@ -97,7 +101,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
+    <section id="about" className="py-12 md:py-16 bg-white dark:bg-slate-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
       {/* 3D Particle Background - Desktop Only */}
       {isDesktop && (
         <canvas
@@ -117,7 +121,7 @@ const AboutUs = () => {
           <h2 className="text-primary dark:text-blue-400 mb-4">
             About Cliberduche Corporation
           </h2>
-          <p className="text-gray dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-gray dark:text-white text-lg md:text-xl max-w-2xl mx-auto">
             One-stop shop for backfill sourcing, land development, and civil works since 2018
           </p>
           <div className="section-title-underline"></div>
@@ -130,13 +134,13 @@ const AboutUs = () => {
               <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white scroll-fade-left" ref={headingRef}>
                 Company Overview
               </h3>
-              <p className="text-gray dark:text-gray-400 text-lg leading-relaxed scroll-fade-up" ref={para1Ref}>
+              <p className="text-gray dark:text-gray-100 text-lg leading-relaxed scroll-fade-up" ref={para1Ref}>
                 Cliberduche Corporation is a full-scale land development and civil works contractor
                 serving CALABARZON and beyond. We supply high-quality backfill materials (sub-base,
                 aggregates, mixed soil, and boulders), execute site development, and deliver civil
                 works with a compliance-led, safety-first approach.
               </p>
-              <p className="text-gray dark:text-gray-400 text-lg leading-relaxed scroll-fade-up" ref={para2Ref}>
+              <p className="text-gray dark:text-gray-100 text-lg leading-relaxed scroll-fade-up" ref={para2Ref}>
                 Established in 2018 and registered with the SEC on November 28, 2018, we operate as
                 a one-stop shop with in-house assets and a network of qualified professionals.
               </p>
@@ -147,11 +151,11 @@ const AboutUs = () => {
                   const refs = [feat1Ref, feat2Ref, feat3Ref, feat4Ref];
                   return (
                     <div key={i} className="flex items-center gap-5 group scroll-scale" ref={refs[i]}>
-                      <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-lg group-hover:shadow-primary/50 dark:shadow-primary/50 dark:group-hover:shadow-primary/70 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
+                      <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-lg group-hover:shadow-primary/50 dark:shadow-primary/60 dark:group-hover:shadow-primary/90 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
                         {feat.reactIcon && React.createElement(feat.reactIcon, { className: 'text-lg' })}
                       </div>
                       <div>
-                        <h4 className="font-semibold text-dark dark:text-white text-lg group-hover:text-secondary transition-colors">{feat.title}</h4>
+                        <h4 className="font-semibold text-dark dark:text-white text-lg group-hover:text-secondary dark:group-hover:text-green-400 transition-colors">{feat.title}</h4>
                       </div>
                     </div>
                   );
@@ -161,7 +165,7 @@ const AboutUs = () => {
 
             <div className="space-y-6">
               {/* Key Milestones */}
-              <div className="premium-card p-8 md:p-10 scroll-fade-right" ref={milestonesRef}>
+              <div className="premium-card p-8 md:p-10 scroll-fade-right shadow-lg dark:shadow-xl dark:shadow-black/50 border border-gray-200/60 dark:border-slate-700/80 dark:bg-slate-800/80" ref={milestonesRef}>
                 <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">Key Milestones</h4>
                 <ul className="space-y-6">
                   {highlights.map((item, index) => {
@@ -169,7 +173,7 @@ const AboutUs = () => {
                     return (
                       <li key={index} className="flex items-start gap-4 scroll-fade-up" ref={refs[index]}>
                         <span className="mt-2 h-3 w-3 rounded-full bg-gradient-to-br from-secondary to-accent flex-shrink-0 shadow-md shadow-secondary/50"></span>
-                        <span className="text-gray dark:text-gray-400 text-base leading-relaxed">{item}</span>
+                        <span className="text-gray dark:text-gray-100 text-base leading-relaxed">{item}</span>
                       </li>
                     );
                   })}
@@ -193,14 +197,14 @@ const AboutUs = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-xl shadow-md border border-primary/10 p-6 md:p-10 border-l-4 border-secondary dark:bg-gray-800 scroll-rotate"
+                  className="bg-white dark:bg-slate-800/80 rounded-xl shadow-lg dark:shadow-xl dark:shadow-black/50 border border-gray-200/60 dark:border-slate-700/80 p-6 md:p-10 border-l-4 border-secondary dark:border-l-green-400 scroll-rotate hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/60 transition-all duration-300"
                   ref={refs[index]}
                 >
                   <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4 flex items-center justify-start gap-3">
                     {index === 0 ? <MdAutoAwesome className="text-secondary" /> : <MdRemoveRedEye className="text-secondary" />}
                     {item.title}
                   </h4>
-                  <p id={`mission-desc-${index}`} className={`text-gray dark:text-gray-400 text-base md:text-lg leading-relaxed text-left ${expanded[index] ? '' : 'clamp-4'}`}>
+                  <p id={`mission-desc-${index}`} className={`text-gray dark:text-gray-100 text-base md:text-lg leading-relaxed text-left ${expanded[index] ? '' : 'clamp-4'}`}>
                     {item.desc}
                   </p>
                   <button
@@ -229,14 +233,14 @@ const AboutUs = () => {
               return (
                 <div
                   key={i}
-                  className="premium-card p-10 text-center hover:shadow-xl hover:-translate-y-2 scroll-scale"
+                  className="premium-card p-10 text-center shadow-lg dark:shadow-xl dark:shadow-black/50 hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/60 hover:-translate-y-2 scroll-scale transition-all duration-300 dark:bg-slate-800/80"
                   ref={refs[i]}
                 >
                   <div className="text-secondary dark:text-green-400 text-6xl mb-8 h-20 flex items-center justify-center group-hover:scale-125 transition-transform duration-300">
                     {value.reactIcon && React.createElement(value.reactIcon)}
                   </div>
                   <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4 hover:text-secondary transition-colors">{value.title}</h4>
-                  <p className="text-gray dark:text-gray-400 text-base md:text-lg leading-relaxed">{value.desc}</p>
+                  <p className="text-gray dark:text-gray-100 text-base md:text-lg leading-relaxed">{value.desc}</p>
                 </div>
               );
             })}

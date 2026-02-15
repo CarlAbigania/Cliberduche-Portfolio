@@ -9,6 +9,7 @@ export const useThreeParticles = (options = {}) => {
     particleCount = 1000,
     particleColor = '#3b82f6',
     getTargetPositions = null,
+    isDarkMode = false,
   } = options;
 
   const canvasRef = useRef(null);
@@ -27,7 +28,7 @@ export const useThreeParticles = (options = {}) => {
 
     // Scene setup with better rendering
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff);
+    scene.background = null; // Transparent background to show Tailwind bg
     sceneRef.current = scene;
 
     const width = canvas.clientWidth;
@@ -40,10 +41,11 @@ export const useThreeParticles = (options = {}) => {
     const renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
-      alpha: false,
+      alpha: true, // Enable transparency for dark mode support
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setClearColor(0x000000, 0); // Transparent clear color
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowShadowMap;
     rendererRef.current = renderer;
