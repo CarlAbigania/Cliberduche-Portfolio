@@ -1,7 +1,9 @@
 import React from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useTheme } from '../hooks/useTheme';
 
 const EquipmentFleet = () => {
+  const { isDarkMode } = useTheme();
   // Refs for animations
   const titleRef = useScrollAnimation({ threshold: 0.2 });
   const descRef = useScrollAnimation({ threshold: 0.2 });
@@ -50,17 +52,17 @@ const EquipmentFleet = () => {
   ];
 
   return (
-    <section id="equipment" className="py-12 md:py-16 bg-amber-100 dark:bg-amber-950/25 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
+    <section id="equipment" className="py-12 md:py-16 bg-amber-100 dark:bg-amber-950 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
       {/* Decorative background element - top-right */}
-      <div className="absolute top-0 -right-10 w-[450px] h-48 bg-white dark:bg-gray-900 skew-x-12 pointer-events-none" />
+      <div className="absolute top-0 -right-10 w-[450px] h-48 bg-white dark:bg-slate-900 skew-x-12 pointer-events-none" />
       {/* Decorative background element - bottom-right */}
-      <div className="absolute bottom-0 -right-10 w-[450px] h-48 bg-white dark:bg-gray-900 -skew-x-12 pointer-events-none" />
+      <div className="absolute bottom-0 -right-10 w-[450px] h-48 bg-white dark:bg-slate-900 -skew-x-12 pointer-events-none" />
       <div className="max-w-container mx-auto px-4 relative z-10">
         <div className="section-title text-center mb-12">
           <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>
             Equipment & Fleet
           </h2>
-          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>
+          <p className="text-gray dark:text-gray-100 text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>
             Modern equipment assets supporting large-scale site development
           </p>
           <div className="section-title-underline"></div>
@@ -78,12 +80,12 @@ const EquipmentFleet = () => {
               <div
                 key={index}
                 ref={fleetRefs[index]}
-                className="premium-card p-7 text-center hover:border-primary/50 hover:shadow-xl hover:-translate-y-2 scroll-fade-up group"
+                className="bg-white dark:bg-slate-800/80 overflow-hidden p-7 text-center rounded-xl shadow-lg dark:shadow-xl dark:shadow-black/50 border border-gray-200/60 dark:border-slate-700/60 hover:border-primary/50 hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/60 hover:-translate-y-2 scroll-fade-up group transition-all duration-300"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <p className="text-xs uppercase tracking-widest font-bold text-gray dark:text-gray-400 mb-4">{item.label}</p>
+                <p className="text-xs uppercase tracking-widest font-bold text-gray dark:text-gray-100 mb-4">{item.label}</p>
                 <p className="text-4xl md:text-5xl font-mont font-bold text-secondary dark:text-green-400 mb-4 group-hover:scale-110 transition-transform duration-300">{item.value}</p>
-                <p className="text-gray dark:text-gray-400 text-base">{item.desc}</p>
+                <p className="text-gray dark:text-gray-100 text-base">{item.desc}</p>
               </div>
             );
             })}
@@ -98,7 +100,7 @@ const EquipmentFleet = () => {
           <div className="space-y-12">
             <div ref={dumpTrucksRef}>
               <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">Dump Trucks</h4>
-              <div className="overflow-x-auto bg-white dark:bg-gray-800 border border-primary/10 dark:border-primary/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="overflow-x-auto bg-white dark:bg-slate-800/80 border border-primary/10 dark:border-slate-700/60 rounded-xl shadow-md dark:shadow-lg dark:shadow-black/40 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/50 transition-shadow duration-300">
                 <table className="min-w-full text-left text-sm md:text-base">
                   <thead className="bg-gradient-to-r from-primary to-accent text-white">
                     <tr>
@@ -110,11 +112,11 @@ const EquipmentFleet = () => {
                   </thead>
                   <tbody>
                     {dumpTrucks.map((row, index) => (
-                      <tr key={row.no} className={`border-t transition-colors hover:bg-blue-50 dark:hover:bg-gray-700 ${index % 2 ? 'bg-gray-50 dark:bg-gray-800/50' : 'bg-white dark:bg-gray-900'}`}>
+                      <tr key={row.no} className={`border-t transition-colors hover:bg-blue-50 dark:hover:bg-slate-700/60 ${index % 2 ? 'bg-gray-50 dark:bg-slate-700/30' : 'bg-white dark:bg-slate-800/50'}`}>
                         <td className="px-6 py-4 font-semibold text-dark dark:text-white">{row.no}</td>
-                        <td className="px-6 py-4 text-gray dark:text-gray-400">{row.model}</td>
-                        <td className="px-6 py-4 text-gray dark:text-gray-400 font-mono">{row.plate}</td>
-                        <td className="px-6 py-4 text-gray dark:text-gray-400">{row.capacity}</td>
+                        <td className="px-6 py-4 text-gray dark:text-gray-100">{row.model}</td>
+                        <td className="px-6 py-4 text-gray dark:text-gray-100 font-mono">{row.plate}</td>
+                        <td className="px-6 py-4 text-gray dark:text-gray-100">{row.capacity}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -124,7 +126,7 @@ const EquipmentFleet = () => {
 
             <div ref={heavyEquipmentRef}>
               <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">Heavy Equipment</h4>
-              <div className="overflow-x-auto bg-white dark:bg-gray-800 border border-primary/10 dark:border-primary/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="overflow-x-auto bg-white dark:bg-slate-800/80 border border-primary/10 dark:border-slate-700/60 rounded-xl shadow-md dark:shadow-lg dark:shadow-black/40 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/50 transition-shadow duration-300">
                 <table className="min-w-full text-left text-sm md:text-base">
                   <thead className="bg-gradient-to-r from-primary to-accent text-white">
                     <tr>
@@ -136,11 +138,11 @@ const EquipmentFleet = () => {
                   </thead>
                   <tbody>
                     {heavyEquipment.map((row, index) => (
-                      <tr key={row.type + index} className={`border-t transition-colors hover:bg-blue-50 dark:hover:bg-gray-700 ${index % 2 ? 'bg-gray-50 dark:bg-gray-800/50' : 'bg-white dark:bg-gray-900'}`}>
+                      <tr key={row.type + index} className={`border-t transition-colors hover:bg-blue-50 dark:hover:bg-slate-700/60 ${index % 2 ? 'bg-gray-50 dark:bg-slate-700/30' : 'bg-white dark:bg-slate-800/50'}`}>
                         <td className="px-6 py-4 font-semibold text-dark dark:text-white">{row.type}</td>
-                        <td className="px-6 py-4 text-gray dark:text-gray-400 text-center">{row.units}</td>
-                        <td className="px-6 py-4 text-gray dark:text-gray-400">{row.model}</td>
-                        <td className="px-6 py-4 text-gray dark:text-gray-400">{row.capacity}</td>
+                        <td className="px-6 py-4 text-gray dark:text-gray-100 text-center">{row.units}</td>
+                        <td className="px-6 py-4 text-gray dark:text-gray-100">{row.model}</td>
+                        <td className="px-6 py-4 text-gray dark:text-gray-100">{row.capacity}</td>
                       </tr>
                     ))}
                   </tbody>
