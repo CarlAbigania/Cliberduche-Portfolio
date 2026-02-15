@@ -197,7 +197,7 @@ const Sidebar = () => {
       <button
         ref={bubbleRef}
         onMouseDown={handleMouseDown}
-        className={`fixed w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 z-40 flex items-center justify-center active:scale-95 ${
+        className={`fixed w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 dark:shadow-primary/50 z-40 flex items-center justify-center active:scale-95 ${
           isDragging ? 'cursor-grabbing no-transition' : 'cursor-grab transition-all duration-300 hover:scale-110'
         } ${
           isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
@@ -217,12 +217,12 @@ const Sidebar = () => {
 
       {/* Left Sidebar Navigation - Floating */}
       <div
-        className={`fixed left-8 top-20 h-[calc(100vh-120px)] w-72 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-950 rounded-2xl shadow-2xl shadow-black/25 dark:shadow-black/50 overflow-hidden z-40 transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50 ${
+        className={`fixed left-8 top-20 h-[calc(100vh-120px)] w-72 bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-slate-800 dark:via-slate-900 dark:to-slate-950 rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/50 overflow-hidden z-40 transition-all duration-300 border border-gray-200/60 dark:border-slate-700/60 ${
           isMenuOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-96 opacity-0 pointer-events-none'
         }`}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary via-primary to-accent text-white p-6 flex items-center justify-between sticky top-0 z-10 shadow-lg shadow-primary/20 dark:shadow-primary/10">
+        <div className="bg-gradient-to-r from-primary via-primary to-accent text-white p-6 flex items-center justify-between sticky top-0 z-10 shadow-lg shadow-primary/30 dark:shadow-black/40">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
               <MdMenu className="text-white" />
@@ -238,7 +238,7 @@ const Sidebar = () => {
         </div>
 
         {/* Navigation Links */}
-        <nav className="overflow-y-auto h-[calc(100vh-120px)] scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-700 dark:scrollbar-track-gray-800/30 backdrop-blur-md bg-white/40 dark:bg-gray-800/40">
+        <nav className="overflow-y-auto h-[calc(100vh-120px)] scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-gray-100 dark:scrollbar-thumb-slate-600 dark:scrollbar-track-slate-800/50 backdrop-blur-md bg-white/50 dark:bg-slate-900/50">
           <ul className="space-y-2 p-5">
             {navigationLinks.map((link) => (
               <li key={link.id}>
@@ -248,8 +248,8 @@ const Sidebar = () => {
                   onClick={() => handleNavClick(link.id)}
                   className={`w-full relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${
                     activeSection === link.id
-                      ? 'bg-gradient-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/40 dark:shadow-primary/20 scale-105 origin-left'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 dark:hover:bg-gray-800/40 hover:text-primary dark:hover:text-secondary hover:shadow-md hover:shadow-primary/10'
+                      ? 'bg-gradient-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/50 dark:shadow-black/40 scale-105 origin-left'
+                      : 'text-gray-700 dark:text-white hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 dark:hover:bg-slate-700/60 hover:text-primary dark:hover:text-blue-400 hover:shadow-md hover:shadow-primary/10 dark:hover:shadow-black/20'
                   }`}
                 >
                   {/* Background animation */}
@@ -259,14 +259,14 @@ const Sidebar = () => {
                   <div className={`relative flex-shrink-0 w-5 h-5 flex items-center justify-center transition-all duration-300 ${
                     activeSection === link.id 
                       ? 'scale-125 text-white' 
-                      : 'text-gray-600 dark:text-gray-400 group-hover:scale-125 group-hover:text-primary dark:group-hover:text-secondary'
+                      : 'text-gray-600 dark:text-gray-100 group-hover:scale-125 group-hover:text-primary dark:group-hover:text-blue-400'
                   }`}>
                     {iconMap[link.icon] && React.createElement(iconMap[link.icon])}
                   </div>
                   
                   {/* Label */}
                   <span className={`font-medium flex-1 text-left transition-all duration-300 ${
-                    activeSection === link.id ? 'text-white' : 'text-gray-700 dark:text-gray-300'
+                    activeSection === link.id ? 'text-white' : 'text-gray-700 dark:text-gray-100'
                   }`}>{link.label}</span>
                   
                   {/* Active indicator dot */}
