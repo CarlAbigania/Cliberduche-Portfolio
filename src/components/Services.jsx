@@ -1,8 +1,10 @@
 import React from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useTheme } from '../hooks/useTheme';
 import { MdTerrain, MdAgriculture, MdWorkHistory, MdHandyman, MdConstruction, MdPendingActions } from 'react-icons/md';
 
 const Services = () => {
+  const { isDarkMode } = useTheme();
   // Refs for main sections
   const titleRef = useScrollAnimation({ threshold: 0.2 });
   const ctaRef = useScrollAnimation({ threshold: 0.2 });
@@ -39,7 +41,9 @@ const Services = () => {
       id="services"
       className="py-12 md:py-16 bg-fixed bg-cover bg-center relative"
       style={{
-        backgroundImage: "linear-gradient(rgba(60, 60, 60, 0.72), rgba(60, 60, 60, 0.72)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+        backgroundImage: isDarkMode 
+          ? "linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"
+          : "linear-gradient(rgba(60, 60, 60, 0.72), rgba(60, 60, 60, 0.72)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
         position: 'relative',
         zIndex: 15,
       }}
@@ -59,14 +63,14 @@ const Services = () => {
               <div
                 key={index}
                 ref={serviceRefs[index]}
-                className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl p-7 shadow-lg border border-white/60 dark:border-gray-700/60 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group scroll-fade-up"
+                className="bg-white/95 dark:bg-slate-800/80 backdrop-blur-md rounded-xl p-7 shadow-lg dark:shadow-xl dark:shadow-black/50 border border-white/60 dark:border-slate-700/80 hover:shadow-2xl dark:hover:shadow-2xl dark:hover:shadow-black/60 hover:-translate-y-2 transition-all duration-300 group scroll-fade-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="text-secondary text-5xl mb-8 h-16 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                <div className="text-secondary dark:text-green-400 text-5xl mb-8 h-16 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
                   {iconMap[service.icon] && React.createElement(iconMap[service.icon])}
                 </div>
-                <h3 className="text-xl md:text-2xl font-mont font-bold mb-4 text-dark dark:text-white group-hover:text-secondary transition-colors duration-300">{service.title}</h3>
-                <p className="text-gray dark:text-gray-400 text-base md:text-lg leading-relaxed">{service.desc}</p>
+                <h3 className="text-xl md:text-2xl font-mont font-bold mb-4 text-dark dark:text-white group-hover:text-secondary dark:group-hover:text-green-400 transition-colors duration-300">{service.title}</h3>
+                <p className="text-gray dark:text-gray-100 text-base md:text-lg leading-relaxed">{service.desc}</p>
               </div>
             );
           })}
