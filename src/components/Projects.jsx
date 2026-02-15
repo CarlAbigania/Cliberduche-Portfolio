@@ -16,6 +16,11 @@ const Projects = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
 
+  // Reset page when filter changes
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [activeFilter]);
+
   const projects = [
     {
       id: 1,
@@ -206,8 +211,7 @@ const Projects = () => {
         </div>
 
         {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 scroll-fade-up mt-12" ref={paginationRef}>
+        <div className="flex justify-center items-center gap-2 scroll-fade-up mt-12" ref={paginationRef}>
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -247,9 +251,6 @@ const Projects = () => {
               Next
             </button>
           </div>
-        )}
-
-
 
         {/* Case Study Modal */}
         <ModalPortal isOpen={showModal && !!selectedProject}>
