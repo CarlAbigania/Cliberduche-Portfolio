@@ -1,12 +1,20 @@
 import React from 'react';
+import { useTheme } from '../hooks/useTheme';
 
 const Hero = () => {
+  const { isDarkMode } = useTheme();
+
+  // Adjust gradient overlay based on dark mode
+  const gradientOverlay = isDarkMode
+    ? 'linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.80) 50%, rgba(15, 23, 42, 0.85) 100%)'
+    : 'linear-gradient(135deg, rgba(60, 60, 60, 0.75) 0%, rgba(70, 70, 70, 0.70) 50%, rgba(60, 60, 60, 0.75) 100%)';
+
   return (
     <section
       id="home"
       className="hero relative min-h-screen flex items-center justify-center text-center text-white bg-center bg-cover overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(135deg, rgba(60, 60, 60, 0.75) 0%, rgba(70, 70, 70, 0.70) 50%, rgba(60, 60, 60, 0.75) 100%), url('/images/compony provided/office.jpg')`,
+        backgroundImage: `${gradientOverlay}, url('/images/compony provided/office.jpg')`,
         backgroundAttachment: 'fixed',
         position: 'relative',
         zIndex: 15,
