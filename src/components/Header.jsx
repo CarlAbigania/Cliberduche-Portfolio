@@ -118,7 +118,7 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-xl transition-all duration-300 hover:scale-110 p-2 rounded-lg dark:hover:bg-slate-800"
+              className="md:hidden text-gray-600 dark:text-white hover:text-primary dark:hover:text-primary text-xl transition-all duration-300 hover:scale-110 p-2 rounded-lg dark:hover:bg-slate-800"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <MdClose /> : <MdMenu />}
