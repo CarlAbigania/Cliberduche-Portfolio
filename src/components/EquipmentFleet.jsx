@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useTheme } from '../hooks/useTheme';
 
 const EquipmentFleet = () => {
   const { isDarkMode } = useTheme();
+  const [activeTable, setActiveTable] = useState('dump-trucks');
   // Refs for animations
   const titleRef = useScrollAnimation({ threshold: 0.2 });
   const descRef = useScrollAnimation({ threshold: 0.2 });
@@ -105,12 +106,37 @@ const EquipmentFleet = () => {
 
         {/* Detailed Equipment Inventory */}
         <div className="scroll-fade-up" ref={inventoryHeadingRef}>
-          <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-4 text-center">
+          <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-8 text-center">
             Detailed Equipment Inventory
           </h3>
-          <div className="space-y-12">
-            <div ref={dumpTrucksRef}>
-              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">Dump Trucks</h4>
+
+          {/* Toggle Buttons */}
+          <div className="flex justify-center gap-4 mb-8">
+            <button
+              onClick={() => setActiveTable('dump-trucks')}
+              className={`px-8 py-3 rounded-lg font-mont font-bold transition-all duration-300 ${
+                activeTable === 'dump-trucks'
+                  ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
+                  : 'bg-white dark:bg-slate-800/80 text-dark dark:text-white border border-primary/30 dark:border-slate-700/60 hover:border-primary/60'
+              }`}
+            >
+              Dump Trucks
+            </button>
+            <button
+              onClick={() => setActiveTable('heavy-equipment')}
+              className={`px-8 py-3 rounded-lg font-mont font-bold transition-all duration-300 ${
+                activeTable === 'heavy-equipment'
+                  ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
+                  : 'bg-white dark:bg-slate-800/80 text-dark dark:text-white border border-primary/30 dark:border-slate-700/60 hover:border-primary/60'
+              }`}
+            >
+              Heavy Equipment
+            </button>
+          </div>
+
+          {/* Dump Trucks Table */}
+          {activeTable === 'dump-trucks' && (
+            <div ref={dumpTrucksRef} className="animate-fadeIn">
               <div className="overflow-x-auto bg-white dark:bg-slate-800/80 border border-primary/10 dark:border-slate-700/60 rounded-xl shadow-md dark:shadow-lg dark:shadow-black/40 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/50 transition-shadow duration-300">
                 <table className="min-w-full text-left text-sm md:text-base">
                   <thead className="bg-gradient-to-r from-primary to-accent text-white">
@@ -134,9 +160,11 @@ const EquipmentFleet = () => {
                 </table>
               </div>
             </div>
+          )}
 
-            <div ref={heavyEquipmentRef}>
-              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">Heavy Equipment</h4>
+          {/* Heavy Equipment Table */}
+          {activeTable === 'heavy-equipment' && (
+            <div ref={heavyEquipmentRef} className="animate-fadeIn">
               <div className="overflow-x-auto bg-white dark:bg-slate-800/80 border border-primary/10 dark:border-slate-700/60 rounded-xl shadow-md dark:shadow-lg dark:shadow-black/40 hover:shadow-lg dark:hover:shadow-xl dark:hover:shadow-black/50 transition-shadow duration-300">
                 <table className="min-w-full text-left text-sm md:text-base">
                   <thead className="bg-gradient-to-r from-primary to-accent text-white">
@@ -160,7 +188,7 @@ const EquipmentFleet = () => {
                 </table>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>
