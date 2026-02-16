@@ -217,7 +217,7 @@ const Sidebar = () => {
 
       {/* Left Sidebar Navigation - Floating */}
       <div
-        className={`fixed left-8 top-20 h-[calc(100vh-120px)] w-72 bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-slate-800 dark:via-slate-900 dark:to-slate-950 rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/50 overflow-hidden z-40 transition-all duration-300 border border-gray-200/60 dark:border-slate-700/60 ${
+        className={`fixed left-8 top-20 h-[calc(100vh-120px)] w-72 bg-white/25 dark:bg-slate-800/30 rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/50 overflow-hidden z-40 transition-all duration-300 border border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md ${
           isMenuOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-96 opacity-0 pointer-events-none'
         }`}
       >
@@ -238,7 +238,7 @@ const Sidebar = () => {
         </div>
 
         {/* Navigation Links */}
-        <nav className="overflow-y-auto h-[calc(100vh-120px)] scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-gray-100 dark:scrollbar-thumb-slate-600 dark:scrollbar-track-slate-800/50 backdrop-blur-md bg-white/50 dark:bg-slate-900/50">
+        <nav className="overflow-y-auto h-[calc(100vh-120px)] scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-gray-100 dark:scrollbar-thumb-slate-600 dark:scrollbar-track-slate-800/50 backdrop-blur-md bg-white/10 dark:bg-slate-800/10">
           <ul className="space-y-2 p-5">
             {navigationLinks.map((link) => (
               <li key={link.id}>
@@ -249,11 +249,10 @@ const Sidebar = () => {
                   className={`w-full relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${
                     activeSection === link.id
                       ? 'bg-gradient-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/50 dark:shadow-black/40 scale-105 origin-left'
-                      : 'text-gray-700 dark:text-white hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 dark:hover:bg-slate-700/60 hover:text-primary dark:hover:text-blue-400 hover:shadow-md hover:shadow-primary/10 dark:hover:shadow-black/20'
+                      : 'text-gray-700 dark:text-white hover:bg-primary/20 dark:hover:bg-slate-600/60 hover:text-primary dark:hover:text-blue-400 hover:shadow-md hover:shadow-primary/10 dark:hover:shadow-black/20'
                   }`}
                 >
                   {/* Background animation */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   {/* Icon */}
                   <div className={`relative flex-shrink-0 w-5 h-5 flex items-center justify-center transition-all duration-300 ${

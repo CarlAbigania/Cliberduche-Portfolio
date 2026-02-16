@@ -165,7 +165,7 @@ const AboutUs = () => {
 
             <div className="space-y-6">
               {/* Key Milestones */}
-              <div className="premium-card p-8 md:p-10 scroll-fade-right shadow-lg dark:shadow-xl dark:shadow-black/50 border border-gray-200/60 dark:border-slate-700/80 dark:bg-slate-800/80" ref={milestonesRef}>
+              <div className="premium-card p-8 md:p-10 scroll-fade-right shadow-lg dark:shadow-xl dark:shadow-black/50 border border-gray-200/60 dark:border-slate-700/80 bg-white/70 dark:bg-slate-800/80 backdrop-blur-md" ref={milestonesRef}>
                 <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">Key Milestones</h4>
                 <ul className="space-y-6">
                   {highlights.map((item, index) => {
@@ -197,7 +197,7 @@ const AboutUs = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white dark:bg-slate-800/80 rounded-xl shadow-lg dark:shadow-xl dark:shadow-black/50 border border-gray-200/60 dark:border-slate-700/80 p-6 md:p-10 border-l-4 border-secondary dark:border-l-green-400 scroll-rotate hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/60 transition-all duration-300"
+                  className="bg-white/70 dark:bg-slate-800/80 rounded-xl shadow-lg dark:shadow-xl dark:shadow-black/50 border border-gray-200/60 dark:border-slate-700/80 p-6 md:p-10 border-l-4 border-secondary dark:border-l-green-400 scroll-rotate hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/60 transition-all duration-300 backdrop-blur-md"
                   ref={refs[index]}
                 >
                   <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4 flex items-center justify-start gap-3">
@@ -233,7 +233,7 @@ const AboutUs = () => {
               return (
                 <div
                   key={i}
-                  className="premium-card p-10 text-center shadow-lg dark:shadow-xl dark:shadow-black/50 hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/60 hover:-translate-y-2 scroll-scale transition-all duration-300 dark:bg-slate-800/80"
+                  className="premium-card p-10 text-center shadow-lg dark:shadow-xl dark:shadow-black/50 hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/60 hover:-translate-y-2 scroll-scale transition-all duration-300 bg-white/70 dark:bg-slate-800/80 backdrop-blur-md"
                   ref={refs[i]}
                 >
                   <div className="text-secondary dark:text-green-400 text-6xl mb-8 h-20 flex items-center justify-center group-hover:scale-125 transition-transform duration-300">
