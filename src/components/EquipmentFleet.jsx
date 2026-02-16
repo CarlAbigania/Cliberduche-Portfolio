@@ -19,12 +19,12 @@ const EquipmentFleet = () => {
   const heavyEquipmentRef = useScrollAnimation({ threshold: 0.2 });
 
   const fleet = [
-    { label: 'Dump Trucks', value: '9 units', desc: '8,000–12,500 kg capacities' },
-    { label: 'Compactors', value: '2 units', desc: '10–12 tons' },
-    { label: 'Bulldozers', value: '1 unit', desc: 'Caterpillar DSH' },
-    { label: 'Motor Grader', value: '1 unit', desc: 'Mitsubishi MG 130' },
-    { label: 'Backhoes / Excavators', value: '3 units', desc: '0.98–1.2 cu.m.' },
-    { label: 'Support Units', value: '5 units', desc: 'Tower lights & container vans' },
+    { label: 'Dump Trucks', value: '9 units', desc: '8,000–12,500 kg capacities', image: 'https://t3.ftcdn.net/jpg/05/79/29/80/360_F_579298011_98yHQKvfzUqrPVVMrfUAVtM7hmP9dV5r.jpg' },
+    { label: 'Compactors', value: '2 units', desc: '10–12 tons', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAmhzlLZY2vWvFCdYKlf9AZ9klutf-4h7KAg&s' },
+    { label: 'Bulldozers', value: '1 unit', desc: 'Caterpillar DSH', image: 'https://cdn.britannica.com/42/124942-050-5057EA58/Bulldozer.jpg' },
+    { label: 'Motor Grader', value: '1 unit', desc: 'Mitsubishi MG 130', image: 'https://s7d2.scene7.com/is/image/Caterpillar/CM20171009-37324-16812' },
+    { label: 'Backhoes / Excavators', value: '3 units', desc: '0.98–1.2 cu.m.', image: 'https://res.cloudinary.com/dsfzcj5qk/image/upload/v1712765646/biggest-backhoes/biggest-backhoes-in-the-world.jpg' },
+    { label: 'Support Units', value: '5 units', desc: 'Tower lights & container vans', image: 'https://files01.pna.gov.ph/ograph/2020/11/10/container-vans.jpg' },
   ];
 
   const dumpTrucks = [
@@ -80,12 +80,23 @@ const EquipmentFleet = () => {
               <div
                 key={index}
                 ref={fleetRefs[index]}
-                className="bg-white dark:bg-slate-800/80 overflow-hidden p-7 text-center rounded-xl shadow-lg dark:shadow-xl dark:shadow-black/50 border border-gray-200/60 dark:border-slate-700/60 hover:border-primary/50 hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/60 hover:-translate-y-2 scroll-fade-up group transition-all duration-300"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="relative overflow-hidden rounded-xl shadow-lg dark:shadow-xl dark:shadow-black/50 border border-gray-200/60 dark:border-slate-700/60 hover:border-primary/50 hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/60 hover:-translate-y-2 scroll-fade-up group transition-all duration-300 min-h-[400px]"
+                style={{ 
+                  animationDelay: `${index * 0.1}s`,
+                  backgroundImage: `url('${item.image}')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
               >
-                <p className="text-xs uppercase tracking-widest font-bold text-gray dark:text-gray-100 mb-4">{item.label}</p>
-                <p className="text-4xl md:text-5xl font-mont font-bold text-secondary dark:text-green-400 mb-4 group-hover:scale-110 transition-transform duration-300">{item.value}</p>
-                <p className="text-gray dark:text-gray-100 text-base">{item.desc}</p>
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300" />
+                
+                {/* Content */}
+                <div className="relative z-10 p-7 text-center h-full flex flex-col justify-end">
+                  <p className="text-xs uppercase tracking-widest font-bold text-white mb-4">{item.label}</p>
+                  <p className="text-4xl md:text-5xl font-mont font-bold text-green-400 mb-4 group-hover:scale-110 transition-transform duration-300">{item.value}</p>
+                  <p className="text-white text-base">{item.desc}</p>
+                </div>
               </div>
             );
             })}
