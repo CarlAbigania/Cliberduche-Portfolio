@@ -51,9 +51,9 @@ const ProcessOverview = () => {
   };
 
   return (
-    <section id="process" className="py-12 md:py-16 bg-white dark:bg-gray-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
+    <section id="process" className="py-12 md:py-16 bg-white dark:bg-slate-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
       {/* Decorative background element - top-left */}
-      <div className="absolute top-0 -left-5 w-[450px] h-48 bg-amber-100 dark:bg-amber-950/25 skew-x-12 pointer-events-none" />
+      <div className="absolute top-0 -left-5 w-[450px] h-48 bg-amber-100 dark:bg-amber-950 skew-x-12 pointer-events-none" />
       <div className="max-w-container mx-auto px-4 relative z-10">
         <div className="section-title text-center mb-12">
           <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>
@@ -73,7 +73,7 @@ const ProcessOverview = () => {
                 <div
                   key={index}
                   ref={stepRefs[index]}
-                  className="bg-white dark:bg-gray-900 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-gray-700 cursor-pointer hover:shadow-xl hover:-translate-y-1 hover:border-primary/50 transition-all duration-300 min-h-40 relative group"
+                  className="bg-white dark:bg-slate-800/80 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-slate-700/60 cursor-pointer hover:shadow-xl hover:-translate-y-1 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 min-h-40 relative group"
                   onClick={() => handleToggle(index)}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
@@ -88,7 +88,7 @@ const ProcessOverview = () => {
                           e.stopPropagation();
                           setMaxExpandedStep(Math.max(0, maxExpandedStep - 1));
                         }}
-                        className="absolute top-4 right-4 text-xl text-gray-400 hover:text-primary transition-colors"
+                        className="absolute top-4 right-4 text-xl text-gray-400 dark:text-white hover:text-primary dark:hover:text-primary transition-colors"
                       >
                         ✕
                       </button>
