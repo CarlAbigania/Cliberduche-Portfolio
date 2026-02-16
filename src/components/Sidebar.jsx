@@ -197,7 +197,7 @@ const Sidebar = () => {
       <button
         ref={bubbleRef}
         onMouseDown={handleMouseDown}
-        className={`fixed w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 dark:shadow-primary/50 z-40 flex items-center justify-center active:scale-95 ${
+        className={`hidden md:flex fixed w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 dark:shadow-primary/50 z-40 items-center justify-center active:scale-95 ${
           isDragging ? 'cursor-grabbing no-transition' : 'cursor-grab transition-all duration-300 hover:scale-110'
         } ${
           isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
@@ -217,7 +217,7 @@ const Sidebar = () => {
 
       {/* Left Sidebar Navigation - Floating */}
       <div
-        className={`fixed left-8 top-20 h-[calc(100vh-120px)] w-72 bg-white/25 dark:bg-slate-800/30 rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/50 overflow-hidden z-40 transition-all duration-300 border border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md ${
+        className={`hidden md:block fixed left-8 top-20 h-[calc(100vh-120px)] w-72 bg-white/25 dark:bg-slate-800/30 rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/50 overflow-hidden z-40 transition-all duration-300 border border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md ${
           isMenuOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-96 opacity-0 pointer-events-none'
         }`}
       >
