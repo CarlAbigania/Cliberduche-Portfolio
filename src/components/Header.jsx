@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <>
       <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16 ${
-        scrolled 
+        scrolled || mobileMenuOpen
           ? 'bg-white dark:bg-slate-900 shadow-lg dark:shadow-xl dark:shadow-black/30' 
           : 'bg-transparent'
       }`}>
