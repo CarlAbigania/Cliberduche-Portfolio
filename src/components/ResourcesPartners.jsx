@@ -93,17 +93,17 @@ const ResourcesPartners = () => {
       <section 
         ref={sectionRef}
         id="resources" 
-        className="py-12 md:py-16 bg-amber-100 dark:bg-amber-950/25 relative overflow-hidden"
+        className="py-12 md:py-16 bg-amber-100 dark:bg-amber-950 relative overflow-hidden"
         style={{ position: 'relative', zIndex: 10 }}
       >
 
       <div className="max-w-container mx-auto px-4 relative">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
-          <h2 className="text-primary mb-4">
+          <h2 className="text-primary dark:text-blue-400 mb-4">
             Resources & Partners
           </h2>
-          <p className="text-gray text-lg max-w-2xl mx-auto">
+          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto">
             Our assets and trusted partners supporting project success
           </p>
           <div className="section-title-underline"></div>
@@ -135,13 +135,13 @@ const ResourcesPartners = () => {
           ].map((stat, i) => (
             <div
               key={i}
-              className="premium-card p-8 text-center hover:border-secondary/50"
+              className="premium-card p-8 text-center bg-white dark:bg-slate-800/80 border border-gray-100 dark:border-slate-700/60 hover:border-secondary/50 dark:hover:border-secondary/50"
             >
               <div className="text-4xl md:text-5xl font-mont font-bold text-primary mb-4">
                 {stat.number}
               </div>
-              <h3 className="text-lg md:text-xl font-mont font-bold text-dark mb-2">{stat.label}</h3>
-              <p className="text-gray text-base mt-2">{stat.desc}</p>
+              <h3 className="text-lg md:text-xl font-mont font-bold text-dark dark:text-white mb-2">{stat.label}</h3>
+              <p className="text-gray dark:text-gray-400 text-base mt-2">{stat.desc}</p>
             </div>
           ))}
         </div>
@@ -149,26 +149,26 @@ const ResourcesPartners = () => {
         {/* Land Development Sites */}
         <div className="mb-12">
           <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-4">
               Land Development Sites
             </h3>
           </div>
 
           <div className="space-y-10">
             {/* Calamba Site */}
-            <div className="premium-card p-10 border-l-4 border-secondary">
-              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4">
+            <div className="premium-card p-10 border-l-4 border-secondary bg-white dark:bg-slate-800/80">
+              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">
                 Calamba City Site
               </h4>
-              <div className="space-y-3 text-gray text-base md:text-lg">
+              <div className="space-y-3 text-gray dark:text-gray-400 text-base md:text-lg">
                 <p>
-                  <strong className="text-dark">Coordinates:</strong> 14°08'32.0"N 121°09'37.0"E
+                  <strong className="text-dark dark:text-white">Coordinates:</strong> 14°08'32.0"N 121°09'37.0"E
                 </p>
                 <p>
-                  <strong className="text-dark">Address:</strong> 45R6+V4J Calamba, Laguna
+                  <strong className="text-dark dark:text-white">Address:</strong> 45R6+V4J Calamba, Laguna
                 </p>
                 <p>
-                  <strong className="text-dark">Capacity:</strong> Approximately 20 million cubic meters of
+                  <strong className="text-dark dark:text-white">Capacity:</strong> Approximately 20 million cubic meters of
                   backfilling materials
                 </p>
                 <p>
@@ -179,19 +179,19 @@ const ResourcesPartners = () => {
             </div>
 
             {/* Silang Site */}
-            <div className="premium-card p-10 border-l-4 border-secondary">
-              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark mb-4">
+            <div className="premium-card p-10 border-l-4 border-secondary bg-white dark:bg-slate-800/80">
+              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">
                 Silang, Cavite Site
               </h4>
-              <div className="space-y-3 text-gray text-base md:text-lg">
+              <div className="space-y-3 text-gray dark:text-gray-400 text-base md:text-lg">
                 <p>
-                  <strong className="text-dark">Coordinates:</strong> 14°15'02"N 120°59'12"E
+                  <strong className="text-dark dark:text-white">Coordinates:</strong> 14°15'02"N 120°59'12"E
                 </p>
                 <p>
-                  <strong className="text-dark">Address:</strong> Sabutan, 7X2P+6MF Silang, Cavite
+                  <strong className="text-dark dark:text-white">Address:</strong> Sabutan, 7X2P+6MF Silang, Cavite
                 </p>
                 <p>
-                  <strong className="text-dark">Capacity:</strong> Approximately 2.2 million cubic meters of
+                  <strong className="text-dark dark:text-white">Capacity:</strong> Approximately 2.2 million cubic meters of
                   backfilling materials
                 </p>
                 <p>
@@ -206,12 +206,12 @@ const ResourcesPartners = () => {
         {/* Supplier Network */}
         <div>
           <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-4">
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-4">
               Supplier Network
             </h3>
           </div>
 
-          <div className="overflow-x-auto bg-white border border-primary/10 rounded-xl shadow-md">
+          <div className="overflow-x-auto bg-white dark:bg-slate-800/80 border border-primary/10 dark:border-slate-700/60 rounded-xl shadow-md dark:shadow-lg dark:shadow-black/40">
             <table className="min-w-full text-left text-sm md:text-base">
               <thead className="bg-primary text-white">
                 <tr>
@@ -224,12 +224,12 @@ const ResourcesPartners = () => {
               </thead>
               <tbody>
                 {suppliers.map((row, index) => (
-                  <tr key={row.company} className={`border-t ${index % 2 ? 'bg-light' : 'bg-white'} hover:bg-blue-50 transition-colors`}>
-                    <td className="px-6 py-4 font-semibold text-dark">{row.company}</td>
-                    <td className="px-6 py-4 text-gray">{row.address}</td>
-                    <td className="px-6 py-4 text-gray">{row.contact}</td>
-                    <td className="px-6 py-4 text-gray">{row.person}</td>
-                    <td className="px-6 py-4 text-gray font-semibold">{row.supply}</td>
+                  <tr key={row.company} className={`border-t transition-colors hover:bg-blue-50 dark:hover:bg-slate-700/60 ${index % 2 ? 'bg-gray-50 dark:bg-slate-700/30' : 'bg-white dark:bg-slate-800/50'}`}>
+                    <td className="px-6 py-4 font-semibold text-dark dark:text-white">{row.company}</td>
+                    <td className="px-6 py-4 text-gray dark:text-gray-400">{row.address}</td>
+                    <td className="px-6 py-4 text-gray dark:text-gray-400">{row.contact}</td>
+                    <td className="px-6 py-4 text-gray dark:text-gray-400">{row.person}</td>
+                    <td className="px-6 py-4 text-gray dark:text-gray-400 font-semibold">{row.supply}</td>
                   </tr>
                 ))}
               </tbody>
