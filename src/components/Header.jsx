@@ -62,7 +62,7 @@ const Header = () => {
               <a
                 href="/Company Profile 2026.pdf"
                 download="Cliberduche_Portfolio.pdf"
-                className="hidden md:inline-flex items-center gap-2 px-4 py-2 border-2 border-primary text-primary dark:text-blue-400 dark:border-blue-400 text-sm font-semibold rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-all duration-300"
+                className="hidden md:inline-flex items-center gap-2 px-4 py-2 border-2 border-primary text-primary dark:text-blue-400 dark:border-blue-400 text-sm font-semibold rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-white transition-all duration-300"
                 title="Download Portfolio PDF"
               >
                 <MdDownload className="text-sm" />
@@ -137,7 +137,7 @@ const Header = () => {
             <a
               href="/Company Profile 2026.pdf"
               download="Cliberduche_Portfolio.pdf"
-              className="flex items-center justify-center gap-2 w-full px-4 py-3 border-2 border-primary text-primary dark:text-blue-400 dark:border-blue-400 font-semibold rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-all duration-300 text-center"
+              className="flex items-center justify-center gap-2 w-full px-4 py-3 border-2 border-primary text-primary dark:text-blue-400 dark:border-blue-400 font-semibold rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-white transition-all duration-300 text-center"
             >
               <MdDownload />
               Download Portfolio
