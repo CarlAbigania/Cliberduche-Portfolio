@@ -122,7 +122,7 @@ const MeetOurTeam = () => {
   const currentDepartment = departments[currentDeptIndex];
 
   return (
-    <section className="bg-amber-100 dark:bg-amber-950/25 py-12 md:py-16" style={{ position: 'relative', zIndex: 15 }}>
+    <section className="bg-amber-100 dark:bg-amber-950 py-12 md:py-16" style={{ position: 'relative', zIndex: 15 }}>
       {/* Header */}
       <div className="max-w-container mx-auto px-4">
         <div className="section-title text-center mb-12">
@@ -183,7 +183,7 @@ const MeetOurTeam = () => {
                   className={`h-2.5 md:h-3.5 rounded-full transition-all duration-300 ${
                     index === currentDeptIndex
                       ? 'bg-primary w-7 md:w-9'
-                      : 'w-2.5 md:w-3.5 bg-primary/30 hover:bg-primary/60'
+                      : 'w-2.5 md:w-3.5 bg-primary/30 dark:bg-primary/60 hover:bg-primary/60 dark:hover:bg-primary/80'
                   }`}
                   aria-label={`Go to department ${index + 1}`}
                 />
@@ -203,7 +203,7 @@ const MeetOurTeam = () => {
 
           {/* Department Counter */}
           <div className="text-center mt-3">
-            <p className="text-gray dark:text-gray-400 text-xs md:text-sm font-semibold">
+            <p className="text-gray dark:text-gray-300 text-xs md:text-sm font-semibold">
               Department {currentDeptIndex + 1} of {departments.length}
             </p>
           </div>
