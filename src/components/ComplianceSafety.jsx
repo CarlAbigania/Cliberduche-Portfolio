@@ -38,14 +38,14 @@ const ComplianceSafety = () => {
   ];
 
   return (
-    <section id="compliance" className="py-12 md:py-16 bg-white dark:bg-gray-900" style={{ position: 'relative', zIndex: 15 }}>
+    <section id="compliance" className="py-12 md:py-16 bg-white dark:bg-slate-900" style={{ position: 'relative', zIndex: 15 }}>
       <div className="max-w-container mx-auto px-4">
         {/* Section Title */}
         <div className="section-title text-center mb-12">
-          <h2 className="text-primary mb-4 scroll-fade-up" ref={titleRef}>
+          <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>
             Compliance & Safety
           </h2>
-          <p className="text-gray text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>
+          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>
             Legal compliance, certifications, and unwavering safety commitment
           </p>
           <div className="section-title-underline"></div>
@@ -54,7 +54,7 @@ const ComplianceSafety = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Compliance Registrations */}
           <div>
-            <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark mb-10 scroll-fade-up" ref={registrationsHeadingRef}>
+            <h3 className="text-3xl md:text-4xl font-mont font-bold text-dark dark:text-white mb-10 scroll-fade-up" ref={registrationsHeadingRef}>
               Government Registrations & Permits
             </h3>
             <div className="grid grid-cols-1 gap-4">
@@ -62,13 +62,13 @@ const ComplianceSafety = () => {
                 <button
                   key={index}
                   onClick={() => setSelectedCert(item)}
-                  className="premium-card p-5 flex items-center gap-4 hover:border-secondary/50 hover:shadow-lg hover:bg-blue-50/30 transition-all duration-300 cursor-pointer text-left group"
+                  className="premium-card p-5 flex items-center gap-4 bg-white dark:bg-slate-800/80 border border-gray-100 dark:border-slate-700/60 hover:border-secondary/50 dark:hover:border-secondary/50 hover:shadow-lg dark:hover:shadow-lg hover:bg-blue-50/30 dark:hover:bg-blue-950/30 transition-all duration-300 cursor-pointer text-left group"
                 >
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/30 group-hover:scale-110 transition-transform">
                     {item.reactIcon && React.createElement(item.reactIcon, { className: 'text-sm' })}
                   </div>
-                  <p className="text-dark font-semibold text-base flex-1">{item.name}</p>
-                  <MdOpenInNew className="text-primary/60 group-hover:text-primary text-xs" />
+                  <p className="text-dark dark:text-white font-semibold text-base flex-1">{item.name}</p>
+                  <MdOpenInNew className="text-primary/60 dark:text-white group-hover:text-primary dark:group-hover:text-primary text-xs" />
                 </button>
               ))}
             </div>
@@ -76,32 +76,32 @@ const ComplianceSafety = () => {
 
           {/* Safety Commitment */}
           <div>
-            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark mb-6 scroll-fade-up" ref={safetyHeadingRef}>
+            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-6 scroll-fade-up" ref={safetyHeadingRef}>
               Safety Commitment
             </h3>
-            <div className="premium-card border-l-4 border-secondary p-10 mb-8 scroll-fade-up" ref={commitmentCardRef}>
-              <p className="text-gray text-lg leading-relaxed mb-6">
+            <div className="premium-card border-l-4 border-secondary p-10 mb-8 scroll-fade-up bg-white dark:bg-slate-800/80" ref={commitmentCardRef}>
+              <p className="text-gray dark:text-gray-400 text-lg leading-relaxed mb-6">
                 CLIBERDUCHE CORPORATION is vitally interested in its employees' health and safety.
                 Protecting employees from injury or occupational disease is a major, continuing
                 objective. As President, I personally promise that every reasonable precaution will be
                 taken to protect our workers. Hiring experienced Safety Officers and maintaining strict
                 safety practices before, during, and after project execution is a core commitment.
               </p>
-              <p className="text-gray text-lg leading-relaxed">
+              <p className="text-gray dark:text-gray-400 text-lg leading-relaxed">
                 Commitment to health and safety must form an integral part of this organization from
                 the president to the workers. Signed November 2018.
               </p>
             </div>
 
-            <div className="premium-card border-l-4 border-secondary p-10 scroll-fade-up" ref={principlesCardRef}>
-              <h4 className="text-2xl font-mont font-bold text-dark mb-6 scroll-fade-up" ref={principlesHeadingRef}>
+            <div className="premium-card border-l-4 border-secondary p-10 scroll-fade-up bg-white dark:bg-slate-800/80" ref={principlesCardRef}>
+              <h4 className="text-2xl font-mont font-bold text-dark dark:text-white mb-6 scroll-fade-up" ref={principlesHeadingRef}>
                 Safety Principles
               </h4>
               <ul className="space-y-4">
                 {safetyCommitments.map((item, index) => (
                   <li key={index} className="flex items-start gap-4">
                     <span className="mt-2 h-3 w-3 rounded-full bg-secondary flex-shrink-0"></span>
-                    <span className="text-gray text-base leading-relaxed">{item}</span>
+                    <span className="text-gray dark:text-gray-400 text-base leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -112,12 +112,12 @@ const ComplianceSafety = () => {
         {/* Certificate Modal */}
         <ModalPortal isOpen={!!selectedCert}>
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-            <div className="bg-white rounded-2xl max-w-3xl w-full shadow-2xl overflow-hidden">
-              <div className="flex justify-between items-center p-6 border-b border-gray-200">
-                <h3 className="text-2xl font-mont font-bold text-dark">{selectedCert?.name}</h3>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-3xl w-full shadow-2xl overflow-hidden">
+              <div className="flex justify-between items-center p-6 border-b border-gray-200 dark:border-slate-700">
+                <h3 className="text-2xl font-mont font-bold text-dark dark:text-white">{selectedCert?.name}</h3>
                 <button
                   onClick={() => setSelectedCert(null)}
-                  className="text-gray-400 hover:text-dark text-3xl font-light transition-colors"
+                  className="text-gray-400 dark:text-gray-300 hover:text-dark dark:hover:text-white text-3xl font-light transition-colors"
                 >
                   ×
                 </button>
@@ -134,7 +134,7 @@ const ComplianceSafety = () => {
                   />
                 </div>
               </div>
-              <div className="p-6 border-t border-gray-200 flex justify-end">
+              <div className="p-6 border-t border-gray-200 dark:border-slate-700 flex justify-end bg-gray-50 dark:bg-slate-700/50">
                 <button
                   onClick={() => setSelectedCert(null)}
                   className="btn-dark py-2 px-6"
