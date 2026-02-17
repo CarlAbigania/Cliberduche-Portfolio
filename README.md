@@ -10,6 +10,6 @@ git fetch --all; git branch -r | ForEach-Object {
             git branch --track $local $branch | Out-Null
         }
         git checkout $local
-        git pulls
+        git pull
     }
 }
