@@ -103,10 +103,7 @@ const Footer = () => {
           </div>
 
           {/* Back to Top Button */}
-          <div className="flex items-center gap-2">
-            <span className="text-gray-400 text-sm">Back to top</span>
-            <BackToTopButton />
-          </div>
+          <BackToTopButton />
         </div>
 
       </div>
