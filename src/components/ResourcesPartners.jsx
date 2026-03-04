@@ -1,42 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useScrollAnimated3DBuilding } from '../hooks/useScrollAnimated3DBuilding';
+import React from 'react';
 
 const ResourcesPartners = () => {
-  const buildingContainer = useRef(null);
-  const sectionRef = useRef(null);
-  const [isModelVisible, setIsModelVisible] = useState(true);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
-  
-  useScrollAnimated3DBuilding(buildingContainer, isDesktop);
-
-  // Handle responsive 3D model visibility
-  useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-
-      const sectionRect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Hide the 3D model if the section bottom is within 200px of viewport bottom (approaching footer)
-      if (sectionRect.bottom <= windowHeight) {
-        setIsModelVisible(false);
-      } else {
-        setIsModelVisible(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const suppliers = [
     {
@@ -71,30 +35,9 @@ const ResourcesPartners = () => {
 
   return (
     <>
-      {/* 3D Building Model - Follows Screen while Scrolling through Section */}
-      <div
-        ref={buildingContainer}
-        className="pointer-events-none"
-        style={{
-          position: 'fixed',
-          top: 0,
-          right: -600,
-          width: '100vw',
-          height: '100vh',
-          zIndex: 11,
-          opacity: isModelVisible ? 1 : 0,
-          visibility: isModelVisible ? 'visible' : 'hidden',
-          pointerEvents: 'none',
-          overflow: 'hidden',
-          transition: 'opacity 0.3s ease, visibility 0.3s ease',
-        }}
-      />
-
       <section 
-        ref={sectionRef}
         id="resources" 
         className="py-12 md:py-16 bg-amber-100 dark:bg-amber-950 relative overflow-hidden"
-        style={{ position: 'relative', zIndex: 10 }}
       >
 
       <div className="max-w-container mx-auto px-4 relative">

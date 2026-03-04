@@ -159,7 +159,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-12 md:py-16 bg-white dark:bg-slate-900 relative overflow-hidden" style={{ position: 'relative', zIndex: 15 }}>
+    <section id="projects" className="py-12 md:py-16 bg-white dark:bg-slate-900 relative overflow-hidden">
       {/* Decorative background element - bottom-left */}
       <div className="hidden lg:block absolute bottom-0 -left-5 w-[450px] h-48 bg-amber-100 dark:bg-amber-950 -skew-x-12 pointer-events-none" />
       <div className="max-w-container mx-auto px-4 relative z-10">
