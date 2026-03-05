@@ -91,9 +91,9 @@ const AboutUs = () => {
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2">
                   <div className={`w-12 h-1 bg-gradient-to-r ${
-                    isDarkMode 
-                      ? 'from-indigo-500 to-rose-500' 
-                      : 'from-indigo-600 to-rose-600'
+                    isDarkMode
+                      ? 'from-purple-500 to-pink-500'
+                      : 'from-[#0099FF] to-[#CCFF00]'
                   }`}></div>
                   <span className={`text-sm font-bold tracking-widest ${
                     isDarkMode 
@@ -110,7 +110,7 @@ const AboutUs = () => {
                   <span className={`bg-gradient-to-r bg-clip-text text-transparent ${
                     isDarkMode
                       ? 'from-indigo-400 via-purple-400 to-pink-400'
-                      : 'from-indigo-600 via-purple-600 to-pink-600'
+                      : 'from-[#0052CC] to-[#66AA00]'
                   }`}>
                     Tomorrow
                   </span>
@@ -155,8 +155,8 @@ const AboutUs = () => {
                   transition={{ delay: i * 0.12 }}
                   className={`absolute w-48 p-6 rounded-2xl backdrop-blur-xl transition-all duration-300 group ${
                     isDarkMode
-                      ? 'border border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent hover:border-indigo-500/50'
-                      : 'border border-gray-300 bg-gradient-to-br from-white/60 to-white/30 hover:border-indigo-400'
+                      ? 'border border-white/10 bg-gradient-to-br from-indigo-500/10 to-pink-500/10 hover:border-indigo-500/50'
+                      : 'border border-gray-300 bg-gradient-to-br from-[#0052CC]/20 to-[#66AA00]/20 hover:border-[#0052CC]'
                   }`}
                   style={{
                     top: `${i % 2 === 0 ? i * 80 : i * 70}px`,
@@ -167,8 +167,8 @@ const AboutUs = () => {
                   <div className="flex flex-col gap-3">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform ${
                       isDarkMode
-                        ? 'bg-gradient-to-br from-indigo-500/30 to-rose-500/30'
-                        : 'bg-gradient-to-br from-indigo-100 to-rose-100'
+                        ? 'bg-gradient-to-br from-indigo-500/30 to-pink-500/30'
+                        : 'bg-gradient-to-br from-[#0052CC]/30 to-[#66AA00]/30'
                     }`}>
                       {feat.reactIcon && React.createElement(feat.reactIcon, { className: `text-xl ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}` })}
                     </div>
@@ -229,16 +229,16 @@ const AboutUs = () => {
                   <div className="flex flex-col items-center">
                     <div className={`w-14 h-14 rounded-full flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform ${
                       isDarkMode
-                        ? 'bg-gradient-to-br from-indigo-500 to-rose-500 text-white'
-                        : 'bg-gradient-to-br from-indigo-600 to-rose-600 text-white'
+                        ? 'bg-gradient-to-br from-indigo-500 to-pink-500 text-white'
+                        : 'bg-gradient-to-br from-[#0052CC] to-[#66AA00] text-white'
                     }`}>
                       {i + 1}
                     </div>
                     {i < highlights.length - 1 && (
                       <div className={`w-1 h-20 mt-4 ${
                         isDarkMode
-                          ? 'bg-gradient-to-b from-indigo-500/50 to-transparent'
-                          : 'bg-gradient-to-b from-indigo-400/50 to-transparent'
+                          ? 'bg-gradient-to-b from-pink-500/50 to-transparent'
+                          : 'bg-gradient-to-b from-[#0052CC]/50 to-transparent'
                       }`}></div>
                     )}
                   </div>
@@ -280,8 +280,8 @@ const AboutUs = () => {
                     <div className="flex items-center gap-3 mb-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                         isDarkMode
-                          ? 'bg-gradient-to-br from-indigo-500/30 to-rose-500/30'
-                          : 'bg-gradient-to-br from-indigo-100 to-rose-100'
+                          ? 'bg-gradient-to-br from-indigo-500/30 to-pink-500/30'
+                          : 'bg-gradient-to-br from-[#0052CC]/30 to-[#66AA00]/30'
                       }`}>
                         {idx === 0 ? <MdAutoAwesome className={isDarkMode ? 'text-indigo-400' : 'text-indigo-600'} /> : <MdRemoveRedEye className={isDarkMode ? 'text-rose-400' : 'text-rose-600'} />}
                       </div>
@@ -337,11 +337,11 @@ const AboutUs = () => {
           >
             <div>
               <div className="inline-flex items-center gap-2 mb-4">
-                <div className={`w-12 h-1 bg-gradient-to-r ${
-                  isDarkMode
-                    ? 'from-purple-500 to-pink-500'
-                    : 'from-purple-600 to-pink-600'
-                }`}></div>
+                  <div className={`w-12 h-1 bg-gradient-to-r ${
+                    isDarkMode
+                      ? 'from-purple-500 to-pink-500'
+                      : 'from-[#0099FF] to-[#CCFF00]'
+                  }`}></div>
                 <span className={`text-sm font-bold tracking-widest ${
                   isDarkMode
                     ? 'text-purple-400'
@@ -371,19 +371,19 @@ const AboutUs = () => {
                 >
                   <div className={`absolute inset-0 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-300 opacity-0 group-hover:opacity-100 ${
                     isDarkMode
-                      ? 'bg-gradient-to-br from-indigo-500/10 to-rose-500/10'
-                      : 'bg-gradient-to-br from-indigo-300/20 to-rose-300/20'
+                      ? 'bg-gradient-to-br from-indigo-500/10 to-pink-500/10'
+                      : 'bg-gradient-to-br from-[#0052CC]/10 to-[#66AA00]/10'
                   }`}></div>
                   <div className={`relative p-8 md:p-10 rounded-3xl border backdrop-blur-xl ${
                     isDarkMode
-                      ? 'border-white/5 bg-gradient-to-br from-white/[0.05] to-transparent'
-                      : 'border-gray-300 bg-gradient-to-br from-white/80 to-gray-100/50'
+                      ? 'border-white/5 bg-gradient-to-br from-indigo-500/5 to-pink-500/5'
+                      : 'border-gray-300 bg-gradient-to-br from-[#0052CC]/10 to-[#66AA00]/10'
                   }`}>
                     <div className="flex flex-col gap-6">
                       <div className={`w-16 h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${
                         isDarkMode
-                          ? 'bg-gradient-to-br from-indigo-500/20 to-rose-500/20'
-                          : 'bg-gradient-to-br from-indigo-100 to-rose-100'
+                          ? 'bg-gradient-to-br from-indigo-500/20 to-pink-500/20'
+                          : 'bg-gradient-to-br from-[#0052CC]/20 to-[#66AA00]/20'
                       }`}>
                         {value.reactIcon && React.createElement(value.reactIcon, { className: `text-2xl ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}` })}
                       </div>

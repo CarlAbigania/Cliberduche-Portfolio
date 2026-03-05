@@ -134,18 +134,18 @@ const Projects = () => {
           <div className="inline-flex items-center gap-2 mb-4">
             <div className={`w-12 h-1 bg-gradient-to-r ${
               isDarkMode 
-                ? 'from-indigo-500 to-rose-500' 
-                : 'from-indigo-600 to-rose-600'
+                ? 'from-purple-500 to-pink-500' 
+                : 'from-[#0099FF] to-[#CCFF00]'
             }`}></div>
             <span className={`text-sm font-bold tracking-widest ${
               isDarkMode 
-                ? 'text-indigo-400' 
-                : 'text-indigo-600'
+                ? 'text-purple-400' 
+                : 'text-[#0099FF]'
             }`}>OUR PORTFOLIO</span>
             <div className={`w-12 h-1 bg-gradient-to-l ${
               isDarkMode 
-                ? 'from-indigo-500 to-rose-500' 
-                : 'from-indigo-600 to-rose-600'
+                ? 'from-purple-500 to-pink-500' 
+                : 'from-[#0099FF] to-[#CCFF00]'
             }`}></div>
           </div>
           <h2 className={cn(
@@ -187,11 +187,11 @@ const Projects = () => {
                 "px-4 md:px-6 py-2 md:py-3 rounded-full text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300",
                 activeFilter === filter.key
                   ? isDarkMode
-                    ? 'bg-gradient-to-r from-indigo-500 to-rose-500 text-white shadow-lg shadow-indigo-500/30'
-                    : 'bg-gradient-to-r from-indigo-600 to-rose-600 text-white shadow-lg shadow-indigo-600/30'
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-pink-500/30'
+                    : 'bg-gradient-to-r from-[#0099FF] to-[#CCFF00] text-white shadow-lg shadow-[#0099FF]/30'
                   : isDarkMode
-                    ? 'border border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent text-white hover:border-indigo-500/50'
-                    : 'border border-gray-300 bg-white/80 text-gray-900 hover:border-indigo-400'
+                    ? 'border border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent text-white hover:border-pink-500/50'
+                    : 'border border-gray-300 bg-white/80 text-gray-900 hover:border-[#0099FF]'
               )}
             >
               {filter.label} ({filter.key === 'all' ? projects.length : projects.filter(p => p.category.includes(filter.key)).length})
@@ -246,12 +246,12 @@ const Projects = () => {
                   <div className={cn(
                     "w-1 h-5 rounded-full",
                     isDarkMode
-                      ? 'bg-gradient-to-b from-indigo-500 to-rose-500'
-                      : 'bg-gradient-to-b from-indigo-600 to-rose-600'
+                      ? 'bg-gradient-to-b from-purple-500 to-pink-500'
+                      : 'bg-gradient-to-b from-[#0099FF] to-[#CCFF00]'
                   )}></div>
                   <span className={cn(
                     "text-xs font-bold uppercase tracking-widest",
-                    isDarkMode ? 'text-indigo-400' : 'text-indigo-600'
+                    isDarkMode ? 'text-purple-400' : 'text-[#0099FF]'
                   )}>
                     Featured
                   </span>
@@ -295,8 +295,8 @@ const Projects = () => {
                   className={cn(
                     "w-fit px-8 py-3 rounded-lg font-bold uppercase text-sm transition-all",
                     isDarkMode
-                      ? 'bg-gradient-to-r from-indigo-500 to-rose-500 text-white hover:shadow-lg hover:shadow-indigo-500/30'
-                      : 'bg-gradient-to-r from-indigo-600 to-rose-600 text-white hover:shadow-lg hover:shadow-indigo-600/30'
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-lg hover:shadow-pink-500/30'
+                      : 'bg-gradient-to-r from-[#0099FF] to-[#CCFF00] text-white hover:shadow-lg hover:shadow-[#0099FF]/30'
                   )}
                 >
                   View Case Study
@@ -454,7 +454,7 @@ const Projects = () => {
               className={cn(
                 "rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border",
                 isDarkMode
-                  ? 'bg-gradient-to-br from-slate-800 to-slate-900 border-white/10'
+                  ? 'border-white/10 bg-slate-900'
                   : 'bg-white border-gray-200 shadow-2xl'
               )}
             >
@@ -462,8 +462,8 @@ const Projects = () => {
               <div className={cn(
                 "border-b p-6 md:p-10 transition-colors duration-500",
                 isDarkMode
-                  ? 'border-white/10 bg-gradient-to-r from-indigo-500/10 to-rose-500/10'
-                  : 'border-gray-200 bg-gradient-to-r from-indigo-50 to-rose-50'
+                  ? 'border-white/10 bg-gradient-to-r from-[#232a45] via-[#292a3a] to-[#2e2336]'
+                  : 'border-gray-200 bg-gradient-to-r from-[#0099FF]/10 to-[#CCFF00]/10'
               )}>
                 <div className="flex justify-between items-start gap-4">
                   <motion.div
@@ -531,8 +531,8 @@ const Projects = () => {
                     <div className={cn(
                       "w-1 h-6 rounded-full bg-gradient-to-b",
                       isDarkMode
-                        ? 'from-indigo-500 to-rose-500'
-                        : 'from-indigo-600 to-rose-600'
+                        ? 'from-purple-500 to-pink-500'
+                        : 'from-[#0099FF] to-[#CCFF00]'
                     )}></div>
                     <h4 className={cn(
                       "text-xl md:text-2xl font-black",
@@ -559,7 +559,7 @@ const Projects = () => {
                   <div className={cn(
                     "p-4 rounded-lg border transition-colors duration-500",
                     isDarkMode
-                      ? 'border-white/10 bg-white/5'
+                      ? 'border-indigo-900 bg-gradient-to-r from-indigo-900/60 to-slate-900/80'
                       : 'border-indigo-200 bg-indigo-50'
                   )}>
                     <h4 className={cn(
@@ -576,7 +576,7 @@ const Projects = () => {
                   <div className={cn(
                     "p-4 rounded-lg border transition-colors duration-500",
                     isDarkMode
-                      ? 'border-white/10 bg-white/5'
+                      ? 'border-green-900 bg-gradient-to-r from-green-900/60 to-slate-900/80'
                       : 'border-rose-200 bg-rose-50'
                   )}>
                     <h4 className={cn(
@@ -608,8 +608,8 @@ const Projects = () => {
                     <div className={cn(
                       "w-1 h-6 rounded-full bg-gradient-to-b",
                       isDarkMode
-                        ? 'from-indigo-500 to-rose-500'
-                        : 'from-indigo-600 to-rose-600'
+                        ? 'from-purple-500 to-pink-500'
+                        : 'from-[#0099FF] to-[#CCFF00]'
                     )}></div>
                     <h4 className={cn(
                       "text-xl md:text-2xl font-black",
@@ -637,8 +637,8 @@ const Projects = () => {
                       <div className={cn(
                         "w-1 h-6 rounded-full bg-gradient-to-b",
                         isDarkMode
-                          ? 'from-indigo-500 to-rose-500'
-                          : 'from-indigo-600 to-rose-600'
+                          ? 'from-purple-500 to-pink-500'
+                          : 'from-[#0099FF] to-[#CCFF00]'
                       )}></div>
                       <h4 className={cn(
                         "text-xl md:text-2xl font-black",
@@ -648,13 +648,13 @@ const Projects = () => {
                     <div className={cn(
                       "grid grid-cols-3 gap-6 p-6 rounded-lg border",
                       isDarkMode
-                        ? 'border-white/10 bg-gradient-to-r from-indigo-500/10 to-rose-500/10'
-                        : 'border-indigo-200 bg-gradient-to-r from-indigo-50 to-rose-50'
+                        ? 'border-white/10 bg-gradient-to-r from-purple-500/10 to-pink-500/10'
+                        : 'border-indigo-200 bg-gradient-to-r from-[#0099FF]/10 to-[#CCFF00]/10'
                     )}>
                       <div className="text-center">
                         <div className={cn(
                           "text-3xl font-black",
-                          isDarkMode ? 'text-indigo-400' : 'text-indigo-600'
+                          isDarkMode ? 'text-purple-400' : 'text-[#0099FF]'
                         )}>
                           {selectedProject.metrics.area}
                         </div>
@@ -669,7 +669,7 @@ const Projects = () => {
                       )}>
                         <div className={cn(
                           "text-3xl font-black",
-                          isDarkMode ? 'text-indigo-400' : 'text-indigo-600'
+                          isDarkMode ? 'text-purple-400' : 'text-[#0099FF]'
                         )}>
                           {selectedProject.metrics.duration}
                         </div>
@@ -681,7 +681,7 @@ const Projects = () => {
                       <div className="text-center">
                         <div className={cn(
                           "text-3xl font-black",
-                          isDarkMode ? 'text-indigo-400' : 'text-indigo-600'
+                          isDarkMode ? 'text-purple-400' : 'text-[#0099FF]'
                         )}>
                           {selectedProject.metrics.value}
                         </div>
@@ -711,8 +711,8 @@ const Projects = () => {
                     className={cn(
                       "px-8 py-3 rounded-lg font-bold uppercase text-sm transition-all duration-300",
                       isDarkMode
-                        ? 'bg-gradient-to-r from-indigo-500 to-rose-500 text-white hover:shadow-lg hover:shadow-indigo-500/30'
-                        : 'bg-gradient-to-r from-indigo-600 to-rose-600 text-white hover:shadow-lg hover:shadow-indigo-600/30'
+                        ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-lg hover:shadow-pink-500/30'
+                        : 'bg-gradient-to-r from-[#0099FF] to-[#CCFF00] text-white hover:shadow-lg hover:shadow-[#0099FF]/30'
                     )}
                   >
                     Close

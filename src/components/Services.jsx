@@ -40,8 +40,8 @@ const Services = () => {
         "h-full p-8 md:p-10 rounded-3xl border backdrop-blur-xl transition-all duration-300",
         "hover:shadow-2xl",
         isDarkMode
-          ? 'border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent hover:border-indigo-500/50 hover:shadow-indigo-500/30'
-          : 'border-gray-300 bg-gradient-to-br from-white/80 to-gray-50/70 hover:border-indigo-400 hover:shadow-indigo-400/30'
+          ? 'border-white/10 bg-gradient-to-br from-purple-500/10 to-pink-500/10 hover:border-pink-500/50 hover:shadow-pink-500/30'
+          : 'border-gray-300 bg-gradient-to-br from-[#0099FF]/10 to-[#CCFF00]/10 hover:border-[#0099FF] hover:shadow-[#0099FF]/30'
       )}>
         {/* Icon */}
         <motion.div
@@ -51,8 +51,8 @@ const Services = () => {
           className={cn(
             "w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300",
             isDarkMode
-              ? 'bg-gradient-to-br from-indigo-500/30 to-rose-500/30 text-indigo-300'
-              : 'bg-gradient-to-br from-indigo-200 to-rose-200 text-indigo-700'
+              ? 'bg-gradient-to-br from-purple-500/30 to-pink-500/30 text-purple-200'
+              : 'bg-gradient-to-br from-[#0099FF]/30 to-[#CCFF00]/30 text-[#0099FF]'
           )}
         >
           {iconMap[service.icon] && React.createElement(iconMap[service.icon], { className: 'text-3xl' })}
@@ -81,8 +81,8 @@ const Services = () => {
           className={cn(
             "h-1 rounded-full bg-gradient-to-r mt-6",
             isDarkMode
-              ? 'from-indigo-500 to-rose-500'
-              : 'from-indigo-600 to-rose-600'
+              ? 'from-purple-500 to-pink-500'
+              : 'from-[#0099FF] to-[#CCFF00]'
           )}
         ></motion.div>
       </div>

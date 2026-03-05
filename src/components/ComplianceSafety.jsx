@@ -77,9 +77,9 @@ const ComplianceSafety = () => {
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-purple-500 to-pink-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
             <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>COMPLIANCE & SAFETY</span>
-            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-purple-500 to-pink-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
           </div>
           <h2 className={`text-5xl md:text-6xl lg:text-7xl font-black mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Compliance & Safety</h2>
           <p className={`text-lg max-w-2xl mx-auto ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>Legal compliance, certifications, and unwavering safety commitment</p>
