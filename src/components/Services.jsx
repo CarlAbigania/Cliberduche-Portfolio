@@ -37,7 +37,7 @@ const Services = () => {
       className="group cursor-pointer"
     >
       <div className={cn(
-        "h-[320px] w-[340px] md:h-[340px] md:w-[380px] p-6 md:p-7 rounded-2xl border backdrop-blur-xl transition-all duration-300",
+        "h-full p-8 md:p-10 rounded-3xl border backdrop-blur-xl transition-all duration-300",
         "hover:shadow-2xl",
         isDarkMode
           ? 'border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent hover:border-indigo-500/50 hover:shadow-indigo-500/30'
