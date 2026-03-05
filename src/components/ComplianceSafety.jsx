@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useTheme } from '../hooks/useTheme';
 import { motion, AnimatePresence } from 'framer-motion';
 import ModalPortal from './ModalPortal';
 import { MdVerified, MdReceipt, MdDocumentScanner, MdLocalHospital, MdHouse, MdWorkspacePremium, MdLocalFireDepartment, MdVerifiedUser, MdOpenInNew, MdEco } from 'react-icons/md';
 
 const ComplianceSafety = () => {
+  const { isDarkMode } = useTheme();
   const [selectedCert, setSelectedCert] = useState(null);
 
   // Animation variants
@@ -44,10 +46,12 @@ const ComplianceSafety = () => {
 
   return (
     <section id="compliance" className={
-      `py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ` +
-      (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
-        : 'bg-gradient-to-br from-gray-50 via-white to-gray-100')
+      [
+        'py-24 md:py-32 relative overflow-hidden transition-colors duration-500',
+        isDarkMode
+          ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
+          : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+      ].join(' ')
     }>
       {/* Animated Infographic SVG Background */}
       <motion.div
@@ -57,10 +61,10 @@ const ComplianceSafety = () => {
         className="absolute inset-0 w-full h-full pointer-events-none z-0"
       >
         <svg width="100%" height="100%" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-0 left-0">
-          <ellipse cx="720" cy="300" rx="600" ry="220" fill="#6366f1" fillOpacity="0.10" />
-          <rect x="320" y="120" width="800" height="360" rx="80" fill="#f43f5e" fillOpacity="0.07" />
-          <path d="M720 120 Q800 300 720 480 Q640 300 720 120 Z" fill="#6366f1" fillOpacity="0.13" />
-          <circle cx="720" cy="300" r="90" fill="#fff" fillOpacity="0.08" />
+          <ellipse cx="720" cy="300" rx="600" ry="220" fill={isDarkMode ? '#6366f1' : '#3b82f6'} fillOpacity="0.10" />
+          <rect x="320" y="120" width="800" height="360" rx="80" fill={isDarkMode ? '#f43f5e' : '#e0e7ff'} fillOpacity="0.07" />
+          <path d="M720 120 Q800 300 720 480 Q640 300 720 120 Z" fill={isDarkMode ? '#6366f1' : '#60a5fa'} fillOpacity="0.13" />
+          <circle cx="720" cy="300" r="90" fill={isDarkMode ? '#fff' : '#bae6fd'} fillOpacity="0.08" />
         </svg>
       </motion.div>
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
@@ -73,14 +77,12 @@ const ComplianceSafety = () => {
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-12 h-1 bg-gradient-to-r from-indigo-600 to-rose-600 dark:from-indigo-500 dark:to-rose-500"></div>
-            <span className="text-sm font-bold tracking-widest text-indigo-600 dark:text-indigo-400">COMPLIANCE & SAFETY</span>
-            <div className="w-12 h-1 bg-gradient-to-l from-indigo-600 to-rose-600 dark:from-indigo-500 dark:to-rose-500"></div>
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
+            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>COMPLIANCE & SAFETY</span>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
           </div>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-gray-900 dark:text-white">Compliance & Safety</h2>
-          <p className="text-lg max-w-2xl mx-auto text-gray-700 dark:text-white/70">
-            Legal compliance, certifications, and unwavering safety commitment
-          </p>
+          <h2 className={`text-5xl md:text-6xl lg:text-7xl font-black mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Compliance & Safety</h2>
+          <p className={`text-lg max-w-2xl mx-auto ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>Legal compliance, certifications, and unwavering safety commitment</p>
         </motion.div>
 
         {/* Blueprint Interactive Map for Certificates */}
