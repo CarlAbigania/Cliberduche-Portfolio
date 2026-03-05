@@ -139,27 +139,33 @@ const MeetOurTeam = () => {
           {/* Department Title */}
           <h3 className="text-3xl md:text-4xl font-mont font-bold text-primary dark:text-blue-400 mb-6 text-center fade-in-up">{currentDepartment.name}</h3>
           
-          {/* Team Members Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 fade-in-up">
-            {currentDepartment.members.map((member, index) => (
-                  <div key={index} className="text-center group fade-in-up scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                    <div className="relative mb-4">
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-36 h-36 md:w-40 h-40 rounded-lg mx-auto object-cover shadow-lg shadow-primary/20 dark:shadow-primary/30 group-hover:shadow-lg group-hover:shadow-primary/40 dark:group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-110 group-hover:-rotate-2"
-                      />
-                      <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary/80 to-accent/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                        <div className="text-white font-mont font-bold text-center px-3">
-                          <p className="text-xs md:text-sm">Dedicated Professional</p>
-                        </div>
+          {/* Team Members Horizontal Carousel */}
+          <div className="w-full overflow-x-auto pb-4 mb-6 fade-in-up">
+            <div className="flex gap-8 min-w-max px-2">
+              {currentDepartment.members.map((member, index) => (
+                <div
+                  key={index}
+                  className="text-center group fade-in-up scale-in flex-shrink-0"
+                  style={{ animationDelay: `${index * 0.1}s`, width: '260px' }}
+                >
+                  <div className="relative mb-4">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-36 h-36 md:w-40 h-40 rounded-lg mx-auto object-cover shadow-lg shadow-primary/20 dark:shadow-primary/30 group-hover:shadow-lg group-hover:shadow-primary/40 dark:group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-110 group-hover:-rotate-2"
+                    />
+                    <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary/80 to-accent/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                      <div className="text-white font-mont font-bold text-center px-3">
+                        <p className="text-xs md:text-sm">Dedicated Professional</p>
                       </div>
                     </div>
-                    <h4 className="text-lg md:text-xl font-mont font-bold text-dark dark:text-white mb-1 group-hover:text-secondary transition-colors">{member.name}</h4>
-                    <p className="text-secondary dark:text-green-400 font-mont font-bold mb-2 text-sm md:text-base">{member.position}</p>
-                    <p className="text-gray dark:text-gray-400 text-sm md:text-base leading-relaxed">{member.bio}</p>
                   </div>
-                ))}
+                  <h4 className="text-lg md:text-xl font-mont font-bold text-dark dark:text-white mb-1 group-hover:text-secondary transition-colors">{member.name}</h4>
+                  <p className="text-secondary dark:text-green-400 font-mont font-bold mb-2 text-sm md:text-base">{member.position}</p>
+                  <p className="text-gray dark:text-gray-400 text-sm md:text-base leading-relaxed">{member.bio}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Carousel Navigation */}

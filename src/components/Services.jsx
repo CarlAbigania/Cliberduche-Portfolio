@@ -101,12 +101,8 @@ const Services = () => {
       style={{
         background:
           isDarkMode
-            ? `linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.90) 50%, rgba(15,23,42,0.92) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=')`
-            : `linear-gradient(135deg, rgba(248,250,252,0.7) 0%, rgba(241,245,249,0.65) 50%, rgba(248,250,252,0.7) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=')`,
-        backgroundSize: '100% 100%',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
+            ? `linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.90) 50%, rgba(15,23,42,0.92) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=') fixed center/cover no-repeat`
+            : `linear-gradient(135deg, rgba(248,250,252,0.7) 0%, rgba(241,245,249,0.65) 50%, rgba(248,250,252,0.7) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=') fixed center/cover no-repeat`,
       }}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">

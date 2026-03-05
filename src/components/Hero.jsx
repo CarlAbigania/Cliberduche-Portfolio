@@ -37,11 +37,8 @@ const Hero = () => {
       }`}
       style={{
         background: isDarkMode
-          ? `linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.90) 50%, rgba(15, 23, 42, 0.92) 100%), url('/images/compony provided/office.jpg')`
-          : `linear-gradient(135deg, rgba(248, 250, 252, 0.7) 0%, rgba(241, 245, 249, 0.65) 50%, rgba(248, 250, 252, 0.7) 100%), url('/images/compony provided/office.jpg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
+          ? `linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.90) 50%, rgba(15, 23, 42, 0.92) 100%), url('/images/compony provided/office.jpg') fixed center/cover no-repeat`
+          : `linear-gradient(135deg, rgba(248, 250, 252, 0.7) 0%, rgba(241, 245, 249, 0.65) 50%, rgba(248, 250, 252, 0.7) 100%), url('/images/compony provided/office.jpg') fixed center/cover no-repeat`,
       }}
     >
       {/* Animated SVG Lines Background */}
