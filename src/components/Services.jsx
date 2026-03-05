@@ -37,7 +37,7 @@ const Services = () => {
       className="group cursor-pointer"
     >
       <div className={cn(
-        "h-full p-8 md:p-10 rounded-3xl border backdrop-blur-xl transition-all duration-300",
+        "h-[320px] w-[340px] md:h-[340px] md:w-[380px] p-6 md:p-7 rounded-2xl border backdrop-blur-xl transition-all duration-300",
         "hover:shadow-2xl",
         isDarkMode
           ? 'border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent hover:border-indigo-500/50 hover:shadow-indigo-500/30'
@@ -98,47 +98,19 @@ const Services = () => {
           ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
           : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
       )}
+      style={{
+        background:
+          isDarkMode
+            ? `linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.90) 50%, rgba(15,23,42,0.92) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=')`
+            : `linear-gradient(135deg, rgba(248,250,252,0.7) 0%, rgba(241,245,249,0.65) 50%, rgba(248,250,252,0.7) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=')`,
+        backgroundSize: '100% 100%',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          className="text-center mb-12 md:mb-16"
-        >
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className={`w-12 h-1 bg-gradient-to-r ${
-              isDarkMode 
-                ? 'from-indigo-500 to-rose-500' 
-                : 'from-indigo-600 to-rose-600'
-            }`}></div>
-            <span className={`text-sm font-bold tracking-widest ${
-              isDarkMode 
-                ? 'text-indigo-400' 
-                : 'text-indigo-600'
-            }`}>WHAT WE OFFER</span>
-            <div className={`w-12 h-1 bg-gradient-to-l ${
-              isDarkMode 
-                ? 'from-indigo-500 to-rose-500' 
-                : 'from-indigo-600 to-rose-600'
-            }`}></div>
-          </div>
-          <h2 className={cn(
-            "text-5xl md:text-6xl lg:text-7xl font-black mb-6",
-            isDarkMode ? 'text-white' : 'text-gray-900'
-          )}>
-            Our Services
-          </h2>
-          <p className={cn(
-            "text-lg max-w-2xl mx-auto",
-            isDarkMode 
-              ? 'text-white/70' 
-              : 'text-gray-700'
-          )}>
-            Comprehensive solutions for your infrastructure and development needs
-          </p>
-        </motion.div>
+        {/* Removed section header for cleaner look */}
 
         {/* Smooth Infinite Scroll Logo Loop */}
         <LogoLoop
