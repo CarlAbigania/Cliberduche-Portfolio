@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useTheme } from '../hooks/useTheme';
 
 const MeetOurTeam = () => {
   // Refs for scroll animations
   const titleRef = useScrollAnimation({ threshold: 0.2 });
   const descRef = useScrollAnimation({ threshold: 0.2 });
   const [currentDeptIndex, setCurrentDeptIndex] = useState(0);
+  const { isDarkMode } = useTheme();
   const departments = [
     {
       name: 'Executive Management',
@@ -122,97 +124,102 @@ const MeetOurTeam = () => {
   const currentDepartment = departments[currentDeptIndex];
 
   return (
-    <section className="bg-amber-100 dark:bg-amber-950 py-12 md:py-16">
-      {/* Header */}
-      <div className="max-w-container mx-auto px-4">
-        <div className="section-title text-center mb-12">
-          <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>Meet Our Team</h2>
-          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto scroll-fade-up" ref={descRef}>Experienced professionals dedicated to your project's success</p>
-          <div className="section-title-underline"></div>
+    <section id="team" className={
+      `py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ` +
+      (isDarkMode
+        ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
+        : 'bg-gradient-to-br from-gray-50 via-white to-gray-100')
+    }>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
+            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>OUR TEAM</span>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
+          </div>
+          <h2 className={
+            `text-5xl md:text-6xl lg:text-7xl font-black mb-6 ` +
+            (isDarkMode ? 'text-white' : 'text-gray-900')
+          }>Meet Our Team</h2>
+          <p className={
+            `text-lg max-w-2xl mx-auto ` +
+            (isDarkMode ? 'text-white/70' : 'text-gray-700')
+          }>
+            Experienced professionals dedicated to your project's success
+          </p>
         </div>
-      </div>
 
-      {/* Carousel Content */}
-      <div className="max-w-container mx-auto px-4 w-full">
-        {/* Department Carousel */}
-        <div className="flex flex-col">
-          {/* Department Title */}
-          <h3 className="text-3xl md:text-4xl font-mont font-bold text-primary dark:text-blue-400 mb-6 text-center fade-in-up">{currentDepartment.name}</h3>
-          
-          {/* Team Members Horizontal Carousel */}
-          <div className="w-full overflow-x-auto pb-4 mb-6 fade-in-up">
-            <div className="flex gap-8 min-w-max px-2">
-              {currentDepartment.members.map((member, index) => (
-                <div
-                  key={index}
-                  className="text-center group fade-in-up scale-in flex-shrink-0"
-                  style={{ animationDelay: `${index * 0.1}s`, width: '260px' }}
-                >
-                  <div className="relative mb-4">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-36 h-36 md:w-40 h-40 rounded-lg mx-auto object-cover shadow-lg shadow-primary/20 dark:shadow-primary/30 group-hover:shadow-lg group-hover:shadow-primary/40 dark:group-hover:shadow-primary/50 transition-all duration-300 group-hover:scale-110 group-hover:-rotate-2"
-                    />
-                    <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary/80 to-accent/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                      <div className="text-white font-mont font-bold text-center px-3">
-                        <p className="text-xs md:text-sm">Dedicated Professional</p>
-                      </div>
-                    </div>
-                  </div>
-                  <h4 className="text-lg md:text-xl font-mont font-bold text-dark dark:text-white mb-1 group-hover:text-secondary transition-colors">{member.name}</h4>
-                  <p className="text-secondary dark:text-green-400 font-mont font-bold mb-2 text-sm md:text-base">{member.position}</p>
-                  <p className="text-gray dark:text-gray-400 text-sm md:text-base leading-relaxed">{member.bio}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Department Navigation */}
+        <div className="flex items-center justify-center gap-4 mb-10">
+          <button
+            onClick={handlePrevDept}
+            className="p-2 rounded-full bg-primary hover:bg-primary/80 text-white transition-all duration-300 shadow-lg"
+            aria-label="Previous Department"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <h3 className="text-2xl md:text-3xl font-bold text-primary dark:text-blue-400 text-center">
+            {currentDepartment.name}
+          </h3>
+          <button
+            onClick={handleNextDept}
+            className="p-2 rounded-full bg-primary hover:bg-primary/80 text-white transition-all duration-300 shadow-lg"
+            aria-label="Next Department"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
 
-          {/* Carousel Navigation */}
-          <div className="flex items-center justify-center gap-3 md:gap-5 mt-4">
-            <button
-              onClick={handlePrevDept}
-              className="p-2 md:p-2.5 rounded-full bg-primary hover:bg-primary/80 text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
-              aria-label="Previous Department"
+        {/* Team Members Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10 justify-items-center">
+          {currentDepartment.members.map((member, index) => (
+            <div
+              key={index}
+              className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-6 md:p-8 w-full max-w-xs flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+              style={{ minHeight: '370px', height: '100%' }}
             >
-              <svg className="w-4 h-4 md:w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-
-            {/* Indicators */}
-            <div className="flex gap-2.5">
-              {departments.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentDeptIndex(index)}
-                  className={`h-2.5 md:h-3.5 rounded-full transition-all duration-300 ${
-                    index === currentDeptIndex
-                      ? 'bg-primary w-7 md:w-9'
-                      : 'w-2.5 md:w-3.5 bg-primary/30 dark:bg-primary/60 hover:bg-primary/60 dark:hover:bg-primary/80'
-                  }`}
-                  aria-label={`Go to department ${index + 1}`}
-                />
-              ))}
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover mb-4 border-4 border-primary/20 dark:border-blue-400/20 shadow"
+              />
+              <h4 className="text-lg md:text-xl font-bold text-dark dark:text-white mb-1 text-center">
+                {member.name}
+              </h4>
+              <p className="text-secondary dark:text-green-400 font-semibold mb-2 text-sm md:text-base text-center">
+                {member.position}
+              </p>
+              <p className="text-gray-700 dark:text-white/90 text-sm md:text-base text-center leading-relaxed">
+                {member.bio}
+              </p>
             </div>
+          ))}
+        </div>
 
+        {/* Department Indicators */}
+        <div className="flex items-center justify-center gap-2 mt-10">
+          {departments.map((_, index) => (
             <button
-              onClick={handleNextDept}
-              className="p-2 md:p-2.5 rounded-full bg-primary hover:bg-primary/80 text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
-              aria-label="Next Department"
-            >
-              <svg className="w-4 h-4 md:w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Department Counter */}
-          <div className="text-center mt-3">
-            <p className="text-gray dark:text-gray-300 text-xs md:text-sm font-semibold">
-              Department {currentDeptIndex + 1} of {departments.length}
-            </p>
-          </div>
+              key={index}
+              onClick={() => setCurrentDeptIndex(index)}
+              className={`h-2.5 w-7 rounded-full transition-all duration-300 ${
+                index === currentDeptIndex
+                  ? 'bg-primary dark:bg-blue-400'
+                  : 'bg-primary/30 dark:bg-blue-400/30 hover:bg-primary/60 dark:hover:bg-blue-400/60'
+              }`}
+              aria-label={`Go to department ${index + 1}`}
+            />
+          ))}
+        </div>
+        <div className="text-center mt-4">
+          <p className="text-gray-500 dark:text-gray-300 text-xs md:text-sm font-semibold">
+            Department {currentDeptIndex + 1} of {departments.length}
+          </p>
         </div>
       </div>
     </section>
