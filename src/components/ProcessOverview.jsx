@@ -1,19 +1,10 @@
 import React, { useState } from 'react';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { motion } from 'framer-motion';
+import { useTheme } from '../hooks/useTheme';
 
 const ProcessOverview = () => {
+  const { isDarkMode } = useTheme();
   const [maxExpandedStep, setMaxExpandedStep] = useState(1);
-
-  // Refs for animations
-  const titleRef = useScrollAnimation({ threshold: 0.2 });
-  const descRef = useScrollAnimation({ threshold: 0.2 });
-  const step1Ref = useScrollAnimation({ threshold: 0.2 });
-  const step2Ref = useScrollAnimation({ threshold: 0.2 });
-  const step3Ref = useScrollAnimation({ threshold: 0.2 });
-  const step4Ref = useScrollAnimation({ threshold: 0.2 });
-  const step5Ref = useScrollAnimation({ threshold: 0.2 });
-  const step6Ref = useScrollAnimation({ threshold: 0.2 });
-  const step7Ref = useScrollAnimation({ threshold: 0.2 });
 
   const steps = [
     {
@@ -51,60 +42,79 @@ const ProcessOverview = () => {
   };
 
   return (
-    <section id="process" className="py-12 md:py-16 bg-white dark:bg-slate-900 relative overflow-hidden">
-      {/* Decorative background element - top-left */}
-      <div className="hidden lg:block absolute top-0 -left-5 w-[450px] h-48 bg-amber-100 dark:bg-amber-950 skew-x-12 pointer-events-none" />
-      <div className="max-w-container mx-auto px-4 relative z-10">
-        <div className="section-title text-center mb-12">
-          <h2 className="text-primary dark:text-blue-400 mb-4 scroll-fade-up" ref={titleRef}>
-            Operational Process (MQP)
-          </h2>
-          <p className="text-gray dark:text-gray-400 text-base md:text-lg scroll-fade-up" ref={descRef}>
+    <section
+      id="process"
+      className={
+        `py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ` +
+        (isDarkMode
+          ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
+          : 'bg-gradient-to-br from-gray-50 via-white to-gray-100')
+      }
+    >
+      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <div className="inline-flex items-center gap-2 mb-4">
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
+            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>OPERATIONAL PROCESS</span>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
+          </div>
+          <h2 className={
+            `text-5xl md:text-6xl lg:text-7xl font-black mb-6 ` +
+            (isDarkMode ? 'text-white' : 'text-gray-900')
+          }>Operational Process (MQP)</h2>
+          <p className={
+            `text-lg max-w-2xl mx-auto ` +
+            (isDarkMode ? 'text-white/70' : 'text-gray-700')
+          }>
             A structured workflow that ensures quality, safety, and delivery precision
           </p>
-          <div className="section-title-underline"></div>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {steps.map((step, index) => {
-            const stepRefs = [step1Ref, step2Ref, step3Ref, step4Ref, step5Ref, step6Ref, step7Ref];
-            return (
-              index <= maxExpandedStep + 1 && (
-                <div
+        {/* Infographic Style - SVG Path with Step Markers */}
+        <div className="max-w-5xl mx-auto">
+          <div className="relative flex flex-col items-center">
+            <svg width="100%" height="120" viewBox="0 0 900 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full mb-8">
+              <path d="M60 60 Q 200 10, 340 60 T 620 60 T 880 60" stroke="url(#grad)" strokeWidth="6" fill="none" />
+              <defs>
+                <linearGradient id="grad" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#6366f1" />
+                  <stop offset="0.5" stopColor="#f43f5e" />
+                  <stop offset="1" stopColor="#6366f1" />
+                </linearGradient>
+              </defs>
+              {steps.map((step, index) => {
+                const x = 60 + (index * ((820) / (steps.length - 1)));
+                const y = 60 + (index % 2 === 0 ? -20 : 20);
+                return (
+                  <g key={index}>
+                    <circle cx={x} cy={y} r="22" fill="url(#grad)" stroke="#fff" strokeWidth="4" />
+                    <text x={x} y={y + 7} textAnchor="middle" fontSize="20" fontWeight="bold" fill="#fff">{index + 1}</text>
+                  </g>
+                );
+              })}
+            </svg>
+            <div className="flex flex-wrap justify-center gap-8 w-full">
+              {steps.map((step, index) => (
+                <motion.div
                   key={index}
-                  ref={stepRefs[index]}
-                  className="bg-white dark:bg-slate-800/80 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-slate-700/60 cursor-pointer hover:shadow-xl hover:-translate-y-1 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 min-h-40 relative group"
-                  onClick={() => handleToggle(index)}
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: index * 0.1 }}
+                  className="flex flex-col items-center w-64"
                 >
-                {index <= maxExpandedStep ? (
-                  <>
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center font-semibold mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {index + 1}
-                    </div>
-                    {index === maxExpandedStep && maxExpandedStep > 0 && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setMaxExpandedStep(Math.max(0, maxExpandedStep - 1));
-                        }}
-                        className="absolute top-4 right-4 text-xl text-gray-400 dark:text-white hover:text-primary dark:hover:text-primary transition-colors"
-                      >
-                        ✕
-                      </button>
-                    )}
-                    <h3 className="text-lg font-semibold text-dark dark:text-white mb-2 group-hover:text-secondary transition-colors">{step.title}</h3>
-                    <p className="text-gray dark:text-gray-400 text-sm leading-relaxed">{step.desc}</p>
-                  </>
-                ) : (
-                  <div className="flex items-center justify-center h-full">
-                    <span className="text-4xl font-light text-primary dark:text-blue-400 group-hover:scale-125 transition-transform duration-300">+</span>
-                  </div>
-                )}
-              </div>
-              )
-            );
-          })}
+                  <span className="text-lg font-bold text-indigo-500 dark:text-rose-300 mb-2">Step {index + 1}</span>
+                  <h3 className="text-base font-semibold text-dark dark:text-white/90 mb-2 text-center">{step.title}</h3>
+                  <p className="text-gray-700 dark:text-white/80 text-sm leading-relaxed text-center">{step.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
