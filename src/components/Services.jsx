@@ -93,7 +93,7 @@ const Services = () => {
     <section
       id="services"
       className={cn(
-        "py-20 md:py-32 relative overflow-hidden transition-colors duration-500",
+        "py-24 md:py-32 relative overflow-hidden transition-colors duration-500",
         isDarkMode 
           ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
           : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
@@ -105,7 +105,7 @@ const Services = () => {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 mb-4">
             <div className={`w-12 h-1 bg-gradient-to-r ${
@@ -131,7 +131,7 @@ const Services = () => {
             Our Services
           </h2>
           <p className={cn(
-            "text-lg md:text-xl max-w-2xl mx-auto",
+            "text-lg max-w-2xl mx-auto",
             isDarkMode 
               ? 'text-white/70' 
               : 'text-gray-700'
