@@ -78,7 +78,7 @@ const ComplianceSafety = () => {
         >
           <div className="inline-flex items-center gap-2 mb-4">
             <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-purple-500 to-pink-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
-            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>COMPLIANCE & SAFETY</span>
+            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>COMPLIANCE & SAFETY</span>
             <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-purple-500 to-pink-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
           </div>
           <h2 className={`text-5xl md:text-6xl lg:text-7xl font-black mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Compliance & Safety</h2>
@@ -165,7 +165,13 @@ const ComplianceSafety = () => {
               viewport={{ once: true }}
               variants={overlayItem}
               whileHover="hover"
-              className="relative px-8 py-5 rounded-full bg-gradient-to-br from-indigo-100 to-rose-100 dark:from-slate-700 dark:to-slate-900 shadow-md text-lg text-gray-700 dark:text-white/80 font-semibold select-none"
+              className={
+                `relative px-8 py-5 rounded-full bg-gradient-to-br ` +
+                (isDarkMode
+                  ? 'from-slate-700 to-slate-900 text-white/80'
+                  : 'from-[#0099FF]/10 to-[#CCFF00]/20 text-gray-700') +
+                ' shadow-md text-lg font-semibold select-none'
+              }
               style={{ cursor: 'default', minWidth: '200px', minHeight: '60px' }}
             >
               {item}

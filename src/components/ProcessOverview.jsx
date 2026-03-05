@@ -60,9 +60,9 @@ const ProcessOverview = () => {
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
-            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>OPERATIONAL PROCESS</span>
-            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>OPERATIONAL PROCESS</span>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
           </div>
           <h2 className={
             `text-5xl md:text-6xl lg:text-7xl font-black mb-6 ` +
@@ -80,9 +80,14 @@ const ProcessOverview = () => {
         <div className="max-w-5xl mx-auto">
           <div className="relative flex flex-col items-center">
             <svg width="100%" height="120" viewBox="0 0 900 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full mb-8">
-              <path d="M60 60 Q 200 10, 340 60 T 620 60 T 880 60" stroke="url(#grad)" strokeWidth="6" fill="none" />
+              <path d="M60 60 Q 200 10, 340 60 T 620 60 T 880 60" stroke={isDarkMode ? "url(#grad-dark)" : "url(#grad-light)"} strokeWidth="6" fill="none" />
               <defs>
-                <linearGradient id="grad" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
+                <linearGradient id="grad-light" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#0099FF" />
+                  <stop offset="0.5" stopColor="#CCFF00" />
+                  <stop offset="1" stopColor="#0099FF" />
+                </linearGradient>
+                <linearGradient id="grad-dark" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
                   <stop stopColor="#6366f1" />
                   <stop offset="0.5" stopColor="#f43f5e" />
                   <stop offset="1" stopColor="#6366f1" />
@@ -93,7 +98,7 @@ const ProcessOverview = () => {
                 const y = 60 + (index % 2 === 0 ? -20 : 20);
                 return (
                   <g key={index}>
-                    <circle cx={x} cy={y} r="22" fill="url(#grad)" stroke="#fff" strokeWidth="4" />
+                    <circle cx={x} cy={y} r="22" fill={isDarkMode ? "url(#grad-dark)" : "url(#grad-light)"} stroke="#fff" strokeWidth="4" />
                     <text x={x} y={y + 7} textAnchor="middle" fontSize="20" fontWeight="bold" fill="#fff">{index + 1}</text>
                   </g>
                 );

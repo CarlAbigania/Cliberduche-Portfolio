@@ -134,9 +134,9 @@ const MeetOurTeam = () => {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
-            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>OUR TEAM</span>
-            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>OUR TEAM</span>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
           </div>
           <h2 className={
             `text-5xl md:text-6xl lg:text-7xl font-black mb-6 ` +
@@ -208,10 +208,10 @@ const MeetOurTeam = () => {
               key={index}
               onClick={() => setCurrentDeptIndex(index)}
               className={`h-2.5 w-7 rounded-full transition-all duration-300 ${
-                index === currentDeptIndex
-                  ? 'bg-primary dark:bg-blue-400'
-                  : 'bg-primary/30 dark:bg-blue-400/30 hover:bg-primary/60 dark:hover:bg-blue-400/60'
-              }`}
+                  index === currentDeptIndex
+                    ? (isDarkMode ? 'bg-blue-400' : 'bg-[#0099FF]')
+                    : (isDarkMode ? 'bg-blue-400/30 hover:bg-blue-400/60' : 'bg-[#0099FF]/30 hover:bg-[#0099FF]/60')
+                }`}
               aria-label={`Go to department ${index + 1}`}
             />
           ))}

@@ -6,10 +6,11 @@ const logo = '/images/logo2.png';
 
 const Footer = () => {
   return (
-    <footer className="transition-all duration-300 bg-gradient-to-b from-dark via-dark to-dark dark:from-gray-900 dark:via-gray-900 dark:to-black text-white pt-12 md:pt-16 pb-6 ease-out" style={{ position: 'relative', zIndex: 12 }}>
+    <footer id="footer" className="transition-all duration-300 bg-gradient-to-b from-dark via-dark to-dark dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-900 dark:to-black text-white pt-12 md:pt-16 pb-6 ease-out" style={{ position: 'relative', zIndex: 12 }}>
       <div className="max-w-container mx-auto px-4">
         {/* Top Decorative Line */}
-        <div className="h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent mb-12"></div>
+        <div className={
+          `h-px bg-gradient-to-r from-transparent via-[#0099FF]/40 to-transparent mb-12`}></div>
 
         {/* Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8">
@@ -19,7 +20,8 @@ const Footer = () => {
               <img src={logo} alt="Cliberduche" className="h-10 w-auto mb-3" />
             </div>
             <h3 className="text-xl font-mont font-bold mb-3 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
-              CLIBERDUCHE CORP.
+              <span className={
+                `bg-clip-text text-transparent bg-gradient-to-r from-[#0099FF] to-[#CCFF00]`}>CLIBERDUCHE CORP.</span>
             </h3>
             <p className="text-gray-300 leading-relaxed text-sm font-light">
               One-stop shop for backfill sourcing, land development, and civil works with a safety-first approach.
@@ -29,7 +31,8 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="fade-in-up" style={{ animationDelay: '0.1s' }}>
-            <h4 className="text-sm font-mont font-bold mb-4 text-secondary uppercase tracking-widest">Quick Links</h4>
+            <h4 className={
+              `text-sm font-mont font-bold mb-4 uppercase tracking-widest text-[#0099FF]`}>Quick Links</h4>
             <ul className="space-y-3 text-gray-300 text-sm">
               {['About', 'Services', 'Projects', 'Equipment', 'Compliance'].map((item, i) => (
                 <li key={item} className="fade-in-up" style={{ animationDelay: `${0.1 + i * 0.05}s` }}>
@@ -46,7 +49,8 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <h4 className="text-sm font-mont font-bold mb-6 text-secondary uppercase tracking-widest">Contact</h4>
+            <h4 className={
+              `text-sm font-mont font-bold mb-6 uppercase tracking-widest text-[#0099FF]`}>Contact</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3 hover:translate-x-1 transition-all duration-300">
                 <MdPhone className="text-secondary mt-0.5 flex-shrink-0" />
@@ -69,7 +73,8 @@ const Footer = () => {
 
           {/* Social Links */}
           <div className="fade-in-up" style={{ animationDelay: '0.3s' }}>
-            <h4 className="text-sm font-mont font-bold mb-6 text-secondary uppercase tracking-widest">Follow Us</h4>
+            <h4 className={
+              `text-sm font-mont font-bold mb-6 uppercase tracking-widest text-[#0099FF]`}>Follow Us</h4>
             <div className="flex space-x-3 mb-6">
               {[
                 { icon: FaFacebook, url: '#', label: 'Facebook' },
@@ -82,7 +87,7 @@ const Footer = () => {
                     key={social.label}
                     href={social.url}
                     title={social.label}
-                    className="w-11 h-11 bg-gradient-to-br from-primary to-accent text-white rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-secondary/30 transition-all duration-300 hover:scale-110 text-sm fade-in-up"
+                    className="w-11 h-11 bg-gradient-to-br from-[#0099FF] to-[#CCFF00] text-white rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-[#0099FF]/30 transition-all duration-300 hover:scale-110 text-sm fade-in-up"
                     style={{ animationDelay: `${0.3 + i * 0.05}s` }}
                   >
                     <Icon />
@@ -98,7 +103,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="text-center md:text-left">
             <p className="text-gray-400 text-sm">
-              &copy; {new Date().getFullYear()} <span className="text-secondary font-semibold">Cliberduche Corporation</span>. All rights reserved.
+              &copy; {new Date().getFullYear()} <span className="text-[#0099FF] font-semibold">Cliberduche Corporation</span>. All rights reserved.
             </p>
           </div>
 

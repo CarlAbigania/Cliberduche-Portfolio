@@ -55,9 +55,9 @@ const ResourcesPartners = () => {
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
-            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>RESOURCES & PARTNERS</span>
-            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-indigo-600 to-rose-600'}`}></div>
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>RESOURCES & PARTNERS</span>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
           </div>
           <h2 className={`text-5xl md:text-6xl lg:text-7xl font-black mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Resources & Partners</h2>
           <p className={`text-lg max-w-2xl mx-auto ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>Our assets and trusted partners supporting project success</p>
@@ -94,7 +94,7 @@ const ResourcesPartners = () => {
               transition={{ duration: 0.7, delay: i * 0.1 }}
               className={`rounded-2xl shadow-lg border bg-white dark:bg-slate-800/80 border-gray-100 dark:border-slate-700/60 p-8 text-center hover:shadow-xl transition-all duration-300 ${isDarkMode ? 'hover:border-rose-500/40' : 'hover:border-indigo-500/40'}`}
             >
-              <div className={`text-4xl md:text-5xl font-mont font-bold mb-4 ${isDarkMode ? 'text-indigo-400' : 'text-primary'}`}>{stat.number}</div>
+              <div className={`text-4xl md:text-5xl font-mont font-bold mb-4 ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>{stat.number}</div>
               <h3 className={`text-lg md:text-xl font-mont font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{stat.label}</h3>
               <p className={`text-base mt-2 ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>{stat.desc}</p>
             </motion.div>
@@ -157,7 +157,7 @@ const ResourcesPartners = () => {
           </motion.div>
           <div className="overflow-x-auto">
             <table className={`min-w-full text-left text-sm md:text-base rounded-xl shadow-lg border border-gray-100 dark:border-slate-700/60 bg-white dark:bg-slate-800/80`}>
-              <thead className={isDarkMode ? 'bg-indigo-900 text-white' : 'bg-primary text-white'}>
+              <thead className={isDarkMode ? 'bg-indigo-900 text-white' : 'bg-[#0099FF] text-white'}>
                 <tr>
                   <th className="px-6 py-4 font-mont font-bold">Company</th>
                   <th className="px-6 py-4 font-mont font-bold">Address</th>
@@ -173,7 +173,7 @@ const ResourcesPartners = () => {
                     <td className={`px-6 py-4 ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>{row.address}</td>
                     <td className={`px-6 py-4 ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>{row.contact}</td>
                     <td className={`px-6 py-4 ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>{row.person}</td>
-                    <td className={`px-6 py-4 font-semibold ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}`}>{row.supply}</td>
+                    <td className={`px-6 py-4 font-semibold ${isDarkMode ? 'text-indigo-300' : 'text-[#0099FF]'}`}>{row.supply}</td>
                   </tr>
                 ))}
               </tbody>

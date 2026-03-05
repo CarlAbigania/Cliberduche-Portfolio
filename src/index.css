@@ -42,6 +42,20 @@
     background: #555;
   }
 
+  /* Custom Scrollbar - Dark Mode Support */
+  .dark ::-webkit-scrollbar-thumb {
+    background: #22223b;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #44446b;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: #2d3656; /* Lighter shade for better contrast */
+    border-left: 1px solid #20263a; /* Optional: subtle border for visibility */
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-mont font-semibold;
     letter-spacing: -0.5px;

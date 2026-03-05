@@ -101,17 +101,17 @@ const EquipmentFleet = () => {
             <div className={`w-12 h-1 bg-gradient-to-r ${
               isDarkMode 
                 ? 'from-indigo-500 to-rose-500' 
-                : 'from-indigo-600 to-rose-600'
+                : 'from-[#0099FF] to-[#CCFF00]'
             }`}></div>
             <span className={`text-sm font-bold tracking-widest ${
               isDarkMode 
                 ? 'text-indigo-400' 
-                : 'text-indigo-600'
+                : 'text-[#0099FF]'
             }`}>EQUIPMENT & FLEET</span>
             <div className={`w-12 h-1 bg-gradient-to-l ${
               isDarkMode 
                 ? 'from-indigo-500 to-rose-500' 
-                : 'from-indigo-600 to-rose-600'
+                : 'from-[#0099FF] to-[#CCFF00]'
             }`}></div>
           </div>
           <h2 className={cn(
@@ -148,10 +148,10 @@ const EquipmentFleet = () => {
                       activeCategory === cat.key
                         ? isDarkMode
                           ? 'bg-gradient-to-r from-indigo-500 to-rose-500 text-white shadow-lg shadow-indigo-500/30'
-                          : 'bg-gradient-to-r from-indigo-600 to-rose-600 text-white shadow-lg shadow-indigo-600/30'
+                          : 'bg-gradient-to-r from-[#0099FF] to-[#CCFF00] text-white shadow-lg shadow-[#0099FF]/30'
                         : isDarkMode
                           ? 'border border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent text-white hover:border-indigo-500/50'
-                          : 'border border-gray-300 bg-white/80 text-gray-900 hover:border-indigo-400'
+                          : 'border border-gray-300 bg-white/80 text-gray-900 hover:border-[#0099FF]'
                     )}
                     onClick={() => {
                       setActiveCategory(cat.key);
@@ -207,7 +207,7 @@ const EquipmentFleet = () => {
                       activeItemIndex === idx
                         ? isDarkMode
                           ? 'bg-indigo-500 text-white border-indigo-500'
-                          : 'bg-indigo-600 text-white border-indigo-600'
+                          : 'bg-[#0099FF] text-white border-[#0099FF]'
                         : isDarkMode
                           ? 'bg-white/10 text-white border-white/10 hover:bg-indigo-500/20'
                           : 'bg-white text-gray-900 border-gray-300 hover:bg-indigo-100'
