@@ -180,27 +180,8 @@ const CardSwap = ({
   });
 
   if (isMobile) {
-    // Render a simple static card stack for mobile (no animation)
-    return (
-      <div
-        className="w-full flex flex-col items-center gap-4 px-2"
-        style={{ maxWidth: width, height: 'auto' }}
-      >
-        {childArr.map((child, i) => {
-          if (isValidElement(child)) {
-            return cloneElement(child, {
-              key: i,
-              style: { width: '100%', height: 'auto', ...(child.props.style ?? {}) },
-              onClick: e => {
-                child.props.onClick?.(e);
-                onCardClick?.(i);
-              }
-            });
-          }
-          return child;
-        })}
-      </div>
-    );
+    // On mobile, do not render anything at all
+    return null;
   }
   // Desktop/animated version
   return (

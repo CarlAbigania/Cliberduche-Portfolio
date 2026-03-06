@@ -141,7 +141,7 @@ const AboutUs = () => {
             </motion.div>
 
             {/* Right - CardSwap animated feature cards */}
-            <div className="relative h-96">
+            <div className="relative">
               <CardSwap
                 width={420}
                 height={260}
