@@ -23,9 +23,7 @@ const Hero = ({ revealContent = true }) => {
         isDarkMode ? 'bg-slate-950' : 'bg-gray-50'
       }`}
       style={{
-        background: isDarkMode
-          ? `linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.90) 50%, rgba(15, 23, 42, 0.92) 100%), url('/images/compony provided/office.jpg') fixed center/cover no-repeat`
-          : `linear-gradient(135deg, rgba(248, 250, 252, 0.7) 0%, rgba(241, 245, 249, 0.65) 50%, rgba(248, 250, 252, 0.7) 100%), url('/images/compony provided/office.jpg') fixed center/cover no-repeat`,
+        background: `linear-gradient(135deg, rgba(15, 23, 42, 0.65) 0%, rgba(30, 41, 59, 0.60) 50%, rgba(15, 23, 42, 0.65) 100%), url('/images/compony provided/office.jpg') fixed center/cover no-repeat`,
       }}
     >
       {/* Animated SVG Lines Background - Only show when revealContent is true */}
@@ -67,24 +65,16 @@ const Hero = ({ revealContent = true }) => {
             >
               {/* Subtle Badge */}
               <motion.div variants={itemVariants} className="mb-12">
-                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                  isDarkMode
-                    ? 'bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20'
-                    : 'bg-white/40 border border-gray-800/20 hover:bg-white/60 hover:border-gray-800/30 backdrop-blur-sm'
-                }`}>
-                  <div className={`h-2 w-2 rounded-full animate-pulse ${
-                    isDarkMode ? 'bg-[#CCFF00]' : 'bg-[#66AA00]'
-                  }`}></div>
-                  <span className={`text-sm font-medium tracking-wide ${
-                    isDarkMode ? 'text-white/70' : 'text-gray-800/80'
-                  }`}>Founded 2018 • CALABARZON</span>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 bg-white/40 border border-gray-800/20 hover:bg-white/60 hover:border-gray-800/30 backdrop-blur-sm">
+                  <div className="h-2 w-2 rounded-full animate-pulse bg-[#CCFF00]"></div>
+                  <span className="text-sm font-medium tracking-wide text-white">Founded 2018 • CALABARZON</span>
                 </div>
               </motion.div>
 
               {/* Main Headline */}
               <motion.div variants={itemVariants} className="mb-10">
                 <h1 className={`text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight tracking-tight ${
-                  isDarkMode ? 'text-white' : 'text-gray-900'
+                  'text-white'
                 }`}
                 style={!isDarkMode ? { textShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' } : {}}
                 >
@@ -94,7 +84,7 @@ const Hero = ({ revealContent = true }) => {
                     isDarkMode
                       ? 'bg-[#6366f1]'
                       : 'bg-[#0099FF]'
-                  }`} style={{ WebkitTextFillColor: isDarkMode ? '#6366f1' : '#0099FF', background: 'none' }}>
+                  }`} style={{ WebkitTextFillColor: isDarkMode ? '#6366f1' : '#0099FF', color: 'white', background: 'none' }}>
                     Made Simple
                   </span>
                 </h1>
@@ -103,9 +93,7 @@ const Hero = ({ revealContent = true }) => {
               {/* Subheadline */}
               <motion.p
                 variants={itemVariants}
-                className={`text-lg sm:text-xl lg:text-2xl max-w-2xl mx-auto mb-12 leading-relaxed tracking-wide font-medium ${
-                  isDarkMode ? 'text-white/70' : 'text-gray-800/85'
-                }`}
+                className={`text-lg sm:text-xl lg:text-2xl max-w-2xl mx-auto mb-12 leading-relaxed tracking-wide font-medium text-white`}
                 style={!isDarkMode ? { textShadow: '0 1px 4px rgba(0, 0, 0, 0.12)' } : {}}
               >
                 Comprehensive backfill sourcing, land development, and civil works solutions you can trust.
@@ -121,21 +109,17 @@ const Hero = ({ revealContent = true }) => {
                       : 'bg-[#0099FF] hover:bg-[#005fcc] text-white hover:shadow-lg hover:shadow-[#0099FF]/50 font-semibold'
                   }`}
                 >
-                  View Projects
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <span className="text-white">View Projects</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
                 </a>
                 <a
                   href="https://drive.google.com/drive/folders/1QFFNjs4s6DDpD4ncV1n4AXV5HPU7MMxk?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group px-10 py-4 font-bold text-lg rounded-lg transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center ${
-                    isDarkMode
-                      ? 'border border-white/20 hover:border-[#CCFF00] text-white hover:bg-white/5'
-                      : 'border-2 border-gray-800/40 hover:border-[#0052CC] text-gray-800 hover:bg-white/40 hover:text-gray-900 font-semibold'
-                  }`}
+                  className="group px-10 py-4 font-bold text-lg rounded-lg transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center border-2 border-gray-800/40 hover:border-[#0052CC] text-white hover:bg-white/40 hover:text-white font-semibold"
                 >
-                  Archives
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <span className="text-white">Archives</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
                 </a>
               </motion.div>
             </motion.div>
@@ -147,7 +131,7 @@ const Hero = ({ revealContent = true }) => {
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2.5, repeat: Infinity }}
           >
-            <svg className={`w-5 h-5 ${isDarkMode ? 'text-white/40' : 'text-gray-800/50'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </motion.div>

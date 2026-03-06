@@ -122,7 +122,11 @@ const Header = () => {
               {/* Group 3: Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
-                className="text-gray-600 dark:text-yellow-300 hover:text-primary dark:hover:text-yellow-400 text-lg transition-all duration-300 hover:scale-110 p-2 rounded-lg dark:hover:bg-slate-800"
+                className={`text-gray-600 dark:text-yellow-300 hover:text-primary dark:hover:text-yellow-400 text-lg transition-all duration-300 hover:scale-110 p-2 rounded-lg ${
+                  isDarkMode
+                    ? 'dark:hover:bg-slate-800'
+                    : 'hover:bg-white'
+                } border border-transparent`}
                 title={isDarkMode ? 'Light Mode' : 'Dark Mode'}
               >
                 {isDarkMode ? <MdLightMode /> : <MdNightlight />}

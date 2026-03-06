@@ -40,8 +40,8 @@ const Services = () => {
         "h-full p-8 md:p-10 rounded-3xl border backdrop-blur-xl transition-all duration-300",
         "hover:shadow-2xl",
         isDarkMode
-          ? 'border-white/10 bg-gradient-to-br from-indigo-500/10 to-teal-500/10 hover:border-teal-400/50 hover:shadow-teal-400/30'
-          : 'border-gray-300 bg-gradient-to-br from-[#0099FF]/10 to-[#CCFF00]/10 hover:border-[#0099FF] hover:shadow-[#0099FF]/30'
+          ? 'border-white/10 bg-slate-900 hover:border-teal-400/50 hover:shadow-teal-400/30'
+          : 'border-gray-400 bg-white hover:border-[#0099FF] hover:shadow-[#0099FF]/30 shadow-lg shadow-gray-300/40'
       )}>
         {/* Icon */}
         <motion.div
@@ -100,9 +100,7 @@ const Services = () => {
       )}
       style={{
         background:
-          isDarkMode
-            ? `linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.90) 50%, rgba(15,23,42,0.92) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=') fixed center/cover no-repeat`
-            : `linear-gradient(135deg, rgba(248,250,252,0.7) 0%, rgba(241,245,249,0.65) 50%, rgba(248,250,252,0.7) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=') fixed center/cover no-repeat`,
+          `linear-gradient(135deg, rgba(15,23,42,0.65) 0%, rgba(30,41,59,0.60) 50%, rgba(15,23,42,0.65) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=') fixed center/cover no-repeat`,
       }}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
