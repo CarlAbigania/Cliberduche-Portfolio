@@ -28,7 +28,10 @@ const Header = () => {
   }, []);
 
   const handleLogoClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Use SmoothScroll custom event for scroll-to-top
+    window.dispatchEvent(
+      new CustomEvent('smooth-scroll-set-target', { detail: 0 })
+    );
   };
 
   return (

@@ -25,6 +25,15 @@ const Footer = () => {
               One-stop shop for backfill sourcing, land development, and civil works with a safety-first approach.
             </p>
             <p className="text-white/80 dark:text-gray-400 text-xs mt-3">Est. 2018</p>
+            <a
+              href="https://cliberduchewebsite.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block px-6 py-2 rounded-lg font-bold bg-secondary text-primary dark:bg-blue-400 dark:text-dark shadow-md hover:bg-primary hover:text-white dark:hover:bg-secondary dark:hover:text-dark transition-all duration-300"
+              style={{ letterSpacing: '0.04em' }}
+            >
+              Visit Our Official Site
+            </a>
           </div>
 
           {/* Quick Links */}

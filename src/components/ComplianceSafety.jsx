@@ -130,9 +130,15 @@ const ComplianceSafety = () => {
                 onClick={() => setSelectedCert(item)}
                 onKeyDown={e => (e.key === 'Enter' ? setSelectedCert(item) : null)}
               >
-                <span className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg text-white ${isDarkMode ? 'bg-[#6366f1]' : 'bg-[#0099FF]'}`}> 
-                  {item.reactIcon && React.createElement(item.reactIcon, { className: 'text-xl' })}
+                <span className="relative inline-flex">
+                  {/* Pulsing ring indicator */}
+                  <span className={`absolute inset-0 rounded-full animate-pulse pointer-events-none ${isDarkMode ? 'bg-blue-400/30' : 'bg-blue-400/20'}`}></span>
+                  <span className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg text-white relative z-10 ${isDarkMode ? 'bg-[#6366f1]' : 'bg-[#0099FF]'}`}>
+                    {item.reactIcon && React.createElement(item.reactIcon, { className: 'text-xl' })}
+                  </span>
                 </span>
+                {/* Tooltip for clickability */}
+                <span className="block text-xs text-blue-500 dark:text-blue-300 mt-1 text-center font-semibold select-none">Click to view</span>
                 {/* Floating card on hover/click with certificate name and details only (no image preview) */}
                 <AnimatePresence>
                   {hoveredIndex === idx && (
