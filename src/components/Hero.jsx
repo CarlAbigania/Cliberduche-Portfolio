@@ -26,9 +26,9 @@ const Hero = ({ revealContent = true }) => {
         background: `linear-gradient(135deg, rgba(15, 23, 42, 0.65) 0%, rgba(30, 41, 59, 0.60) 50%, rgba(15, 23, 42, 0.65) 100%), url('/images/compony provided/office.jpg') fixed center/cover no-repeat`,
       }}
     >
-      {/* Animated SVG Lines Background - Only show when revealContent is true */}
+      {/* Animated SVG Lines Background - Only show when revealContent is true and not on mobile */}
       {revealContent && (
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none hidden sm:block">
           <svg className="w-full h-full" viewBox="0 0 1400 800" fill="none" preserveAspectRatio="xMidYMid slice">
             {Array.from({ length: 8 }, (_, i) => (
               <motion.path
