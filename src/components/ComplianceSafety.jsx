@@ -137,9 +137,9 @@ const ComplianceSafety = () => {
                     {item.reactIcon && React.createElement(item.reactIcon, { className: 'text-xl' })}
                   </span>
                 </span>
-                {/* Tooltip for clickability */}
+                {/* 'Click to view' text always visible */}
                 <span className="block text-xs text-blue-500 dark:text-blue-300 mt-1 text-center font-semibold select-none">Click to view</span>
-                {/* Floating card on hover/click with certificate name and details only (no image preview) */}
+                {/* Floating card on hover/click with certificate name and details only (no image preview) - only show on tablet/desktop */}
                 <AnimatePresence>
                   {hoveredIndex === idx && (
                     <motion.div
@@ -147,7 +147,7 @@ const ComplianceSafety = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.3 }}
-                      className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-72 bg-white dark:bg-slate-900/90 text-gray-700 dark:text-white/80 rounded-xl shadow-lg px-4 py-3 text-sm z-50"
+                      className="hidden md:block absolute left-1/2 -translate-x-1/2 top-full mt-3 w-72 bg-white dark:bg-slate-900/90 text-gray-700 dark:text-white/80 rounded-xl shadow-lg px-4 py-3 text-sm z-50"
                     >
                       <div className="font-bold mb-1">{item.name}</div>
                       <div>{item.details || 'Click to view certificate.'}</div>
