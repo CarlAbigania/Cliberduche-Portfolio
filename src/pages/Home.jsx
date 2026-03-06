@@ -12,15 +12,15 @@ import Footer from '../components/Footer';
 import ProcessOverview from '../components/ProcessOverview';
 import MeetOurTeam from '../components/MeetOurTeam';
 
-const Home = () => {
+const Home = ({ heroRevealContent = true }) => {
   return (
     <>
-      <Header />
-      <Sidebar />
+      <section id="hero">
+        <Hero revealContent={heroRevealContent} />
+      </section>
+      {heroRevealContent && <Header />}
+      {heroRevealContent && <Sidebar />}
       <main>
-        <section id="hero">
-          <Hero />
-        </section>
         <section id="about">
           <AboutUs />
         </section>
