@@ -1,5 +1,7 @@
 import React, { Children, cloneElement, forwardRef, isValidElement, useEffect, useMemo, useRef, useState } from 'react';
-// Hook to detect mobile
+import gsap from 'gsap';
+
+// Hook to detect mobile (for conditional hover)
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -10,36 +12,15 @@ const useIsMobile = () => {
   }, []);
   return isMobile;
 };
-import gsap from 'gsap';
 
 export const Card = forwardRef(({ customClass, ...rest }, ref) => (
   <div
     ref={ref}
     {...rest}
-    className={`absolute top-1/2 left-1/2 rounded-xl border border-white bg-black [transform-style:preserve-3d] [will-change:transform] [backface-visibility:hidden] ${customClass ?? ''} ${rest.className ?? ''}`.trim()}
+    className={`absolute top-0 left-0 rounded-xl border border-white bg-black [transform-style:preserve-3d] [will-change:transform] [backface-visibility:hidden] ${customClass ?? ''} ${rest.className ?? ''}`.trim()}
   />
 ));
 Card.displayName = 'Card';
-
-const makeSlot = (i, distX, distY, total) => ({
-  x: i * distX,
-  y: -i * distY,
-  z: -i * distX * 1.5,
-  zIndex: total - i
-});
-
-const placeNow = (el, slot, skew) =>
-  gsap.set(el, {
-    x: slot.x,
-    y: slot.y,
-    z: slot.z,
-    xPercent: -50,
-    yPercent: -50,
-    skewY: skew,
-    transformOrigin: 'center center',
-    zIndex: slot.zIndex,
-    force3D: true
-  });
 
 const CardSwap = ({
   width = 500,
@@ -57,21 +38,21 @@ const CardSwap = ({
   const config =
     easing === 'elastic'
       ? {
-          ease: 'elastic.out(0.6,0.9)',
-          durDrop: 2,
-          durMove: 2,
-          durReturn: 2,
-          promoteOverlap: 0.9,
-          returnDelay: 0.05
-        }
+        ease: 'elastic.out(0.6,0.9)',
+        durDrop: 2,
+        durMove: 2,
+        durReturn: 2,
+        promoteOverlap: 0.9,
+        returnDelay: 0.05
+      }
       : {
-          ease: 'power1.inOut',
-          durDrop: 0.8,
-          durMove: 0.8,
-          durReturn: 0.8,
-          promoteOverlap: 0.45,
-          returnDelay: 0.2
-        };
+        ease: 'power1.inOut',
+        durDrop: 0.8,
+        durMove: 0.8,
+        durReturn: 0.8,
+        promoteOverlap: 0.45,
+        returnDelay: 0.2
+      };
 
   const childArr = useMemo(() => Children.toArray(children), [children]);
   const refs = useMemo(
@@ -84,25 +65,55 @@ const CardSwap = ({
   const intervalRef = useRef();
   const container = useRef(null);
 
+  // Compute total dimensions needed to contain the whole stack
+  const totalWidth = width + (childArr.length - 1) * cardDistance;
+  const totalHeight = height + (childArr.length - 1) * verticalDistance;
+  // Offsets to shift the stack to the top‑left corner of the container
+  const offsetX = width / 2;
+  const offsetY = (childArr.length - 1) * verticalDistance + height / 2;
+
+  const getSlot = (i) => ({
+    x: i * cardDistance + offsetX,
+    y: -i * verticalDistance + offsetY,
+    z: -i * cardDistance * 1.5,
+    zIndex: childArr.length - i
+  });
+
+  const placeNow = (el, slot, skew) =>
+    gsap.set(el, {
+      x: slot.x,
+      y: slot.y,
+      z: slot.z,
+      xPercent: -50,
+      yPercent: -50,
+      skewY: skew,
+      transformOrigin: 'center center',
+      zIndex: slot.zIndex,
+      force3D: true
+    });
+
   useEffect(() => {
-    if (isMobile) return;
-    const total = refs.length;
-    refs.forEach((r, i) => placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount));
+    // Initial placement
+    refs.forEach((r, i) => placeNow(r.current, getSlot(i), skewAmount));
+
     const swap = () => {
       if (order.current.length < 2) return;
       const [front, ...rest] = order.current;
       const elFront = refs[front].current;
       const tl = gsap.timeline();
       tlRef.current = tl;
+
       tl.to(elFront, {
-        y: '+=500',
+        y: `+=${totalHeight * 0.8}`, // drop far enough to be out of view
         duration: config.durDrop,
         ease: config.ease
       });
+
       tl.addLabel('promote', `-=${config.durDrop * config.promoteOverlap}`);
+
       rest.forEach((idx, i) => {
         const el = refs[idx].current;
-        const slot = makeSlot(i, cardDistance, verticalDistance, refs.length);
+        const slot = getSlot(i);
         tl.set(el, { zIndex: slot.zIndex }, 'promote');
         tl.to(
           el,
@@ -116,7 +127,8 @@ const CardSwap = ({
           `promote+=${i * 0.15}`
         );
       });
-      const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
+
+      const backSlot = getSlot(rest.length); // front card moves to last position
       tl.addLabel('return', `promote+=${config.durMove * config.returnDelay}`);
       tl.call(
         () => {
@@ -140,9 +152,11 @@ const CardSwap = ({
         order.current = [...rest, front];
       });
     };
+
     swap();
     intervalRef.current = window.setInterval(swap, delay);
-    if (pauseOnHover) {
+
+    if (pauseOnHover && !isMobile) {
       const node = container.current;
       const pause = () => {
         tlRef.current?.pause();
@@ -160,9 +174,10 @@ const CardSwap = ({
         clearInterval(intervalRef.current);
       };
     }
+
     return () => clearInterval(intervalRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing, isMobile]);
+  }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing, isMobile, totalWidth, totalHeight]);
 
   const rendered = childArr.map((child, i) => {
     if (isValidElement(child)) {
@@ -179,17 +194,14 @@ const CardSwap = ({
     return child;
   });
 
-  if (isMobile) {
-    // On mobile, do not render anything at all
-    return null;
-  }
-  // Desktop/animated version
   return (
     <div
       ref={container}
-      className="absolute bottom-0 right-0 transform translate-x-[5%] translate-y-[20%] origin-bottom-right perspective-[900px] overflow-visible
-        max-[768px]:static max-[768px]:mx-auto max-[768px]:block max-[768px]:transform-none max-[768px]:w-full max-[768px]:h-auto max-[768px]:origin-center"
-      style={{ width: '100%', maxWidth: width, height }}
+      className="relative mx-auto perspective-[900px] overflow-visible"
+      style={{
+        width: totalWidth,
+        height: totalHeight,
+      }}
     >
       {rendered}
     </div>
