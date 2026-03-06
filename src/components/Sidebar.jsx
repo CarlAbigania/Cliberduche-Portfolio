@@ -81,7 +81,14 @@ const Sidebar = () => {
   const handleNavClick = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Get the element's position relative to the top of the document
+      const rect = element.getBoundingClientRect();
+      const scrollTop = window.scrollY || window.pageYOffset;
+      const targetY = rect.top + scrollTop;
+      // Dispatch custom event for SmoothScroll
+      window.dispatchEvent(
+        new CustomEvent('smooth-scroll-set-target', { detail: targetY })
+      );
     }
   };
 

@@ -1,42 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useScrollAnimated3DBuilding } from '../hooks/useScrollAnimated3DBuilding';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useTheme } from '../hooks/useTheme';
 
 const ResourcesPartners = () => {
-  const buildingContainer = useRef(null);
-  const sectionRef = useRef(null);
-  const [isModelVisible, setIsModelVisible] = useState(true);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
-  
-  useScrollAnimated3DBuilding(buildingContainer, isDesktop);
-
-  // Handle responsive 3D model visibility
-  useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-
-      const sectionRect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Hide the 3D model if the section bottom is within 200px of viewport bottom (approaching footer)
-      if (sectionRect.bottom <= windowHeight) {
-        setIsModelVisible(false);
-      } else {
-        setIsModelVisible(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { isDarkMode } = useTheme();
 
   const suppliers = [
     {
@@ -70,47 +37,34 @@ const ResourcesPartners = () => {
   ];
 
   return (
-    <>
-      {/* 3D Building Model - Follows Screen while Scrolling through Section */}
-      <div
-        ref={buildingContainer}
-        className="pointer-events-none"
-        style={{
-          position: 'fixed',
-          top: 0,
-          right: -600,
-          width: '100vw',
-          height: '100vh',
-          zIndex: 11,
-          opacity: isModelVisible ? 1 : 0,
-          visibility: isModelVisible ? 'visible' : 'hidden',
-          pointerEvents: 'none',
-          overflow: 'hidden',
-          transition: 'opacity 0.3s ease, visibility 0.3s ease',
-        }}
-      />
-
-      <section 
-        ref={sectionRef}
-        id="resources" 
-        className="py-12 md:py-16 bg-amber-100 dark:bg-amber-950 relative overflow-hidden"
-        style={{ position: 'relative', zIndex: 10 }}
-      >
-
-      <div className="max-w-container mx-auto px-4 relative">
+    <section
+      id="resources"
+      className={[
+        'py-24 md:py-32 relative overflow-hidden transition-colors duration-500',
+        isDarkMode
+          ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
+          : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+      ].join(' ')}
+    >
+      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         {/* Section Title */}
-        <div className="section-title text-center mb-12">
-          <h2 className="text-primary dark:text-blue-400 mb-4">
-            Resources & Partners
-          </h2>
-          <p className="text-gray dark:text-gray-400 text-lg max-w-2xl mx-auto">
-            Our assets and trusted partners supporting project success
-          </p>
-          <div className="section-title-underline"></div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <div className="inline-flex items-center gap-2 mb-4">
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 to-teal-400' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-300' : 'text-[#0099FF]'}`}>RESOURCES & PARTNERS</span>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-400 to-teal-400' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+          </div>
+          <h2 className={`text-5xl md:text-6xl lg:text-7xl font-black mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Resources & Partners</h2>
+          <p className={`text-lg max-w-2xl mx-auto ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>Our assets and trusted partners supporting project success</p>
+        </motion.div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {[
             {
               number: '20M+',
@@ -133,112 +87,106 @@ const ResourcesPartners = () => {
               desc: 'Various capacities from 8,000 to 12,500 kg',
             },
           ].map((stat, i) => (
-            <div
+            <motion.div
               key={i}
-              className="premium-card p-8 text-center bg-white dark:bg-slate-800/80 border border-gray-100 dark:border-slate-700/60 hover:border-secondary/50 dark:hover:border-secondary/50"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: i * 0.1 }}
+              className={`rounded-2xl shadow-lg border bg-white dark:bg-slate-800/80 border-gray-100 dark:border-slate-700/60 p-8 text-center hover:shadow-xl transition-all duration-300 ${isDarkMode ? 'hover:border-teal-400/40' : 'hover:border-indigo-500/40'}`}
             >
-              <div className="text-4xl md:text-5xl font-mont font-bold text-primary mb-4">
-                {stat.number}
-              </div>
-              <h3 className="text-lg md:text-xl font-mont font-bold text-dark dark:text-white mb-2">{stat.label}</h3>
-              <p className="text-gray dark:text-gray-400 text-base mt-2">{stat.desc}</p>
-            </div>
+              <div className={`text-4xl md:text-5xl font-mont font-bold mb-4 ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>{stat.number}</div>
+              <h3 className={`text-lg md:text-xl font-mont font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{stat.label}</h3>
+              <p className={`text-base mt-2 ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>{stat.desc}</p>
+            </motion.div>
           ))}
         </div>
 
-        {/* Land Development Sites */}
-        <div className="mb-12">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-4">
-              Land Development Sites
-            </h3>
-          </div>
-
-          <div className="space-y-10">
+        {/* Land Development Sites - Modern Redesign */}
+        <div className="mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-8"
+          >
+            <h3 className={`text-2xl md:text-3xl font-mont font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Land Development Sites</h3>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Calamba Site */}
-            <div className="premium-card p-10 border-l-4 border-secondary bg-white dark:bg-slate-800/80">
-              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">
-                Calamba City Site
-              </h4>
-              <div className="space-y-3 text-gray dark:text-gray-400 text-base md:text-lg">
-                <p>
-                  <strong className="text-dark dark:text-white">Coordinates:</strong> 14°08'32.0"N 121°09'37.0"E
-                </p>
-                <p>
-                  <strong className="text-dark dark:text-white">Address:</strong> 45R6+V4J Calamba, Laguna
-                </p>
-                <p>
-                  <strong className="text-dark dark:text-white">Capacity:</strong> Approximately 20 million cubic meters of
-                  backfilling materials
-                </p>
-                <p>
-                  Covering 7 lots with a total volume of 19,580,004.6 cubic meters of
-                  excess backfill materials (Jastifias).
-                </p>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className={`relative rounded-3xl shadow-xl border bg-gradient-to-br ${isDarkMode ? 'from-slate-900 via-indigo-900 to-teal-900 border-white/10' : 'from-white via-blue-50 to-teal-50 border-gray-200'} overflow-hidden group p-0`}
+            >
+              <img src="/images/land-development-site1.png" alt="Calamba City Site" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+              <div className="relative z-10 p-10 md:p-14 flex flex-col justify-center h-full">
+                <h4 className={`text-2xl md:text-3xl font-mont font-black mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Calamba City Site</h4>
+                <div className={`space-y-3 text-base md:text-lg ${isDarkMode ? 'text-white/80' : 'text-gray-800'}`}> 
+                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Coordinates:</strong> 14°08'32.0"N 121°09'37.0"E</motion.p>
+                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Address:</strong> 45R6+V4J Calamba, Laguna</motion.p>
+                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Capacity:</strong> 20M+ cubic meters of backfilling materials</motion.p>
+                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>Covering 7 lots with a total volume of 19,580,004.6 cubic meters of excess backfill materials (Jastifias).</motion.p>
+                </div>
               </div>
-            </div>
-
+            </motion.div>
             {/* Silang Site */}
-            <div className="premium-card p-10 border-l-4 border-secondary bg-white dark:bg-slate-800/80">
-              <h4 className="text-xl md:text-2xl font-mont font-bold text-dark dark:text-white mb-4">
-                Silang, Cavite Site
-              </h4>
-              <div className="space-y-3 text-gray dark:text-gray-400 text-base md:text-lg">
-                <p>
-                  <strong className="text-dark dark:text-white">Coordinates:</strong> 14°15'02"N 120°59'12"E
-                </p>
-                <p>
-                  <strong className="text-dark dark:text-white">Address:</strong> Sabutan, 7X2P+6MF Silang, Cavite
-                </p>
-                <p>
-                  <strong className="text-dark dark:text-white">Capacity:</strong> Approximately 2.2 million cubic meters of
-                  backfilling materials
-                </p>
-                <p>
-                  Covering 5 lots with a total volume of 2,241,000 cubic meters of
-                  excess backfill materials (Sitikis).
-                </p>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className={`relative rounded-3xl shadow-xl border bg-gradient-to-br ${isDarkMode ? 'from-slate-900 via-indigo-900 to-teal-900 border-white/10' : 'from-white via-blue-50 to-teal-50 border-gray-200'} overflow-hidden group p-0`}
+            >
+              <img src="/images/land-development-site2.png" alt="Silang, Cavite Site" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+              <div className="relative z-10 p-10 md:p-14 flex flex-col justify-center h-full">
+                <h4 className={`text-2xl md:text-3xl font-mont font-black mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Silang, Cavite Site</h4>
+                <div className={`space-y-3 text-base md:text-lg ${isDarkMode ? 'text-white/80' : 'text-gray-800'}`}> 
+                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Coordinates:</strong> 14°15'02"N 120°59'12"E</motion.p>
+                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Address:</strong> Sabutan, 7X2P+6MF Silang, Cavite</motion.p>
+                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Capacity:</strong> 2.2M+ cubic meters of backfilling materials</motion.p>
+                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>Covering 5 lots with a total volume of 2,241,000 cubic meters of excess backfill materials (Sitikis).</motion.p>
+                </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Supplier Network */}
-        <div>
-          <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-mont font-bold text-dark dark:text-white mb-4">
-              Supplier Network
-            </h3>
-          </div>
-
-          <div className="overflow-x-auto bg-white dark:bg-slate-800/80 border border-primary/10 dark:border-slate-700/60 rounded-xl shadow-md dark:shadow-lg dark:shadow-black/40">
-            <table className="min-w-full text-left text-sm md:text-base">
-              <thead className="bg-primary text-white">
-                <tr>
-                  <th className="px-6 py-4 font-mont font-bold">Company</th>
-                  <th className="px-6 py-4 font-mont font-bold">Address</th>
-                  <th className="px-6 py-4 font-mont font-bold">Contact No.</th>
-                  <th className="px-6 py-4 font-mont font-bold">Contact Person</th>
-                  <th className="px-6 py-4 font-mont font-bold">Supplier Of</th>
-                </tr>
-              </thead>
-              <tbody>
-                {suppliers.map((row, index) => (
-                  <tr key={row.company} className={`border-t transition-colors hover:bg-blue-50 dark:hover:bg-slate-700/60 ${index % 2 ? 'bg-gray-50 dark:bg-slate-700/30' : 'bg-white dark:bg-slate-800/50'}`}>
-                    <td className="px-6 py-4 font-semibold text-dark dark:text-white">{row.company}</td>
-                    <td className="px-6 py-4 text-gray dark:text-gray-400">{row.address}</td>
-                    <td className="px-6 py-4 text-gray dark:text-gray-400">{row.contact}</td>
-                    <td className="px-6 py-4 text-gray dark:text-gray-400">{row.person}</td>
-                    <td className="px-6 py-4 text-gray dark:text-gray-400 font-semibold">{row.supply}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {/* Supplier Network - Modern Card Grid */}
+        <div className="mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-8"
+          >
+            <h3 className={`text-2xl md:text-3xl font-mont font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Supplier Network</h3>
+          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {suppliers.map((row, index) => (
+              <motion.div
+                key={row.company}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: index * 0.1 }}
+                className={`rounded-2xl shadow-lg border ${
+                  isDarkMode
+                    ? 'bg-slate-900 border-white/10'
+                    : 'bg-gradient-to-br from-white via-blue-50 to-teal-50 border-gray-200'
+                } p-8 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group`}
+              >
+                <div className="mb-4">
+                  <div className={`text-lg md:text-xl font-mont font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{row.company}</div>
+                  <div className={`text-sm mb-2 ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>{row.address}</div>
+                  <div className={`text-sm mb-2 ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}><span className="font-semibold">Contact:</span> {row.contact}</div>
+                  <div className={`text-sm mb-2 ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}><span className="font-semibold">Person:</span> {row.person}</div>
+                </div>
+                <div className={`text-base font-semibold mt-2 ${isDarkMode ? 'text-indigo-300' : 'text-[#0099FF]'}`}>{row.supply}</div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
     </section>
-    </>
   );
 };
 

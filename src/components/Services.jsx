@@ -1,21 +1,13 @@
-import React from 'react';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useTheme } from '../hooks/useTheme';
+import { cn } from '../utils/cn';
 import { MdTerrain, MdAgriculture, MdWorkHistory, MdHandyman, MdConstruction, MdPendingActions } from 'react-icons/md';
+import LogoLoop from './ui/LogoLoop';
 
 const Services = () => {
   const { isDarkMode } = useTheme();
-  // Refs for main sections
-  const titleRef = useScrollAnimation({ threshold: 0.2 });
-  const ctaRef = useScrollAnimation({ threshold: 0.2 });
-  
-  // Refs for individual service cards
-  const service1Ref = useScrollAnimation({ threshold: 0.2 });
-  const service2Ref = useScrollAnimation({ threshold: 0.2 });
-  const service3Ref = useScrollAnimation({ threshold: 0.2 });
-  const service4Ref = useScrollAnimation({ threshold: 0.2 });
-  const service5Ref = useScrollAnimation({ threshold: 0.2 });
-  const service6Ref = useScrollAnimation({ threshold: 0.2 });
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   // Icon mapping
   const iconMap = {
@@ -36,47 +28,99 @@ const Services = () => {
     { icon: 'fa-clipboard-check', title: 'Project Consultation', desc: 'Consultation for horizontal and vertical development projects.' },
   ];
 
+  // Custom service card renderer for LogoLoop
+  const renderServiceCard = (service, index) => (
+    <motion.div
+      onMouseEnter={() => setHoveredIndex(index)}
+      onMouseLeave={() => setHoveredIndex(null)}
+      whileHover={{ y: -8 }}
+      className="group cursor-pointer"
+    >
+      <div className={cn(
+        "h-full p-4 sm:p-6 md:p-10 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300",
+        "hover:shadow-2xl",
+        isDarkMode
+          ? 'border-white/10 bg-slate-900 hover:border-teal-400/50 hover:shadow-teal-400/30'
+          : 'border-gray-400 bg-white hover:border-[#0099FF] hover:shadow-[#0099FF]/30 shadow-lg shadow-gray-300/40'
+      )}>
+        {/* Icon */}
+        <motion.div
+          initial={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.3 }}
+          className={cn(
+            "w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 transition-all duration-300",
+            isDarkMode
+              ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30 text-teal-200'
+              : 'bg-gradient-to-br from-[#0099FF]/30 to-[#CCFF00]/30 text-[#0099FF]'
+          )}
+        >
+          {iconMap[service.icon] && React.createElement(iconMap[service.icon], { className: 'text-2xl sm:text-3xl' })}
+        </motion.div>
+
+        {/* Content */}
+        <h3 className={cn(
+          "text-base sm:text-xl md:text-2xl font-black mb-2 sm:mb-3 transition-all duration-300",
+          isDarkMode ? 'text-white' : 'text-gray-900'
+        )}>
+          {service.title}
+        </h3>
+
+        <p className={cn(
+          "leading-relaxed text-sm sm:text-base transition-opacity duration-300",
+          isDarkMode ? 'text-white/75' : 'text-gray-700'
+        )}>
+          {service.desc}
+        </p>
+
+        {/* Accent line */}
+        <motion.div
+          initial={{ width: 0 }}
+          whileHover={{ width: '100%' }}
+          transition={{ duration: 0.5 }}
+          className={cn(
+            "h-1 rounded-full bg-gradient-to-r mt-6",
+            isDarkMode
+              ? 'from-indigo-400 to-teal-400'
+              : 'from-[#0099FF] to-[#CCFF00]'
+          )}
+        ></motion.div>
+      </div>
+    </motion.div>
+  );
+
   return (
     <section
       id="services"
-      className="py-12 md:py-16 bg-fixed bg-cover bg-center relative"
+      className={cn(
+        "py-24 md:py-32 relative overflow-hidden transition-colors duration-500",
+        isDarkMode 
+          ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
+          : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+      )}
       style={{
-        backgroundImage: isDarkMode 
-          ? "linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"
-          : "linear-gradient(rgba(60, 60, 60, 0.72), rgba(60, 60, 60, 0.72)), url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
-        position: 'relative',
-        zIndex: 15,
+        background:
+          `linear-gradient(135deg, rgba(15,23,42,0.65) 0%, rgba(30,41,59,0.60) 50%, rgba(15,23,42,0.65) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=') fixed center/cover no-repeat`,
       }}
     >
-      <div className="max-w-container mx-auto px-4">
-        {/* Section Title */}
-        <div className="section-title text-center mb-12 scroll-fade-up" ref={titleRef}>
-          <h2 className="text-white mb-4">Our Services</h2>
-          <div className="section-title-underline"></div>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+        {/* Removed section header for cleaner look */}
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => {
-            const serviceRefs = [service1Ref, service2Ref, service3Ref, service4Ref, service5Ref, service6Ref];
-            return (
-              <div
-                key={index}
-                ref={serviceRefs[index]}
-                className="bg-white/95 dark:bg-slate-800/80 backdrop-blur-md rounded-xl p-7 shadow-lg dark:shadow-xl dark:shadow-black/50 border border-white/60 dark:border-slate-700/80 hover:shadow-2xl dark:hover:shadow-2xl dark:hover:shadow-black/60 hover:-translate-y-2 transition-all duration-300 group scroll-fade-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="text-secondary dark:text-green-400 text-5xl mb-8 h-16 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
-                  {iconMap[service.icon] && React.createElement(iconMap[service.icon])}
-                </div>
-                <h3 className="text-xl md:text-2xl font-mont font-bold mb-4 text-dark dark:text-white group-hover:text-secondary dark:group-hover:text-green-400 transition-colors duration-300">{service.title}</h3>
-                <p className="text-gray dark:text-gray-100 text-base md:text-lg leading-relaxed">{service.desc}</p>
-              </div>
-            );
-          })}
-        </div>
-
-
+        {/* Smooth Infinite Scroll Logo Loop */}
+        <LogoLoop
+          logos={services}
+          speed={80}
+          direction="left"
+          gap={24}
+          pauseOnHover={true}
+          logoHeight={400}
+          fadeOut={true}
+          fadeOutColor={isDarkMode ? '#0f172a' : '#f9fafb'}
+          scaleOnHover={true}
+          className="w-full"
+          renderItem={renderServiceCard}
+          ariaLabel="Our services carousel"
+        />
       </div>
     </section>
   );

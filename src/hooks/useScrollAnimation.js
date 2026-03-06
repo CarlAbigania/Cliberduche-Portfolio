@@ -2,19 +2,18 @@ import { useEffect, useRef } from 'react';
 
 /**
  * Custom hook for triggering animations when elements enter the viewport
+ * Animations trigger once and are permanent (non-reversible)
  * Uses Intersection Observer API for optimal performance
  * 
  * @param {Object} options - Configuration options
  * @param {number} options.threshold - Intersection threshold (0-1), default 0.2
  * @param {string} options.rootMargin - Margin around viewport, default '0px'
- * @param {boolean} options.triggerOnce - Only trigger once, default false (reversible)
- * @returns {Object} - { ref, isVisible }
+ * @returns {Object} - { ref } reference to attach to animated element
  */
 export const useScrollAnimation = (options = {}) => {
   const { 
     threshold = 0.2, 
-    rootMargin = '0px 0px -50px 0px',
-    triggerOnce = false 
+    rootMargin = '0px 0px -50px 0px'
   } = options;
 
   const ref = useRef(null);
@@ -24,24 +23,12 @@ export const useScrollAnimation = (options = {}) => {
     const element = ref.current;
     if (!element) return;
 
-    // Skip if already triggered and triggerOnce is enabled
-    if (triggerOnce && hasTriggered.current) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !hasTriggered.current) {
           element.classList.add('in-view');
           hasTriggered.current = true;
-
-          // Only unobserve if triggerOnce is true
-          if (triggerOnce) {
-            observer.unobserve(element);
-          }
-        } else {
-          // Remove animation class when element leaves viewport (reversible)
-          if (!triggerOnce) {
-            element.classList.remove('in-view');
-          }
+          observer.unobserve(element);
         }
       },
       {
@@ -67,7 +54,7 @@ export const useScrollAnimation = (options = {}) => {
     return () => {
       observer.unobserve(element);
     };
-  }, [threshold, rootMargin, triggerOnce]);
+  }, [threshold, rootMargin]);
 
   return ref;
 };

@@ -1,3 +1,45 @@
+/* Ensure grid-bg is visible in dark mode */
+.dark .grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(22, 163, 74, 0.20) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(22, 163, 74, 0.20) 1px, transparent 1px),
+    linear-gradient(to right, rgba(37, 99, 235, 0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 99, 235, 0.10) 1px, transparent 1px);
+  background-size:
+    160px 160px,
+    160px 160px,
+    20px 20px,
+    20px 20px;
+  background-repeat: repeat;
+  opacity: 1;
+}
+/* ===== FIXED GRID BACKGROUND ===== */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-color: transparent;
+
+  background-image:
+    /* BIG OUTER GRID (GREEN) */
+    linear-gradient(to right, rgba(22, 163, 74, 0.20) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(22, 163, 74, 0.20) 1px, transparent 1px),
+
+    /* SMALL INNER GRID (BLUE) with lower opacity */
+    linear-gradient(to right, rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+
+  background-size:
+    160px 160px,
+    /* big tiles */
+    160px 160px,
+    20px 20px,
+    /* small tiles */
+    20px 20px;
+
+  background-repeat: repeat;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,6 +82,20 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
+  }
+
+  /* Custom Scrollbar - Dark Mode Support */
+  .dark ::-webkit-scrollbar-thumb {
+    background: #22223b;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #44446b;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: #2d3656; /* Lighter shade for better contrast */
+    border-left: 1px solid #20263a; /* Optional: subtle border for visibility */
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -156,6 +212,19 @@
 
   .scale-in {
     animation: scaleUp 0.5s ease-out;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.4s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .float-animation {

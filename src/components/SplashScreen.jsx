@@ -1,159 +1,184 @@
-import React, { useEffect, useState } from 'react';
-import logo from '/images/logo2.png';
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
-const SplashScreen = ({ onFinish }) => {
-  const [isExiting, setIsExiting] = useState(false);
-  const [startLetterFade, setStartLetterFade] = useState(false);
+import logo from "/images/logo2.png";
 
-  const companyName = 'CLIBERDUCHE';
-  const abbreviationIndices = [0, 3, 6]; // C(0), B(3), D(6)
+export default function Intro({ title, onFinish }) {
+  const container = useRef(null);
+  const titleRef = useRef(null);
+  const progress = useRef(null);
+  const counter = useRef(null);
+  const logoRef = useRef(null);
+  const logoWrapperRef = useRef(null);
 
   useEffect(() => {
-    // After 1 second, start the letter-by-letter fade effect
-    const transformTimer = setTimeout(() => {
-      setStartLetterFade(true);
-    }, 1200);
+    // Split text into letters — h1 is opacity:0 so no flash, but layout space is preserved
+    const letters = titleRef.current.innerText.split("");
+    titleRef.current.innerHTML = letters
+      .map((letter) => `<span class="letter">${letter}</span>`)
+      .join("");
 
-    // Show splash screen for 2.8 seconds total, then start exit animation
-    const timer = setTimeout(() => {
-      setIsExiting(true);
-    }, 2800);
+    // Make h1 visible — letters are opacity:0 so still hidden, GSAP animates them in
+    gsap.set(titleRef.current, { opacity: 1 });
+    gsap.set(titleRef.current.querySelectorAll(".letter"), { opacity: 0, y: 80 });
 
-    // Complete the splash screen after exit animation
-    const exitTimer = setTimeout(() => {
-      onFinish();
-    }, 3500); // 2800 + 700ms animation
+    gsap.set(logoWrapperRef.current, { visibility: "visible", clipPath: "inset(0 0 100% 0)" });
+    gsap.set(logoRef.current, { opacity: 0, scale: 0.8, rotateY: -45 });
+    gsap.set(progress.current, { width: 0, visibility: "visible" });
 
-    return () => {
-      clearTimeout(transformTimer);
-      clearTimeout(timer);
-      clearTimeout(exitTimer);
-    };
+    // Loading counter
+    let obj = { val: 0 };
+    gsap.to(obj, {
+      val: 100,
+      duration: 2,
+      ease: "power2.out",
+      onUpdate: () => {
+        counter.current.innerText = Math.floor(obj.val);
+      },
+    });
+
+    const tl = gsap.timeline({
+      delay: 0.5,
+      onComplete: () => setTimeout(onFinish, 200),
+    });
+
+    // Logo mask reveal + 3D rotation
+    tl.to(logoWrapperRef.current, {
+      clipPath: "inset(0% 0% 0% 0%)",
+      duration: 1.2,
+      ease: "power3.inOut",
+    }).to(
+      logoRef.current,
+      {
+        opacity: 1,
+        scale: 1,
+        rotateY: 0,
+        duration: 1,
+        ease: "elastic.out(1, 0.5)",
+      },
+      "<"
+    );
+
+    // Start subtle floating animation for logo while letters load
+    gsap.to(logoRef.current, {
+      y: "-=8",
+      rotateY: "+=2",
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
+    // Letters animation
+    tl.to(titleRef.current.querySelectorAll(".letter"), {
+      y: 0,
+      opacity: 1,
+      stagger: 0.04,
+      duration: 0.8,
+      ease: "power3.out",
+    });
+
+    // Progress bar animation
+    tl.to(
+      progress.current,
+      {
+        width: "100%",
+        duration: 2,
+        ease: "power2.out",
+      },
+      "<"
+    );
+
+    // Exit intro
+    tl.to(container.current, {
+      clipPath: "inset(0 0 100% 0)",
+      duration: 1.2,
+      ease: "power4.inOut",
+    });
   }, [onFinish]);
 
   return (
-    <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-white transition-opacity duration-700 ${
-        isExiting ? 'opacity-0' : 'opacity-100'
-      }`}
-    >
-      {/* Animated background orbs with enhanced effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Left glow orb */}
-        <div 
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
-          style={{
-            animation: 'float 8s ease-in-out infinite',
-            boxShadow: '0 0 60px rgba(8, 55, 124, 0.08)',
-          }}
-        ></div>
-        
-        {/* Right glow orb */}
-        <div 
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl"
-          style={{
-            animation: 'float 10s ease-in-out infinite reverse',
-            boxShadow: '0 0 40px rgba(15, 74, 161, 0.08)',
-          }}
-        ></div>
+    <>
+      <style>{`
+        .letter { display: inline-block; }
 
-        {/* Subtle top accent */}
-        <div 
-          className="absolute -top-40 right-1/3 w-60 h-60 bg-primary/3 rounded-full blur-3xl"
-          style={{
-            animation: 'pulse 4s ease-in-out infinite',
-          }}
-        ></div>
-      </div>
+        /* Animated intro grid with big green + small blue */
+        .intro-grid {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
 
-      {/* Content */}
-      <div className="relative z-10 text-center">
-        {/* Logo */}
-        <div className="mb-12 md:mb-16 animate-bounceIn" style={{ animationDelay: '0s' }}>
+          background-image:
+            linear-gradient(to right, rgba(22, 163, 74, 0.20) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(22, 163, 74, 0.20) 1px, transparent 1px),
+            linear-gradient(to right, rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+
+          background-size:
+            160px 160px,
+            160px 160px,
+            20px 20px,
+            20px 20px;
+
+          background-repeat: repeat;
+
+          animation: gridMove 8s linear infinite;
+        }
+
+        @keyframes gridMove {
+          from { background-position: 0 0, 0 0, 0 0, 0 0; }
+          to { background-position: 0 160px, 160px 0, 0 20px, 20px 0; }
+        }
+      `}</style>
+
+      <div
+        ref={container}
+        className="intro-container fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#f4faf7] perspective-1000"
+      >
+        <div className="intro-grid" />
+
+        {/* visibility:hidden preserves layout space before GSAP runs */}
+        <div
+          ref={logoWrapperRef}
+          className="overflow-hidden mb-6 relative z-10"
+          style={{ visibility: "hidden" }}
+        >
           <img
+            ref={logoRef}
             src={logo}
-            alt="Cliberduche Logo"
-            className="h-32 w-auto mx-auto drop-shadow-2xl"
+            alt="Logo"
+            className="w-24 md:w-32"
           />
         </div>
 
-        {/* Company Name - Letter by Letter Fade with CBD converging to center */}
-        <div className="h-24 md:h-28 flex items-center justify-center mb-6 overflow-hidden">
-          <h1 
-            className="text-6xl md:text-7xl font-mont font-bold flex justify-center tracking-wider"
-            style={{
-              animation: 'slideInUp 0.8s ease-out',
-              animationDelay: '0.3s',
-              animationFillMode: 'both',
-            }}
-          >
-            {companyName.split('').map((letter, index) => {
-              const isCBDLetter = abbreviationIndices.includes(index);
-              const shouldHide = startLetterFade && !isCBDLetter;
-              
-              return (
-                <span
-                  key={`letter-${index}`}
-                  className={`inline-block transition-all duration-1300 overflow-hidden ${
-                    isCBDLetter ? 'text-secondary' : 'text-primary'
-                  }`}
-                  style={{
-                    opacity: shouldHide ? 0 : 1,
-                    maxWidth: shouldHide ? '0px' : '100px',
-                    transform: shouldHide ? 'scale(0.75)' : 'scale(1)',
-                    transitionDelay: `${index * 140}ms`,
-                  }}
-                >
-                  {letter}
-                </span>
-              );
-            })}
-          </h1>
+        {/* opacity:0 hides text before split, layout space preserved via line-height */}
+        <h1
+          ref={titleRef}
+          className="text-3xl md:text-4xl font-semibold tracking-wide relative z-10 text-[#0b2545]"
+          style={{ opacity: 0 }}
+        >
+          {title}
+        </h1>
+
+        {/* Loading bar */}
+        <div className="w-40 h-[2px] bg-gray-300 mt-6 overflow-hidden relative z-10">
+          {/* visibility:hidden preserves layout space, no full-width flash */}
+          <div
+            ref={progress}
+            className="h-full bg-[#0b2545]"
+            style={{ visibility: "hidden" }}
+          />
         </div>
 
-        {/* Corporation Label */}
-        <p
-          className="text-2xl md:text-3xl font-mont text-primary mb-4 tracking-widest letter-spacing-2 font-light"
-          style={{
-            animation: startLetterFade ? 'slideInUp 0.8s ease-out forwards' : 'slideInUp 0.8s ease-out 1.5s both',
-            textShadow: '0 2px 20px rgba(0, 0, 0, 0.1)',
-          }}
-        >
-          Corporation
-        </p>
-
-        {/* Tagline */}
-        <p
-          className="text-primary/70 text-sm md:text-base max-w-md mx-auto font-light leading-relaxed"
-          style={{
-            animation: startLetterFade ? 'slideInUp 0.8s ease-out forwards' : 'slideInUp 0.8s ease-out 1.8s both',
-            opacity: startLetterFade ? 1 : 0,
-            transition: 'opacity 0.5s ease-out',
-          }}
-        >
-          Civil Works • Land Development • Construction
-        </p>
-
-        {/* Loading Bar */}
+        {/* Loading counter */}
         <div
-          className="mt-14 w-72 h-1.5 bg-primary/10 rounded-full overflow-hidden mx-auto backdrop-blur-sm"
-          style={{
-            animation: startLetterFade ? 'slideInUp 0.8s ease-out forwards' : 'slideInUp 0.8s ease-out 2.1s both',
-            boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.05)',
-          }}
+          ref={counter}
+          className="mt-4 text-sm tracking-widest text-gray-500 relative z-10"
         >
-          <div
-            className="h-full bg-gradient-to-r from-primary via-accent to-primary rounded-full"
-            style={{
-              backgroundSize: '200% 100%',
-              animation: 'shimmer 2s ease-in-out infinite, slideLoadingBar 2.8s ease-in-out forwards',
-              animationDelay: startLetterFade ? '0s' : '0s',
-            }}
-          ></div>
+          0
         </div>
       </div>
-    </div>
+    </>
   );
-};
-
-export default SplashScreen;
+}
