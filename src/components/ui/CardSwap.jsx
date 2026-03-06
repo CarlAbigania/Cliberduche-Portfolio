@@ -1,4 +1,15 @@
-import React, { Children, cloneElement, forwardRef, isValidElement, useEffect, useMemo, useRef } from 'react';
+import React, { Children, cloneElement, forwardRef, isValidElement, useEffect, useMemo, useRef, useState } from 'react';
+// Hook to detect mobile
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+  return isMobile;
+};
 import gsap from 'gsap';
 
 export const Card = forwardRef(({ customClass, ...rest }, ref) => (
@@ -42,6 +53,7 @@ const CardSwap = ({
   easing = 'elastic',
   children
 }) => {
+  const isMobile = useIsMobile();
   const config =
     easing === 'elastic'
       ? {
@@ -67,31 +79,26 @@ const CardSwap = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [childArr.length]
   );
-
   const order = useRef(Array.from({ length: childArr.length }, (_, i) => i));
-
   const tlRef = useRef(null);
   const intervalRef = useRef();
   const container = useRef(null);
 
   useEffect(() => {
+    if (isMobile) return;
     const total = refs.length;
     refs.forEach((r, i) => placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount));
-
     const swap = () => {
       if (order.current.length < 2) return;
-
       const [front, ...rest] = order.current;
       const elFront = refs[front].current;
       const tl = gsap.timeline();
       tlRef.current = tl;
-
       tl.to(elFront, {
         y: '+=500',
         duration: config.durDrop,
         ease: config.ease
       });
-
       tl.addLabel('promote', `-=${config.durDrop * config.promoteOverlap}`);
       rest.forEach((idx, i) => {
         const el = refs[idx].current;
@@ -109,7 +116,6 @@ const CardSwap = ({
           `promote+=${i * 0.15}`
         );
       });
-
       const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
       tl.addLabel('return', `promote+=${config.durMove * config.returnDelay}`);
       tl.call(
@@ -130,15 +136,12 @@ const CardSwap = ({
         },
         'return'
       );
-
       tl.call(() => {
         order.current = [...rest, front];
       });
     };
-
     swap();
     intervalRef.current = window.setInterval(swap, delay);
-
     if (pauseOnHover) {
       const node = container.current;
       const pause = () => {
@@ -159,27 +162,53 @@ const CardSwap = ({
     }
     return () => clearInterval(intervalRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
+  }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing, isMobile]);
 
-  const rendered = childArr.map((child, i) =>
-    isValidElement(child)
-      ? cloneElement(child, {
-          key: i,
-          ref: refs[i],
-          style: { width, height, ...(child.props.style ?? {}) },
-          onClick: e => {
-            child.props.onClick?.(e);
-            onCardClick?.(i);
+  const rendered = childArr.map((child, i) => {
+    if (isValidElement(child)) {
+      return cloneElement(child, {
+        key: i,
+        ref: refs[i],
+        style: { width, height, ...(child.props.style ?? {}) },
+        onClick: e => {
+          child.props.onClick?.(e);
+          onCardClick?.(i);
+        }
+      });
+    }
+    return child;
+  });
+
+  if (isMobile) {
+    // Render a simple static card stack for mobile (no animation)
+    return (
+      <div
+        className="w-full flex flex-col items-center gap-4 px-2"
+        style={{ maxWidth: width, height: 'auto' }}
+      >
+        {childArr.map((child, i) => {
+          if (isValidElement(child)) {
+            return cloneElement(child, {
+              key: i,
+              style: { width: '100%', height: 'auto', ...(child.props.style ?? {}) },
+              onClick: e => {
+                child.props.onClick?.(e);
+                onCardClick?.(i);
+              }
+            });
           }
-        })
-      : child
-  );
-
+          return child;
+        })}
+      </div>
+    );
+  }
+  // Desktop/animated version
   return (
     <div
       ref={container}
-      className="absolute bottom-0 right-0 transform translate-x-[5%] translate-y-[20%] origin-bottom-right perspective-[900px] overflow-visible max-[768px]:translate-x-[25%] max-[768px]:translate-y-[25%] max-[768px]:scale-[0.75] max-[480px]:translate-x-[25%] max-[480px]:translate-y-[25%] max-[480px]:scale-[0.55]"
-      style={{ width, height }}
+      className="absolute bottom-0 right-0 transform translate-x-[5%] translate-y-[20%] origin-bottom-right perspective-[900px] overflow-visible
+        max-[768px]:static max-[768px]:mx-auto max-[768px]:block max-[768px]:transform-none max-[768px]:w-full max-[768px]:h-auto max-[768px]:origin-center"
+      style={{ width: '100%', maxWidth: width, height }}
     >
       {rendered}
     </div>
