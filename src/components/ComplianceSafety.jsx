@@ -61,10 +61,10 @@ const ComplianceSafety = () => {
         className="absolute inset-0 w-full h-full pointer-events-none z-0"
       >
         <svg width="100%" height="100%" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-0 left-0">
-          <ellipse cx="720" cy="300" rx="600" ry="220" fill={isDarkMode ? '#6366f1' : '#3b82f6'} fillOpacity="0.10" />
-          <rect x="320" y="120" width="800" height="360" rx="80" fill={isDarkMode ? '#f43f5e' : '#e0e7ff'} fillOpacity="0.07" />
-          <path d="M720 120 Q800 300 720 480 Q640 300 720 120 Z" fill={isDarkMode ? '#6366f1' : '#60a5fa'} fillOpacity="0.13" />
-          <circle cx="720" cy="300" r="90" fill={isDarkMode ? '#fff' : '#bae6fd'} fillOpacity="0.08" />
+            <ellipse cx="720" cy="300" rx="600" ry="220" fill={isDarkMode ? '#6366f1' : '#3b82f6'} fillOpacity="0.10" />
+            <rect x="320" y="120" width="800" height="360" rx="80" fill={isDarkMode ? '#2dd4bf' : '#e0e7ff'} fillOpacity="0.07" />
+            <path d="M720 120 Q800 300 720 480 Q640 300 720 120 Z" fill={isDarkMode ? '#2dd4bf' : '#60a5fa'} fillOpacity="0.13" />
+            <circle cx="720" cy="300" r="90" fill={isDarkMode ? '#6366f1' : '#bae6fd'} fillOpacity="0.08" />
         </svg>
       </motion.div>
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
@@ -77,9 +77,9 @@ const ComplianceSafety = () => {
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-purple-500 to-pink-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
-            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>COMPLIANCE & SAFETY</span>
-            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-purple-500 to-pink-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+              <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 to-teal-400' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+              <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-300' : 'text-[#0099FF]'}`}>COMPLIANCE & SAFETY</span>
+              <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-400 to-teal-400' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
           </div>
           <h2 className={`text-5xl md:text-6xl lg:text-7xl font-black mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Compliance & Safety</h2>
           <p className={`text-lg max-w-2xl mx-auto ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>Legal compliance, certifications, and unwavering safety commitment</p>
@@ -130,7 +130,7 @@ const ComplianceSafety = () => {
                 onClick={() => setSelectedCert(item)}
                 onKeyDown={e => (e.key === 'Enter' ? setSelectedCert(item) : null)}
               >
-                <span className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center shadow-lg">
+                <span className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg text-white ${isDarkMode ? 'bg-[#6366f1]' : 'bg-[#0099FF]'}`}> 
                   {item.reactIcon && React.createElement(item.reactIcon, { className: 'text-xl' })}
                 </span>
                 {/* Floating card on hover/click with certificate name and details only (no image preview) */}
@@ -168,7 +168,7 @@ const ComplianceSafety = () => {
               className={
                 `relative px-8 py-5 rounded-full bg-gradient-to-br ` +
                 (isDarkMode
-                  ? 'from-slate-700 to-slate-900 text-white/80'
+                  ? 'from-indigo-900 to-teal-900 text-white/80'
                   : 'from-[#0099FF]/10 to-[#CCFF00]/20 text-gray-700') +
                 ' shadow-md text-lg font-semibold select-none'
               }
@@ -195,7 +195,8 @@ const ComplianceSafety = () => {
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{selectedCert?.name}</h3>
                     <button
                       onClick={() => setSelectedCert(null)}
-                      className="text-gray-400 dark:text-gray-300 hover:text-dark dark:hover:text-white text-3xl font-light transition-colors"
+                      className={`w-10 h-10 flex items-center justify-center rounded-full text-2xl font-light transition-colors duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 ${isDarkMode ? 'bg-[#6366f1] text-white hover:bg-[#818cf8]' : 'bg-[#0099FF] text-white hover:bg-[#005fcc]'}`}
+                      aria-label="Close"
                     >
                       ×
                     </button>

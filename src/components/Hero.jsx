@@ -92,9 +92,9 @@ const Hero = ({ revealContent = true }) => {
                   <br />
                   <span className={`bg-clip-text text-transparent ${
                     isDarkMode
-                      ? 'bg-gradient-to-r from-[#0099FF] to-[#0077CC]'
-                      : 'bg-gradient-to-r from-[#0052CC] to-[#0033AA]'
-                  }`}>
+                      ? 'bg-[#6366f1]'
+                      : 'bg-[#0099FF]'
+                  }`} style={{ WebkitTextFillColor: isDarkMode ? '#6366f1' : '#0099FF', background: 'none' }}>
                     Made Simple
                   </span>
                 </h1>
@@ -117,8 +117,8 @@ const Hero = ({ revealContent = true }) => {
                   href="#projects"
                   className={`group px-10 py-4 font-bold text-lg rounded-lg transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center ${
                     isDarkMode
-                      ? 'bg-[#0099FF] hover:bg-[#0088DD] text-white hover:shadow-lg hover:shadow-[#0099FF]/40'
-                      : 'bg-[#0052CC] hover:bg-[#0041AA] text-white hover:shadow-lg hover:shadow-[#0052CC]/50 font-semibold'
+                      ? 'bg-[#6366f1] hover:bg-[#818cf8] text-white hover:shadow-lg hover:shadow-[#6366f1]/40'
+                      : 'bg-[#0099FF] hover:bg-[#005fcc] text-white hover:shadow-lg hover:shadow-[#0099FF]/50 font-semibold'
                   }`}
                 >
                   View Projects

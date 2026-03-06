@@ -29,7 +29,7 @@ const BackToTopButton = ({ threshold = 300, showAtBottom = false }) => {
   return (
     <button
       onClick={scrollToTop}
-      className={`w-12 h-12 bg-secondary text-primary rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl hover:shadow-secondary/40 transition-all duration-300 active:scale-95 hover:scale-110 font-semibold ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      className={`w-12 h-12 bg-secondary text-primary dark:bg-blue-400 dark:text-dark rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl hover:shadow-secondary/40 dark:hover:shadow-blue-400/40 transition-all duration-300 active:scale-95 hover:scale-110 font-semibold ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
       aria-label="Back to top"
       title="Back to top"

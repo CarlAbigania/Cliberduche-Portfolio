@@ -134,9 +134,9 @@ const MeetOurTeam = () => {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 to-teal-400' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
             <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>OUR TEAM</span>
-            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-400 to-teal-400' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
           </div>
           <h2 className={
             `text-5xl md:text-6xl lg:text-7xl font-black mb-6 ` +
@@ -154,19 +154,19 @@ const MeetOurTeam = () => {
         <div className="flex items-center justify-center gap-4 mb-10">
           <button
             onClick={handlePrevDept}
-            className="p-2 rounded-full bg-primary hover:bg-primary/80 text-white transition-all duration-300 shadow-lg"
+            className={`p-2 rounded-full transition-all duration-300 shadow-lg text-white ${isDarkMode ? 'bg-[#6366f1] hover:bg-[#818cf8]' : 'bg-[#0099FF] hover:bg-[#005fcc]'}`}
             aria-label="Previous Department"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <h3 className="text-2xl md:text-3xl font-bold text-primary dark:text-blue-400 text-center">
+          <h3 className={`text-2xl md:text-3xl font-bold text-center ${isDarkMode ? 'text-[#6366f1]' : 'text-[#0099FF]'}`}>
             {currentDepartment.name}
           </h3>
           <button
             onClick={handleNextDept}
-            className="p-2 rounded-full bg-primary hover:bg-primary/80 text-white transition-all duration-300 shadow-lg"
+            className={`p-2 rounded-full transition-all duration-300 shadow-lg text-white ${isDarkMode ? 'bg-[#6366f1] hover:bg-[#818cf8]' : 'bg-[#0099FF] hover:bg-[#005fcc]'}`}
             aria-label="Next Department"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -209,8 +209,8 @@ const MeetOurTeam = () => {
               onClick={() => setCurrentDeptIndex(index)}
               className={`h-2.5 w-7 rounded-full transition-all duration-300 ${
                   index === currentDeptIndex
-                    ? (isDarkMode ? 'bg-blue-400' : 'bg-[#0099FF]')
-                    : (isDarkMode ? 'bg-blue-400/30 hover:bg-blue-400/60' : 'bg-[#0099FF]/30 hover:bg-[#0099FF]/60')
+                    ? (isDarkMode ? 'bg-[#6366f1]' : 'bg-[#0099FF]')
+                    : (isDarkMode ? 'bg-[#6366f1]/30 hover:bg-[#6366f1]/60' : 'bg-[#0099FF]/30 hover:bg-[#0099FF]/60')
                 }`}
               aria-label={`Go to department ${index + 1}`}
             />

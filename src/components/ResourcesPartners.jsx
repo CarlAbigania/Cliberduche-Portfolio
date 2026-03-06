@@ -55,9 +55,9 @@ const ResourcesPartners = () => {
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
-            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>RESOURCES & PARTNERS</span>
-            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 to-teal-400' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+            <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-300' : 'text-[#0099FF]'}`}>RESOURCES & PARTNERS</span>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-400 to-teal-400' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
           </div>
           <h2 className={`text-5xl md:text-6xl lg:text-7xl font-black mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Resources & Partners</h2>
           <p className={`text-lg max-w-2xl mx-auto ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>Our assets and trusted partners supporting project success</p>
@@ -92,7 +92,7 @@ const ResourcesPartners = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: i * 0.1 }}
-              className={`rounded-2xl shadow-lg border bg-white dark:bg-slate-800/80 border-gray-100 dark:border-slate-700/60 p-8 text-center hover:shadow-xl transition-all duration-300 ${isDarkMode ? 'hover:border-rose-500/40' : 'hover:border-indigo-500/40'}`}
+              className={`rounded-2xl shadow-lg border bg-white dark:bg-slate-800/80 border-gray-100 dark:border-slate-700/60 p-8 text-center hover:shadow-xl transition-all duration-300 ${isDarkMode ? 'hover:border-teal-400/40' : 'hover:border-indigo-500/40'}`}
             >
               <div className={`text-4xl md:text-5xl font-mont font-bold mb-4 ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>{stat.number}</div>
               <h3 className={`text-lg md:text-xl font-mont font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{stat.label}</h3>
@@ -117,7 +117,7 @@ const ResourcesPartners = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className={`rounded-2xl shadow-lg border bg-white dark:bg-slate-800/80 border-gray-100 dark:border-slate-700/60 p-10 hover:shadow-xl transition-all duration-300 ${isDarkMode ? 'hover:border-rose-500/40' : 'hover:border-indigo-500/40'}`}
+              className={`rounded-2xl shadow-lg border bg-white dark:bg-slate-800/80 border-gray-100 dark:border-slate-700/60 p-10 hover:shadow-xl transition-all duration-300 ${isDarkMode ? 'hover:border-teal-400/40' : 'hover:border-indigo-500/40'}`}
             >
               <h4 className={`text-xl md:text-2xl font-mont font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Calamba City Site</h4>
               <div className={`space-y-3 text-base md:text-lg ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>
@@ -132,7 +132,7 @@ const ResourcesPartners = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className={`rounded-2xl shadow-lg border bg-white dark:bg-slate-800/80 border-gray-100 dark:border-slate-700/60 p-10 hover:shadow-xl transition-all duration-300 ${isDarkMode ? 'hover:border-rose-500/40' : 'hover:border-indigo-500/40'}`}
+              className={`rounded-2xl shadow-lg border bg-white dark:bg-slate-800/80 border-gray-100 dark:border-slate-700/60 p-10 hover:shadow-xl transition-all duration-300 ${isDarkMode ? 'hover:border-teal-400/40' : 'hover:border-indigo-500/40'}`}
             >
               <h4 className={`text-xl md:text-2xl font-mont font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Silang, Cavite Site</h4>
               <div className={`space-y-3 text-base md:text-lg ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>

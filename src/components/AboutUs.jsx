@@ -92,7 +92,7 @@ const AboutUs = () => {
                 <div className="inline-flex items-center gap-2">
                   <div className={`w-12 h-1 bg-gradient-to-r ${
                     isDarkMode
-                      ? 'from-purple-500 to-pink-500'
+                      ? 'from-indigo-400 to-teal-400'
                       : 'from-[#0099FF] to-[#CCFF00]'
                   }`}></div>
                   <span className={`text-sm font-bold tracking-widest ${
@@ -109,7 +109,7 @@ const AboutUs = () => {
                   Building <br />
                   <span className={`bg-gradient-to-r bg-clip-text text-transparent ${
                     isDarkMode
-                      ? 'from-indigo-400 via-purple-400 to-pink-400'
+                      ? 'from-indigo-400 via-blue-400 to-teal-400'
                       : 'from-[#0052CC] to-[#66AA00]'
                   }`}>
                     Tomorrow
@@ -131,10 +131,10 @@ const AboutUs = () => {
                   : 'border-indigo-300'
               }`}>
                 <p className={isDarkMode ? 'text-white/80' : 'text-gray-800'}>
-                  <span className={`font-bold ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>Established 2018</span> - Registered with SEC
+                  <span className={`font-bold ${isDarkMode ? 'text-[#6366f1]' : 'text-[#0099FF]'}`}>Established 2018</span> - Registered with SEC
                 </p>
                 <p className={`italic ${isDarkMode ? 'text-white/60' : 'text-gray-600'}`}>
-                  "CLIBERDUCHE represents: <span className={isDarkMode ? 'text-indigo-300' : 'text-indigo-700'}>CLImaco, BERonilla, PiaDUCHE</span>"
+                  "CLIBERDUCHE represents: <span className={isDarkMode ? 'text-[#6366f1]' : 'text-[#0099FF]'}>CLImaco, BERonilla, PiaDUCHE</span>"
                 </p>
               </div>
             </motion.div>
@@ -155,7 +155,7 @@ const AboutUs = () => {
                   transition={{ delay: i * 0.12 }}
                   className={`absolute w-48 p-6 rounded-2xl backdrop-blur-xl transition-all duration-300 group ${
                     isDarkMode
-                      ? 'border border-white/10 bg-gradient-to-br from-indigo-500/10 to-pink-500/10 hover:border-indigo-500/50'
+                      ? 'border border-white/10 bg-gradient-to-br from-indigo-500/10 to-teal-500/10 hover:border-teal-400/50'
                       : 'border border-gray-300 bg-gradient-to-br from-[#0052CC]/20 to-[#66AA00]/20 hover:border-[#0052CC]'
                   }`}
                   style={{
@@ -167,7 +167,7 @@ const AboutUs = () => {
                   <div className="flex flex-col gap-3">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform ${
                       isDarkMode
-                        ? 'bg-gradient-to-br from-indigo-500/30 to-pink-500/30'
+                        ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30'
                         : 'bg-gradient-to-br from-[#0052CC]/30 to-[#66AA00]/30'
                     }`}>
                       {feat.reactIcon && React.createElement(feat.reactIcon, { className: `text-xl ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}` })}
@@ -229,7 +229,7 @@ const AboutUs = () => {
                   <div className="flex flex-col items-center">
                     <div className={`w-14 h-14 rounded-full flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform ${
                       isDarkMode
-                        ? 'bg-gradient-to-br from-indigo-500 to-pink-500 text-white'
+                        ? 'bg-gradient-to-br from-indigo-500 to-teal-500 text-white'
                         : 'bg-gradient-to-br from-[#0052CC] to-[#66AA00] text-white'
                     }`}>
                       {i + 1}
@@ -237,7 +237,7 @@ const AboutUs = () => {
                     {i < highlights.length - 1 && (
                       <div className={`w-1 h-20 mt-4 ${
                         isDarkMode
-                          ? 'bg-gradient-to-b from-pink-500/50 to-transparent'
+                          ? 'bg-gradient-to-b from-teal-500/50 to-transparent'
                           : 'bg-gradient-to-b from-[#0052CC]/50 to-transparent'
                       }`}></div>
                     )}
@@ -280,7 +280,7 @@ const AboutUs = () => {
                     <div className="flex items-center gap-3 mb-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                         isDarkMode
-                          ? 'bg-gradient-to-br from-indigo-500/30 to-pink-500/30'
+                          ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30'
                           : 'bg-gradient-to-br from-[#0052CC]/30 to-[#66AA00]/30'
                       }`}>
                         {idx === 0 ? <MdAutoAwesome className={isDarkMode ? 'text-indigo-400' : 'text-indigo-600'} /> : <MdRemoveRedEye className={isDarkMode ? 'text-rose-400' : 'text-rose-600'} />}
@@ -304,8 +304,8 @@ const AboutUs = () => {
                       onClick={() => toggleMission(idx)}
                       className={`mt-6 inline-flex items-center gap-2 font-semibold transition-colors group ${
                         isDarkMode
-                          ? 'text-indigo-400 hover:text-indigo-300'
-                          : 'text-indigo-600 hover:text-indigo-700'
+                          ? 'text-[#6366f1] hover:text-[#818cf8]'
+                          : 'text-[#0099FF] hover:text-[#005fcc]'
                       }`}
                       aria-expanded={expandedMission[idx]}
                       aria-controls={`mission-text-${idx}`}
@@ -339,12 +339,12 @@ const AboutUs = () => {
               <div className="inline-flex items-center gap-2 mb-4">
                   <div className={`w-12 h-1 bg-gradient-to-r ${
                     isDarkMode
-                      ? 'from-purple-500 to-pink-500'
+                      ? 'from-indigo-400 to-teal-400'
                       : 'from-[#0099FF] to-[#CCFF00]'
                   }`}></div>
                 <span className={`text-sm font-bold tracking-widest ${
                   isDarkMode
-                    ? 'text-purple-400'
+                    ? 'text-indigo-400'
                     : 'text-purple-600'
                 }`}>OUR VALUES</span>
               </div>
@@ -371,18 +371,18 @@ const AboutUs = () => {
                 >
                   <div className={`absolute inset-0 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-300 opacity-0 group-hover:opacity-100 ${
                     isDarkMode
-                      ? 'bg-gradient-to-br from-indigo-500/10 to-pink-500/10'
+                      ? 'bg-gradient-to-br from-indigo-500/10 to-teal-500/10'
                       : 'bg-gradient-to-br from-[#0052CC]/10 to-[#66AA00]/10'
                   }`}></div>
                   <div className={`relative p-8 md:p-10 rounded-3xl border backdrop-blur-xl ${
                     isDarkMode
-                      ? 'border-white/5 bg-gradient-to-br from-indigo-500/5 to-pink-500/5'
+                      ? 'border-white/5 bg-gradient-to-br from-indigo-500/5 to-teal-500/5'
                       : 'border-gray-300 bg-gradient-to-br from-[#0052CC]/10 to-[#66AA00]/10'
                   }`}>
                     <div className="flex flex-col gap-6">
                       <div className={`w-16 h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${
                         isDarkMode
-                          ? 'bg-gradient-to-br from-indigo-500/20 to-pink-500/20'
+                          ? 'bg-gradient-to-br from-indigo-500/20 to-teal-500/20'
                           : 'bg-gradient-to-br from-[#0052CC]/20 to-[#66AA00]/20'
                       }`}>
                         {value.reactIcon && React.createElement(value.reactIcon, { className: `text-2xl ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}` })}

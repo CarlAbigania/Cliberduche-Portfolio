@@ -60,9 +60,9 @@ const ProcessOverview = () => {
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+            <div className={`w-12 h-1 bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 to-teal-400' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
             <span className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'}`}>OPERATIONAL PROCESS</span>
-            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-500 to-rose-500' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
+            <div className={`w-12 h-1 bg-gradient-to-l ${isDarkMode ? 'from-indigo-400 to-teal-400' : 'from-[#0099FF] to-[#CCFF00]'}`}></div>
           </div>
           <h2 className={
             `text-5xl md:text-6xl lg:text-7xl font-black mb-6 ` +
@@ -89,7 +89,7 @@ const ProcessOverview = () => {
                 </linearGradient>
                 <linearGradient id="grad-dark" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
                   <stop stopColor="#6366f1" />
-                  <stop offset="0.5" stopColor="#f43f5e" />
+                  <stop offset="0.5" stopColor="#14b8a6" />
                   <stop offset="1" stopColor="#6366f1" />
                 </linearGradient>
               </defs>
@@ -113,7 +113,7 @@ const ProcessOverview = () => {
                   transition={{ duration: 0.7, delay: index * 0.1 }}
                   className="flex flex-col items-center w-64"
                 >
-                  <span className="text-lg font-bold text-indigo-500 dark:text-rose-300 mb-2">Step {index + 1}</span>
+                  <span className="text-lg font-bold text-indigo-500 dark:text-teal-300 mb-2">Step {index + 1}</span>
                   <h3 className="text-base font-semibold text-dark dark:text-white/90 mb-2 text-center">{step.title}</h3>
                   <p className="text-gray-700 dark:text-white/80 text-sm leading-relaxed text-center">{step.desc}</p>
                 </motion.div>

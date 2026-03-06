@@ -134,17 +134,17 @@ const Projects = () => {
           <div className="inline-flex items-center gap-2 mb-4">
             <div className={`w-12 h-1 bg-gradient-to-r ${
               isDarkMode 
-                ? 'from-purple-500 to-pink-500' 
+                ? 'from-indigo-400 to-teal-400' 
                 : 'from-[#0099FF] to-[#CCFF00]'
             }`}></div>
             <span className={`text-sm font-bold tracking-widest ${
               isDarkMode 
-                ? 'text-purple-400' 
+                ? 'text-indigo-400' 
                 : 'text-[#0099FF]'
             }`}>OUR PORTFOLIO</span>
             <div className={`w-12 h-1 bg-gradient-to-l ${
               isDarkMode 
-                ? 'from-purple-500 to-pink-500' 
+                ? 'from-indigo-400 to-teal-400' 
                 : 'from-[#0099FF] to-[#CCFF00]'
             }`}></div>
           </div>
@@ -187,10 +187,10 @@ const Projects = () => {
                 "px-4 md:px-6 py-2 md:py-3 rounded-full text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300",
                 activeFilter === filter.key
                   ? isDarkMode
-                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-pink-500/30'
-                    : 'bg-gradient-to-r from-[#0099FF] to-[#CCFF00] text-white shadow-lg shadow-[#0099FF]/30'
+                    ? 'bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/30'
+                    : 'bg-[#0099FF] text-white shadow-lg shadow-[#0099FF]/30'
                   : isDarkMode
-                    ? 'border border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent text-white hover:border-pink-500/50'
+                    ? 'border border-white/10 bg-white/[0.08] text-white hover:border-[#6366f1]'
                     : 'border border-gray-300 bg-white/80 text-gray-900 hover:border-[#0099FF]'
               )}
             >
@@ -246,12 +246,12 @@ const Projects = () => {
                   <div className={cn(
                     "w-1 h-5 rounded-full",
                     isDarkMode
-                      ? 'bg-gradient-to-b from-purple-500 to-pink-500'
+                      ? 'bg-gradient-to-b from-indigo-400 to-teal-400'
                       : 'bg-gradient-to-b from-[#0099FF] to-[#CCFF00]'
                   )}></div>
                   <span className={cn(
                     "text-xs font-bold uppercase tracking-widest",
-                    isDarkMode ? 'text-purple-400' : 'text-[#0099FF]'
+                    isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'
                   )}>
                     Featured
                   </span>
@@ -295,8 +295,8 @@ const Projects = () => {
                   className={cn(
                     "w-fit px-8 py-3 rounded-lg font-bold uppercase text-sm transition-all",
                     isDarkMode
-                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-lg hover:shadow-pink-500/30'
-                      : 'bg-gradient-to-r from-[#0099FF] to-[#CCFF00] text-white hover:shadow-lg hover:shadow-[#0099FF]/30'
+                      ? 'bg-[#6366f1] text-white hover:shadow-lg hover:shadow-[#6366f1]/30'
+                      : 'bg-[#0099FF] text-white hover:shadow-lg hover:shadow-[#0099FF]/30'
                   )}
                 >
                   View Case Study
@@ -331,8 +331,8 @@ const Projects = () => {
                 className={cn(
                   "absolute -left-4 md:left-0 top-1/2 transform -translate-y-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100",
                   isDarkMode
-                    ? 'bg-indigo-500/80 hover:bg-indigo-500 text-white'
-                    : 'bg-indigo-600/80 hover:bg-indigo-600 text-white'
+                    ? 'bg-[#6366f1] hover:bg-[#818cf8] text-white'
+                    : 'bg-[#0099FF] hover:bg-[#005fcc] text-white'
                 )}
               >
                 <MdChevronLeft className="text-2xl" />
@@ -361,8 +361,8 @@ const Projects = () => {
                       "relative flex-shrink-0 w-28 md:w-36 h-24 md:h-32 rounded-lg overflow-hidden border-2 transition-all duration-300 group/thumb",
                       selectedProject.id === project.id
                         ? isDarkMode
-                          ? 'border-indigo-500 shadow-lg shadow-indigo-500/50'
-                          : 'border-indigo-600 shadow-lg shadow-indigo-600/50'
+                          ? 'border-[#6366f1] shadow-lg shadow-[#6366f1]/50'
+                          : 'border-[#0099FF] shadow-lg shadow-[#0099FF]/50'
                         : isDarkMode
                           ? 'border-white/10 hover:border-white/30'
                           : 'border-gray-300 hover:border-gray-400'
@@ -422,8 +422,8 @@ const Projects = () => {
                 className={cn(
                   "absolute -right-4 md:right-0 top-1/2 transform -translate-y-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100",
                   isDarkMode
-                    ? 'bg-indigo-500/80 hover:bg-indigo-500 text-white'
-                    : 'bg-indigo-600/80 hover:bg-indigo-600 text-white'
+                    ? 'bg-[#6366f1] hover:bg-[#818cf8] text-white'
+                    : 'bg-[#0099FF] hover:bg-[#005fcc] text-white'
                 )}
               >
                 <MdChevronRight className="text-2xl" />
@@ -462,7 +462,7 @@ const Projects = () => {
               <div className={cn(
                 "border-b p-6 md:p-10 transition-colors duration-500",
                 isDarkMode
-                  ? 'border-white/10 bg-gradient-to-r from-[#232a45] via-[#292a3a] to-[#2e2336]'
+                  ? 'border-white/10 bg-gradient-to-r from-[#0099FF]/20 to-[#00CC99]/20'
                   : 'border-gray-200 bg-gradient-to-r from-[#0099FF]/10 to-[#CCFF00]/10'
               )}>
                 <div className="flex justify-between items-start gap-4">
@@ -531,7 +531,7 @@ const Projects = () => {
                     <div className={cn(
                       "w-1 h-6 rounded-full bg-gradient-to-b",
                       isDarkMode
-                        ? 'from-purple-500 to-pink-500'
+                        ? 'from-indigo-400 to-teal-400'
                         : 'from-[#0099FF] to-[#CCFF00]'
                     )}></div>
                     <h4 className={cn(
@@ -559,7 +559,7 @@ const Projects = () => {
                   <div className={cn(
                     "p-4 rounded-lg border transition-colors duration-500",
                     isDarkMode
-                      ? 'border-indigo-900 bg-gradient-to-r from-indigo-900/60 to-slate-900/80'
+                      ? 'border-indigo-500 bg-slate-800'
                       : 'border-indigo-200 bg-indigo-50'
                   )}>
                     <h4 className={cn(
@@ -576,7 +576,7 @@ const Projects = () => {
                   <div className={cn(
                     "p-4 rounded-lg border transition-colors duration-500",
                     isDarkMode
-                      ? 'border-green-900 bg-gradient-to-r from-green-900/60 to-slate-900/80'
+                      ? 'border-green-500 bg-slate-800'
                       : 'border-rose-200 bg-rose-50'
                   )}>
                     <h4 className={cn(
@@ -608,7 +608,7 @@ const Projects = () => {
                     <div className={cn(
                       "w-1 h-6 rounded-full bg-gradient-to-b",
                       isDarkMode
-                        ? 'from-purple-500 to-pink-500'
+                        ? 'from-indigo-400 to-teal-400'
                         : 'from-[#0099FF] to-[#CCFF00]'
                     )}></div>
                     <h4 className={cn(
@@ -648,13 +648,13 @@ const Projects = () => {
                     <div className={cn(
                       "grid grid-cols-3 gap-6 p-6 rounded-lg border",
                       isDarkMode
-                        ? 'border-white/10 bg-gradient-to-r from-purple-500/10 to-pink-500/10'
+                        ? 'border-white/10 bg-gradient-to-r from-indigo-500/10 to-teal-500/10'
                         : 'border-indigo-200 bg-gradient-to-r from-[#0099FF]/10 to-[#CCFF00]/10'
                     )}>
                       <div className="text-center">
                         <div className={cn(
                           "text-3xl font-black",
-                          isDarkMode ? 'text-purple-400' : 'text-[#0099FF]'
+                          isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'
                         )}>
                           {selectedProject.metrics.area}
                         </div>
@@ -669,7 +669,7 @@ const Projects = () => {
                       )}>
                         <div className={cn(
                           "text-3xl font-black",
-                          isDarkMode ? 'text-purple-400' : 'text-[#0099FF]'
+                          isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'
                         )}>
                           {selectedProject.metrics.duration}
                         </div>
@@ -711,8 +711,8 @@ const Projects = () => {
                     className={cn(
                       "px-8 py-3 rounded-lg font-bold uppercase text-sm transition-all duration-300",
                       isDarkMode
-                        ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-lg hover:shadow-pink-500/30'
-                        : 'bg-gradient-to-r from-[#0099FF] to-[#CCFF00] text-white hover:shadow-lg hover:shadow-[#0099FF]/30'
+                        ? 'bg-[#6366f1] text-white hover:shadow-lg hover:shadow-[#6366f1]/30'
+                        : 'bg-[#0099FF] text-white hover:shadow-lg hover:shadow-[#0099FF]/30'
                     )}
                   >
                     Close

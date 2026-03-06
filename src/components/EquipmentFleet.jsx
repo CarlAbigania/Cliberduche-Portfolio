@@ -100,7 +100,7 @@ const EquipmentFleet = () => {
           <div className="inline-flex items-center gap-2 mb-4">
             <div className={`w-12 h-1 bg-gradient-to-r ${
               isDarkMode 
-                ? 'from-indigo-500 to-rose-500' 
+                ? 'from-indigo-400 to-teal-400' 
                 : 'from-[#0099FF] to-[#CCFF00]'
             }`}></div>
             <span className={`text-sm font-bold tracking-widest ${
@@ -110,7 +110,7 @@ const EquipmentFleet = () => {
             }`}>EQUIPMENT & FLEET</span>
             <div className={`w-12 h-1 bg-gradient-to-l ${
               isDarkMode 
-                ? 'from-indigo-500 to-rose-500' 
+                ? 'from-indigo-400 to-teal-400' 
                 : 'from-[#0099FF] to-[#CCFF00]'
             }`}></div>
           </div>
@@ -147,8 +147,8 @@ const EquipmentFleet = () => {
                       "w-full flex items-center gap-3 px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300",
                       activeCategory === cat.key
                         ? isDarkMode
-                          ? 'bg-gradient-to-r from-indigo-500 to-rose-500 text-white shadow-lg shadow-indigo-500/30'
-                          : 'bg-gradient-to-r from-[#0099FF] to-[#CCFF00] text-white shadow-lg shadow-[#0099FF]/30'
+                          ? 'bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/30'
+                          : 'bg-[#0099FF] text-white shadow-lg shadow-[#0099FF]/30'
                         : isDarkMode
                           ? 'border border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent text-white hover:border-indigo-500/50'
                           : 'border border-gray-300 bg-white/80 text-gray-900 hover:border-[#0099FF]'
@@ -206,7 +206,7 @@ const EquipmentFleet = () => {
                       "px-4 py-2 rounded-lg font-bold text-sm transition-all duration-200 border",
                       activeItemIndex === idx
                         ? isDarkMode
-                          ? 'bg-indigo-500 text-white border-indigo-500'
+                          ? 'bg-[#6366f1] text-white border-[#6366f1]'
                           : 'bg-[#0099FF] text-white border-[#0099FF]'
                         : isDarkMode
                           ? 'bg-white/10 text-white border-white/10 hover:bg-indigo-500/20'

@@ -40,7 +40,7 @@ const Services = () => {
         "h-full p-8 md:p-10 rounded-3xl border backdrop-blur-xl transition-all duration-300",
         "hover:shadow-2xl",
         isDarkMode
-          ? 'border-white/10 bg-gradient-to-br from-purple-500/10 to-pink-500/10 hover:border-pink-500/50 hover:shadow-pink-500/30'
+          ? 'border-white/10 bg-gradient-to-br from-indigo-500/10 to-teal-500/10 hover:border-teal-400/50 hover:shadow-teal-400/30'
           : 'border-gray-300 bg-gradient-to-br from-[#0099FF]/10 to-[#CCFF00]/10 hover:border-[#0099FF] hover:shadow-[#0099FF]/30'
       )}>
         {/* Icon */}
@@ -51,7 +51,7 @@ const Services = () => {
           className={cn(
             "w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300",
             isDarkMode
-              ? 'bg-gradient-to-br from-purple-500/30 to-pink-500/30 text-purple-200'
+              ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30 text-teal-200'
               : 'bg-gradient-to-br from-[#0099FF]/30 to-[#CCFF00]/30 text-[#0099FF]'
           )}
         >
@@ -81,7 +81,7 @@ const Services = () => {
           className={cn(
             "h-1 rounded-full bg-gradient-to-r mt-6",
             isDarkMode
-              ? 'from-purple-500 to-pink-500'
+              ? 'from-indigo-400 to-teal-400'
               : 'from-[#0099FF] to-[#CCFF00]'
           )}
         ></motion.div>
