@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useTheme } from '../hooks/useTheme';
 import { MdVerified, MdSecurity, MdRecycling, MdGroupWork, MdStars, MdPeopleOutline, MdAutoAwesome, MdRemoveRedEye } from 'react-icons/md';
+import CardSwap, { Card } from './ui/CardSwap';
 import { cn } from '../utils/cn';
 
 const AboutUs = () => {
@@ -139,44 +140,36 @@ const AboutUs = () => {
               </div>
             </motion.div>
 
-            {/* Right - Features with overlap effect */}
-            <motion.div
-              ref={featuresRef}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.2 }}
-              className="relative h-96"
-            >
-              {features.map((feat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.12 }}
-                  className={`absolute w-48 p-6 rounded-2xl backdrop-blur-xl transition-all duration-300 group ${
-                    isDarkMode
-                      ? 'border border-white/10 bg-gradient-to-br from-indigo-500/10 to-teal-500/10 hover:border-teal-400/50'
-                      : 'border border-gray-300 bg-gradient-to-br from-[#0052CC]/20 to-[#66AA00]/20 hover:border-[#0052CC]'
-                  }`}
-                  style={{
-                    top: `${i % 2 === 0 ? i * 80 : i * 70}px`,
-                    left: `${i % 2 === 0 ? 0 : 80}px`,
-                    zIndex: i,
-                  }}
-                >
-                  <div className="flex flex-col gap-3">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform ${
+            {/* Right - CardSwap animated feature cards */}
+            <div className="relative h-96">
+              <CardSwap
+                width={420}
+                height={260}
+                cardDistance={40}
+                verticalDistance={50}
+                delay={3500}
+                pauseOnHover={true}
+              >
+                {features.map((feat, i) => (
+                  <Card key={i}>
+                    <div className={`flex flex-col gap-3 p-6 w-full h-full rounded-2xl backdrop-blur-xl ${
                       isDarkMode
-                        ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30'
-                        : 'bg-gradient-to-br from-[#0052CC]/30 to-[#66AA00]/30'
+                        ? 'border border-white/10 bg-gradient-to-br from-indigo-500/10 to-teal-500/10'
+                        : 'border border-gray-300 bg-gradient-to-br from-white to-[#E0F7FA]'
                     }`}>
-                      {feat.reactIcon && React.createElement(feat.reactIcon, { className: `text-xl ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}` })}
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 ${
+                        isDarkMode
+                          ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30'
+                          : 'bg-gradient-to-br from-[#B3E5FC]/60 to-[#A5D6A7]/60'
+                      }`}>
+                        {feat.reactIcon && React.createElement(feat.reactIcon, { className: `text-xl ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}` })}
+                      </div>
+                      <h3 className={`font-bold text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{feat.title}</h3>
                     </div>
-                    <h3 className={`font-bold text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{feat.title}</h3>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  </Card>
+                ))}
+              </CardSwap>
+            </div>
           </div>
         </div>
       </div>
