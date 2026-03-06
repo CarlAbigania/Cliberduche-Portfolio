@@ -168,10 +168,10 @@ const ResourcesPartners = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: index * 0.1 }}
-                className={`rounded-2xl shadow-lg border bg-gradient-to-br ${
+                className={`rounded-2xl shadow-lg border ${
                   isDarkMode
-                    ? 'from-slate-900 via-indigo-900 to-teal-900 border-white/10'
-                    : 'from-white via-blue-50 to-teal-50 border-gray-200'
+                    ? 'bg-slate-900 border-white/10'
+                    : 'bg-gradient-to-br from-white via-blue-50 to-teal-50 border-gray-200'
                 } p-8 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group`}
               >
                 <div className="mb-4">

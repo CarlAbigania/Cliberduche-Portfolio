@@ -18,10 +18,10 @@ const AboutUs = () => {
   const valuesRef = useScrollAnimation({ threshold: 0.2 });
 
   const features = [
-    { icon: 'fa-check', title: 'Quality Materials', reactIcon: MdVerified },
-    { icon: 'fa-shield-alt', title: 'Safety First', reactIcon: MdSecurity },
-    { icon: 'fa-leaf', title: 'Eco-Friendly', reactIcon: MdRecycling },
-    { icon: 'fa-handshake', title: 'Client Focused', reactIcon: MdGroupWork },
+    { icon: 'fa-check', title: 'Quality Materials', reactIcon: MdVerified, image: 'https://www.shutterstock.com/image-illustration/construction-materials-tools-indoors-walls-600nw-2464204581.jpg' },
+    { icon: 'fa-shield-alt', title: 'Safety First', reactIcon: MdSecurity, image: 'https://png.pngtree.com/thumb_back/fh260/background/20220924/pngtree-safety-first-caution-work-warning-photo-image_14747062.jpg' },
+    { icon: 'fa-leaf', title: 'Eco-Friendly', reactIcon: MdRecycling, image: 'https://media.istockphoto.com/id/1502289160/photo/global-sustainable-environment-concept-esg-net-zero-eco-co2-carbon-human-hand-holding-green.jpg?s=612x612&w=0&k=20&c=Q9F-Q7dDBOrNj5Cd9jjjw-0ioRSJBTM4YacK9xctFP8=' },
+    { icon: 'fa-handshake', title: 'Client Focused', reactIcon: MdGroupWork, image: 'https://png.pngtree.com/thumb_back/fw800/background/20250323/pngtree-modern-client-focus-with-futuristic-block-text-direction-and-fast-priority-photo-photo-image_70143188.webp' },
   ];
 
   const highlights = [
@@ -152,19 +152,27 @@ const AboutUs = () => {
               >
                 {features.map((feat, i) => (
                   <Card key={i}>
-                    <div className={`flex flex-col gap-3 p-6 w-full h-full rounded-2xl backdrop-blur-xl ${
+                    <div className={`flex flex-col justify-between p-6 w-full h-full rounded-2xl backdrop-blur-xl ${
                       isDarkMode
                         ? 'border border-white/10 bg-gradient-to-br from-indigo-500/10 to-teal-500/10'
                         : 'border border-gray-300 bg-gradient-to-br from-white to-[#E0F7FA]'
                     }`}>
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 ${
-                        isDarkMode
-                          ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30'
-                          : 'bg-gradient-to-br from-[#B3E5FC]/60 to-[#A5D6A7]/60'
-                      }`}>
-                        {feat.reactIcon && React.createElement(feat.reactIcon, { className: `text-xl ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}` })}
+                      <div>
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 ${
+                          isDarkMode
+                            ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30'
+                            : 'bg-gradient-to-br from-[#B3E5FC]/60 to-[#A5D6A7]/60'
+                        }`}>
+                          {feat.reactIcon && React.createElement(feat.reactIcon, { className: `text-xl ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}` })}
+                        </div>
+                        <h3 className={`font-bold text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{feat.title}</h3>
                       </div>
-                      <h3 className={`font-bold text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{feat.title}</h3>
+                      <img
+                        src={feat.image}
+                        alt={feat.title}
+                        className="w-full h-32 object-cover rounded-xl mt-4"
+                        style={{ maxHeight: '130px' }}
+                      />
                     </div>
                   </Card>
                 ))}
