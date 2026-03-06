@@ -12,11 +12,11 @@ const MeetOurTeam = () => {
     {
       name: 'Executive Management',
       members: [
-        {
-          name: 'Rolando Climaco',
-          position: 'President / CEO',
-          bio: 'Founder and visionary leader overseeing all company operations.',
-          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+            {
+              name: 'Rolando Climaco',
+              position: 'President / CEO',
+              bio: 'Founder and visionary leader overseeing all company operations.',
+              image: '/images/employee/rolando.jpg',
         },
       ],
     },
@@ -27,13 +27,13 @@ const MeetOurTeam = () => {
           name: 'Ofelia Macaldo',
           position: 'HR Admin & Legal - Head',
           bio: 'Oversees legal matters, contracts, employee management, and HR operations.',
-          image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/ofelia.jpg',
         },
         {
           name: 'Ian Climaco',
           position: 'HR Officer',
           bio: 'Manages employee records, hiring, benefits, and compliance matters.',
-          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/ian.jpg',
         },
       ],
     },
@@ -44,13 +44,13 @@ const MeetOurTeam = () => {
           name: 'Mabel Climaco',
           position: 'Vice President',
           bio: 'Leads financial strategy and oversees accounting operations.',
-          image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/maria.jpg',
         },
         {
           name: 'Ma. Cristina Dino',
           position: 'Accounting Head',
           bio: 'Manages bookkeeping, financial records, permits, and tax compliance.',
-          image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/cristina.jpg',
         },
       ],
     },
@@ -61,13 +61,13 @@ const MeetOurTeam = () => {
           name: 'Benilda Padilla',
           position: 'Purchasing Head',
           bio: 'Directs material sourcing, supplier negotiations, and quality assurance.',
-          image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/benilda.jpg',
         },
         {
           name: 'Ivan Climaco',
           position: 'Purchasing Officer',
           bio: 'Manages procurement operations and supplier coordination.',
-          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/ivan.jpg',
         },
       ],
     },
@@ -78,13 +78,13 @@ const MeetOurTeam = () => {
           name: 'Rolisdio Climaco',
           position: 'AMO, Site Supervisor & Safety Officer',
           bio: 'Oversees logistics operations, site safety, and workplace compliance.',
-          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/rolisdio.jpg',
         },
         {
           name: 'Edgardo Canicon',
           position: 'Material Handler & Records',
           bio: 'Manages warehouse operations, inventory control, and material distribution.',
-          image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/edgardo.jpg',
         },
       ],
     },
@@ -95,19 +95,19 @@ const MeetOurTeam = () => {
           name: 'Engr. Genesis De Guzman',
           position: 'Project Manager',
           bio: 'Leads project planning, technical design, and engineering solutions.',
-          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/genesis.jpg',
         },
         {
           name: 'Katleen Mae Martinez',
           position: 'QA/QC Engineer',
           bio: 'Ensures quality assurance and quality control across all projects.',
-          image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/katleen.jpg',
         },
         {
           name: 'Persues Sarte',
           position: 'Site Engineer',
           bio: 'Provides on-site technical support and oversees project implementation.',
-          image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+              image: '/images/employee/persues.jpg',
         },
       ],
     },
@@ -176,31 +176,43 @@ const MeetOurTeam = () => {
         </div>
 
         {/* Team Members Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10 justify-items-center">
-          {currentDepartment.members.map((member, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-6 md:p-8 w-full max-w-xs flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
-              style={{ minHeight: '370px', height: '100%' }}
-            >
-              <img
-                src={member.image}
-                alt={member.name}
-                className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover mb-4 border-4 border-primary/20 dark:border-blue-400/20 shadow"
-              />
-              <h4 className="text-lg md:text-xl font-bold text-dark dark:text-white mb-1 text-center">
-                {member.name}
-              </h4>
-              <p className="text-secondary dark:text-green-400 font-semibold mb-2 text-sm md:text-base text-center">
-                {member.position}
-              </p>
-              <p className="text-gray-700 dark:text-white/90 text-sm md:text-base text-center leading-relaxed">
-                {member.bio}
-              </p>
-            </div>
-          ))}
+        {/* Use flexbox to center cards horizontally */}
+        <div className="flex flex-wrap justify-center gap-8 md:gap-10 w-full">
+          {currentDepartment.members.map((member, index) => {
+            const noPhotoMembers = ['Ian Climaco', 'Ivan Climaco', 'Edgardo Canicon', 'Persues Sarte'];
+            const hasNoPhoto = noPhotoMembers.includes(member.name);
+            return (
+              <div
+                key={index}
+                className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg p-6 md:p-8 w-full max-w-xs flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+                style={{ minHeight: '370px', height: '100%' }}
+              >
+                {hasNoPhoto ? (
+                  <div className="w-28 h-28 md:w-32 md:h-32 rounded-full mb-4 flex items-center justify-center bg-gray-200 dark:bg-slate-700 border-4 border-primary/20 dark:border-blue-400/20 shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 md:w-20 md:h-20 text-gray-400 dark:text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 12c2.7 0 4.5-2.1 4.5-4.5S14.7 3 12 3 7.5 5.1 7.5 7.5 9.3 12 12 12zm0 2c-3 0-9 1.5-9 4.5V21h18v-2.5c0-3-6-4.5-9-4.5z" />
+                    </svg>
+                  </div>
+                ) : (
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover mb-4 border-4 border-primary/20 dark:border-blue-400/20 shadow"
+                  />
+                )}
+                <h4 className="text-lg md:text-xl font-bold text-dark dark:text-white mb-1 text-center">
+                  {member.name}
+                </h4>
+                <p className="text-secondary dark:text-green-400 font-semibold mb-2 text-sm md:text-base text-center">
+                  {member.position}
+                </p>
+                <p className="text-gray-700 dark:text-white/90 text-sm md:text-base text-center leading-relaxed">
+                  {member.bio}
+                </p>
+              </div>
+            );
+          })}
         </div>
-
         {/* Department Indicators */}
         <div className="flex items-center justify-center gap-2 mt-10">
           {departments.map((_, index) => (
