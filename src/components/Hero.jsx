@@ -70,8 +70,8 @@ const Hero = ({ revealContent = true }) => {
                     ? 'bg-slate-800/80 border-slate-400/20 hover:bg-slate-800/90 hover:border-slate-400/30'
                     : 'bg-white/40 border-gray-800/20 hover:bg-white/60 hover:border-gray-800/30'
                 }`}>
-                  <div className="h-1.5 w-1.5 rounded-full animate-pulse bg-[#CCFF00]"></div>
-                  <span className="text-xs sm:text-sm font-medium tracking-wide text-white">Founded 2018 • CALABARZON</span>
+                  <div className="h-2 w-2 rounded-full animate-pulse bg-[#CCFF00]"></div>
+                  <span className="text-sm xs:text-base sm:text-sm font-medium tracking-wide text-white">Founded 2018 • CALABARZON</span>
                 </div>
               </motion.div>
 
@@ -95,7 +95,7 @@ const Hero = ({ revealContent = true }) => {
               {/* Subheadline */}
               <motion.p
                 variants={itemVariants}
-                className={`text-base xs:text-lg sm:text-xl lg:text-2xl max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed tracking-wide font-medium text-white`}
+                className={`text-sm xs:text-base sm:text-xl lg:text-2xl max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed tracking-wide font-medium text-white`}
                 style={!isDarkMode ? { textShadow: '0 1px 4px rgba(0, 0, 0, 0.12)' } : {}}
               >
                 Comprehensive backfill sourcing, land development, and civil works solutions you can trust.
@@ -105,23 +105,23 @@ const Hero = ({ revealContent = true }) => {
               <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center gap-6 mt-8">
                 <a
                   href="#projects"
-                  className={`group px-8 py-3 sm:px-10 sm:py-4 font-bold text-lg sm:text-lg rounded-lg transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center ${
+                  className={`group px-6 py-2 sm:px-10 sm:py-4 font-bold text-base sm:text-lg rounded-lg transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center ${
                     isDarkMode
                       ? 'bg-[#6366f1] hover:bg-[#818cf8] text-white hover:shadow-lg hover:shadow-[#6366f1]/40'
                       : 'bg-[#0099FF] hover:bg-[#005fcc] text-white hover:shadow-lg hover:shadow-[#0099FF]/50 font-semibold'
                   }`}
                 >
-                  <span className="text-white">View Projects</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
+                  <span className="text-base xs:text-lg text-white">View Projects</span>
+                  <ArrowRight className="w-5 h-5 xs:w-6 xs:h-6 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform text-white" />
                 </a>
                 <a
                   href="https://drive.google.com/drive/folders/1QFFNjs4s6DDpD4ncV1n4AXV5HPU7MMxk?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group px-8 py-3 sm:px-10 sm:py-4 font-bold text-lg sm:text-lg rounded-lg transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center border-2 border-gray-800/40 hover:border-[#0052CC] text-white hover:bg-white/40 hover:text-white font-semibold"
+                  className="group px-6 py-2 sm:px-10 sm:py-4 font-bold text-base sm:text-lg rounded-lg transition-all duration-300 flex items-center gap-2 w-full sm:w-auto justify-center border-2 border-gray-800/40 hover:border-[#0052CC] text-white hover:bg-white/40 hover:text-white font-semibold"
                 >
-                  <span className="text-white">Archives</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
+                  <span className="text-base xs:text-lg text-white">Archives</span>
+                  <ArrowRight className="w-5 h-5 xs:w-6 xs:h-6 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform text-white" />
                 </a>
               </motion.div>
             </motion.div>
@@ -129,11 +129,11 @@ const Hero = ({ revealContent = true }) => {
 
           {/* Down Arrow Animation */}
           <motion.div
-            className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2"
+            className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2"
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2.5, repeat: Infinity }}
           >
-            <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 xs:w-6 xs:h-6 sm:w-5 sm:h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </motion.div>
