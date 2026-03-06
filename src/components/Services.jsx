@@ -37,7 +37,7 @@ const Services = () => {
       className="group cursor-pointer"
     >
       <div className={cn(
-        "h-full p-8 md:p-10 rounded-3xl border backdrop-blur-xl transition-all duration-300",
+        "h-full p-4 sm:p-6 md:p-10 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300",
         "hover:shadow-2xl",
         isDarkMode
           ? 'border-white/10 bg-slate-900 hover:border-teal-400/50 hover:shadow-teal-400/30'
@@ -49,25 +49,25 @@ const Services = () => {
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.3 }}
           className={cn(
-            "w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300",
+            "w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 transition-all duration-300",
             isDarkMode
               ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30 text-teal-200'
               : 'bg-gradient-to-br from-[#0099FF]/30 to-[#CCFF00]/30 text-[#0099FF]'
           )}
         >
-          {iconMap[service.icon] && React.createElement(iconMap[service.icon], { className: 'text-3xl' })}
+          {iconMap[service.icon] && React.createElement(iconMap[service.icon], { className: 'text-2xl sm:text-3xl' })}
         </motion.div>
 
         {/* Content */}
         <h3 className={cn(
-          "text-xl md:text-2xl font-black mb-3 transition-all duration-300",
+          "text-base sm:text-xl md:text-2xl font-black mb-2 sm:mb-3 transition-all duration-300",
           isDarkMode ? 'text-white' : 'text-gray-900'
         )}>
           {service.title}
         </h3>
 
         <p className={cn(
-          "leading-relaxed text-base transition-opacity duration-300",
+          "leading-relaxed text-sm sm:text-base transition-opacity duration-300",
           isDarkMode ? 'text-white/75' : 'text-gray-700'
         )}>
           {service.desc}
