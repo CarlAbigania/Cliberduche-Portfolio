@@ -65,7 +65,11 @@ const Hero = ({ revealContent = true }) => {
             >
               {/* Subtle Badge */}
               <motion.div variants={itemVariants} className="mb-12">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 bg-white/40 border border-gray-800/20 hover:bg-white/60 hover:border-gray-800/30 backdrop-blur-sm">
+                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 border backdrop-blur-sm ${
+                  isDarkMode
+                    ? 'bg-slate-800/80 border-slate-400/20 hover:bg-slate-800/90 hover:border-slate-400/30'
+                    : 'bg-white/40 border-gray-800/20 hover:bg-white/60 hover:border-gray-800/30'
+                }`}>
                   <div className="h-2 w-2 rounded-full animate-pulse bg-[#CCFF00]"></div>
                   <span className="text-sm font-medium tracking-wide text-white">Founded 2018 • CALABARZON</span>
                 </div>
