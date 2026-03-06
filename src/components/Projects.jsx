@@ -4,6 +4,7 @@ import { useTheme } from '../hooks/useTheme';
 import { cn } from '../utils/cn';
 import ModalPortal from './ModalPortal';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import Magnet from './ui/Magnet';
 
 const Projects = () => {
   const { isDarkMode } = useTheme();
@@ -288,19 +289,19 @@ const Projects = () => {
                   )}
                 </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => handleProjectClick(selectedProject)}
-                  className={cn(
-                    "w-fit px-8 py-3 rounded-lg font-bold uppercase text-sm transition-all",
-                    isDarkMode
-                      ? 'bg-[#6366f1] text-white hover:shadow-lg hover:shadow-[#6366f1]/30'
-                      : 'bg-[#0099FF] text-white hover:shadow-lg hover:shadow-[#0099FF]/30'
-                  )}
-                >
-                  View Case Study
-                </motion.button>
+                <Magnet padding={50} magnetStrength={8}>
+                  <motion.button
+                    onClick={() => handleProjectClick(selectedProject)}
+                    className={cn(
+                      "w-fit px-8 py-3 rounded-lg font-bold uppercase text-sm transition-all",
+                      isDarkMode
+                        ? 'bg-[#6366f1] text-white hover:shadow-lg hover:shadow-[#6366f1]/30'
+                        : 'bg-[#0099FF] text-white hover:shadow-lg hover:shadow-[#0099FF]/30'
+                    )}
+                  >
+                    View Case Study
+                  </motion.button>
+                </Magnet>
               </motion.div>
             </div>
           </motion.div>
