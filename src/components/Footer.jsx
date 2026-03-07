@@ -91,7 +91,7 @@ const Footer = () => {
                     key={social.label}
                     href={social.url}
                     title={social.label}
-                    className="w-11 h-11 bg-secondary dark:bg-blue-400 text-primary dark:text-white rounded-lg flex items-center justify-center hover:bg-primary hover:text-white dark:hover:bg-secondary dark:hover:text-dark transition-all duration-300 hover:scale-110 text-sm fade-in-up"
+                    className="w-11 h-11 bg-secondary dark:bg-blue-400 text-primary dark:text-white rounded-full flex items-center justify-center hover:bg-primary hover:text-white dark:hover:bg-secondary dark:hover:text-dark transition-all duration-300 hover:scale-110 text-sm fade-in-up"
                     style={{ animationDelay: `${0.3 + i * 0.05}s` }}
                   >
                     <Icon />
