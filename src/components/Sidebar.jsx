@@ -217,20 +217,23 @@ const Sidebar = () => {
         {/* Edge panel */}
         <div
           className={`flex flex-col items-center bg-white/80 dark:bg-slate-800/80 rounded-r-2xl shadow-lg shadow-black/20 dark:shadow-black/50 p-2 gap-3 border-r border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md transition-all duration-300 ${
-            isEdgePanelOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-24 opacity-0 pointer-events-none'
+            isEdgePanelOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-24 opacity-0 pointer-events-auto'
           }`}
           style={{ zIndex: 40 }}
         >
           {navigationLinks.map((link) => (
             <button
               key={link.id}
-              onClick={() => { handleNavClick(link.id); setIsEdgePanelOpen(false); }}
+              onClick={() => handleNavClick(link.id)}
               className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-300 text-xl ${
                 activeSection === link.id
                   ? 'bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/50 scale-110'
                   : 'bg-white dark:bg-slate-700 text-primary dark:text-blue-400 hover:bg-primary/10 hover:scale-105'
               }`}
               title={link.label}
+              tabIndex={0}
+              aria-label={link.label}
+              style={{ touchAction: 'manipulation' }}
             >
               {iconMap[link.icon] && React.createElement(iconMap[link.icon])}
             </button>
