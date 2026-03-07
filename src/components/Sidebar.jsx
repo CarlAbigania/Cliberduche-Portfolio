@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { MdHome, MdInfoOutline, MdBuild, MdChecklist, MdNoteAlt, MdLocalShipping, MdFolderOpen, MdPeople, MdShield, MdLink, MdEmail, MdMenu, MdClose } from 'react-icons/md';
+import { MdHome, MdInfoOutline, MdBuild, MdChecklist, MdNoteAlt, MdLocalShipping, MdFolderOpen, MdPeople, MdShield, MdLink, MdEmail, MdMenu, MdClose, MdChevronRight, MdChevronLeft } from 'react-icons/md';
 
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isEdgePanelOpen, setIsEdgePanelOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [bubblePos, setBubblePos] = useState({ xPx: 32, y: 32 }); // xPx: pixels from left, y: pixels from bottom
   const [isDragging, setIsDragging] = useState(false);
@@ -200,7 +201,44 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Floating Bubble Button */}
+      {/* Mobile Edge Panel (visible below md) */}
+      <div className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center md:hidden">
+        {/* Toggle button */}
+        <button
+          onClick={() => setIsEdgePanelOpen(v => !v)}
+          className={`w-8 h-8 flex items-center justify-center rounded-r-xl bg-white/80 dark:bg-slate-800/80 shadow-lg shadow-black/20 dark:shadow-black/50 border-r border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md transition-all duration-300 ${
+            isEdgePanelOpen ? 'ml-0' : 'ml-0'
+          }`}
+          style={{ zIndex: 41 }}
+          title={isEdgePanelOpen ? 'Close panel' : 'Open panel'}
+        >
+          {isEdgePanelOpen ? <MdChevronLeft className="text-xl text-primary dark:text-blue-400" /> : <MdChevronRight className="text-xl text-primary dark:text-blue-400" />}
+        </button>
+        {/* Edge panel */}
+        <div
+          className={`flex flex-col items-center bg-white/80 dark:bg-slate-800/80 rounded-r-2xl shadow-lg shadow-black/20 dark:shadow-black/50 p-2 gap-3 border-r border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md transition-all duration-300 ${
+            isEdgePanelOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-24 opacity-0 pointer-events-none'
+          }`}
+          style={{ zIndex: 40 }}
+        >
+          {navigationLinks.map((link) => (
+            <button
+              key={link.id}
+              onClick={() => { handleNavClick(link.id); setIsEdgePanelOpen(false); }}
+              className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-300 text-xl ${
+                activeSection === link.id
+                  ? 'bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/50 scale-110'
+                  : 'bg-white dark:bg-slate-700 text-primary dark:text-blue-400 hover:bg-primary/10 hover:scale-105'
+              }`}
+              title={link.label}
+            >
+              {iconMap[link.icon] && React.createElement(iconMap[link.icon])}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Floating Bubble Button (desktop) */}
       <button
         ref={bubbleRef}
         onMouseDown={handleMouseDown}
@@ -222,7 +260,7 @@ const Sidebar = () => {
         ></div>
       )}
 
-      {/* Left Sidebar Navigation - Floating */}
+      {/* Left Sidebar Navigation - Floating (desktop) */}
       <div
         className={`hidden md:block fixed left-8 top-20 h-[calc(100vh-120px)] w-72 bg-white/25 dark:bg-slate-800/30 rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/50 overflow-hidden z-40 transition-all duration-300 border border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md ${
           isMenuOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-96 opacity-0 pointer-events-none'
@@ -260,7 +298,6 @@ const Sidebar = () => {
                   }`}
                 >
                   {/* Background animation */}
-                  
                   {/* Icon */}
                   <div className={`relative flex-shrink-0 w-5 h-5 flex items-center justify-center transition-all duration-300 ${
                     activeSection === link.id 
@@ -269,12 +306,10 @@ const Sidebar = () => {
                   }`}>
                     {iconMap[link.icon] && React.createElement(iconMap[link.icon])}
                   </div>
-                  
                   {/* Label */}
                   <span className={`font-medium flex-1 text-left transition-all duration-300 ${
                     activeSection === link.id ? 'text-white' : 'text-gray-700 dark:text-gray-100'
                   }`}>{link.label}</span>
-                  
                   {/* Active indicator dot */}
                   {activeSection === link.id && (
                     <div className="relative flex-shrink-0 w-2.5 h-2.5 rounded-full bg-white shadow-lg shadow-white/50 animate-pulse"></div>
@@ -284,7 +319,6 @@ const Sidebar = () => {
             ))}
           </ul>
         </nav>
-
       </div>
     </>
   );
