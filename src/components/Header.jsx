@@ -32,6 +32,11 @@ const Header = () => {
     window.dispatchEvent(
       new CustomEvent('smooth-scroll-set-target', { detail: 0 })
     );
+    // Fallback for mobile: scroll directly and close menu if open
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (mobileMenuOpen) setMobileMenuOpen(false);
+    }, 0);
   };
 
   return (
