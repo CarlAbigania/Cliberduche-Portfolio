@@ -24,6 +24,14 @@ const BackToTopButton = ({ threshold = 300, showAtBottom = false }) => {
     window.dispatchEvent(
       new CustomEvent('smooth-scroll-set-target', { detail: 0 })
     );
+    // Fallback for mobile: scroll directly
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Try to close mobile menu if Header is present
+      if (typeof window.setMobileMenuOpen === 'function') {
+        window.setMobileMenuOpen(false);
+      }
+    }, 0);
   };
 
   return (
