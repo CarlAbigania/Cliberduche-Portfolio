@@ -90,6 +90,10 @@ const Sidebar = () => {
       window.dispatchEvent(
         new CustomEvent('smooth-scroll-set-target', { detail: targetY })
       );
+      // Fallback: scroll directly (especially for mobile)
+      setTimeout(() => {
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+      }, 0);
     }
   };
 
@@ -217,7 +221,7 @@ const Sidebar = () => {
         {/* Edge panel */}
         <div
           className={`flex flex-col items-center bg-white/80 dark:bg-slate-800/80 rounded-r-2xl shadow-lg shadow-black/20 dark:shadow-black/50 p-2 gap-3 border-r border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md transition-all duration-300 ${
-            isEdgePanelOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-24 opacity-0 pointer-events-auto'
+            isEdgePanelOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-24 opacity-0 pointer-events-none'
           }`}
           style={{ zIndex: 40 }}
         >
