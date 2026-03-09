@@ -80,14 +80,14 @@ const Hero = ({ revealContent = true }) => {
                 <h1 className={`text-4xl xs:text-5xl sm:text-6xl lg:text-8xl font-bold leading-tight tracking-tight text-white`}
                   style={!isDarkMode ? { textShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' } : {}}
                 >
-                  Civil Works
+                  Company
                   <br />
                   <span className={`bg-clip-text text-transparent ${
                     isDarkMode
                       ? 'bg-[#6366f1]'
                       : 'bg-[#0099FF]'
                   }`} style={{ WebkitTextFillColor: isDarkMode ? '#6366f1' : '#0099FF', color: 'white', background: 'none' }}>
-                    Made Simple
+                    Profile
                   </span>
                 </h1>
               </motion.div>
