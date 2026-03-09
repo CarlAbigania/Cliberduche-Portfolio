@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../hooks/useTheme';
+import FlipCard from './ui/FlipCard';
 
 const ResourcesPartners = () => {
   const { isDarkMode } = useTheme();
@@ -117,36 +118,64 @@ const ResourcesPartners = () => {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className={`relative rounded-3xl shadow-xl border bg-gradient-to-br ${isDarkMode ? 'from-slate-900 via-indigo-900 to-teal-900 border-white/10' : 'from-white via-blue-50 to-teal-50 border-gray-200'} overflow-hidden group p-0`}
             >
-              <img src="/images/land-development-site1.png" alt="Calamba City Site" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-              <div className="relative z-10 p-10 md:p-14 flex flex-col justify-center h-full">
-                <h4 className={`text-2xl md:text-3xl font-mont font-black mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Calamba City Site</h4>
-                <div className={`space-y-3 text-base md:text-lg ${isDarkMode ? 'text-white/80' : 'text-gray-800'}`}> 
-                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Coordinates:</strong> 14°08'32.0"N 121°09'37.0"E</motion.p>
-                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Address:</strong> 45R6+V4J Calamba, Laguna</motion.p>
-                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Capacity:</strong> 20M+ cubic meters of backfilling materials</motion.p>
-                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>Covering 7 lots with a total volume of 19,580,004.6 cubic meters of excess backfill materials (Jastifias).</motion.p>
-                </div>
-              </div>
+              <FlipCard
+                isDarkMode={isDarkMode}
+                front={
+                  <div className="relative w-full h-full overflow-hidden">
+                    <img 
+                      src="/images/land-development-site1.png" 
+                      alt="Calamba City Site" 
+                      className="w-full h-full object-cover" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4 text-2xl font-bold text-white">Calamba City Site</div>
+                  </div>
+                }
+                back={
+                  <div className={`relative w-full h-full flex flex-col justify-center p-8 ${isDarkMode ? 'bg-gradient-to-br from-slate-900 via-indigo-900 to-teal-900' : 'bg-gradient-to-br from-indigo-600 via-blue-600 to-teal-600'}`}>
+                    <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-white'}`}>Calamba City Site</h3>
+                    <div className={`border-t py-4 space-y-2 text-sm md:text-base leading-relaxed font-medium ${isDarkMode ? 'border-t-indigo-400/40 text-white' : 'border-t-white/40 text-white'}`}>
+                      <p><strong>Coordinates:</strong> 14°08'32.0"N 121°09'37.0"E</p>
+                      <p><strong>Address:</strong> 45R6+V4J Calamba, Laguna</p>
+                      <p><strong>Capacity:</strong> 20M+ cubic meters of backfilling materials</p>
+                      <p className="text-sm">Covering 7 lots with a total volume of 19,580,004.6 cubic meters of excess backfill materials (Jastifias).</p>
+                    </div>
+                  </div>
+                }
+              />
             </motion.div>
             {/* Silang Site */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className={`relative rounded-3xl shadow-xl border bg-gradient-to-br ${isDarkMode ? 'from-slate-900 via-indigo-900 to-teal-900 border-white/10' : 'from-white via-blue-50 to-teal-50 border-gray-200'} overflow-hidden group p-0`}
             >
-              <img src="/images/land-development-site2.png" alt="Silang, Cavite Site" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-              <div className="relative z-10 p-10 md:p-14 flex flex-col justify-center h-full">
-                <h4 className={`text-2xl md:text-3xl font-mont font-black mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Silang, Cavite Site</h4>
-                <div className={`space-y-3 text-base md:text-lg ${isDarkMode ? 'text-white/80' : 'text-gray-800'}`}> 
-                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Coordinates:</strong> 14°15'02"N 120°59'12"E</motion.p>
-                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.1 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Address:</strong> Sabutan, 7X2P+6MF Silang, Cavite</motion.p>
-                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}><strong className={isDarkMode ? 'text-white' : 'text-gray-900'}>Capacity:</strong> 2.2M+ cubic meters of backfilling materials</motion.p>
-                  <motion.p initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>Covering 5 lots with a total volume of 2,241,000 cubic meters of excess backfill materials (Sitikis).</motion.p>
-                </div>
-              </div>
+              <FlipCard
+                isDarkMode={isDarkMode}
+                front={
+                  <div className="relative w-full h-full overflow-hidden">
+                    <img 
+                      src="/images/land-development-site2.png" 
+                      alt="Silang, Cavite Site" 
+                      className="w-full h-full object-cover" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4 text-2xl font-bold text-white">Silang, Cavite Site</div>
+                  </div>
+                }
+                back={
+                  <div className={`relative w-full h-full flex flex-col justify-center p-8 ${isDarkMode ? 'bg-gradient-to-br from-slate-900 via-indigo-900 to-teal-900' : 'bg-gradient-to-br from-indigo-600 via-blue-600 to-teal-600'}`}>
+                    <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-white'}`}>Silang, Cavite Site</h3>
+                    <div className={`border-t py-4 space-y-2 text-sm md:text-base leading-relaxed font-medium ${isDarkMode ? 'border-t-indigo-400/40 text-white' : 'border-t-white/40 text-white'}`}>
+                      <p><strong>Coordinates:</strong> 14°15'02"N 120°59'12"E</p>
+                      <p><strong>Address:</strong> Sabutan, 7X2P+6MF Silang, Cavite</p>
+                      <p><strong>Capacity:</strong> 2.2M+ cubic meters of backfilling materials</p>
+                      <p className="text-sm">Covering 5 lots with a total volume of 2,241,000 cubic meters of excess backfill materials (Sitikis).</p>
+                    </div>
+                  </div>
+                }
+              />
             </motion.div>
           </div>
         </div>
