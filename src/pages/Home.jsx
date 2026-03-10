@@ -8,7 +8,6 @@ import Projects from '../components/Projects';
 import ResourcesPartners from '../components/ResourcesPartners';
 import EquipmentFleet from '../components/EquipmentFleet';
 import ComplianceSafety from '../components/ComplianceSafety';
-import Footer from '../components/Footer';
 import ProcessOverview from '../components/ProcessOverview';
 import MeetOurTeam from '../components/MeetOurTeam';
 
@@ -46,7 +45,6 @@ const Home = ({ heroRevealContent = true }) => {
           <ResourcesPartners />
         </section>
       </main>
-      <Footer />
     </>
   );
 };

@@ -41,7 +41,7 @@ const ResourcesPartners = () => {
     <section
       id="resources"
       className={[
-        'py-24 md:py-32 relative overflow-hidden transition-colors duration-500',
+        'pt-24 md:pt-32 relative overflow-hidden transition-colors duration-500',
         isDarkMode
           ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
           : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
@@ -215,6 +215,16 @@ const ResourcesPartners = () => {
           </div>
         </div>
       </div>
+
+      {/* Curved Shape Section */}
+      <div 
+        style={{ 
+          clipPath: 'polygon(0% 0%, 14% 30%, 86% 30%, 100% 0%, 100% 100%, 0% 100%)',
+          height: '130px',
+          marginTop: '60px'
+        }}
+        className={`${isDarkMode ? 'bg-dark' : 'bg-primary'}`}
+      />
     </section>
   );
 };
