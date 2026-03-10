@@ -49,7 +49,7 @@ const ComplianceSafety = () => {
       [
         'py-24 md:py-32 relative overflow-hidden transition-colors duration-500',
         isDarkMode
-          ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
+          ? 'bg-[#0f172a]'
           : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
       ].join(' ')
     }>
@@ -72,104 +72,63 @@ const ComplianceSafety = () => {
           <p className={`text-lg max-w-2xl mx-auto ${isDarkMode ? 'text-white/70' : 'text-gray-700'}`}>Legal compliance, certifications, and unwavering safety commitment</p>
         </motion.div>
 
-        {/* Blueprint Interactive Map for Certificates */}
-        <div className="relative flex items-center justify-center mb-20 min-h-[480px] w-full">
-          {/* SVG Blueprint Background with grid lines, now much wider */}
-          <svg viewBox="0 0 200 110" className="absolute w-full h-full left-0 top-0 z-0" style={{ maxWidth: '2000px', maxHeight: '520px' }}>
-            {/* Only grid lines remain, extended width */}
-            <g stroke="#334155" strokeWidth="0.3">
-              <line x1="3" y1="30" x2="197" y2="30" />
-              <line x1="3" y1="55" x2="197" y2="55" />
-              <line x1="3" y1="80" x2="197" y2="80" />
-              <line x1="33" y1="7" x2="33" y2="103" />
-              <line x1="100" y1="7" x2="100" y2="103" />
-              <line x1="167" y1="7" x2="167" y2="103" />
-            </g>
-          </svg>
-          {/* Hotspots with improved spacing and animated effects */}
-          {complianceHotspots.map((item, idx) => {
-            // Clamp hotspot positions to always stay within the grid area
-            // Grid area in SVG: x: 3-197, y: 7-103 (out of 200x110)
-            // Convert to percent: x: 1.5%-98.5%, y: 6.4%-93.6%
-            const clamp = (val, min, max) => Math.max(min, Math.min(val, max));
-            const minX = 1.5, maxX = 98.5, minY = 6.4, maxY = 93.6;
-            const clampedX = clamp(item.x, minX, maxX);
-            const clampedY = clamp(item.y, minY, maxY);
-            return (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.08, duration: 0.6, ease: 'easeOut' }}
-                whileHover={{}}
-                style={{
-                  position: 'absolute',
-                  left: `${clampedX}%`,
-                  top: `${clampedY}%`,
-                  transform: 'translate(-50%, -50%)',
-                  zIndex: 10 + idx,
-                  cursor: 'pointer',
-                }}
-                tabIndex={0}
-                aria-label={item.name}
-                onMouseEnter={() => setHoveredIndex(idx)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() => setSelectedCert(item)}
-                onKeyDown={e => (e.key === 'Enter' ? setSelectedCert(item) : null)}
-              >
-                <span className="relative inline-flex">
-                  {/* Pulsing ring indicator */}
-                  <span className={`absolute inset-0 rounded-full animate-pulse pointer-events-none ${isDarkMode ? 'bg-blue-400/30' : 'bg-blue-400/20'}`}></span>
-                  <span className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg text-white relative z-10 ${isDarkMode ? 'bg-[#6366f1]' : 'bg-[#0099FF]'}`}>
-                    {item.reactIcon && React.createElement(item.reactIcon, { className: 'text-xl' })}
-                  </span>
-                </span>
-                {/* 'Click to view' text always visible */}
-                <span className="block text-xs text-blue-500 dark:text-blue-300 mt-1 text-center font-semibold select-none">Click to view</span>
-                {/* Floating card on hover/click with certificate name and details only (no image preview) - only show on tablet/desktop */}
-                <AnimatePresence>
-                  {hoveredIndex === idx && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.3 }}
-                      className="hidden md:block absolute left-1/2 -translate-x-1/2 top-full mt-3 w-72 bg-white dark:bg-slate-900/90 text-gray-700 dark:text-white/80 rounded-xl shadow-lg px-4 py-3 text-sm z-50"
-                    >
-                      <div className="font-bold mb-1">{item.name}</div>
-                      <div>{item.details || 'Click to view certificate.'}</div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-          {/* Removed safety badges/icons around the blueprint as requested */}
-        </div>
 
-        {/* Safety Commitments as Animated Overlays on Infographic */}
-        <div className="flex flex-wrap gap-8 items-center justify-center relative z-10">
-          {safetyCommitments.map((item, index) => (
-            <motion.div
-              key={index}
-              custom={index}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={overlayItem}
-              whileHover="hover"
-              className={
-                `relative px-8 py-5 rounded-full bg-gradient-to-br ` +
-                (isDarkMode
-                  ? 'from-indigo-900 to-teal-900 text-white/80'
-                  : 'from-[#0099FF]/10 to-[#CCFF00]/20 text-gray-700') +
-                ' shadow-md text-lg font-semibold select-none'
-              }
-              style={{ cursor: 'default', minWidth: '200px', minHeight: '60px' }}
-            >
-              {item}
-            </motion.div>
-          ))}
+
+        {/* New grid layout for certificates and safety commitments */}
+        <div className="flex flex-col md:flex-row gap-12 md:gap-20">
+          {/* Certificates Grid */}
+          <div className="flex-1">
+            <div className="p-0 bg-white/90 dark:bg-slate-900/80 overflow-hidden">
+              {complianceHotspots.map((item, idx) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.07, duration: 0.6, ease: 'easeOut' }}
+                  className="flex flex-col sm:flex-row items-center gap-6 px-6 py-5"
+                >
+                  <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white text-3xl ${isDarkMode ? 'bg-[#6366f1]' : 'bg-[#0099FF]'}`}>
+                    {item.reactIcon && React.createElement(item.reactIcon, { className: 'text-2xl' })}
+                  </div>
+                  <div className="flex-1 flex flex-col items-center sm:items-start">
+                    <div className="font-bold text-base text-center sm:text-left text-gray-900 dark:text-white min-h-[48px] flex items-center">{item.name}</div>
+                  </div>
+                  <button
+                    className={`mt-4 sm:mt-0 px-4 py-2 rounded-lg font-semibold transition-colors duration-200 flex items-center gap-2 text-white ${isDarkMode ? 'bg-[#6366f1] hover:bg-[#818cf8]' : 'bg-[#0099FF] hover:bg-[#005fcc]'}`}
+                    onClick={() => setSelectedCert(item)}
+                  >
+                    View
+                    <MdOpenInNew className="w-4 h-4" />
+                  </button>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          {/* Safety Commitments */}
+          <div className="flex-1 flex flex-col gap-8 items-center">
+            {safetyCommitments.map((item, index) => (
+              <motion.div
+                key={index}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={overlayItem}
+                whileHover="hover"
+                className={
+                  `relative px-8 py-5 rounded-2xl bg-gradient-to-br ` +
+                  (isDarkMode
+                    ? 'from-indigo-900 to-teal-900 text-white/80'
+                    : 'from-[#0099FF]/10 to-[#CCFF00]/20 text-gray-700') +
+                  ' shadow-md text-lg font-semibold select-none text-center'
+                }
+                style={{ cursor: 'default', minWidth: '200px', minHeight: '60px' }}
+              >
+                {item}
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Certificate Modal - Animated */}
