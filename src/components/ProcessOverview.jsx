@@ -47,7 +47,7 @@ const ProcessOverview = () => {
       className={
         `py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ` +
         (isDarkMode
-          ? 'bg-[#0f172a]'
+          ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
           : 'bg-gradient-to-br from-gray-50 via-white to-gray-100')
       }
     >

@@ -221,9 +221,9 @@ const AboutUs = () => {
     <section id="about" className="relative">
       {/* Company Overview Section - Enhanced */}
       <div
-        className={`relative py-24 md:py-32 transition-colors duration-500 ${isDarkMode
-            ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
-            : 'bg-gradient-to-br from-[#e0f2fe] via-white to-[#e0f7fa]'
+        className={`relative py-24 md:py-32 border-b transition-colors duration-500 ${isDarkMode
+            ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black border-white/5'
+            : 'bg-white border-gray-200'
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -342,9 +342,9 @@ const AboutUs = () => {
 
       {/* Key Highlights Section - Timeline style */}
       <div
-        className={`relative py-24 md:py-32 transition-colors duration-500 ${isDarkMode
-            ? 'bg-[#0f172a]'
-            : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+        className={`relative py-24 md:py-32 border-b transition-colors duration-500 ${isDarkMode
+            ? 'bg-black border-white/5'
+            : 'bg-slate-100 border-gray-200'
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -424,13 +424,13 @@ const AboutUs = () => {
 
       {/* Mission & Vision - Large Typography */}
       <div
-        className={`relative py-24 md:py-32 transition-colors duration-500 ${isDarkMode
-            ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
-            : 'bg-gradient-to-br from-[#e0f2fe] via-white to-[#e0f7fa]'
+        className={`relative py-24 md:py-32 border-b transition-colors duration-500 ${isDarkMode
+            ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black border-white/5'
+            : 'bg-white border-gray-200'
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="flex flex-col md:flex-row gap-12 md:gap-20">
+          <div className="space-y-20">
             {missionVision.map((item, idx) => (
               <motion.div
                 key={idx}
@@ -438,42 +438,59 @@ const AboutUs = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9 }}
-                className="flex-1 space-y-6"
+                className="space-y-6"
               >
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center ${isDarkMode
-                          ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30'
-                          : 'bg-gradient-to-br from-[#0052CC]/30 to-[#66AA00]/30'
-                        }`}
-                    >
-                      {idx === 0 ? (
-                        <MdAutoAwesome
-                          className={isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}
-                        />
-                      ) : (
-                        <MdRemoveRedEye
-                          className={isDarkMode ? 'text-rose-400' : 'text-rose-600'}
-                        />
-                      )}
+                <div className="flex items-start justify-between gap-8">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div
+                        className={`w-10 h-10 rounded-full flex items-center justify-center ${isDarkMode
+                            ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30'
+                            : 'bg-gradient-to-br from-[#0052CC]/30 to-[#66AA00]/30'
+                          }`}
+                      >
+                        {idx === 0 ? (
+                          <MdAutoAwesome
+                            className={isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}
+                          />
+                        ) : (
+                          <MdRemoveRedEye
+                            className={isDarkMode ? 'text-rose-400' : 'text-rose-600'}
+                          />
+                        )}
+                      </div>
+                      <h3
+                        className={`text-3xl md:text-4xl font-black ${isDarkMode ? 'text-white' : 'text-gray-900'
+                          }`}
+                      >
+                        {item.title}
+                      </h3>
                     </div>
-                    <h3
-                      className={`text-3xl md:text-4xl font-black ${isDarkMode ? 'text-white' : 'text-gray-900'
-                        }`}
+                    <p
+                      id={`mission-text-${idx}`}
+                      className={cn(
+                        'text-lg leading-relaxed transition-all duration-300 max-w-3xl',
+                        !expandedMission[idx] && 'line-clamp-3',
+                        isDarkMode ? 'text-white/75' : 'text-gray-700'
+                      )}
                     >
-                      {item.title}
-                    </h3>
+                      {item.desc}
+                    </p>
+                    <button
+                      onClick={() => toggleMission(idx)}
+                      className={`mt-6 inline-flex items-center gap-2 font-semibold transition-colors group ${isDarkMode
+                          ? 'text-[#6366f1] hover:text-[#818cf8]'
+                          : 'text-[#0099FF] hover:text-[#005fcc]'
+                        }`}
+                      aria-expanded={expandedMission[idx]}
+                      aria-controls={`mission-text-${idx}`}
+                    >
+                      <span>{expandedMission[idx] ? 'Show less' : 'Read more'}</span>
+                      <span className="group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+                    </button>
                   </div>
-                  <p
-                    id={`mission-text-${idx}`}
-                    className={cn(
-                      'text-lg leading-relaxed transition-all duration-300 max-w-3xl',
-                      isDarkMode ? 'text-white/75' : 'text-gray-700'
-                    )}
-                  >
-                    {item.desc}
-                  </p>
                 </div>
               </motion.div>
             ))}
@@ -483,9 +500,7 @@ const AboutUs = () => {
 
       {/* Core Values - Asymmetric Layout */}
       <div
-        className={`relative py-24 md:py-32 transition-colors duration-500 ${isDarkMode
-            ? 'bg-[#0f172a]'
-            : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+        className={`relative py-24 md:py-32 transition-colors duration-500 ${isDarkMode ? 'bg-black' : 'bg-slate-100'
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6">
