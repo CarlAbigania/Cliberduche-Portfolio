@@ -309,7 +309,7 @@ const AboutUs = () => {
                 cardDistance={cardDistance}
                 verticalDistance={verticalDistance}
                 delay={3500}
-                pauseOnHover={true}
+                pauseOnHover={false}
               >
                 {features.map((feat, i) => (
                   <Card key={i}>
