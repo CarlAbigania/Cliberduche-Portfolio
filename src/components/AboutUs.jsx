@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../hooks/useTheme';
 import {
   MdVerified,
@@ -15,8 +15,11 @@ import {
 import CardSwap, { Card } from './ui/CardSwap';
 import { cn } from '../utils/cn';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const AboutUs = () => {
   const { isDarkMode } = useTheme();
+  const containerRef = useRef(null);
 
   // Responsive card dimensions for CardSwap
   const [cardWidth, setCardWidth] = useState(420);
@@ -28,18 +31,16 @@ const AboutUs = () => {
   useEffect(() => {
     const updateCardSize = () => {
       const width = window.innerWidth;
-      let newWidth;
-      let sizeLevel;
+      let newWidth, sizeLevel;
 
-      // Define breakpoints
       if (width < 640) {
-        newWidth = 250; // mobile
+        newWidth = 250; 
         sizeLevel = 'sm';
       } else if (width < 1024) {
-        newWidth = 300; // tablet
+        newWidth = 300; 
         sizeLevel = 'md';
       } else {
-        newWidth = 420; // desktop
+        newWidth = 420; 
         sizeLevel = 'lg';
       }
 
@@ -56,41 +57,119 @@ const AboutUs = () => {
     return () => window.removeEventListener('resize', updateCardSize);
   }, []);
 
-  // Scroll animation refs
-  const overviewRef = useScrollAnimation({ threshold: 0.2 });
-  const milestonesRef = useScrollAnimation({ threshold: 0.2 });
-  const missionRef = useScrollAnimation({ threshold: 0.2 });
-  const visionRef = useScrollAnimation({ threshold: 0.2 });
-  const valuesRef = useScrollAnimation({ threshold: 0.2 });
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      // Intro section animations
+      const introElements = gsap.utils.toArray('.gsap-intro');
+      introElements.forEach((el, idx) => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          delay: idx * 0.1,
+          ease: "easeOut"
+        });
+      });
+
+      // Journey Timeline
+      const timelinePoints = gsap.utils.toArray('.gsap-journey');
+      gsap.from(timelinePoints, {
+        scrollTrigger: {
+          trigger: '.gsap-journey-container',
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        x: -50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out"
+      });
+
+      // Mission & Vision
+      const missionCards = gsap.utils.toArray('.gsap-mission');
+      missionCards.forEach((card) => {
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+          scale: 0.95,
+          y: 40,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power2.out"
+        });
+      });
+
+      // Values Stagger
+      const values = gsap.utils.toArray('.gsap-value');
+      gsap.from(values, {
+        scrollTrigger: {
+          trigger: '.gsap-values-container',
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: "back.out(1.2)"
+      });
+
+      // Parallax Orbs
+      gsap.to('.gsap-orb-1', {
+        y: 150,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        }
+      });
+      gsap.to('.gsap-orb-2', {
+        y: -150,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        }
+      });
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const features = [
     {
-      icon: 'fa-check',
       title: 'Quality Materials',
       reactIcon: MdVerified,
-      image:
-        'https://www.shutterstock.com/image-illustration/construction-materials-tools-indoors-walls-600nw-2464204581.jpg',
+      image: 'https://www.shutterstock.com/image-illustration/construction-materials-tools-indoors-walls-600nw-2464204581.jpg',
     },
     {
-      icon: 'fa-shield-alt',
       title: 'Safety First',
       reactIcon: MdSecurity,
-      image:
-        'https://png.pngtree.com/thumb_back/fh260/background/20220924/pngtree-safety-first-caution-work-warning-photo-image_14747062.jpg',
+      image: 'https://png.pngtree.com/thumb_back/fh260/background/20220924/pngtree-safety-first-caution-work-warning-photo-image_14747062.jpg',
     },
     {
-      icon: 'fa-leaf',
       title: 'Eco-Friendly',
       reactIcon: MdRecycling,
-      image:
-        'https://media.istockphoto.com/id/1502289160/photo/global-sustainable-environment-concept-esg-net-zero-eco-co2-carbon-human-hand-holding-green.jpg?s=612x612&w=0&k=20&c=Q9F-Q7dDBOrNj5Cd9jjjw-0ioRSJBTM4YacK9xctFP8=',
+      image: 'https://media.istockphoto.com/id/1502289160/photo/global-sustainable-environment-concept-esg-net-zero-eco-co2-carbon-human-hand-holding-green.jpg?s=612x612&w=0&k=20&c=Q9F-Q7dDBOrNj5Cd9jjjw-0ioRSJBTM4YacK9xctFP8=',
     },
     {
-      icon: 'fa-handshake',
       title: 'Client Focused',
       reactIcon: MdGroupWork,
-      image:
-        'https://png.pngtree.com/thumb_back/fw800/background/20250323/pngtree-modern-client-focus-with-futuristic-block-text-direction-and-fast-priority-photo-photo-image_70143188.webp',
+      image: 'https://png.pngtree.com/thumb_back/fw800/background/20250323/pngtree-modern-client-focus-with-futuristic-block-text-direction-and-fast-priority-photo-photo-image_70143188.webp',
     },
   ];
 
@@ -113,26 +192,23 @@ const AboutUs = () => {
 
   const coreValues = [
     {
-      icon: 'fa-award',
       title: 'Quality',
       reactIcon: MdStars,
       desc: 'Ensuring projects are of high quality and paired with local standards to be competitive in the national and local market scene.',
     },
     {
-      icon: 'fa-shield-alt',
       title: 'Safety',
       reactIcon: MdSecurity,
       desc: 'Ensuring safety at work site, safety of projects and safety of personnel through rigorous safety practices before and after execution of projects.',
     },
     {
-      icon: 'fa-handshake',
       title: 'Integrity',
       reactIcon: MdPeopleOutline,
       desc: 'Ensuring compliance with existing laws covering the construction industry, reliable workforce and our timely delivery of projects.',
     },
   ];
 
-  const [expandedMission, setExpandedMission] = React.useState([false, false]);
+  const [expandedMission, setExpandedMission] = useState([false, false]);
   const toggleMission = (i) => {
     setExpandedMission((prev) => {
       const copy = [...prev];
@@ -141,169 +217,79 @@ const AboutUs = () => {
     });
   };
 
-  // Content classes based on contentSize
   const getCardContentClasses = () => {
-    const base = "flex flex-col justify-between w-full h-full rounded-2xl backdrop-blur-xl";
+    const base = "flex flex-col justify-between w-full h-full rounded-2xl backdrop-blur-xl transition-all duration-300";
     const theme = isDarkMode
-      ? "border border-white/10 bg-gradient-to-br from-indigo-500/10 to-teal-500/10"
-      : "border border-gray-300 bg-gradient-to-br from-white to-[#E0F7FA]";
+      ? "border border-white/10 bg-white/5 shadow-2xl shadow-black/50"
+      : "border border-gray-200 bg-white/60 shadow-xl shadow-blue-900/5";
 
-    let sizing = "";
-    if (contentSize === 'sm') {
-      sizing = "p-3";
-    } else if (contentSize === 'md') {
-      sizing = "p-4";
-    } else {
-      sizing = "p-6";
-    }
-
+    let sizing = contentSize === 'sm' ? "p-3" : contentSize === 'md' ? "p-4" : "p-6";
     return `${base} ${theme} ${sizing}`;
   };
 
   const getIconContainerClasses = () => {
     const base = "rounded-xl flex items-center justify-center mb-2";
     const theme = isDarkMode
-      ? "bg-gradient-to-br from-indigo-500/30 to-teal-500/30"
-      : "bg-gradient-to-br from-[#B3E5FC]/60 to-[#A5D6A7]/60";
-
-    let sizing = "";
-    if (contentSize === 'sm') {
-      sizing = "w-8 h-8";
-    } else if (contentSize === 'md') {
-      sizing = "w-10 h-10";
-    } else {
-      sizing = "w-12 h-12";
-    }
-
+      ? "bg-gradient-to-br from-indigo-500/20 to-teal-500/20"
+      : "bg-gradient-to-br from-blue-500/10 to-cyan-500/10";
+    let sizing = contentSize === 'sm' ? "w-8 h-8" : contentSize === 'md' ? "w-10 h-10" : "w-12 h-12";
     return `${base} ${theme} ${sizing}`;
   };
 
   const getIconClasses = () => {
-    const base = "";
-    const theme = isDarkMode ? "text-indigo-300" : "text-indigo-600";
-
-    let size = "";
-    if (contentSize === 'sm') {
-      size = "text-base";
-    } else if (contentSize === 'md') {
-      size = "text-lg";
-    } else {
-      size = "text-xl";
-    }
-
-    return `${base} ${theme} ${size}`;
+    return `${isDarkMode ? "text-indigo-400" : "text-blue-600"} ${contentSize === 'sm' ? "text-base" : contentSize === 'md' ? "text-lg" : "text-xl"}`;
   };
 
   const getTitleClasses = () => {
-    const base = "font-bold";
-    const theme = isDarkMode ? "text-white" : "text-gray-900";
-
-    let size = "";
-    if (contentSize === 'sm') {
-      size = "text-xs";
-    } else if (contentSize === 'md') {
-      size = "text-sm";
-    } else {
-      size = "text-sm";
-    }
-
-    return `${base} ${theme} ${size}`;
+    return `font-bold ${isDarkMode ? "text-white" : "text-slate-900"} ${contentSize === 'sm' ? "text-xs" : "text-sm"}`;
   };
 
-  // Updated image height – significantly smaller
   const getImageHeight = () => {
-    if (contentSize === 'sm') return "60px";
-    if (contentSize === 'md') return "80px";
-    return "100px";
+    return contentSize === 'sm' ? "60px" : contentSize === 'md' ? "80px" : "100px";
   };
 
   return (
-    <section id="about" className="relative">
-      {/* Company Overview Section - Enhanced */}
-      <div
-        className={`relative py-24 md:py-32 border-b transition-colors duration-500 ${isDarkMode
-            ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black border-white/5'
-            : 'bg-white border-gray-200'
-          }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
-            {/* Left Content */}
-            <motion.div
-              ref={overviewRef}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9 }}
-              className="space-y-8"
-            >
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2">
-                  <div
-                    className={`w-12 h-1 bg-gradient-to-r ${isDarkMode
-                        ? 'from-indigo-400 to-teal-400'
-                        : 'from-[#0099FF] to-[#CCFF00]'
-                      }`}
-                  ></div>
-                  <span
-                    className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'
-                      }`}
-                  >
-                    ABOUT US
-                  </span>
-                </div>
-                <h2
-                  className={`text-5xl md:text-6xl lg:text-7xl font-black leading-tight ${isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}
-                >
-                  Building <br />
-                  <span
-                    className={`bg-gradient-to-r bg-clip-text text-transparent ${isDarkMode
-                        ? 'from-indigo-400 via-blue-400 to-teal-400'
-                        : 'from-[#0052CC] to-[#66AA00]'
-                      }`}
-                  >
-                    Tomorrow
-                  </span>
-                  <br />
-                  Today
-                </h2>
-              </div>
-              <p
-                className={`text-lg leading-relaxed max-w-md ${isDarkMode ? 'text-white/70' : 'text-gray-700'
-                  }`}
-              >
-                Cliberduche Corporation is a full-scale land development and
-                civil works contractor serving CALABARZON and beyond with
-                unwavering commitment to quality and safety.
-              </p>
-              <div
-                className={`pt-8 space-y-4 border-l-2 pl-6 ${isDarkMode ? 'border-indigo-500/30' : 'border-indigo-300'
-                  }`}
-              >
-                <p className={isDarkMode ? 'text-white/80' : 'text-gray-800'}>
-                  <span
-                    className={`font-bold ${isDarkMode ? 'text-[#6366f1]' : 'text-[#0099FF]'
-                      }`}
-                  >
-                    Established 2018
-                  </span>{' '}
-                  - Registered with SEC
-                </p>
-                <p
-                  className={`italic ${isDarkMode ? 'text-white/60' : 'text-gray-600'
-                    }`}
-                >
-                  "CLIBERDUCHE represents:{' '}
-                  <span className={isDarkMode ? 'text-[#6366f1]' : 'text-[#0099FF]'}>
-                    CLImaco, BERonilla, PiaDUCHE
-                  </span>"
-                </p>
-              </div>
-            </motion.div>
+    <section id="about" ref={containerRef} className={`relative overflow-hidden transition-colors duration-700 ${
+      isDarkMode ? 'bg-[#030712]' : 'bg-[#f8fafc]'
+    }`}>
+      {/* Background Ambience */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className={`gsap-orb-1 absolute top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[120px] opacity-30 ${isDarkMode ? 'bg-indigo-600/50' : 'bg-blue-400/40'}`} />
+        <div className={`gsap-orb-2 absolute top-[60%] -right-[10%] w-[35vw] h-[35vw] rounded-full mix-blend-screen filter blur-[100px] opacity-20 ${isDarkMode ? 'bg-teal-600/40' : 'bg-cyan-400/30'}`} />
+        <div className={`absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] ${isDarkMode ? 'opacity-[0.03]' : 'opacity-[0.04]'}`} />
+      </div>
 
-            {/* Right - Fully Responsive CardSwap */}
-            <div className="relative flex justify-center">
-              <CardSwap
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40 border-b border-white/5">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          
+          <div className="space-y-8">
+            <div className="gsap-intro inline-flex items-center gap-3">
+              <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-teal-400' : 'from-blue-600 to-cyan-500'}`} />
+              <span className={`text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>ABOUT US</span>
+            </div>
+            
+            <h2 className={`gsap-intro text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.1] tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+              Building <br/>
+              <span className={`bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-purple-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}>Tomorrow</span>
+              <br/> Today.
+            </h2>
+            
+            <p className={`gsap-intro text-base sm:text-lg md:text-xl leading-relaxed max-w-lg font-medium ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+              Cliberduche Corporation is a full-scale land development and civil works contractor serving CALABARZON with unwavering commitment to quality and safety.
+            </p>
+            
+            <div className={`gsap-intro pt-6 mt-4 border-l-2 pl-6 ${isDarkMode ? 'border-indigo-500/30' : 'border-blue-500/30'}`}>
+              <p className={`text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
+                <span className={isDarkMode ? 'text-indigo-400' : 'text-blue-600'}>Established 2018</span> - SEC Registered
+              </p>
+              <p className={`mt-2 italic ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                "CLIBERDUCHE represents: <span className={isDarkMode ? 'text-indigo-300' : 'text-blue-500'}>CLImaco, BERonilla, PiaDUCHE</span>"
+              </p>
+            </div>
+          </div>
+
+          <div className="gsap-intro relative flex justify-center w-full h-full min-h-[400px]">
+             <CardSwap
                 width={cardWidth}
                 height={cardHeight}
                 cardDistance={cardDistance}
@@ -316,281 +302,132 @@ const AboutUs = () => {
                     <div className={getCardContentClasses()}>
                       <div>
                         <div className={getIconContainerClasses()}>
-                          {feat.reactIcon &&
-                            React.createElement(feat.reactIcon, {
-                              className: getIconClasses(),
-                            })}
+                          {feat.reactIcon && React.createElement(feat.reactIcon, { className: getIconClasses() })}
                         </div>
-                        <h3 className={getTitleClasses()}>
-                          {feat.title}
-                        </h3>
+                        <h3 className={getTitleClasses()}>{feat.title}</h3>
                       </div>
                       <img
                         src={feat.image}
                         alt={feat.title}
-                        className="w-full object-cover rounded-xl mt-4"
+                        className="w-full object-cover rounded-xl mt-4 grayscale hover:grayscale-0 transition-all duration-500"
                         style={{ height: getImageHeight() }}
                       />
                     </div>
                   </Card>
                 ))}
-              </CardSwap>
-            </div>
+            </CardSwap>
           </div>
         </div>
       </div>
 
-      {/* Key Highlights Section - Timeline style */}
-      <div
-        className={`relative py-24 md:py-32 border-b transition-colors duration-500 ${isDarkMode
-            ? 'bg-black border-white/5'
-            : 'bg-slate-100 border-gray-200'
-          }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <motion.div
-            ref={milestonesRef}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.9 }}
-            className="space-y-16"
-          >
-            <div>
-              <div className="inline-flex items-center gap-2 mb-4">
-                <span
-                  className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-rose-400' : 'text-rose-600'
-                    }`}
-                >
-                  KEY MILESTONES
-                </span>
-                <div
-                  className={`w-8 h-1 bg-gradient-to-r ${isDarkMode
-                      ? 'from-rose-500 to-orange-500'
-                      : 'from-rose-600 to-orange-600'
-                    }`}
-                ></div>
-              </div>
-              <h2
-                className={`text-5xl md:text-6xl font-black ${isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}
-              >
-                Our Journey
-              </h2>
+      {/* Highlights / Journey */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 border-b border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <div className="gsap-journey-container space-y-16">
+            <div className="text-center">
+              <span className={`inline-block mb-4 text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-teal-400' : 'text-cyan-600'}`}>KEY MILESTONES</span>
+              <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Our Journey</h2>
             </div>
-
-            <div className="space-y-6">
+            
+            <div className="space-y-8 lg:space-y-12 pl-4 sm:pl-0 border-l lg:border-none border-white/10 ml-4 sm:ml-0 overflow-hidden">
               {highlights.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.15 }}
-                  className="flex gap-6 md:gap-12 items-start group cursor-pointer"
-                >
-                  <div className="flex flex-col items-center">
-                    <div
-                      className={`w-14 h-14 rounded-full flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform ${isDarkMode
-                          ? 'bg-gradient-to-br from-indigo-500 to-teal-500 text-white'
-                          : 'bg-gradient-to-br from-[#0052CC] to-[#66AA00] text-white'
-                        }`}
-                    >
+                <div key={i} className="gsap-journey flex flex-col sm:flex-row gap-6 sm:gap-8 items-start relative group cursor-pointer pl-6 sm:pl-0">
+                  <div className="absolute left-[-24px] sm:relative sm:left-0 top-1 sm:top-0">
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform shadow-xl ${
+                      isDarkMode ? 'bg-indigo-500 text-white shadow-indigo-500/20' : 'bg-blue-600 text-white shadow-blue-500/20'
+                    }`}>
                       {i + 1}
                     </div>
-                    {i < highlights.length - 1 && (
-                      <div
-                        className={`w-1 h-20 mt-4 ${isDarkMode
-                            ? 'bg-gradient-to-b from-teal-500/50 to-transparent'
-                            : 'bg-gradient-to-b from-[#0052CC]/50 to-transparent'
-                          }`}
-                      ></div>
-                    )}
                   </div>
-                  <div className="pt-2 flex-1 pb-8">
-                    <p
-                      className={`text-lg leading-relaxed group-hover:transition-colors ${isDarkMode
-                          ? 'text-white/80 group-hover:text-white'
-                          : 'text-gray-700 group-hover:text-gray-900'
-                        }`}
-                    >
+                  <div className={`flex-1 p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-1 ${
+                    isDarkMode ? 'bg-white/5 border-white/10 group-hover:bg-white/10 hover:shadow-2xl hover:shadow-indigo-500/10' : 'bg-white border-gray-200 group-hover:shadow-xl hover:border-blue-200'
+                  }`}>
+                    <p className={`text-base sm:text-lg leading-relaxed font-medium ${isDarkMode ? 'text-slate-300 group-hover:text-white' : 'text-slate-700 group-hover:text-slate-900'}`}>
                       {item}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Mission & Vision - Large Typography */}
-      <div
-        className={`relative py-24 md:py-32 border-b transition-colors duration-500 ${isDarkMode
-            ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black border-white/5'
-            : 'bg-white border-gray-200'
-          }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="space-y-20">
-            {missionVision.map((item, idx) => (
-              <motion.div
-                key={idx}
-                ref={idx === 0 ? missionRef : visionRef}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9 }}
-                className="space-y-6"
-              >
-                <div className="flex items-start justify-between gap-8">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center ${isDarkMode
-                            ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30'
-                            : 'bg-gradient-to-br from-[#0052CC]/30 to-[#66AA00]/30'
-                          }`}
-                      >
-                        {idx === 0 ? (
-                          <MdAutoAwesome
-                            className={isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}
-                          />
-                        ) : (
-                          <MdRemoveRedEye
-                            className={isDarkMode ? 'text-rose-400' : 'text-rose-600'}
-                          />
-                        )}
-                      </div>
-                      <h3
-                        className={`text-3xl md:text-4xl font-black ${isDarkMode ? 'text-white' : 'text-gray-900'
-                          }`}
-                      >
-                        {item.title}
-                      </h3>
-                    </div>
-                    <p
-                      id={`mission-text-${idx}`}
-                      className={cn(
-                        'text-lg leading-relaxed transition-all duration-300 max-w-3xl',
-                        !expandedMission[idx] && 'line-clamp-3',
-                        isDarkMode ? 'text-white/75' : 'text-gray-700'
-                      )}
-                    >
-                      {item.desc}
-                    </p>
-                    <button
-                      onClick={() => toggleMission(idx)}
-                      className={`mt-6 inline-flex items-center gap-2 font-semibold transition-colors group ${isDarkMode
-                          ? 'text-[#6366f1] hover:text-[#818cf8]'
-                          : 'text-[#0099FF] hover:text-[#005fcc]'
-                        }`}
-                      aria-expanded={expandedMission[idx]}
-                      aria-controls={`mission-text-${idx}`}
-                    >
-                      <span>{expandedMission[idx] ? 'Show less' : 'Read more'}</span>
-                      <span className="group-hover:translate-x-1 transition-transform">
-                        →
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </div>
 
-      {/* Core Values - Asymmetric Layout */}
-      <div
-        className={`relative py-24 md:py-32 transition-colors duration-500 ${isDarkMode ? 'bg-black' : 'bg-slate-100'
-          }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <motion.div
-            ref={valuesRef}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.9 }}
-            className="space-y-20"
-          >
-            <div>
-              <div className="inline-flex items-center gap-2 mb-4">
-                <div
-                  className={`w-12 h-1 bg-gradient-to-r ${isDarkMode
-                      ? 'from-indigo-400 to-teal-400'
-                      : 'from-[#0099FF] to-[#CCFF00]'
-                    }`}
-                ></div>
-                <span
-                  className={`text-sm font-bold tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-purple-600'
-                    }`}
-                >
-                  OUR VALUES
-                </span>
-              </div>
-              <h2
-                className={`text-5xl md:text-6xl font-black ${isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}
-              >
-                What Drives Us
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-              {coreValues.map((value, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.12 }}
-                  className="group relative"
-                  style={{
-                    marginTop: i === 1 ? '40px' : i === 2 ? '80px' : '0',
-                  }}
-                >
-                  <div
-                    className={`absolute inset-0 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-300 opacity-0 group-hover:opacity-100 ${isDarkMode
-                        ? 'bg-gradient-to-br from-indigo-500/10 to-teal-500/10'
-                        : 'bg-gradient-to-br from-[#0052CC]/10 to-[#66AA00]/10'
-                      }`}
-                  ></div>
-                  <div
-                    className={`relative p-8 md:p-10 rounded-3xl border backdrop-blur-xl ${isDarkMode
-                        ? 'border-white/5 bg-gradient-to-br from-indigo-500/5 to-teal-500/5'
-                        : 'border-gray-300 bg-gradient-to-br from-[#0052CC]/10 to-[#66AA00]/10'
-                      }`}
-                  >
-                    <div className="flex flex-col gap-6">
-                      <div
-                        className={`w-16 h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${isDarkMode
-                            ? 'bg-gradient-to-br from-indigo-500/20 to-teal-500/20'
-                            : 'bg-gradient-to-br from-[#0052CC]/20 to-[#66AA00]/20'
-                          }`}
-                      >
-                        {value.reactIcon &&
-                          React.createElement(value.reactIcon, {
-                            className: `text-2xl ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'
-                              }`,
-                          })}
-                      </div>
-                      <div>
-                        <h3
-                          className={`text-2xl md:text-3xl font-black mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'
-                            }`}
-                        >
-                          {value.title}
-                        </h3>
-                        <p
-                          className={`leading-relaxed text-base ${isDarkMode ? 'text-white/70' : 'text-gray-700'
-                            }`}
-                        >
-                          {value.desc}
-                        </p>
-                      </div>
-                    </div>
+      {/* Mission & Vision */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+          {missionVision.map((item, idx) => (
+            <div key={idx} className={`gsap-mission relative p-8 md:p-12 rounded-3xl border overflow-hidden group ${
+              isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200 shadow-xl shadow-blue-900/5'
+            }`}>
+              <div className={`absolute -right-12 -top-12 w-48 h-48 rounded-full blur-3xl opacity-20 transition-opacity group-hover:opacity-40 ${
+                isDarkMode ? (idx === 0 ? 'bg-indigo-500' : 'bg-teal-500') : (idx === 0 ? 'bg-blue-500' : 'bg-cyan-500')
+              }`} />
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg ${
+                    isDarkMode ? 'bg-white/10 border border-white/10' : 'bg-slate-50 border border-slate-200'
+                  }`}>
+                    {idx === 0 ? <MdAutoAwesome className={`text-2xl ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`} /> : <MdRemoveRedEye className={`text-2xl ${isDarkMode ? 'text-teal-400' : 'text-cyan-600'}`} />}
                   </div>
-                </motion.div>
-              ))}
+                  <h3 className={`text-2xl md:text-3xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{item.title}</h3>
+                </div>
+                
+                <p id={`mission-text-${idx}`} className={cn(
+                  'text-base md:text-lg leading-relaxed font-medium transition-all duration-500',
+                  !expandedMission[idx] && 'line-clamp-4',
+                  isDarkMode ? 'text-slate-300' : 'text-slate-700'
+                )}>
+                  {item.desc}
+                </p>
+                
+                <button
+                  onClick={() => toggleMission(idx)}
+                  className={`mt-6 inline-flex items-center gap-2 font-bold uppercase tracking-wider text-sm transition-colors group/btn ${
+                    isDarkMode ? 'text-white hover:text-indigo-400' : 'text-slate-900 hover:text-blue-600'
+                  }`}
+                  aria-expanded={expandedMission[idx]}
+                  aria-controls={`mission-text-${idx}`}
+                >
+                  <span className="relative overflow-hidden">
+                    <span className="inline-block transition-transform duration-300 group-hover/btn:-translate-y-full">{expandedMission[idx] ? 'Show less' : 'Read more'}</span>
+                    <span className="inline-block absolute left-0 top-0 transition-transform duration-300 translate-y-full group-hover/btn:translate-y-0 text-indigo-400">{expandedMission[idx] ? 'Show less' : 'Read more'}</span>
+                  </span>
+                  <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                </button>
+              </div>
             </div>
-          </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Core Values */}
+      <div className="gsap-values-container relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
+          <span className={`inline-block mb-4 text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-purple-400' : 'text-indigo-600'}`}>OUR VALUES</span>
+          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>What Drives Us</h2>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
+          {coreValues.map((value, i) => (
+            <div key={i} className="gsap-value group relative" style={{ marginTop: window.innerWidth > 768 ? (i === 1 ? '40px' : i === 2 ? '80px' : '0') : '0' }}>
+               <div className={`absolute inset-0 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-0 group-hover:opacity-100 ${
+                  isDarkMode ? 'bg-indigo-500/20' : 'bg-blue-500/20'
+                }`} />
+               <div className={`relative h-full p-8 md:p-10 rounded-3xl border backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-2 ${
+                  isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200 shadow-xl shadow-blue-900/5'
+               }`}>
+                 <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 ${
+                    isDarkMode ? 'bg-gradient-to-br from-indigo-500/20 to-purple-500/20' : 'bg-gradient-to-br from-blue-500/10 to-indigo-500/10'
+                 }`}>
+                   {value.reactIcon && React.createElement(value.reactIcon, { className: `text-3xl ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}` })}
+                 </div>
+                 <h3 className={`text-xl lg:text-2xl font-black mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{value.title}</h3>
+                 <p className={`text-sm lg:text-base leading-relaxed font-medium ${isDarkMode ? 'text-slate-400' : 'text-slate-700'}`}>{value.desc}</p>
+               </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

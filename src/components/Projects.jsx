@@ -1,14 +1,21 @@
-import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../hooks/useTheme';
 import { cn } from '../utils/cn';
 import ModalPortal from './ModalPortal';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import Magnet from './ui/Magnet';
+import { MdChevronLeft, MdChevronRight, MdClose, MdLocationOn, MdCheckCircle, MdInfoOutline } from 'react-icons/md';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
   const { isDarkMode } = useTheme();
+  const sectionRef = useRef(null);
   const thumbnailScrollRef = useRef(null);
+  const headerRef = useRef(null);
+  const filterRef = useRef(null);
+  const featuredRef = useRef(null);
+  const carouselRef = useRef(null);
 
   const projects = [
     {
@@ -16,9 +23,9 @@ const Projects = () => {
       img: 'images/mdi-project-2019.png',
       tag: 'Completed',
       title: 'MDI - Project 2019',
-      desc: 'Civil engineering and infrastructure works.',
-      location: '',
-      highlight: 'Scope: MDI project development',
+      desc: 'Comprehensive civil engineering and foundational infrastructure works.',
+      location: 'Various Locations',
+      highlight: 'Scope: Full-scale MDI project development and execution',
       category: ['completed'],
     },
     {
@@ -26,9 +33,9 @@ const Projects = () => {
       img: 'images/silang,cavite2021.png',
       tag: 'Completed',
       title: 'Silang, Cavite Project 2021',
-      desc: 'Leveling and compaction, drainage, road network, riprap, bridge, rectification.',
+      desc: 'Extensive leveling and compaction, drainage systems, road networks, riprap, and bridge rectification.',
       location: 'Silang, Cavite',
-      highlight: 'Area: 18.3 hectares',
+      highlight: 'Area: 18.3 hectares of extensive terrain modification',
       category: ['completed'],
     },
     {
@@ -36,30 +43,30 @@ const Projects = () => {
       img: 'images/cbd-building2019.png',
       tag: 'Completed',
       title: 'CBD Building Project 2019',
-      desc: 'Commercial building development and construction.',
-      location: '',
-      highlight: 'Scope: CBD building project',
+      desc: 'Premium commercial building development and structural construction.',
+      location: 'Central Business District',
+      highlight: 'Scope: High-rise CBD building project construction',
       category: ['completed'],
     },
     {
       id: 4,
       img: 'images/mdi-mercator-holdings2025p1.png',
       tag: 'Completed',
-      title: 'MDI - Mercator Holding Project 2025',
-      desc: 'Embankment, diversion road, retaining wall, drainage, pavement, and infrastructure works.',
+      title: 'MDI - Mercator Holding 2025',
+      desc: 'Major embankment, diversion road construction, retaining walls, drainage, pavement, and infrastructure works.',
       location: 'Calamba, Laguna',
-      highlight: 'Scope: embankment + roadworks + drainage + electrical',
+      highlight: 'Scope: Embankment + Roadworks + Drainage + Electrical setup',
       category: ['completed'],
-      metrics: { area: '50 hectares', duration: '12 months', value: '₱25M' },
+      metrics: { area: '50 hectares', duration: '12 months', value: 'Prime Infrastructure' },
     },
     {
       id: 5,
       img: 'images/mdi-mercator-holdings.png',
       tag: 'Ongoing',
-      title: 'MDI - Mercator Holdings Project',
-      desc: 'Embankment, diversion road, retaining wall, drainage, pavement, and electrical post lights.',
-      location: '',
-      highlight: 'Scope: embankment + roadworks + drainage + electrical',
+      title: 'MDI - Mercator Phase II',
+      desc: 'Ongoing embankment, major diversion road expansion, retaining walls, comprehensive drainage, pavement, and electrical post lights installation.',
+      location: 'Calamba, Laguna',
+      highlight: 'Scope: Advanced Embankment + Roadworks + Utilities',
       category: ['ongoing'],
     },
     {
@@ -67,19 +74,19 @@ const Projects = () => {
       img: 'images/pier2-north-harbour.png',
       tag: 'Ongoing',
       title: 'Pier 2 North Harbour',
-      desc: 'Reconstruction of bridge, pavement, lagoon, embankment, drainage, water & electrical works.',
+      desc: 'Critical reconstruction of port bridge, heavy-duty pavement, lagoon management, coastal embankment, sub-surface drainage, water & electrical works.',
       location: 'North Harbour, Manila',
-      highlight: 'Scope: bridge + pavement + utilities',
+      highlight: 'Scope: Structural Bridge + Port Pavement + Marine Utilities',
       category: ['ongoing'],
     },
     {
       id: 7,
       img: 'images/wdv-phas4-tanza,cavite.png',
       tag: 'Ongoing',
-      title: 'WDV Phase 4 Tanza, Cavite',
-      desc: 'Retaining wall and perimeter fence construction for residential development.',
+      title: 'WDV Phase 4 Tanza',
+      desc: 'Extensive retaining wall and secure perimeter fence construction for massive residential development.',
       location: 'Tanza, Cavite',
-      highlight: 'Scope: retaining wall + perimeter fence',
+      highlight: 'Scope: Structural Retaining Wall + Secure Perimeter Fence',
       category: ['ongoing'],
     },
   ];
@@ -98,6 +105,72 @@ const Projects = () => {
     { key: 'completed', label: 'Completed' },
   ];
 
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      // Header entrance
+      gsap.from(headerRef.current.children, {
+        scrollTrigger: {
+          trigger: headerRef.current,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: 'power3.out',
+      });
+
+      // Filter entrance
+      if (filterRef.current) {
+        gsap.from(filterRef.current, {
+          scrollTrigger: {
+            trigger: filterRef.current,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse',
+          },
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+        });
+      }
+
+      // Featured Project entrance
+      if (featuredRef.current) {
+        gsap.from(featuredRef.current, {
+          scrollTrigger: {
+            trigger: featuredRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          ease: 'back.out(1.1)',
+        });
+      }
+
+      // Carousel entrance
+      if (carouselRef.current) {
+        gsap.from(carouselRef.current, {
+          scrollTrigger: {
+            trigger: carouselRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+        });
+      }
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [activeFilter, selectedProject]); // Re-run when layout elements might change
+
   const handleProjectClick = (project) => {
     setSelectedProject(project);
     setShowModal(true);
@@ -109,7 +182,7 @@ const Projects = () => {
 
   const scrollThumbnails = (direction) => {
     if (thumbnailScrollRef.current) {
-      const scrollAmount = 400;
+      const scrollAmount = window.innerWidth > 768 ? 600 : 300;
       thumbnailScrollRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
@@ -118,611 +191,379 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className={cn(
-      "py-24 md:py-32 relative overflow-hidden transition-colors duration-500",
-      isDarkMode 
-        ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
-        : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
-    )}>
-      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+    <section 
+      id="projects" 
+      ref={sectionRef}
+      className={`relative py-24 md:py-32 lg:py-40 overflow-hidden transition-colors duration-700 ${
+        isDarkMode ? 'bg-[#030712]' : 'bg-[#f8fafc]'
+      }`}
+    >
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className={`absolute top-0 right-0 w-[50vw] h-[50vw] rounded-full mix-blend-screen filter blur-[150px] opacity-20 transform translate-x-1/3 -translate-y-1/3 ${isDarkMode ? 'bg-indigo-600' : 'bg-blue-300'}`} />
+        <div className={`absolute bottom-0 left-0 w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[150px] opacity-20 transform -translate-x-1/3 translate-y-1/3 ${isDarkMode ? 'bg-purple-600' : 'bg-cyan-300'}`} />
+        <div className={`absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] ${isDarkMode ? 'opacity-[0.04]' : 'opacity-[0.03]'}`} />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          className="text-center mb-12 md:mb-16"
-        >
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className={`w-12 h-1 bg-gradient-to-r ${
-              isDarkMode 
-                ? 'from-indigo-400 to-teal-400' 
-                : 'from-[#0099FF] to-[#CCFF00]'
-            }`}></div>
-            <span className={`text-sm font-bold tracking-widest ${
-              isDarkMode 
-                ? 'text-indigo-400' 
-                : 'text-[#0099FF]'
-            }`}>OUR PORTFOLIO</span>
-            <div className={`w-12 h-1 bg-gradient-to-l ${
-              isDarkMode 
-                ? 'from-indigo-400 to-teal-400' 
-                : 'from-[#0099FF] to-[#CCFF00]'
-            }`}></div>
+        <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+          <div className="inline-flex items-center gap-3 mb-6">
+            <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
+            <span className={`text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>OUR PORTFOLIO</span>
+            <div className={`w-12 h-1 bg-gradient-to-l rounded-full ${isDarkMode ? 'from-indigo-500 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
           </div>
-          <h2 className={cn(
-            "text-5xl md:text-6xl lg:text-7xl font-black mb-6",
-            isDarkMode ? 'text-white' : 'text-gray-900'
-          )}>
-            Our Projects
+          <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+            Featured <br className="hidden sm:block" />
+            <span className={`bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-purple-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}>
+               Projects
+            </span>
           </h2>
-          <p className={cn(
-            "text-lg max-w-3xl mx-auto",
-            isDarkMode 
-              ? 'text-white/70' 
-              : 'text-gray-700'
-          )}>
-            Browse through all our completed and ongoing projects
+          <p className={`text-base sm:text-lg font-medium leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+            Explore our track record of successful land development and civil engineering milestones.
           </p>
-        </motion.div>
+        </div>
 
         {/* Filter Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 md:mb-16"
-        >
-          {filters.map((filter, index) => (
-            <motion.button
-              key={filter.key}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                setActiveFilter(filter.key);
-                setSelectedProject(filteredProjects[0] || projects[0]);
-              }}
-              className={cn(
-                "px-4 md:px-6 py-2 md:py-3 rounded-full text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300",
-                activeFilter === filter.key
-                  ? isDarkMode
-                    ? 'bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/30'
-                    : 'bg-[#0099FF] text-white shadow-lg shadow-[#0099FF]/30'
-                  : isDarkMode
-                    ? 'border border-white/10 bg-white/[0.08] text-white hover:border-[#6366f1]'
-                    : 'border border-gray-300 bg-white/80 text-gray-900 hover:border-[#0099FF]'
-              )}
-            >
-              {filter.label} ({filter.key === 'all' ? projects.length : projects.filter(p => p.category.includes(filter.key)).length})
-            </motion.button>
-          ))}
-        </motion.div>
+        <div ref={filterRef} className="flex flex-wrap justify-center gap-3 md:gap-4 mb-16">
+          {filters.map((filter) => {
+            const isActive = activeFilter === filter.key;
+            const count = filter.key === 'all' ? projects.length : projects.filter(p => p.category.includes(filter.key)).length;
+            
+            return (
+              <button
+                key={filter.key}
+                onClick={() => {
+                  setActiveFilter(filter.key);
+                  const newFiltered = filter.key === 'all' ? projects : projects.filter(p => p.category.includes(filter.key));
+                  setSelectedProject(newFiltered[0] || projects[0]);
+                }}
+                className={`group relative px-6 md:px-8 py-3 md:py-4 rounded-full text-xs md:text-sm font-bold uppercase tracking-widest transition-all duration-500 overflow-hidden ${
+                  isActive
+                    ? isDarkMode
+                      ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/30 ring-2 ring-indigo-400 ring-offset-2 ring-offset-[#030712]'
+                      : 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 ring-2 ring-blue-500 ring-offset-2 ring-offset-[#f8fafc]'
+                    : isDarkMode
+                      ? 'bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-white/10'
+                      : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-slate-300 shadow-sm'
+                }`}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  {filter.label} <span className={`px-2 py-0.5 rounded-full text-[10px] ${isActive ? (isDarkMode ? 'bg-white/20' : 'bg-white/30') : (isDarkMode ? 'bg-white/10' : 'bg-slate-100')}`}>{count}</span>
+                </span>
+                {isActive && (
+                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[custom-shimmer_2s_infinite]" />
+                )}
+              </button>
+            );
+          })}
+        </div>
 
         {/* Featured Project Spotlight */}
         {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className={cn(
-              "rounded-3xl overflow-hidden border backdrop-blur-xl mb-12 md:mb-16",
-              isDarkMode
-                ? 'border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent'
-                : 'border-gray-300 bg-gradient-to-br from-white/80 to-gray-50/70'
-            )}
-          >
-            <div className="grid md:grid-cols-2 gap-0 min-h-96 md:min-h-[500px]">
-              {/* Featured Image */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.5 }}
-                className="relative overflow-hidden"
-              >
-                <div
-                  className="w-full h-full bg-cover bg-center"
-                  style={{ backgroundImage: `url(${selectedProject.img})` }}
-                >
-                  <div className={cn(
-                    "absolute inset-0",
-                    isDarkMode
-                      ? 'bg-gradient-to-r from-black/40 to-transparent'
-                      : 'bg-gradient-to-r from-black/20 to-transparent'
-                  )}></div>
-                </div>
-              </motion.div>
-
-              {/* Featured Content */}
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-                className={cn(
-                  "p-8 md:p-12 flex flex-col justify-center relative z-10",
-                  isDarkMode ? 'bg-slate-900/50' : 'bg-white/50'
-                )}
-              >
-                <div className="inline-flex items-center gap-2 mb-4 w-fit">
-                  <div className={cn(
-                    "w-1 h-5 rounded-full",
-                    isDarkMode
-                      ? 'bg-gradient-to-b from-indigo-400 to-teal-400'
-                      : 'bg-gradient-to-b from-[#0099FF] to-[#CCFF00]'
-                  )}></div>
-                  <span className={cn(
-                    "text-xs font-bold uppercase tracking-widest",
-                    isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'
-                  )}>
-                    Featured
-                  </span>
+          <div ref={featuredRef} className="mb-20">
+            <div className={`relative rounded-[2.5rem] overflow-hidden border backdrop-blur-xl group transition-all duration-700 ${
+              isDarkMode ? 'bg-white/5 border-white/10 shadow-2xl shadow-black/50' : 'bg-white/80 border-gray-200 shadow-2xl shadow-blue-900/5'
+            }`}>
+              <div className="grid lg:grid-cols-12 gap-0 min-h-[500px] lg:min-h-[600px]">
+                
+                {/* Featured Image */}
+                <div className="lg:col-span-7 relative overflow-hidden h-[350px] lg:h-full">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
+                    style={{ backgroundImage: `url(${selectedProject.img})` }}
+                  />
+                  <div className={`absolute inset-0 ${
+                    isDarkMode 
+                      ? 'bg-gradient-to-t lg:bg-gradient-to-r from-[#030712] via-[#030712]/50 lg:via-[#030712]/20 to-transparent' 
+                      : 'bg-gradient-to-t lg:bg-gradient-to-r from-white via-white/50 lg:via-white/20 to-transparent'
+                  }`} />
+                  
+                  {/* Status Badge Over Image */}
+                  <div className="absolute top-6 left-6 lg:top-8 lg:left-8 flex gap-3">
+                     <span className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md border shadow-sm ${
+                        selectedProject.tag === 'Ongoing'
+                          ? isDarkMode 
+                              ? 'bg-yellow-500/20 border-yellow-400/50 text-yellow-300' 
+                              : 'bg-yellow-100/90 border-yellow-400 text-yellow-800'
+                          : isDarkMode 
+                              ? 'bg-green-500/20 border-green-400/50 text-green-300' 
+                              : 'bg-green-100/90 border-green-400 text-green-800'
+                      }`}>
+                        {selectedProject.tag}
+                      </span>
+                  </div>
                 </div>
 
-                <h2 className={cn(
-                  "text-3xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight",
-                  isDarkMode ? 'text-white' : 'text-gray-900'
-                )}>
-                  {selectedProject.title}
-                </h2>
+                {/* Featured Content */}
+                <div className="lg:col-span-5 p-8 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-center relative z-10">
+                  
+                  <div className="inline-flex items-center gap-3 mb-6">
+                    <div className={`w-1 h-6 rounded-full bg-gradient-to-b ${isDarkMode ? 'from-indigo-400 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
+                    <span className={`text-sm font-bold uppercase tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>
+                      Featured Work
+                    </span>
+                  </div>
 
-                <p className={cn(
-                  "text-base md:text-lg mb-6",
-                  isDarkMode ? 'text-white/70' : 'text-gray-700'
-                )}>
-                  {selectedProject.desc}
-                </p>
+                  <h3 className={`text-2xl sm:text-3xl lg:text-4xl font-black mb-4 leading-[1.1] ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                    {selectedProject.title}
+                  </h3>
 
-                <div className="space-y-3 mb-8">
-                  <p className={cn(
-                    "text-sm font-semibold",
-                    isDarkMode ? 'text-indigo-400' : 'text-indigo-600'
-                  )}>
-                    ✓ {selectedProject.highlight}
+                  <p className={`text-sm sm:text-base leading-relaxed mb-8 font-medium ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                    {selectedProject.desc}
                   </p>
-                  {selectedProject.location && (
-                    <p className={cn(
-                      "text-sm font-semibold flex items-center gap-2",
-                      isDarkMode ? 'text-white/60' : 'text-gray-600'
-                    )}>
-                      📍 {selectedProject.location}
-                    </p>
-                  )}
-                </div>
 
-                <Magnet padding={50} magnetStrength={8}>
-                  <motion.button
-                    onClick={() => handleProjectClick(selectedProject)}
-                    className={cn(
-                      "w-fit px-8 py-3 rounded-lg font-bold uppercase text-sm transition-all",
-                      isDarkMode
-                        ? 'bg-[#6366f1] text-white hover:shadow-lg hover:shadow-[#6366f1]/30'
-                        : 'bg-[#0099FF] text-white hover:shadow-lg hover:shadow-[#0099FF]/30'
+                  <div className="space-y-4 mb-10">
+                    <div className="flex items-start gap-3">
+                       <MdCheckCircle className={`text-xl mt-0.5 shrink-0 ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`} />
+                       <p className={`text-sm sm:text-base font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                         {selectedProject.highlight}
+                       </p>
+                    </div>
+                    {selectedProject.location && (
+                      <div className="flex items-center gap-3">
+                         <MdLocationOn className={`text-xl shrink-0 ${isDarkMode ? 'text-purple-400' : 'text-cyan-600'}`} />
+                         <p className={`text-sm sm:text-base font-semibold ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                           {selectedProject.location}
+                         </p>
+                      </div>
                     )}
+                  </div>
+
+                  <button
+                    onClick={() => handleProjectClick(selectedProject)}
+                    className={`group/btn relative w-fit px-8 py-4 rounded-full font-bold uppercase tracking-wider text-sm overflow-hidden transition-all duration-300 flex items-center gap-3 ${
+                       isDarkMode 
+                        ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-1' 
+                        : 'bg-blue-600 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-1'
+                    }`}
                   >
-                    View Case Study
-                  </motion.button>
-                </Magnet>
-              </motion.div>
+                    <span className="relative z-10">Explore Case Study</span>
+                    <MdChevronRight className="relative z-10 text-xl group-hover/btn:translate-x-1 transition-transform" />
+                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out rounded-full" />
+                  </button>
+
+                </div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* Thumbnail Carousel */}
-        <div className="relative">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="mb-8 md:mb-12"
-          >
-            <h3 className={cn(
-              "text-lg md:text-xl font-black mb-6",
-              isDarkMode ? 'text-white' : 'text-gray-900'
-            )}>
-              All Projects ({filteredProjects.length})
-            </h3>
-
-            {/* Carousel Container */}
-            <div className="relative group">
-              {/* Left Arrow */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+        <div ref={carouselRef} className="relative pt-10 border-t border-white/5">
+          <div className="flex justify-between items-end mb-8">
+            <div>
+              <h3 className={`text-xl sm:text-2xl font-black mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                Project Gallery
+              </h3>
+              <p className={`text-xs font-bold uppercase tracking-wider ${isDarkMode ? 'text-slate-500' : 'text-slate-600'}`}>
+                {filteredProjects.length} {activeFilter === 'all' ? 'Total' : activeFilter} Projects
+              </p>
+            </div>
+            
+            {/* Navigation Arrows (Desktop) */}
+            <div className="hidden md:flex gap-3">
+              <button 
                 onClick={() => scrollThumbnails('left')}
-                className={cn(
-                  "absolute -left-4 md:left-0 top-1/2 transform -translate-y-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100",
-                  isDarkMode
-                    ? 'bg-[#6366f1] hover:bg-[#818cf8] text-white'
-                    : 'bg-[#0099FF] hover:bg-[#005fcc] text-white'
-                )}
+                className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 hover:scale-105 ${
+                  isDarkMode ? 'border-white/10 bg-white/5 text-white hover:bg-white/10 hover:border-white/20' : 'border-slate-200 bg-white text-slate-800 hover:bg-slate-50 shadow-sm'
+                }`}
               >
                 <MdChevronLeft className="text-2xl" />
-              </motion.button>
-
-              {/* Thumbnails Scroll */}
-              <div
-                ref={thumbnailScrollRef}
-                className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth pb-4 scrollbar-hide"
-                style={{
-                  scrollBehavior: 'smooth',
-                  scrollbarWidth: 'none',
-                  msOverflowStyle: 'none',
-                }}
+              </button>
+              <button 
+                onClick={() => scrollThumbnails('right')}
+                className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 hover:scale-105 ${
+                  isDarkMode ? 'border-white/10 bg-white/5 text-white hover:bg-white/10 hover:border-white/20' : 'border-slate-200 bg-white text-slate-800 hover:bg-slate-50 shadow-sm'
+                }`}
               >
-                {filteredProjects.map((project, index) => (
-                  <motion.button
+                <MdChevronRight className="text-2xl" />
+              </button>
+            </div>
+          </div>
+
+          <div className="relative -mx-4 sm:mx-0 px-4 sm:px-0">
+            {/* Left fade mask */}
+            <div className={`absolute left-0 top-0 bottom-0 w-8 md:w-16 z-10 pointer-events-none ${
+              isDarkMode ? 'bg-gradient-to-r from-[#030712] to-transparent' : 'bg-gradient-to-r from-[#f8fafc] to-transparent'
+            }`} />
+
+            <div
+              ref={thumbnailScrollRef}
+              className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth pb-8 pt-4 scrollbar-hide snap-x snap-mandatory"
+              style={{ scrollBehavior: 'smooth', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {filteredProjects.map((project) => {
+                const isSelected = selectedProject?.id === project.id;
+                return (
+                  <div
                     key={project.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05, duration: 0.5 }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedProject(project)}
-                    className={cn(
-                      "relative flex-shrink-0 w-28 md:w-36 h-24 md:h-32 rounded-lg overflow-hidden border-2 transition-all duration-300 group/thumb",
-                      selectedProject.id === project.id
-                        ? isDarkMode
-                          ? 'border-[#6366f1] shadow-lg shadow-[#6366f1]/50'
-                          : 'border-[#0099FF] shadow-lg shadow-[#0099FF]/50'
-                        : isDarkMode
-                          ? 'border-white/10 hover:border-white/30'
-                          : 'border-gray-300 hover:border-gray-400'
-                    )}
+                    className={`relative flex-shrink-0 w-48 sm:w-64 aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer snap-start transition-all duration-500 group ${
+                      isSelected 
+                        ? (isDarkMode ? 'ring-2 ring-indigo-500 ring-offset-4 ring-offset-[#030712] shadow-2xl shadow-indigo-500/30' : 'ring-2 ring-blue-500 ring-offset-4 ring-offset-[#f8fafc] shadow-2xl shadow-blue-500/30')
+                        : 'hover:-translate-y-2 hover:shadow-xl ' + (isDarkMode ? 'hover:shadow-black/50' : 'hover:shadow-blue-900/10')
+                    }`}
                   >
                     <img
                       src={project.img}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform duration-500"
+                      className={`w-full h-full object-cover transition-transform duration-700 ${isSelected ? 'scale-110' : 'group-hover:scale-110'}`}
                     />
-                    <div className={cn(
-                      "absolute inset-0",
-                      isDarkMode
-                        ? 'bg-gradient-to-b from-transparent to-black/60 group-hover/thumb:from-black/20 group-hover/thumb:to-black/70'
-                        : 'bg-gradient-to-b from-transparent to-black/40 group-hover/thumb:from-black/10 group-hover/thumb:to-black/60'
-                    )}></div>
-
-                    {/* Thumbnail Status Badge */}
-                    <div className="absolute top-1 right-1">
-                      <span className={cn(
-                        "inline-block px-2 py-1 rounded text-xs font-bold",
-                        project.tag === 'Ongoing'
-                          ? isDarkMode
-                            ? 'bg-yellow-500/80 text-yellow-100'
-                            : 'bg-yellow-500/80 text-white'
-                          : isDarkMode
-                            ? 'bg-green-500/80 text-green-100'
-                            : 'bg-green-500/80 text-white'
-                      )}>
-                        {project.tag.split(' ')[0].charAt(0)}
-                      </span>
+                    
+                    {/* Gradient Overlay */}
+                    <div className={`absolute inset-0 transition-opacity duration-500 ${
+                      isSelected 
+                        ? (isDarkMode ? 'bg-indigo-900/40 mix-blend-multiply' : 'bg-blue-900/20 mix-blend-multiply')
+                        : 'bg-black/40 group-hover:bg-black/20'
+                    }`} />
+                    
+                    {/* Content Overlay */}
+                    <div className="absolute inset-0 p-4 sm:p-5 flex flex-col justify-end">
+                      <div className={`transition-all duration-500 ${isSelected ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-90 group-hover:translate-y-0 group-hover:opacity-100'}`}>
+                         <span className={`inline-block px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider mb-2 ${
+                            project.tag === 'Ongoing'
+                              ? 'bg-yellow-500/80 text-yellow-50 backdrop-blur-sm'
+                              : 'bg-green-500/80 text-green-50 backdrop-blur-sm'
+                          }`}>
+                            {project.tag}
+                          </span>
+                        <h4 className="text-sm sm:text-base font-bold text-white leading-tight line-clamp-2 drop-shadow-md">
+                          {project.title}
+                        </h4>
+                      </div>
                     </div>
-
-                    {/* Title on Thumbnail */}
-                    <div className="absolute bottom-1 left-1 right-1">
-                      <p className="text-xs font-bold text-white line-clamp-1">
-                        {project.title.split(' ').slice(0, 2).join(' ')}
-                      </p>
-                    </div>
-
-                    {/* Active Indicator */}
-                    {selectedProject.id === project.id && (
-                      <motion.div
-                        layoutId="activeIndicator"
-                        className="absolute inset-0 border-2 border-indigo-500 rounded-lg"
-                      />
-                    )}
-                  </motion.button>
-                ))}
-              </div>
-
-              {/* Right Arrow */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollThumbnails('right')}
-                className={cn(
-                  "absolute -right-4 md:right-0 top-1/2 transform -translate-y-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100",
-                  isDarkMode
-                    ? 'bg-[#6366f1] hover:bg-[#818cf8] text-white'
-                    : 'bg-[#0099FF] hover:bg-[#005fcc] text-white'
-                )}
-              >
-                <MdChevronRight className="text-2xl" />
-              </motion.button>
+                  </div>
+                );
+              })}
             </div>
 
-            {/* Scroll Indicator */}
-            <p className={cn(
-              "text-xs mt-4 text-center",
-              isDarkMode ? 'text-white/50' : 'text-gray-500'
-            )}>
-              ← Scroll to browse all projects →
-            </p>
-          </motion.div>
+            {/* Right fade mask */}
+            <div className={`absolute right-0 top-0 bottom-0 w-8 md:w-16 z-10 pointer-events-none ${
+              isDarkMode ? 'bg-gradient-to-l from-[#030712] to-transparent' : 'bg-gradient-to-l from-[#f8fafc] to-transparent'
+            }`} />
+          </div>
         </div>
 
-        {/* Case Study Modal */}
+        {/* Enhanced Case Study Modal */}
         <ModalPortal isOpen={showModal && !!selectedProject}>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: showModal ? 1 : 0 }}
-            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className={cn(
-                "rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border",
-                isDarkMode
-                  ? 'border-white/10 bg-slate-900'
-                  : 'bg-white border-gray-200 shadow-2xl'
-              )}
-            >
-              {/* Header */}
-              <div className={cn(
-                "border-b p-6 md:p-10 transition-colors duration-500",
-                isDarkMode
-                  ? 'border-white/10 bg-gradient-to-r from-[#0099FF]/20 to-[#00CC99]/20'
-                  : 'border-gray-200 bg-gradient-to-r from-[#0099FF]/10 to-[#CCFF00]/10'
-              )}>
-                <div className="flex justify-between items-start gap-4">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    <h3 className={cn(
-                      "text-2xl md:text-3xl font-black mb-3",
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    )}>
-                      {selectedProject.title}
-                    </h3>
-                    <p className={cn(
-                      "font-semibold text-base",
-                      isDarkMode ? 'text-indigo-400' : 'text-indigo-600'
-                    )}>
-                      {selectedProject.highlight}
-                    </p>
-                  </motion.div>
-                  <motion.button
-                    whileHover={{ scale: 1.1, rotate: 90 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={closeModal}
-                    className={cn(
-                      "text-3xl flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg transition-all",
-                      isDarkMode
-                        ? 'text-white/60 hover:text-white hover:bg-white/10'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200'
-                    )}
-                  >
-                    ×
-                  </motion.button>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6 md:p-10 space-y-8">
-                {/* Project Image */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.15 }}
-                  className={cn(
-                    "rounded-2xl overflow-hidden flex items-center justify-center border",
-                    isDarkMode
-                      ? 'border-white/10 bg-gradient-to-br from-slate-700 to-slate-800'
-                      : 'border-gray-300 bg-gradient-to-br from-gray-200 to-gray-300'
-                  )}
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-8">
+             {/* Backdrop */}
+             <div 
+               className="absolute inset-0 bg-black/80 backdrop-blur-xl transition-opacity animate-[fadeIn_0.3s_ease-out]" 
+               onClick={closeModal}
+             />
+             
+             {/* Modal Content */}
+             <div className={`relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-[2rem] overflow-hidden shadow-2xl animate-[slideUp_0.4s_cubic-bezier(0.16,1,0.3,1)] ${
+                isDarkMode ? 'bg-[#0f172a] border border-white/10' : 'bg-white border border-slate-200'
+             }`}>
+                
+                {/* Close Button - Floating */}
+                <button 
+                  onClick={closeModal}
+                  className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 w-10 h-10 rounded-full bg-black/50 text-white backdrop-blur-md flex items-center justify-center hover:bg-black/70 hover:scale-110 transition-all border border-white/10"
                 >
+                  <MdClose className="text-xl" />
+                </button>
+
+                {/* Modal Header Image */}
+                <div className="relative h-48 sm:h-64 lg:h-80 shrink-0 bg-slate-900 border-b border-white/10">
                   <img 
-                    src={selectedProject.img} 
-                    alt={selectedProject.title}
-                    className="w-full h-auto max-h-80 object-contain p-4"
+                    src={selectedProject?.img} 
+                    alt={selectedProject?.title}
+                    className="w-full h-full object-cover opacity-80"
                   />
-                </motion.div>
-
-                {/* Overview */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className={cn(
-                      "w-1 h-6 rounded-full bg-gradient-to-b",
-                      isDarkMode
-                        ? 'from-indigo-400 to-teal-400'
-                        : 'from-[#0099FF] to-[#CCFF00]'
-                    )}></div>
-                    <h4 className={cn(
-                      "text-xl md:text-2xl font-black",
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    )}>Project Overview</h4>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  
+                  {/* Title Overlay */}
+                  <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 lg:px-12">
+                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3 backdrop-blur-md border ${
+                        selectedProject?.tag === 'Ongoing'
+                          ? 'bg-yellow-500/20 border-yellow-400/50 text-yellow-300'
+                          : 'bg-green-500/20 border-green-400/50 text-green-300'
+                      }`}>
+                        {selectedProject?.tag}
+                      </span>
+                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+                        {selectedProject?.title}
+                     </h2>
                   </div>
-                  <p className={cn(
-                    "text-base md:text-lg leading-relaxed p-4 rounded-lg border",
-                    isDarkMode
-                      ? 'bg-white/5 text-white/80 border-white/10'
-                      : 'bg-indigo-25 text-gray-800 border-indigo-200'
-                  )}>
-                    {selectedProject.desc}
-                  </p>
-                </motion.div>
+                </div>
 
-                {/* Location & Status Grid */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.25 }}
-                  className="grid grid-cols-2 gap-6"
-                >
-                  <div className={cn(
-                    "p-4 rounded-lg border transition-colors duration-500",
-                    isDarkMode
-                      ? 'border-indigo-500 bg-slate-800'
-                      : 'border-indigo-200 bg-indigo-50'
-                  )}>
-                    <h4 className={cn(
-                      "text-xs font-bold uppercase tracking-wider mb-2",
-                      isDarkMode ? 'text-white/60' : 'text-indigo-700'
-                    )}>📍 Location</h4>
-                    <p className={cn(
-                      "text-base font-semibold",
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    )}>
-                      {selectedProject.location || 'General Area'}
-                    </p>
-                  </div>
-                  <div className={cn(
-                    "p-4 rounded-lg border transition-colors duration-500",
-                    isDarkMode
-                      ? 'border-green-500 bg-slate-800'
-                      : 'border-rose-200 bg-rose-50'
-                  )}>
-                    <h4 className={cn(
-                      "text-xs font-bold uppercase tracking-wider mb-2",
-                      isDarkMode ? 'text-white/60' : 'text-rose-700'
-                    )}>✓ Status</h4>
-                    <span className={cn(
-                      "inline-block px-3 py-1 rounded-lg text-sm font-semibold",
-                      selectedProject.tag === 'Ongoing'
-                        ? isDarkMode
-                          ? 'bg-yellow-500/20 border border-yellow-400/50 text-yellow-300'
-                          : 'bg-yellow-400/20 border border-yellow-500/50 text-yellow-700'
-                        : isDarkMode
-                          ? 'bg-green-500/20 border border-green-400/50 text-green-300'
-                          : 'bg-green-400/20 border border-green-500/50 text-green-700'
-                    )}>
-                      {selectedProject.tag}
-                    </span>
-                  </div>
-                </motion.div>
+                {/* Modal Scrollable Body */}
+                <div className={`flex-1 overflow-y-auto p-6 sm:p-8 lg:p-12 scrollbar-thin ${
+                  isDarkMode ? 'scrollbar-thumb-white/10 scrollbar-track-transparent' : 'scrollbar-thumb-slate-200 scrollbar-track-transparent'
+                }`}>
+                  
+                  {/* Two Column Layout for Body */}
+                  <div className="grid lg:grid-cols-3 gap-10">
+                     
+                     {/* Left Content (Overview & Scope) */}
+                     <div className="lg:col-span-2 space-y-10">
+                        <section>
+                           <div className="flex items-center gap-3 mb-4">
+                             <MdInfoOutline className={`text-2xl ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`} />
+                             <h4 className={`text-xl sm:text-2xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Project Overview</h4>
+                           </div>
+                           <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                             {selectedProject?.desc}
+                           </p>
+                        </section>
 
-                {/* Scope & Highlights */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className={cn(
-                      "w-1 h-6 rounded-full bg-gradient-to-b",
-                      isDarkMode
-                        ? 'from-indigo-400 to-teal-400'
-                        : 'from-[#0099FF] to-[#CCFF00]'
-                    )}></div>
-                    <h4 className={cn(
-                      "text-xl md:text-2xl font-black",
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    )}>Scope & Highlights</h4>
-                  </div>
-                  <p className={cn(
-                    "text-base md:text-lg leading-relaxed p-4 rounded-lg border-l-4",
-                    isDarkMode
-                      ? 'bg-white/5 text-white/80 border-indigo-400'
-                      : 'bg-indigo-25 text-gray-800 border-indigo-600'
-                  )}>
-                    {selectedProject.highlight}
-                  </p>
-                </motion.div>
+                        <section>
+                           <div className="flex items-center gap-3 mb-4">
+                             <MdCheckCircle className={`text-2xl ${isDarkMode ? 'text-teal-400' : 'text-cyan-600'}`} />
+                             <h4 className={`text-xl sm:text-2xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Scope of Work</h4>
+                           </div>
+                           <div className={`p-6 rounded-2xl border ${
+                             isDarkMode ? 'bg-white/5 border-white/10 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
+                           }`}>
+                             <p className="text-base sm:text-lg font-medium leading-relaxed">
+                               {selectedProject?.highlight}
+                             </p>
+                           </div>
+                        </section>
+                     </div>
 
-                {/* Metrics */}
-                {selectedProject.metrics && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.35 }}
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={cn(
-                        "w-1 h-6 rounded-full bg-gradient-to-b",
-                        isDarkMode
-                          ? 'from-purple-500 to-pink-500'
-                          : 'from-[#0099FF] to-[#CCFF00]'
-                      )}></div>
-                      <h4 className={cn(
-                        "text-xl md:text-2xl font-black",
-                        isDarkMode ? 'text-white' : 'text-gray-900'
-                      )}>Project Metrics</h4>
-                    </div>
-                    <div className={cn(
-                      "grid grid-cols-3 gap-6 p-6 rounded-lg border",
-                      isDarkMode
-                        ? 'border-white/10 bg-gradient-to-r from-indigo-500/10 to-teal-500/10'
-                        : 'border-indigo-200 bg-gradient-to-r from-[#0099FF]/10 to-[#CCFF00]/10'
-                    )}>
-                      <div className="text-center">
-                        <div className={cn(
-                          "text-3xl font-black",
-                          isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'
-                        )}>
-                          {selectedProject.metrics.area}
+                     {/* Right Sidebar (Details & Metrics) */}
+                     <div className="space-y-6">
+                        {/* Location Card */}
+                        <div className={`p-6 rounded-2xl border ${
+                           isDarkMode ? 'bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border-indigo-500/20' : 'bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-100'
+                        }`}>
+                           <h5 className={`text-xs font-bold uppercase tracking-widest mb-2 ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>Location</h5>
+                           <p className={`text-lg font-bold flex items-start gap-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                              <MdLocationOn className="text-xl mt-0.5 shrink-0" />
+                              {selectedProject?.location || 'General Area'}
+                           </p>
                         </div>
-                        <div className={cn(
-                          "text-xs font-semibold mt-2 uppercase tracking-widest",
-                          isDarkMode ? 'text-white/60' : 'text-gray-600'
-                        )}>Area</div>
-                      </div>
-                      <div className={cn(
-                        "text-center border-l border-r",
-                        isDarkMode ? 'border-white/10' : 'border-gray-300'
-                      )}>
-                        <div className={cn(
-                          "text-3xl font-black",
-                          isDarkMode ? 'text-indigo-400' : 'text-[#0099FF]'
-                        )}>
-                          {selectedProject.metrics.duration}
-                        </div>
-                        <div className={cn(
-                          "text-xs font-semibold mt-2 uppercase tracking-widest",
-                          isDarkMode ? 'text-white/60' : 'text-gray-600'
-                        )}>Duration</div>
-                      </div>
-                      <div className="text-center">
-                        <div className={cn(
-                          "text-3xl font-black",
-                          isDarkMode ? 'text-purple-400' : 'text-[#0099FF]'
-                        )}>
-                          {selectedProject.metrics.value}
-                        </div>
-                        <div className={cn(
-                          "text-xs font-semibold mt-2 uppercase tracking-widest",
-                          isDarkMode ? 'text-white/60' : 'text-gray-600'
-                        )}>Value</div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
 
-                {/* Footer */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="pt-6 border-t flex justify-end gap-3 transition-colors duration-500"
-                  style={{
-                    borderTopColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : '#e5e7eb'
-                  }}
-                >
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={closeModal}
-                    className={cn(
-                      "px-8 py-3 rounded-lg font-bold uppercase text-sm transition-all duration-300",
-                      isDarkMode
-                        ? 'bg-[#6366f1] text-white hover:shadow-lg hover:shadow-[#6366f1]/30'
-                        : 'bg-[#0099FF] text-white hover:shadow-lg hover:shadow-[#0099FF]/30'
-                    )}
-                  >
-                    Close
-                  </motion.button>
-                </motion.div>
-              </div>
-            </motion.div>
-          </motion.div>
+                        {/* Metrics Cards */}
+                        {selectedProject?.metrics && Object.entries(selectedProject.metrics).map(([key, value]) => (
+                           <div key={key} className={`p-6 rounded-2xl border flex flex-col justify-center items-center text-center ${
+                             isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200 shadow-sm'
+                           }`}>
+                              <h5 className={`text-xs font-bold uppercase tracking-widest mb-2 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>{key}</h5>
+                              <p className={`text-xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{value}</p>
+                           </div>
+                        ))}
+                     </div>
+                  </div>
+                </div>
+
+             </div>
+          </div>
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes slideUp { from { opacity: 0; transform: translateY(40px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+            @keyframes custom-shimmer {
+              100% { transform: translateX(100%); }
+            }
+          `}} />
         </ModalPortal>
+
       </div>
     </section>
   );
