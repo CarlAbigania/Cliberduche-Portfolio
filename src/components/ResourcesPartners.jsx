@@ -133,9 +133,9 @@ const ResourcesPartners = () => {
                   </div>
                 }
                 back={
-                  <div className={`relative w-full h-full flex flex-col justify-center p-8 ${isDarkMode ? 'bg-gradient-to-br from-slate-900 via-indigo-900 to-teal-900' : 'bg-gradient-to-br from-indigo-600 via-blue-600 to-teal-600'}`}>
-                    <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-white'}`}>Calamba City Site</h3>
-                    <div className={`border-t py-4 space-y-2 text-sm md:text-base leading-relaxed font-medium ${isDarkMode ? 'border-t-indigo-400/40 text-white' : 'border-t-white/40 text-white'}`}>
+                  <div className={`relative w-full h-full flex flex-col justify-center p-8 ${isDarkMode ? 'bg-gradient-to-br from-indigo-900 to-teal-900' : 'bg-gradient-to-br from-[#0099FF]/10 to-[#CCFF00]/20'}`}>
+                    <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Calamba City Site</h3>
+                    <div className={`border-t py-4 space-y-2 text-sm md:text-base leading-relaxed font-medium ${isDarkMode ? 'border-t-indigo-400/40 text-white' : 'border-t-gray-400 text-gray-900'}`}>
                       <p><strong>Coordinates:</strong> 14°08'32.0"N 121°09'37.0"E</p>
                       <p><strong>Address:</strong> 45R6+V4J Calamba, Laguna</p>
                       <p><strong>Capacity:</strong> 20M+ cubic meters of backfilling materials</p>
@@ -165,9 +165,9 @@ const ResourcesPartners = () => {
                   </div>
                 }
                 back={
-                  <div className={`relative w-full h-full flex flex-col justify-center p-8 ${isDarkMode ? 'bg-gradient-to-br from-slate-900 via-indigo-900 to-teal-900' : 'bg-gradient-to-br from-indigo-600 via-blue-600 to-teal-600'}`}>
-                    <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-white'}`}>Silang, Cavite Site</h3>
-                    <div className={`border-t py-4 space-y-2 text-sm md:text-base leading-relaxed font-medium ${isDarkMode ? 'border-t-indigo-400/40 text-white' : 'border-t-white/40 text-white'}`}>
+                  <div className={`relative w-full h-full flex flex-col justify-center p-8 ${isDarkMode ? 'bg-gradient-to-br from-indigo-900 to-teal-900' : 'bg-gradient-to-br from-[#0099FF]/10 to-[#CCFF00]/20'}`}>
+                    <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Silang, Cavite Site</h3>
+                    <div className={`border-t py-4 space-y-2 text-sm md:text-base leading-relaxed font-medium ${isDarkMode ? 'border-t-indigo-400/40 text-white' : 'border-t-gray-400 text-gray-900'}`}>
                       <p><strong>Coordinates:</strong> 14°15'02"N 120°59'12"E</p>
                       <p><strong>Address:</strong> Sabutan, 7X2P+6MF Silang, Cavite</p>
                       <p><strong>Capacity:</strong> 2.2M+ cubic meters of backfilling materials</p>
