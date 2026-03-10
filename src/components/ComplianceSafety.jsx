@@ -53,20 +53,7 @@ const ComplianceSafety = () => {
           : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
       ].join(' ')
     }>
-      {/* Animated Infographic SVG Background */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 0.18, scale: 1 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-        className="absolute inset-0 w-full h-full pointer-events-none z-0"
-      >
-        <svg width="100%" height="100%" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-0 left-0">
-            <ellipse cx="720" cy="300" rx="600" ry="220" fill={isDarkMode ? '#6366f1' : '#3b82f6'} fillOpacity="0.10" />
-            <rect x="320" y="120" width="800" height="360" rx="80" fill={isDarkMode ? '#2dd4bf' : '#e0e7ff'} fillOpacity="0.07" />
-            <path d="M720 120 Q800 300 720 480 Q640 300 720 120 Z" fill={isDarkMode ? '#2dd4bf' : '#60a5fa'} fillOpacity="0.13" />
-            <circle cx="720" cy="300" r="90" fill={isDarkMode ? '#6366f1' : '#bae6fd'} fillOpacity="0.08" />
-        </svg>
-      </motion.div>
+      {/* Removed background shapes: only grid remains below */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
