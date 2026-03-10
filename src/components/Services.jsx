@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../hooks/useTheme';
-import { cn } from '../utils/cn';
-import { MdTerrain, MdAgriculture, MdWorkHistory, MdHandyman, MdConstruction, MdPendingActions } from 'react-icons/md';
-import LogoLoop from './ui/LogoLoop';
+import { MdTerrain, MdAgriculture, MdWorkHistory, MdHandyman, MdConstruction, MdPendingActions, MdArrowForward } from 'react-icons/md';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
   const { isDarkMode } = useTheme();
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const sectionRef = useRef(null);
+  const cardsRef = useRef([]);
 
-  // Icon mapping
   const iconMap = {
     'fa-mountain': MdTerrain,
     'fa-tractor': MdAgriculture,
@@ -20,107 +21,173 @@ const Services = () => {
   };
 
   const services = [
-    { icon: 'fa-mountain', title: 'Backfill Sourcing', desc: 'Sub-base, aggregates, mixed soil, and boulders with lab-tested quality.' },
-    { icon: 'fa-tractor', title: 'Land Development', desc: 'Clearing, cutting, leveling, and pipe laying for site readiness.' },
-    { icon: 'fa-hard-hat', title: 'Site Management', desc: 'Professional field supervision aligned with safety and delivery targets.' },
-    { icon: 'fa-tools', title: 'Equipment Leasing', desc: 'Dump trucks, bulldozers, excavators, compactors, and support units.' },
-    { icon: 'fa-road', title: 'Civil Works', desc: 'Bridges, concrete roads, ripraps, drainage, and slope protection.' },
-    { icon: 'fa-clipboard-check', title: 'Project Consultation', desc: 'Consultation for horizontal and vertical development projects.' },
+    { icon: 'fa-mountain', title: 'Backfill Sourcing', desc: 'Sub-base, aggregates, mixed soil, and boulders with lab-tested quality ensuring solid foundations.' },
+    { icon: 'fa-tractor', title: 'Land Development', desc: 'Comprehensive clearing, cutting, leveling, and pipe laying for immediate site readiness.' },
+    { icon: 'fa-hard-hat', title: 'Site Management', desc: 'Professional field supervision aligned with rigorous safety standards and delivery targets.' },
+    { icon: 'fa-tools', title: 'Equipment Leasing', desc: 'Heavy-duty dump trucks, bulldozers, excavators, and compactors ready for deployment.' },
+    { icon: 'fa-road', title: 'Civil Works', desc: 'Expert construction of bridges, concrete roads, ripraps, drainage, and slope protection.' },
+    { icon: 'fa-clipboard-check', title: 'Project Consultation', desc: 'Strategic consultation and planning for extensive horizontal and vertical development.' },
   ];
 
-  // Custom service card renderer for LogoLoop
-  const renderServiceCard = (service, index) => (
-    <motion.div
-      onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(null)}
-      whileHover={{ y: -8 }}
-      className="group cursor-pointer"
-    >
-      <div className={cn(
-        "h-full p-4 sm:p-6 md:p-10 rounded-2xl sm:rounded-3xl border backdrop-blur-xl transition-all duration-300",
-        "hover:shadow-2xl",
-        isDarkMode
-          ? 'border-white/10 bg-slate-900 hover:border-teal-400/50 hover:shadow-teal-400/30'
-          : 'border-gray-400 bg-white hover:border-[#0099FF] hover:shadow-[#0099FF]/30 shadow-lg shadow-gray-300/40'
-      )}>
-        {/* Icon */}
-        <motion.div
-          initial={{ scale: 1 }}
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.3 }}
-          className={cn(
-            "w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 transition-all duration-300",
-            isDarkMode
-              ? 'bg-gradient-to-br from-indigo-500/30 to-teal-500/30 text-teal-200'
-              : 'bg-gradient-to-br from-[#0099FF]/30 to-[#CCFF00]/30 text-[#0099FF]'
-          )}
-        >
-          {iconMap[service.icon] && React.createElement(iconMap[service.icon], { className: 'text-2xl sm:text-3xl' })}
-        </motion.div>
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      // Header Animation
+      gsap.from('.gsap-service-header', {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: 'power3.out',
+      });
 
-        {/* Content */}
-        <h3 className={cn(
-          "text-base sm:text-xl md:text-2xl font-black mb-2 sm:mb-3 transition-all duration-300",
-          isDarkMode ? 'text-white' : 'text-gray-900'
-        )}>
-          {service.title}
-        </h3>
+      // Cards Stagger Animation
+      gsap.from(cardsRef.current, {
+        scrollTrigger: {
+          trigger: '.gsap-services-grid',
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: 'back.out(1.2)',
+      });
 
-        <p className={cn(
-          "leading-relaxed text-sm sm:text-base transition-opacity duration-300",
-          isDarkMode ? 'text-white/75' : 'text-gray-700'
-        )}>
-          {service.desc}
-        </p>
+      // Parallax Background Orbs
+      gsap.to('.gsap-service-orb-1', {
+        y: 200,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+      gsap.to('.gsap-service-orb-2', {
+        y: -150,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
 
-        {/* Accent line */}
-        <motion.div
-          initial={{ width: 0 }}
-          whileHover={{ width: '100%' }}
-          transition={{ duration: 0.5 }}
-          className={cn(
-            "h-1 rounded-full bg-gradient-to-r mt-6",
-            isDarkMode
-              ? 'from-indigo-400 to-teal-400'
-              : 'from-[#0099FF] to-[#CCFF00]'
-          )}
-        ></motion.div>
-      </div>
-    </motion.div>
-  );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       id="services"
-      className={cn(
-        "py-24 md:py-32 relative overflow-hidden transition-colors duration-500",
-        isDarkMode 
-          ? 'bg-gradient-to-br from-slate-900 via-slate-950 to-black'
-          : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
-      )}
-      style={{
-        background:
-          `linear-gradient(135deg, rgba(15,23,42,0.65) 0%, rgba(30,41,59,0.60) 50%, rgba(15,23,42,0.65) 100%), url('https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=') fixed center/cover no-repeat`,
-      }}
+      ref={sectionRef}
+      className={`relative py-24 md:py-32 lg:py-40 overflow-hidden transition-colors duration-700 ${
+        isDarkMode ? 'bg-[#030712]' : 'bg-[#f8fafc]'
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-        {/* Removed section header for cleaner look */}
-
-        {/* Smooth Infinite Scroll Logo Loop */}
-        <LogoLoop
-          logos={services}
-          speed={80}
-          direction="left"
-          gap={24}
-          pauseOnHover={true}
-          logoHeight={400}
-          fadeOut={true}
-          fadeOutColor={isDarkMode ? '#0f172a' : '#f9fafb'}
-          scaleOnHover={true}
-          className="w-full"
-          renderItem={renderServiceCard}
-          ariaLabel="Our services carousel"
+      {/* Background Ambience */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className={`absolute inset-0 transition-opacity duration-1000 ${
+            isDarkMode 
+              ? 'bg-[linear-gradient(to_bottom,rgba(3,7,18,0.8),rgba(3,7,18,0.95)),url("https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=")]' 
+              : 'bg-[linear-gradient(to_bottom,rgba(248,250,252,0.85),rgba(248,250,252,0.95)),url("https://media.istockphoto.com/id/1420678520/photo/building-site-at-sunset.jpg?s=612x612&w=0&k=20&c=HoDUK1RxsH78Fj9D34nao_MUTbf-vR3G97zUWMtES4k=")]'
+          } bg-cover bg-center bg-fixed`} 
         />
+        <div className={`gsap-service-orb-1 absolute top-[20%] -right-[10%] w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] rounded-full mix-blend-screen filter blur-[120px] opacity-30 ${isDarkMode ? 'bg-indigo-600/40' : 'bg-blue-400/30'}`} />
+        <div className={`gsap-service-orb-2 absolute bottom-[10%] -left-[10%] w-[35vw] h-[35vw] max-w-[500px] max-h-[500px] rounded-full mix-blend-screen filter blur-[100px] opacity-20 ${isDarkMode ? 'bg-teal-600/40' : 'bg-cyan-400/30'}`} />
+        <div className={`absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] ${isDarkMode ? 'opacity-[0.05]' : 'opacity-[0.03]'}`} />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <div className="gsap-service-header inline-flex items-center gap-3 mb-6">
+            <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-teal-400' : 'from-blue-600 to-cyan-500'}`} />
+            <span className={`text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>OUR EXPERTISE</span>
+            <div className={`w-12 h-1 bg-gradient-to-l rounded-full ${isDarkMode ? 'from-indigo-500 to-teal-400' : 'from-blue-600 to-cyan-500'}`} />
+          </div>
+          <h2 className={`gsap-service-header text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+            Comprehensive <br className="hidden sm:block" />
+            <span className={`bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-purple-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}>
+               Civil Solutions
+            </span>
+          </h2>
+          <p className={`gsap-service-header text-base sm:text-lg font-medium leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+            Delivering end-to-end land development, civil works, and heavy equipment leasing with unmatched precision and safety.
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="gsap-services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full">
+          {services.map((service, index) => {
+            const Icon = iconMap[service.icon];
+            return (
+              <div 
+                key={index}
+                ref={el => cardsRef.current[index] = el}
+                className="group relative h-full"
+              >
+                {/* Hover Glow Effect */}
+                <div className={`absolute inset-0 rounded-3xl blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100 ${
+                  isDarkMode ? 'bg-indigo-500/20' : 'bg-blue-500/20'
+                }`} />
+                
+                {/* Card Content */}
+                <div className={`relative h-full flex flex-col p-6 sm:p-8 rounded-3xl border backdrop-blur-xl transition-all duration-500 group-hover:-translate-y-2 ${
+                  isDarkMode 
+                    ? 'bg-white/5 border-white/10 hover:bg-white/10' 
+                    : 'bg-white/80 border-gray-200 hover:bg-white shadow-xl shadow-blue-900/5'
+                }`}>
+                  
+                  {/* Icon Container */}
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 ${
+                    isDarkMode 
+                      ? 'bg-gradient-to-br from-indigo-500/20 to-purple-500/20 shadow-lg shadow-indigo-500/10' 
+                      : 'bg-gradient-to-br from-blue-500/10 to-indigo-500/10 shadow-lg shadow-blue-500/10'
+                  }`}>
+                    {Icon && <Icon className={`text-3xl ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`} />}
+                  </div>
+
+                  {/* Text */}
+                  <div className="flex-grow">
+                    <h3 className={`text-xl font-black mb-3 transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                      {service.title}
+                    </h3>
+                    <p className={`text-sm sm:text-base leading-relaxed font-medium mb-6 ${isDarkMode ? 'text-slate-400 group-hover:text-slate-300' : 'text-slate-600 group-hover:text-slate-800'}`}>
+                      {service.desc}
+                    </p>
+                  </div>
+
+                  {/* Interactive Button */}
+                  <div className="mt-auto pt-4 flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+                      isDarkMode ? 'bg-white/5 group-hover:bg-indigo-500 text-white' : 'bg-slate-100 group-hover:bg-blue-600 text-slate-800 group-hover:text-white'
+                    }`}>
+                      <MdArrowForward className="text-xl -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                    </div>
+                    <span className={`text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${
+                      isDarkMode ? 'text-slate-500 group-hover:text-indigo-300' : 'text-slate-400 group-hover:text-blue-600'
+                    }`}>
+                      Explore
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );
