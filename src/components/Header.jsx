@@ -39,6 +39,9 @@ const Header = () => {
     }, 0);
   };
 
+  // Check if in hero section (not scrolled) in light mode
+  const isHeroLightMode = !scrolled && !isDarkMode;
+
   return (
     <>
       {!hideHeader && (
@@ -66,8 +69,8 @@ const Header = () => {
               
               {/* Company name (hidden on mobile) */}
               <div className="hidden md:flex flex-col justify-center">
-                <h1 className="text-sm font-bold text-gray-900 dark:text-white leading-none">Cliberduche</h1>
-                <p className="text-xs text-primary dark:text-blue-400 font-semibold">Corporation</p>
+                <h1 className={`text-sm font-bold leading-none ${isHeroLightMode ? 'text-white' : 'text-gray-900 dark:text-white'}`}>Cliberduche</h1>
+                <p className={`text-xs font-semibold ${isHeroLightMode ? 'text-blue-300' : 'text-primary dark:text-blue-400'}`}>Corporation</p>
               </div>
             </button>
 
@@ -79,7 +82,11 @@ const Header = () => {
                 <a
                   href="/Company Profile 2026.pdf"
                   download="Cliberduche_Portfolio.pdf"
-                  className="hidden md:inline-flex items-center gap-2 px-4 py-2 border-2 border-primary text-primary dark:text-blue-400 dark:border-blue-400 text-sm font-semibold rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-white transition-all duration-300"
+                  className={`hidden md:inline-flex items-center gap-2 px-4 py-2 border-2 text-sm font-semibold rounded-lg transition-all duration-300 ${
+                    isHeroLightMode
+                      ? 'border-blue-300 text-blue-300 hover:bg-blue-400 hover:text-white'
+                      : 'border-primary text-primary dark:text-blue-400 dark:border-blue-400 hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-white'
+                  }`}
                   title="Download Portfolio PDF"
                 >
                   <MdDownload className="text-sm" />
@@ -88,7 +95,7 @@ const Header = () => {
               </div>
 
               {/* Divider 1 */}
-              <div className="hidden md:block w-px h-6 bg-black/30 dark:bg-slate-500"></div>
+              <div className={`hidden md:block w-px h-6 ${isHeroLightMode ? 'bg-white/30' : 'bg-black/30 dark:bg-slate-500'}`}></div>
 
               {/* Group 2: Social Media Links (Desktop) */}
               <div className="hidden md:flex items-center gap-4">
@@ -96,7 +103,7 @@ const Header = () => {
                   href="https://www.facebook.com/cliberduche"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110"
+                  className={`transition-all duration-300 hover:scale-110 ${isHeroLightMode ? 'text-blue-300 hover:text-white' : 'text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400'}`}
                   title="Facebook"
                 >
                   <FaFacebook className="text-sm" />
@@ -105,7 +112,7 @@ const Header = () => {
                   href="https://www.linkedin.com/company/cliberduche"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110"
+                  className={`transition-all duration-300 hover:scale-110 ${isHeroLightMode ? 'text-blue-300 hover:text-white' : 'text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400'}`}
                   title="LinkedIn"
                 >
                   <FaLinkedin className="text-sm" />
@@ -114,7 +121,7 @@ const Header = () => {
                   href="https://www.instagram.com/cliberduche"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110"
+                  className={`transition-all duration-300 hover:scale-110 ${isHeroLightMode ? 'text-blue-300 hover:text-white' : 'text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400'}`}
                   title="Instagram"
                 >
                   <FaInstagram className="text-sm" />
@@ -122,16 +129,18 @@ const Header = () => {
               </div>
 
               {/* Divider 2 */}
-              <div className="hidden md:block w-px h-6 bg-black/30 dark:bg-slate-500"></div>
+              <div className={`hidden md:block w-px h-6 ${isHeroLightMode ? 'bg-white/30' : 'bg-black/30 dark:bg-slate-500'}`}></div>
 
               {/* Group 3: Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
-                className={`text-gray-600 dark:text-yellow-300 hover:text-primary dark:hover:text-yellow-400 text-lg transition-all duration-300 hover:scale-110 p-2 rounded-lg ${
-                  isDarkMode
-                    ? 'dark:hover:bg-slate-800'
-                    : 'hover:bg-white'
-                } border border-transparent`}
+                className={`text-lg transition-all duration-300 hover:scale-110 p-2 rounded-lg border border-transparent ${
+                  isHeroLightMode
+                    ? 'text-yellow-300 hover:text-yellow-200 hover:bg-white/10'
+                    : isDarkMode
+                    ? 'text-gray-600 dark:text-yellow-300 hover:text-primary dark:hover:text-yellow-400 dark:hover:bg-slate-800'
+                    : 'text-gray-600 hover:text-primary hover:bg-white'
+                }`}
                 title={isDarkMode ? 'Light Mode' : 'Dark Mode'}
               >
                 {isDarkMode ? <MdLightMode /> : <MdNightlight />}
@@ -139,7 +148,11 @@ const Header = () => {
 
               {/* Mobile Menu Button */}
               <button
-                className="md:hidden text-gray-600 dark:text-white hover:text-primary dark:hover:text-primary text-xl transition-all duration-300 hover:scale-110 p-2 rounded-lg dark:hover:bg-slate-800"
+                className={`md:hidden text-xl transition-all duration-300 hover:scale-110 p-2 rounded-lg ${
+                  isHeroLightMode
+                    ? 'text-white hover:text-blue-300 hover:bg-white/10'
+                    : 'text-gray-600 dark:text-white hover:text-primary dark:hover:text-primary dark:hover:bg-slate-800'
+                }`}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 {mobileMenuOpen ? <MdClose /> : <MdMenu />}
