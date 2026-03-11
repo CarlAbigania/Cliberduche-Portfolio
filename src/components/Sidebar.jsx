@@ -1,34 +1,28 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { MdHome, MdInfoOutline, MdBuild, MdChecklist, MdNoteAlt, MdLocalShipping, MdFolderOpen, MdPeople, MdShield, MdLink, MdEmail, MdMenu, MdClose, MdChevronRight, MdChevronLeft } from 'react-icons/md';
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  MdHome, MdInfoOutline, MdBuild, MdChecklist, MdNoteAlt, 
+  MdLocalShipping, MdFolderOpen, MdPeople, MdShield, MdLink, MdMenu, MdClose 
+} from 'react-icons/md';
+import gsap from 'gsap';
 
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('hero');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isEdgePanelOpen, setIsEdgePanelOpen] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState(null);
-  const [bubblePos, setBubblePos] = useState({ xPx: 32, y: 32 }); // xPx: pixels from left, y: pixels from bottom
-  const [isDragging, setIsDragging] = useState(false);
-  const [hasMovedSingnificantly, setHasMovedSignificantly] = useState(false);
-  const [isSnapping, setIsSnapping] = useState(false);
-  const bubbleRef = useRef(null);
-  const dragPosRef = useRef({ xPx: 32, y: 32 }); // Track position during drag without re-render
-  const dragStartRef = useRef({ x: 0, y: 0 });
-
-  const DRAG_THRESHOLD = 5; // Pixels threshold to distinguish click from drag
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktopExpanded, setIsDesktopExpanded] = useState(false);
+  const mobileMenuRef = useRef(null);
+  const desktopSidebarRef = useRef(null);
 
   // Icon mapping for navigation links
   const iconMap = {
     'fa-home': MdHome,
     'fa-info-circle': MdInfoOutline,
     'fa-cogs': MdBuild,
-    'fa-tasks': MdChecklist,
-    'fa-file-alt': MdNoteAlt,
-    'fa-truck': MdLocalShipping,
     'fa-project-diagram': MdFolderOpen,
+    'fa-truck': MdLocalShipping,
+    'fa-tasks': MdChecklist,
     'fa-users': MdPeople,
     'fa-shield-alt': MdShield,
     'fa-link': MdLink,
-    'fa-envelope': MdEmail,
   };
 
   const navigationLinks = [
@@ -47,7 +41,7 @@ const Sidebar = () => {
     // Use Intersection Observer for accurate and performant section detection
     const observerOptions = {
       root: null,
-      rootMargin: '-50% 0px -50% 0px',
+      rootMargin: '-40% 0px -60% 0px', // Adjusted to trigger closer to the top
       threshold: 0
     };
 
@@ -77,19 +71,61 @@ const Sidebar = () => {
         }
       });
     };
-  }, [navigationLinks]);
+  }, []);
+
+  // Handle Mobile Menu Animation
+  useEffect(() => {
+    if (mobileMenuRef.current) {
+      if (isMobileMenuOpen) {
+        gsap.to(mobileMenuRef.current, {
+          clipPath: 'circle(150% at calc(100% - 3.5rem) calc(100% - 3.5rem))', // Open from bottom right
+          duration: 0.8,
+          ease: 'power3.inOut',
+          pointerEvents: 'auto',
+          display: 'flex'
+        });
+        
+        // Stagger links in
+        gsap.fromTo('.mobile-nav-item', 
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: 'back.out(1.2)', delay: 0.2 }
+        );
+      } else {
+        gsap.to('.mobile-nav-item', {
+          y: -20, opacity: 0, duration: 0.3, stagger: 0.02, ease: 'power2.in'
+        });
+        
+        gsap.to(mobileMenuRef.current, {
+          clipPath: 'circle(0% at calc(100% - 3.5rem) calc(100% - 3.5rem))', // Close to bottom right
+          duration: 0.6,
+          ease: 'power3.inOut',
+          pointerEvents: 'none',
+          delay: 0.2, // Wait for links to fade
+          onComplete: () => {
+             // Reset styles to avoid issues on re-open
+             gsap.set('.mobile-nav-item', { clearProps: 'all' });
+          }
+        });
+      }
+    }
+  }, [isMobileMenuOpen]);
 
   const handleNavClick = (id) => {
     const element = document.getElementById(id);
     if (element) {
+      // Close menu if on mobile
+      setIsMobileMenuOpen(false);
+
       // Get the element's position relative to the top of the document
       const rect = element.getBoundingClientRect();
       const scrollTop = window.scrollY || window.pageYOffset;
       const targetY = rect.top + scrollTop;
+      
       // Dispatch custom event for SmoothScroll
       window.dispatchEvent(
         new CustomEvent('smooth-scroll-set-target', { detail: targetY })
       );
+      
       // Fallback: scroll directly (especially for mobile)
       setTimeout(() => {
         window.scrollTo({ top: targetY, behavior: 'smooth' });
@@ -97,236 +133,147 @@ const Sidebar = () => {
     }
   };
 
-  const handleMouseDown = (e) => {
-    if (e.button !== 0) return; // Only left mouse button
-    setIsDragging(true);
-    setHasMovedSignificantly(false);
-    dragStartRef.current = { x: e.clientX, y: e.clientY };
-    dragPosRef.current = { xPx: parseFloat(bubbleRef.current.style.left || 32), y: parseFloat(bubbleRef.current.style.bottom || 32) };
-    
-    // Remove transition during drag
-    bubbleRef.current.style.transition = 'none';
-    
-    // Attach listeners immediately
-    document.addEventListener('mousemove', onMouseMoveHandler);
-    document.addEventListener('mouseup', onMouseUpHandler);
-  };
-
-  const onMouseMoveHandler = useCallback((e) => {
-    if (!dragStartRef.current || !bubbleRef.current) return;
-
-    const deltaX = e.clientX - dragStartRef.current.x;
-    const deltaY = e.clientY - dragStartRef.current.y;
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-    // Update position directly without state
-    if (distance > DRAG_THRESHOLD) {
-      let newX = dragPosRef.current.xPx + deltaX;
-      newX = Math.max(0, Math.min(newX, window.innerWidth - 64));
-
-      let newY = dragPosRef.current.y - deltaY;
-      // Prevent bubble from overlapping header (64px) + margin (32px)
-      newY = Math.max(32, Math.min(newY, window.innerHeight - 160));
-
-      bubbleRef.current.style.left = `${newX}px`;
-      bubbleRef.current.style.bottom = `${newY}px`;
-    }
-  }, []);
-
-  const onMouseUpHandler = useCallback(() => {
-    // Remove listeners immediately
-    document.removeEventListener('mousemove', onMouseMoveHandler);
-    document.removeEventListener('mouseup', onMouseUpHandler);
-    
-    setIsDragging(false);
-    
-    // Get final position
-    const finalX = parseFloat(bubbleRef.current?.style.left || 32);
-    const finalY = parseFloat(bubbleRef.current?.style.bottom || 32);
-    
-    // Check if it was a drag or just a click
-    const wasDrag = Math.abs(finalX - dragPosRef.current.xPx) > DRAG_THRESHOLD || 
-                    Math.abs(finalY - dragPosRef.current.y) > DRAG_THRESHOLD;
-    
-    if (wasDrag) {
-      // Re-enable transition for snap animation
-      bubbleRef.current.style.transition = 'all 0.3s ease-out';
-      
-      // Snap to nearest side
-      const midpoint = window.innerWidth / 2;
-      const isCloserToLeft = finalX < midpoint;
-      const targetX = isCloserToLeft ? 32 : window.innerWidth - 96;
-      
-      // Ensure Y position respects header constraint
-      const constrainedY = Math.max(32, Math.min(finalY, window.innerHeight - 160));
-      
-      setIsSnapping(true);
-      setBubblePos({ xPx: targetX, y: constrainedY });
-      dragPosRef.current = { xPx: targetX, y: constrainedY };
-      
-      setTimeout(() => setIsSnapping(false), 300);
-    } else {
-      // It was just a click
-      // Re-enable transition
-      bubbleRef.current.style.transition = 'all 0.3s ease-out';
-      
-      setIsMenuOpen(prev => !prev);
-      // Sync position with state
-      setBubblePos({ xPx: finalX, y: finalY });
-    }
-    
-    setHasMovedSignificantly(false);
-  }, []);
-
-  // Initialize and update bubble position when snapping
-  useEffect(() => {
-    if (bubbleRef.current) {
-      bubbleRef.current.style.left = `${bubblePos.xPx}px`;
-      bubbleRef.current.style.bottom = `${bubblePos.y}px`;
-      dragPosRef.current = { ...bubblePos };
-    }
-  }, [bubblePos]);
-
-  // Initialize bubble position on mount
-  useEffect(() => {
-    if (bubbleRef.current) {
-      bubbleRef.current.style.left = '32px';
-      bubbleRef.current.style.bottom = '32px';
-    }
-  }, []);
-
-  // Cleanup event listeners on unmount
-  useEffect(() => {
-    return () => {
-      document.removeEventListener('mousemove', onMouseMoveHandler);
-      document.removeEventListener('mouseup', onMouseUpHandler);
-    };
-  }, [onMouseMoveHandler, onMouseUpHandler]);
-
   return (
     <>
-      {/* Mobile Edge Panel (visible below md) */}
-      <div className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center md:hidden">
-        {/* Toggle button */}
-        <button
-          onClick={() => setIsEdgePanelOpen(v => !v)}
-          className={`w-8 h-8 flex items-center justify-center rounded-r-xl bg-white/80 dark:bg-slate-800/80 shadow-lg shadow-black/20 dark:shadow-black/50 border-r border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md transition-all duration-300 ${
-            isEdgePanelOpen ? 'ml-0' : 'ml-0'
-          }`}
-          style={{ zIndex: 41 }}
-          title={isEdgePanelOpen ? 'Close panel' : 'Open panel'}
-        >
-          {isEdgePanelOpen ? <MdChevronLeft className="text-xl text-primary dark:text-blue-400" /> : <MdChevronRight className="text-xl text-primary dark:text-blue-400" />}
-        </button>
-        {/* Edge panel */}
-        <div
-          className={`flex flex-col items-center bg-white/80 dark:bg-slate-800/80 rounded-r-2xl shadow-lg shadow-black/20 dark:shadow-black/50 p-2 gap-3 border-r border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md transition-all duration-300 ${
-            isEdgePanelOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-24 opacity-0 pointer-events-none'
-          }`}
-          style={{ zIndex: 40 }}
-        >
-          {navigationLinks.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => handleNavClick(link.id)}
-              className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-300 text-xl ${
-                activeSection === link.id
-                  ? 'bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/50 scale-110'
-                  : 'bg-white dark:bg-slate-700 text-primary dark:text-blue-400 hover:bg-primary/10 hover:scale-105'
-              }`}
-              title={link.label}
-              tabIndex={0}
-              aria-label={link.label}
-              style={{ touchAction: 'manipulation' }}
-            >
-              {iconMap[link.icon] && React.createElement(iconMap[link.icon])}
-            </button>
-          ))}
+      {/* =========================================
+          DESKTOP SIDEBAR (Visible xl and up) 
+          A sleek, expanding glass pill on the left
+      ========================================= */}
+      <div 
+        ref={desktopSidebarRef}
+        onMouseEnter={() => setIsDesktopExpanded(true)}
+        onMouseLeave={() => setIsDesktopExpanded(false)}
+        className={`hidden xl:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col z-50 
+        transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+        bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 
+        shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-[2rem] overflow-hidden py-4
+        ${isDesktopExpanded ? 'w-64 px-4' : 'w-16 px-0 items-center'}
+        `}
+      >
+        <div className="flex flex-col gap-2 w-full">
+          {navigationLinks.map((link) => {
+            const Icon = iconMap[link.icon];
+            const isActive = activeSection === link.id;
+            
+            return (
+              <button
+                key={link.id}
+                onClick={() => handleNavClick(link.id)}
+                className={`relative group flex items-center h-12 rounded-xl transition-all duration-300 w-full
+                  ${isDesktopExpanded ? 'px-4 justify-start' : 'justify-center'}
+                  ${isActive 
+                    ? 'bg-gradient-to-r from-blue-600/90 to-cyan-500/90 dark:from-indigo-600/90 dark:to-purple-500/90 shadow-lg' 
+                    : 'hover:bg-white/10 dark:hover:bg-white/5'}
+                `}
+                title={!isDesktopExpanded ? link.label : ''}
+              >
+                {/* Active Indicator Line (when collapsed) */}
+                {!isDesktopExpanded && isActive && (
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-white rounded-r-full shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+                )}
+
+                {/* Icon */}
+                <Icon className={`flex-shrink-0 text-xl transition-colors duration-300 
+                  ${isActive ? 'text-white' : 'text-slate-600 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-indigo-400'}
+                `} />
+                
+                {/* Label (Only show when expanded) */}
+                <div 
+                  className={`overflow-hidden transition-all duration-300 whitespace-nowrap
+                    ${isDesktopExpanded ? 'w-auto opacity-100 ml-4' : 'w-0 opacity-0 ml-0'}
+                  `}
+                >
+                  <span className={`text-sm font-semibold tracking-wide
+                    ${isActive ? 'text-white' : 'text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-indigo-400'}
+                  `}>
+                    {link.label}
+                  </span>
+                </div>
+                
+                {/* Hover Tooltip (when collapsed) */}
+                {!isDesktopExpanded && (
+                   <div className="absolute left-full ml-4 px-3 py-1.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
+                     {link.label}
+                     {/* Tooltip triangle */}
+                     <div className="absolute top-1/2 -translate-y-1/2 -left-1 border-4 border-transparent border-r-slate-900 dark:border-r-white" />
+                   </div>
+                )}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Floating Bubble Button (desktop) */}
+      {/* =========================================
+          MOBILE / TABLET NAVIGATION (Below xl) 
+      ========================================= */}
+      
+      {/* Floating Action Button (FAB) for Mobile Configured at Bottom Right */}
       <button
-        ref={bubbleRef}
-        onMouseDown={handleMouseDown}
-        className={`hidden md:flex fixed w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/50 dark:shadow-primary/50 z-40 items-center justify-center active:scale-95 ${
-          isDragging ? 'cursor-grabbing no-transition' : 'cursor-grab transition-all duration-300 hover:scale-110'
-        } ${
-          isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
-        }`}
-        title="Open Navigation (Draggable)"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="xl:hidden fixed bottom-6 right-6 w-14 h-14 rounded-full z-[60] flex items-center justify-center 
+        bg-gradient-to-br from-blue-600 to-cyan-500 dark:from-indigo-600 dark:to-purple-600 
+        text-white shadow-[0_10px_25px_rgba(37,99,235,0.4)] dark:shadow-[0_10px_25px_rgba(79,70,229,0.4)]
+        transition-transform duration-300 hover:scale-105 active:scale-95"
+        aria-label="Toggle navigation menu"
       >
-        {isMenuOpen ? <MdClose className="text-xl transition-transform duration-300 rotate-90" /> : <MdMenu className="text-xl transition-transform duration-300" />}
+        <div className="relative w-6 h-6 flex justify-center items-center">
+          <MdMenu className={`absolute text-2xl transition-all duration-500 ${isMobileMenuOpen ? 'opacity-0 scale-50 rotate-180' : 'opacity-100 scale-100 rotate-0'}`} />
+          <MdClose className={`absolute text-2xl transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-50 -rotate-180'}`} />
+        </div>
       </button>
 
-      {/* Navigation Modal Overlay - No overlay effect */}
-      {isMenuOpen && (
-        <div
-          className="fixed inset-0 z-30 transition-opacity duration-300"
-          onClick={() => setIsMenuOpen(false)}
-        ></div>
-      )}
-
-      {/* Left Sidebar Navigation - Floating (desktop) */}
-      <div
-        className={`hidden md:block fixed left-8 top-20 h-[calc(100vh-120px)] w-72 bg-white/25 dark:bg-slate-800/30 rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/50 overflow-hidden z-40 transition-all duration-300 border border-gray-200/60 dark:border-slate-700/60 backdrop-blur-md ${
-          isMenuOpen ? 'translate-x-0 opacity-100 pointer-events-auto' : '-translate-x-96 opacity-0 pointer-events-none'
-        }`}
+      {/* Full Screen Curved Menu Overlay */}
+      <nav 
+        ref={mobileMenuRef}
+        className="xl:hidden fixed inset-0 z-[55] flex-col justify-center px-8 sm:px-16 
+        bg-white/95 dark:bg-[#030712]/95 backdrop-blur-2xl"
+        style={{ clipPath: 'circle(0% at calc(100% - 3.5rem) calc(100% - 3.5rem))', display: 'none' }} // Initial state hidden
       >
-        {/* Header */}
-        <div className="bg-gradient-to-r from-primary via-primary to-accent text-white p-6 flex items-center justify-between sticky top-0 z-10 shadow-lg shadow-primary/30 dark:shadow-black/40">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
-              <MdMenu className="text-white" />
-            </div>
-            <h3 className="text-lg font-mont font-bold tracking-wide">Navigation</h3>
+        <div className="flex flex-col gap-2 max-w-sm mx-auto w-full w-full">
+          {/* Header */}
+          <div className="mobile-nav-item mb-8">
+             <h3 className="text-sm font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-indigo-400 mb-2">Navigation</h3>
+             <div className="h-px w-12 bg-gradient-to-r from-blue-600 to-transparent dark:from-indigo-500" />
           </div>
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            className="text-white hover:bg-white/20 rounded-lg p-2 transition-all duration-200 hover:scale-110 active:scale-95"
-          >
-            <MdClose className="text-lg" />
-          </button>
-        </div>
 
-        {/* Navigation Links */}
-        <nav className="overflow-y-auto h-[calc(100vh-120px)] scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-gray-100 dark:scrollbar-thumb-slate-600 dark:scrollbar-track-slate-800/50 backdrop-blur-md bg-white/10 dark:bg-slate-800/10">
-          <ul className="space-y-2 p-5">
-            {navigationLinks.map((link) => (
-              <li key={link.id}>
-                <button
-                  onMouseEnter={() => setHoveredItem(link.id)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                  onClick={() => handleNavClick(link.id)}
-                  className={`w-full relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${
-                    activeSection === link.id
-                      ? 'bg-gradient-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/50 dark:shadow-black/40 scale-105 origin-left'
-                      : 'text-gray-700 dark:text-white hover:bg-primary/20 dark:hover:bg-slate-600/60 hover:text-primary dark:hover:text-blue-400 hover:shadow-md hover:shadow-primary/10 dark:hover:shadow-black/20'
-                  }`}
-                >
-                  {/* Background animation */}
-                  {/* Icon */}
-                  <div className={`relative flex-shrink-0 w-5 h-5 flex items-center justify-center transition-all duration-300 ${
-                    activeSection === link.id 
-                      ? 'scale-125 text-white' 
-                      : 'text-gray-600 dark:text-gray-100 group-hover:scale-125 group-hover:text-primary dark:group-hover:text-blue-400'
-                  }`}>
-                    {iconMap[link.icon] && React.createElement(iconMap[link.icon])}
-                  </div>
-                  {/* Label */}
-                  <span className={`font-medium flex-1 text-left transition-all duration-300 ${
-                    activeSection === link.id ? 'text-white' : 'text-gray-700 dark:text-gray-100'
-                  }`}>{link.label}</span>
-                  {/* Active indicator dot */}
-                  {activeSection === link.id && (
-                    <div className="relative flex-shrink-0 w-2.5 h-2.5 rounded-full bg-white shadow-lg shadow-white/50 animate-pulse"></div>
-                  )}
-                </button>
-              </li>
-            ))}
+          <ul className="flex flex-col gap-2 w-full">
+            {navigationLinks.map((link) => {
+              const Icon = iconMap[link.icon];
+              const isActive = activeSection === link.id;
+              
+              return (
+                <li key={link.id} className="mobile-nav-item w-full">
+                  <button
+                    onClick={() => handleNavClick(link.id)}
+                    className={`group w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300
+                      ${isActive 
+                        ? 'bg-blue-50 dark:bg-indigo-500/20 border border-blue-200 dark:border-indigo-500/30' 
+                        : 'hover:bg-slate-50 dark:hover:bg-white/5 border border-transparent'}
+                    `}
+                  >
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300
+                      ${isActive ? 'bg-blue-600 text-white dark:bg-indigo-600' : 'bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-white group-hover:bg-slate-200 dark:group-hover:bg-white/10'}
+                    `}>
+                      <Icon className="text-xl" />
+                    </div>
+                    
+                    <span className={`text-lg sm:text-xl font-bold tracking-wide transition-colors duration-300
+                      ${isActive ? 'text-blue-900 dark:text-white' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white'}
+                    `}>
+                      {link.label}
+                    </span>
+                    
+                    {isActive && (
+                      <div className="ml-auto w-2 h-2 rounded-full bg-blue-500 dark:bg-indigo-400 shadow-[0_0_10px_rgba(59,130,246,0.8)] animate-pulse" />
+                    )}
+                  </button>
+                </li>
+              );
+            })}
           </ul>
-        </nav>
-      </div>
+        </div>
+      </nav>
     </>
   );
 };
