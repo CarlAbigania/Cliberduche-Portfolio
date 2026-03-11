@@ -239,7 +239,7 @@ const Projects = () => {
                   const newFiltered = filter.key === 'all' ? projects : projects.filter(p => p.category.includes(filter.key));
                   setSelectedProject(newFiltered[0] || projects[0]);
                 }}
-                className={`group relative px-6 md:px-8 py-3 md:py-4 rounded-full text-xs md:text-sm font-bold uppercase tracking-widest transition-all duration-500 overflow-hidden ${
+                className={`group relative px-5 md:px-6 py-2.5 md:py-3 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all duration-500 overflow-hidden ${
                   isActive
                     ? isDarkMode
                       ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/30 ring-2 ring-indigo-400 ring-offset-2 ring-offset-[#030712]'
@@ -266,10 +266,10 @@ const Projects = () => {
             <div className={`relative rounded-[2.5rem] overflow-hidden border backdrop-blur-xl group transition-all duration-700 ${
               isDarkMode ? 'bg-white/5 border-white/10 shadow-2xl shadow-black/50' : 'bg-white/80 border-gray-200 shadow-2xl shadow-blue-900/5'
             }`}>
-              <div className="grid lg:grid-cols-12 gap-0 min-h-[500px] lg:min-h-[600px]">
+              <div className="grid lg:grid-cols-12 gap-0 min-h-[400px] lg:min-h-[500px]">
                 
                 {/* Featured Image */}
-                <div className="lg:col-span-7 relative overflow-hidden h-[350px] lg:h-full">
+                <div className="lg:col-span-7 relative overflow-hidden h-[250px] lg:h-full">
                   <div 
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
                     style={{ backgroundImage: `url(${selectedProject.img})` }}
@@ -282,7 +282,7 @@ const Projects = () => {
                   
                   {/* Status Badge Over Image */}
                   <div className="absolute top-6 left-6 lg:top-8 lg:left-8 flex gap-3">
-                     <span className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md border shadow-sm ${
+                     <span className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md border shadow-sm ${
                         selectedProject.tag === 'Ongoing'
                           ? isDarkMode 
                               ? 'bg-yellow-500/20 border-yellow-400/50 text-yellow-300' 
@@ -297,34 +297,34 @@ const Projects = () => {
                 </div>
 
                 {/* Featured Content */}
-                <div className="lg:col-span-5 p-8 sm:p-10 lg:p-12 xl:p-16 flex flex-col justify-center relative z-10">
+                <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 xl:p-12 flex flex-col justify-center relative z-10">
                   
                   <div className="inline-flex items-center gap-3 mb-6">
                     <div className={`w-1 h-6 rounded-full bg-gradient-to-b ${isDarkMode ? 'from-indigo-400 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
-                    <span className={`text-sm font-bold uppercase tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>
+                    <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>
                       Featured Work
                     </span>
                   </div>
 
-                  <h3 className={`text-2xl sm:text-3xl lg:text-4xl font-black mb-4 leading-[1.1] ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                  <h3 className={`text-xl sm:text-2xl lg:text-3xl font-black mb-3 leading-[1.1] ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
                     {selectedProject.title}
                   </h3>
 
-                  <p className={`text-sm sm:text-base leading-relaxed mb-8 font-medium ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                  <p className={`text-sm leading-relaxed mb-6 font-medium ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                     {selectedProject.desc}
                   </p>
 
-                  <div className="space-y-4 mb-10">
+                  <div className="space-y-4 mb-8">
                     <div className="flex items-start gap-3">
-                       <MdCheckCircle className={`text-xl mt-0.5 shrink-0 ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`} />
-                       <p className={`text-sm sm:text-base font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                       <MdCheckCircle className={`text-lg mt-0.5 shrink-0 ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`} />
+                       <p className={`text-sm font-semibold ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                          {selectedProject.highlight}
                        </p>
                     </div>
                     {selectedProject.location && (
                       <div className="flex items-center gap-3">
-                         <MdLocationOn className={`text-xl shrink-0 ${isDarkMode ? 'text-purple-400' : 'text-cyan-600'}`} />
-                         <p className={`text-sm sm:text-base font-semibold ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                         <MdLocationOn className={`text-lg shrink-0 ${isDarkMode ? 'text-purple-400' : 'text-cyan-600'}`} />
+                         <p className={`text-sm font-semibold ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                            {selectedProject.location}
                          </p>
                       </div>
@@ -333,14 +333,14 @@ const Projects = () => {
 
                   <button
                     onClick={() => handleProjectClick(selectedProject)}
-                    className={`group/btn relative w-fit px-8 py-4 rounded-full font-bold uppercase tracking-wider text-sm overflow-hidden transition-all duration-300 flex items-center gap-3 ${
+                    className={`group/btn relative w-fit px-6 py-3 rounded-full font-bold uppercase tracking-wider text-[10px] md:text-xs overflow-hidden transition-all duration-300 flex items-center gap-2 ${
                        isDarkMode 
                         ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-1' 
                         : 'bg-blue-600 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-1'
                     }`}
                   >
                     <span className="relative z-10">Explore Case Study</span>
-                    <MdChevronRight className="relative z-10 text-xl group-hover/btn:translate-x-1 transition-transform" />
+                    <MdChevronRight className="relative z-10 text-lg group-hover/btn:translate-x-1 transition-transform" />
                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out rounded-full" />
                   </button>
 
@@ -354,10 +354,10 @@ const Projects = () => {
         <div ref={carouselRef} className="relative pt-10 border-t border-white/5">
           <div className="flex justify-between items-end mb-8">
             <div>
-              <h3 className={`text-xl sm:text-2xl font-black mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+              <h3 className={`text-lg sm:text-xl font-black mb-1 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
                 Project Gallery
               </h3>
-              <p className={`text-xs font-bold uppercase tracking-wider ${isDarkMode ? 'text-slate-500' : 'text-slate-600'}`}>
+              <p className={`text-[10px] font-bold uppercase tracking-wider ${isDarkMode ? 'text-slate-500' : 'text-slate-600'}`}>
                 {filteredProjects.length} {activeFilter === 'all' ? 'Total' : activeFilter} Projects
               </p>
             </div>
@@ -366,19 +366,19 @@ const Projects = () => {
             <div className="hidden md:flex gap-3">
               <button 
                 onClick={() => scrollThumbnails('left')}
-                className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 hover:scale-105 ${
+                className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 hover:scale-105 ${
                   isDarkMode ? 'border-white/10 bg-white/5 text-white hover:bg-white/10 hover:border-white/20' : 'border-slate-200 bg-white text-slate-800 hover:bg-slate-50 shadow-sm'
                 }`}
               >
-                <MdChevronLeft className="text-2xl" />
+                <MdChevronLeft className="text-xl" />
               </button>
               <button 
                 onClick={() => scrollThumbnails('right')}
-                className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 hover:scale-105 ${
+                className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 hover:scale-105 ${
                   isDarkMode ? 'border-white/10 bg-white/5 text-white hover:bg-white/10 hover:border-white/20' : 'border-slate-200 bg-white text-slate-800 hover:bg-slate-50 shadow-sm'
                 }`}
               >
-                <MdChevronRight className="text-2xl" />
+                <MdChevronRight className="text-xl" />
               </button>
             </div>
           </div>
@@ -400,7 +400,7 @@ const Projects = () => {
                   <div
                     key={project.id}
                     onClick={() => setSelectedProject(project)}
-                    className={`relative flex-shrink-0 w-48 sm:w-64 aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer snap-start transition-all duration-500 group ${
+                    className={`relative flex-shrink-0 w-40 sm:w-56 aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer snap-start transition-all duration-500 group ${
                       isSelected 
                         ? (isDarkMode ? 'ring-2 ring-indigo-500 ring-offset-4 ring-offset-[#030712] shadow-2xl shadow-indigo-500/30' : 'ring-2 ring-blue-500 ring-offset-4 ring-offset-[#f8fafc] shadow-2xl shadow-blue-500/30')
                         : 'hover:-translate-y-2 hover:shadow-xl ' + (isDarkMode ? 'hover:shadow-black/50' : 'hover:shadow-blue-900/10')
@@ -422,14 +422,14 @@ const Projects = () => {
                     {/* Content Overlay */}
                     <div className="absolute inset-0 p-4 sm:p-5 flex flex-col justify-end">
                       <div className={`transition-all duration-500 ${isSelected ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-90 group-hover:translate-y-0 group-hover:opacity-100'}`}>
-                         <span className={`inline-block px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider mb-2 ${
+                         <span className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider mb-1.5 ${
                             project.tag === 'Ongoing'
                               ? 'bg-yellow-500/80 text-yellow-50 backdrop-blur-sm'
                               : 'bg-green-500/80 text-green-50 backdrop-blur-sm'
                           }`}>
                             {project.tag}
                           </span>
-                        <h4 className="text-sm sm:text-base font-bold text-white leading-tight line-clamp-2 drop-shadow-md">
+                        <h4 className="text-xs sm:text-sm font-bold text-white leading-tight line-clamp-2 drop-shadow-md">
                           {project.title}
                         </h4>
                       </div>
@@ -456,20 +456,20 @@ const Projects = () => {
              />
              
              {/* Modal Content */}
-             <div className={`relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-[2rem] overflow-hidden shadow-2xl animate-[slideUp_0.4s_cubic-bezier(0.16,1,0.3,1)] ${
+             <div className={`relative w-full max-w-3xl max-h-[85vh] flex flex-col rounded-[2rem] overflow-hidden shadow-2xl animate-[slideUp_0.4s_cubic-bezier(0.16,1,0.3,1)] ${
                 isDarkMode ? 'bg-[#0f172a] border border-white/10' : 'bg-white border border-slate-200'
              }`}>
                 
                 {/* Close Button - Floating */}
                 <button 
                   onClick={closeModal}
-                  className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 w-10 h-10 rounded-full bg-black/50 text-white backdrop-blur-md flex items-center justify-center hover:bg-black/70 hover:scale-110 transition-all border border-white/10"
+                  className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 w-8 h-8 rounded-full bg-black/50 text-white backdrop-blur-md flex items-center justify-center hover:bg-black/70 hover:scale-110 transition-all border border-white/10"
                 >
-                  <MdClose className="text-xl" />
+                  <MdClose className="text-lg" />
                 </button>
 
                 {/* Modal Header Image */}
-                <div className="relative h-48 sm:h-64 lg:h-80 shrink-0 bg-slate-900 border-b border-white/10">
+                <div className="relative h-40 sm:h-56 lg:h-64 shrink-0 bg-slate-900 border-b border-white/10">
                   <img 
                     src={selectedProject?.img} 
                     alt={selectedProject?.title}
@@ -479,21 +479,21 @@ const Projects = () => {
                   
                   {/* Title Overlay */}
                   <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 lg:px-12">
-                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3 backdrop-blur-md border ${
+                     <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-2 backdrop-blur-md border ${
                         selectedProject?.tag === 'Ongoing'
                           ? 'bg-yellow-500/20 border-yellow-400/50 text-yellow-300'
                           : 'bg-green-500/20 border-green-400/50 text-green-300'
                       }`}>
                         {selectedProject?.tag}
                       </span>
-                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight">
                         {selectedProject?.title}
                      </h2>
                   </div>
                 </div>
 
                 {/* Modal Scrollable Body */}
-                <div className={`flex-1 overflow-y-auto p-6 sm:p-8 lg:p-12 scrollbar-thin ${
+                <div className={`flex-1 overflow-y-auto p-6 sm:p-8 lg:p-10 scrollbar-thin ${
                   isDarkMode ? 'scrollbar-thumb-white/10 scrollbar-track-transparent' : 'scrollbar-thumb-slate-200 scrollbar-track-transparent'
                 }`}>
                   
@@ -504,23 +504,23 @@ const Projects = () => {
                      <div className="lg:col-span-2 space-y-10">
                         <section>
                            <div className="flex items-center gap-3 mb-4">
-                             <MdInfoOutline className={`text-2xl ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`} />
-                             <h4 className={`text-xl sm:text-2xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Project Overview</h4>
+                             <MdInfoOutline className={`text-xl ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`} />
+                             <h4 className={`text-lg sm:text-xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Project Overview</h4>
                            </div>
-                           <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                           <p className={`text-sm sm:text-base leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
                              {selectedProject?.desc}
                            </p>
                         </section>
 
                         <section>
                            <div className="flex items-center gap-3 mb-4">
-                             <MdCheckCircle className={`text-2xl ${isDarkMode ? 'text-teal-400' : 'text-cyan-600'}`} />
-                             <h4 className={`text-xl sm:text-2xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Scope of Work</h4>
+                             <MdCheckCircle className={`text-xl ${isDarkMode ? 'text-teal-400' : 'text-cyan-600'}`} />
+                             <h4 className={`text-lg sm:text-xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Scope of Work</h4>
                            </div>
                            <div className={`p-6 rounded-2xl border ${
                              isDarkMode ? 'bg-white/5 border-white/10 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
                            }`}>
-                             <p className="text-base sm:text-lg font-medium leading-relaxed">
+                             <p className="text-sm sm:text-base font-medium leading-relaxed">
                                {selectedProject?.highlight}
                              </p>
                            </div>
@@ -533,9 +533,9 @@ const Projects = () => {
                         <div className={`p-6 rounded-2xl border ${
                            isDarkMode ? 'bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border-indigo-500/20' : 'bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-100'
                         }`}>
-                           <h5 className={`text-xs font-bold uppercase tracking-widest mb-2 ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>Location</h5>
-                           <p className={`text-lg font-bold flex items-start gap-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-                              <MdLocationOn className="text-xl mt-0.5 shrink-0" />
+                           <h5 className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>Location</h5>
+                           <p className={`text-base font-bold flex items-start gap-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                              <MdLocationOn className="text-lg mt-0.5 shrink-0" />
                               {selectedProject?.location || 'General Area'}
                            </p>
                         </div>
@@ -545,8 +545,8 @@ const Projects = () => {
                            <div key={key} className={`p-6 rounded-2xl border flex flex-col justify-center items-center text-center ${
                              isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200 shadow-sm'
                            }`}>
-                              <h5 className={`text-xs font-bold uppercase tracking-widest mb-2 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>{key}</h5>
-                              <p className={`text-xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{value}</p>
+                              <h5 className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>{key}</h5>
+                              <p className={`text-lg font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{value}</p>
                            </div>
                         ))}
                      </div>

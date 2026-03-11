@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import logo from '/images/logo2.png';
-import { MdDownload, MdLightMode, MdNightlight, MdMenu, MdClose } from 'react-icons/md';
+import { MdDownload, MdLightMode, MdNightlight } from 'react-icons/md';
 import { FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Header = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
 
   // Track scroll for header effect
   useEffect(() => {
     const handleScroll = () => {
-      // Add background when scrolled past hero section (full viewport height)
-      setScrolled(window.scrollY > window.innerHeight);
-      // Footer visibility logic
+      // Add background when scrolled past a small threshold
+      setScrolled(window.scrollY > 50);
+      
+      // Footer visibility logic to hide header when at bottom
       const footer = document.getElementById('footer');
       if (footer) {
         const rect = footer.getBoundingClientRect();
@@ -23,7 +23,7 @@ const Header = () => {
         setHideHeader(rect.top < window.innerHeight && rect.bottom > window.innerHeight / 2);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -32,10 +32,9 @@ const Header = () => {
     window.dispatchEvent(
       new CustomEvent('smooth-scroll-set-target', { detail: 0 })
     );
-    // Fallback for mobile: scroll directly and close menu if open
+    // Fallback for mobile: scroll directly
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (mobileMenuOpen) setMobileMenuOpen(false);
     }, 0);
   };
 
@@ -44,173 +43,144 @@ const Header = () => {
 
   return (
     <>
-      {!hideHeader && (
-        <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 h-16 ${
-          scrolled || mobileMenuOpen
-            ? 'bg-white dark:bg-slate-900 shadow-lg dark:shadow-xl dark:shadow-black/30' 
-            : 'bg-transparent'
+      <header className={`fixed left-0 right-0 top-0 z-[45] transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+        hideHeader ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'
+      }`}>
+        <div className={`w-full transition-all duration-500 ${
+          scrolled
+            ? 'py-2 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] border-b border-white/20 dark:border-slate-800/50' 
+            : 'py-4 bg-gradient-to-b from-black/40 to-transparent dark:from-slate-900/60'
         }`}>
           {/* Main Header Content */}
-          <div className="max-w-container mx-auto px-4 sm:px-6 h-full flex items-center justify-between relative z-10">
+          <div className="max-w-[1400px] mx-auto px-6 sm:px-8 xl:px-12 flex items-center justify-between relative z-10">
             
             {/* Left Section: Logo & Company Info */}
             <button 
               onClick={handleLogoClick}
-              className="flex items-center gap-4 min-w-0 cursor-pointer hover:opacity-80 transition-opacity duration-300 bg-transparent border-none p-0"
+              className="group flex flex-row items-center gap-3 md:gap-4 min-w-0 cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95 bg-transparent border-none p-0"
               title="Back to top"
             >
               <div className="relative flex items-center justify-center">
                 <img 
                   src={logo} 
                   alt="Cliberduche Logo" 
-                  className="h-12 w-auto"
+                  className={`transition-all duration-500 w-auto ${scrolled ? 'h-10' : 'h-12 md:h-14'}`}
                 />
               </div>
               
-              {/* Company name (hidden on mobile) */}
-              <div className="hidden md:flex flex-col justify-center">
-                <h1 className={`text-sm font-bold leading-none ${isHeroLightMode ? 'text-white' : 'text-gray-900 dark:text-white'}`}>Cliberduche</h1>
-                <p className={`text-xs font-semibold ${isHeroLightMode ? 'text-blue-300' : 'text-primary dark:text-blue-400'}`}>Corporation</p>
+              {/* Company name text logo */}
+              <div className="flex flex-col justify-center text-left">
+                <h1 className={`text-sm md:text-base font-black leading-tight tracking-wide transition-colors duration-300 ${
+                  isHeroLightMode ? 'text-slate-900 drop-shadow-md' : 'text-slate-900 dark:text-white'
+                }`}>
+                  Cliberduche
+                </h1>
+                <p className={`text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${
+                  isHeroLightMode ? 'text-blue-700 drop-shadow-sm' : 'text-blue-600 dark:text-blue-400'
+                }`}>
+                  Corporation
+                </p>
               </div>
             </button>
 
-            {/* Right Section: CTA, Social, Dark Mode, Mobile Menu */}
-            <div className="flex items-center gap-5">
-              {/* Group 1: Download Button */}
-              <div className="flex items-center gap-3">
-                {/* Download Portfolio Button (Desktop) */}
-                <a
-                  href="/Company Profile 2026.pdf"
-                  download="Cliberduche_Portfolio.pdf"
-                  className={`hidden md:inline-flex items-center gap-2 px-4 py-2 border-2 text-sm font-semibold rounded-lg transition-all duration-300 ${
-                    isHeroLightMode
-                      ? 'border-blue-300 text-blue-300 hover:bg-blue-400 hover:text-white'
-                      : 'border-primary text-primary dark:text-blue-400 dark:border-blue-400 hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-white'
-                  }`}
-                  title="Download Portfolio PDF"
-                >
-                  <MdDownload className="text-sm" />
-                  Download
-                </a>
+            {/* Right Section: CTA, Social, Dark Mode */}
+            <div className="flex items-center gap-4 md:gap-6">
+              
+              {/* Group 1: Desktop Actions */}
+              <div className="hidden md:flex flex-row items-center gap-6">
+                 {/* Social Media Links */}
+                 <div className="flex items-center gap-4">
+                   <a
+                     href="https://www.facebook.com/cliberduche"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className={`transition-all duration-300 hover:scale-125 hover:-translate-y-1 ${
+                       isHeroLightMode ? 'text-slate-600 hover:text-blue-600 drop-shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400'
+                     }`}
+                     title="Facebook"
+                   >
+                     <FaFacebook className="text-lg" />
+                   </a>
+                   <a
+                     href="https://www.linkedin.com/company/cliberduche"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className={`transition-all duration-300 hover:scale-125 hover:-translate-y-1 ${
+                       isHeroLightMode ? 'text-slate-600 hover:text-blue-600 drop-shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400'
+                     }`}
+                     title="LinkedIn"
+                   >
+                     <FaLinkedin className="text-lg" />
+                   </a>
+                   <a
+                     href="https://www.instagram.com/cliberduche"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className={`transition-all duration-300 hover:scale-125 hover:-translate-y-1 ${
+                       isHeroLightMode ? 'text-slate-600 hover:text-blue-600 drop-shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400'
+                     }`}
+                     title="Instagram"
+                   >
+                     <FaInstagram className="text-lg" />
+                   </a>
+                 </div>
+
+                 {/* Divider */}
+                 <div className={`w-px h-6 rounded-full ${isHeroLightMode ? 'bg-white/30' : 'bg-slate-300 dark:bg-slate-700'}`} />
+
+                 {/* Download Portfolio Button */}
+                 <a
+                   href="/Company Profile 2026.pdf"
+                   download="Cliberduche_Portfolio.pdf"
+                   className={`group relative flex items-center gap-2 px-5 py-2.5 overflow-hidden rounded-xl font-bold text-sm transition-all duration-300 active:scale-95 shadow-lg ${
+                     isHeroLightMode
+                       ? 'bg-blue-600/10 text-blue-700 hover:bg-blue-600 hover:text-white border border-blue-600/20 hover:border-blue-600 shadow-blue-900/10'
+                       : 'bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-indigo-600 dark:to-purple-600 border border-transparent text-white shadow-blue-500/30'
+                   }`}
+                   title="Download Portfolio PDF"
+                 >
+                   <span className="relative z-10 flex items-center gap-2">
+                     <MdDownload className={`text-lg transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110`} />
+                     Download
+                   </span>
+                   {/* Hover Overlay */}
+                   {!isHeroLightMode && (
+                     <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                   )}
+                 </a>
               </div>
 
-              {/* Divider 1 */}
-              <div className={`hidden md:block w-px h-6 ${isHeroLightMode ? 'bg-white/30' : 'bg-black/30 dark:bg-slate-500'}`}></div>
+              {/* Group 2: Always Visible (Mobile + Desktop variants) */}
+              
+              {/* Divider (Mobile Only) */}
+              <div className={`md:hidden w-px h-6 rounded-full ${isHeroLightMode ? 'bg-white/30' : 'bg-slate-300 dark:bg-slate-700'}`} />
 
-              {/* Group 2: Social Media Links (Desktop) */}
-              <div className="hidden md:flex items-center gap-4">
-                <a
-                  href="https://www.facebook.com/cliberduche"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`transition-all duration-300 hover:scale-110 ${isHeroLightMode ? 'text-blue-300 hover:text-white' : 'text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400'}`}
-                  title="Facebook"
-                >
-                  <FaFacebook className="text-sm" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/cliberduche"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`transition-all duration-300 hover:scale-110 ${isHeroLightMode ? 'text-blue-300 hover:text-white' : 'text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400'}`}
-                  title="LinkedIn"
-                >
-                  <FaLinkedin className="text-sm" />
-                </a>
-                <a
-                  href="https://www.instagram.com/cliberduche"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`transition-all duration-300 hover:scale-110 ${isHeroLightMode ? 'text-blue-300 hover:text-white' : 'text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400'}`}
-                  title="Instagram"
-                >
-                  <FaInstagram className="text-sm" />
-                </a>
-              </div>
-
-              {/* Divider 2 */}
-              <div className={`hidden md:block w-px h-6 ${isHeroLightMode ? 'bg-white/30' : 'bg-black/30 dark:bg-slate-500'}`}></div>
-
-              {/* Group 3: Dark Mode Toggle */}
+              {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
-                className={`text-lg transition-all duration-300 hover:scale-110 p-2 rounded-lg border border-transparent ${
+                className={`relative overflow-hidden flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 hover:scale-110 active:scale-90 shadow-sm ${
                   isHeroLightMode
-                    ? 'text-yellow-300 hover:text-yellow-200 hover:bg-white/10'
+                    ? 'bg-slate-100 text-slate-800 hover:bg-white hover:shadow-md border border-slate-200'
                     : isDarkMode
-                    ? 'text-gray-600 dark:text-yellow-300 hover:text-primary dark:hover:text-yellow-400 dark:hover:bg-slate-800'
-                    : 'text-gray-600 hover:text-primary hover:bg-white'
+                    ? 'bg-slate-800 text-yellow-300 hover:bg-slate-700 hover:shadow-[0_0_15px_rgba(253,224,71,0.2)] border border-slate-700'
+                    : 'bg-slate-100 text-slate-600 hover:bg-white hover:text-blue-600 hover:shadow-md border border-slate-200'
                 }`}
-                title={isDarkMode ? 'Light Mode' : 'Dark Mode'}
+                title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
               >
-                {isDarkMode ? <MdLightMode /> : <MdNightlight />}
-              </button>
-
-              {/* Mobile Menu Button */}
-              <button
-                className={`md:hidden text-xl transition-all duration-300 hover:scale-110 p-2 rounded-lg ${
-                  isHeroLightMode
-                    ? 'text-white hover:text-blue-300 hover:bg-white/10'
-                    : 'text-gray-600 dark:text-white hover:text-primary dark:hover:text-primary dark:hover:bg-slate-800'
-                }`}
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                {mobileMenuOpen ? <MdClose /> : <MdMenu />}
+                {/* Icons inside the button */}
+                <span className="relative z-10 flex justify-center items-center w-full h-full">
+                  <MdLightMode className={`absolute transition-all duration-500 ${isDarkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'}`} />
+                  <MdNightlight className={`absolute transition-all duration-500 ${!isDarkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-50 text-slate-800'}`} />
+                </span>
+                {/* Background active ring */}
+                <div className={`absolute inset-0 rounded-full border-2 transition-all duration-500 opacity-0 scale-50 hover:opacity-100 hover:scale-100 ${
+                  isDarkMode ? 'border-yellow-400/50' : 'border-blue-500/50'
+                }`} />
               </button>
             </div>
           </div>
-
-          {/* Mobile Menu */}
-          <div
-            className={`md:hidden fixed top-16 left-0 right-0 bg-white dark:bg-slate-900 shadow-lg dark:shadow-xl dark:shadow-black/40 border-b border-gray-200 dark:border-slate-800 transform transition-all duration-300 backdrop-blur-md ${
-              mobileMenuOpen ? 'translate-y-0 opacity-100 visible' : '-translate-y-full opacity-0 invisible'
-            }`}
-          >
-            <div className="p-6 space-y-4">
-              {/* Mobile Download Portfolio Button */}
-              <a
-                href="/Company Profile 2026.pdf"
-                download="Cliberduche_Portfolio.pdf"
-                className="flex items-center justify-center gap-2 w-full px-4 py-3 border-2 border-primary text-primary dark:text-blue-400 dark:border-blue-400 font-semibold rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-400 dark:hover:text-white transition-all duration-300 text-center"
-              >
-                <MdDownload />
-                Download Portfolio
-              </a>
-
-              {/* Mobile Social Media Links */}
-              <div className="pt-4 border-t border-gray-200 dark:border-slate-800">
-                <h4 className="text-xs font-bold text-primary dark:text-blue-400 uppercase tracking-wider mb-4">Follow Us</h4>
-                <div className="flex items-center gap-5">
-                  <a
-                    href="https://www.facebook.com/cliberduche"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110 text-lg"
-                  >
-                    <FaFacebook />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/company/cliberduche"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110 text-lg"
-                  >
-                    <FaLinkedin />
-                  </a>
-                  <a
-                    href="https://www.instagram.com/cliberduche"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 dark:text-white hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hover:scale-110 text-lg"
-                  >
-                    <FaInstagram />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
-      )}
+        </div>
+      </header>
     </>
   );
 };

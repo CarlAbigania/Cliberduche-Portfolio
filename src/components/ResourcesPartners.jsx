@@ -89,19 +89,27 @@ const ResourcesPartners = () => {
 
       // Stats Counters Animation
       if (statsRef.current) {
-        gsap.from(statsRef.current.children, {
-          scrollTrigger: {
-            trigger: statsRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
-          y: 50,
-          opacity: 0,
-          scale: 0.9,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'back.out(1.2)',
-        });
+        const statCards = statsRef.current.children;
+
+        if (statCards.length) {
+          gsap.fromTo(
+            statCards,
+            { y: 50, opacity: 0, scale: 0.9 },
+            {
+              scrollTrigger: {
+                trigger: statsRef.current,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse',
+              },
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'back.out(1.2)',
+            }
+          );
+        }
       }
 
       // Sites Animation
@@ -122,18 +130,26 @@ const ResourcesPartners = () => {
 
       // Suppliers Animation
       if (suppliersRef.current) {
-        gsap.from('.gsap-supplier-card', {
-          scrollTrigger: {
-            trigger: suppliersRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'back.out(1.1)',
-        });
+        const supplierCards = suppliersRef.current.querySelectorAll('.gsap-supplier-card');
+
+        if (supplierCards.length) {
+          gsap.fromTo(
+            supplierCards,
+            { y: 40, opacity: 0 },
+            {
+              scrollTrigger: {
+                trigger: suppliersRef.current,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse',
+              },
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'back.out(1.1)',
+            }
+          );
+        }
       }
 
     }, sectionRef);
