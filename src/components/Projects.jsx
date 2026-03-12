@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../hooks/useTheme';
@@ -16,7 +16,11 @@ const Projects = () => {
   const headerRef = useRef(null);
   const filterRef = useRef(null);
   const featuredRef = useRef(null);
+  const featuredImageRef = useRef(null);
   const carouselRef = useRef(null);
+  
+  // Refs for tracking distortion maps
+  const distortionRefs = useRef([]);
 
   const projects = [
     {
@@ -95,6 +99,7 @@ const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(projects[0]);
   const [showModal, setShowModal] = useState(false);
+  const [isChangingProject, setIsChangingProject] = useState(false);
 
   const filteredProjects = activeFilter === 'all'
     ? projects
@@ -137,37 +142,50 @@ const Projects = () => {
         });
       }
 
-      // Featured Project entrance
-      if (featuredRef.current) {
-        gsap.from(featuredRef.current, {
+      // Featured Project Advanced Reveal (Clip-Path)
+      if (featuredRef.current && featuredImageRef.current) {
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: featuredRef.current,
             start: 'top 80%',
             toggleActions: 'play none none reverse',
-          },
-          y: 60,
-          opacity: 0,
-          duration: 1.2,
-          ease: 'back.out(1.1)',
+          }
         });
-      }
 
-      // Carousel entrance
-      if (carouselRef.current) {
-        gsap.from(carouselRef.current, {
-          scrollTrigger: {
-            trigger: carouselRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
-          y: 50,
+        // Unmask the image container
+        tl.fromTo(featuredImageRef.current, 
+          { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' },
+          { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 1.4, ease: 'power4.inOut' }
+        )
+        // Fade in details alongside the end of the unmask
+        .from(featuredRef.current.querySelector('.featured-details'), {
+          y: 40,
           opacity: 0,
           duration: 1,
-          ease: 'power3.out',
-        });
+          ease: 'power3.out'
+        }, "-=0.8");
       }
 
-      // Advanced Background Parallax specific to projects section
+      // Carousel entrance (Clip-Path)
+      if (carouselRef.current) {
+        gsap.fromTo(carouselRef.current.querySelectorAll('.thumbnail-item'), 
+          { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)', opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: carouselRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse',
+            },
+            clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.1,
+            ease: 'power3.inOut',
+          }
+        );
+      }
+
+      // Advanced Background Parallax
       gsap.to('.projects-bg-layer', {
         scale: 1.15,
         yPercent: 15,
@@ -183,11 +201,50 @@ const Projects = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [activeFilter, selectedProject]); // Re-run when layout elements might change
+  }, [activeFilter]); // Layout setup on filter change
 
   const handleProjectClick = (project) => {
-    setSelectedProject(project);
     setShowModal(true);
+  };
+
+  const changeFeaturedProject = (project) => {
+    if (project.id === selectedProject.id || isChangingProject) return;
+    
+    setIsChangingProject(true);
+    
+    // Animate out the current featured details and image
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setSelectedProject(project);
+        
+        // Wait a tick for React to render the new image, then animate in
+        setTimeout(() => {
+          gsap.fromTo(featuredImageRef.current,
+            { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' },
+            { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 1.2, ease: 'power4.inOut' }
+          );
+          
+          gsap.fromTo(featuredRef.current.querySelector('.featured-details'),
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.6 }
+          );
+          
+          setIsChangingProject(false);
+        }, 50);
+      }
+    });
+
+    tl.to(featuredImageRef.current, {
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
+      duration: 0.8,
+      ease: 'power3.inOut'
+    })
+    .to(featuredRef.current.querySelector('.featured-details'), {
+      opacity: 0,
+      y: -20,
+      duration: 0.4,
+      ease: 'power2.in'
+    }, "-=0.8");
   };
 
   const closeModal = () => {
@@ -253,7 +310,7 @@ const Projects = () => {
                 onClick={() => {
                   setActiveFilter(filter.key);
                   const newFiltered = filter.key === 'all' ? projects : projects.filter(p => p.category.includes(filter.key));
-                  setSelectedProject(newFiltered[0] || projects[0]);
+                  changeFeaturedProject(newFiltered[0] || projects[0]);
                 }}
                 className={`group relative px-5 md:px-6 py-2.5 md:py-3 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all duration-500 overflow-hidden ${
                   isActive
@@ -279,25 +336,31 @@ const Projects = () => {
         {/* Featured Project Spotlight */}
         {selectedProject && (
           <div ref={featuredRef} className="mb-20">
-            <div className={`relative rounded-[2.5rem] overflow-hidden border backdrop-blur-xl group transition-all duration-700 ${
+            <div className={`relative rounded-[2.5rem] overflow-hidden border backdrop-blur-xl group/feat transition-all duration-700 ${
               isDarkMode ? 'bg-white/5 border-white/10 shadow-2xl shadow-black/50' : 'bg-white/80 border-gray-200 shadow-2xl shadow-blue-900/5'
             }`}>
               <div className="grid lg:grid-cols-12 gap-0 min-h-[400px] lg:min-h-[500px]">
                 
-                {/* Featured Image */}
-                <div className="lg:col-span-7 relative overflow-hidden h-[250px] lg:h-full">
+                {/* Featured Image with Clip-Path Reveal */}
+                <div 
+                  ref={featuredImageRef}
+                  className="lg:col-span-7 relative overflow-hidden h-[250px] lg:h-full cursor-pointer"
+                  onClick={() => handleProjectClick(selectedProject)}
+                >
                   <div 
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-                    style={{ backgroundImage: `url(${selectedProject.img})` }}
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover/feat:scale-105"
+                    style={{ 
+                       backgroundImage: `url(${selectedProject.img})`
+                    }}
                   />
-                  <div className={`absolute inset-0 ${
+                  <div className={`absolute inset-0 transition-opacity duration-300 group-hover/feat:opacity-80 pointer-events-none ${
                     isDarkMode 
                       ? 'bg-gradient-to-t lg:bg-gradient-to-r from-[#030712] via-[#030712]/50 lg:via-[#030712]/20 to-transparent' 
                       : 'bg-gradient-to-t lg:bg-gradient-to-r from-white via-white/50 lg:via-white/20 to-transparent'
                   }`} />
                   
                   {/* Status Badge Over Image */}
-                  <div className="absolute top-6 left-6 lg:top-8 lg:left-8 flex gap-3">
+                  <div className="absolute top-6 left-6 lg:top-8 lg:left-8 flex gap-3 pointer-events-none">
                      <span className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md border shadow-sm ${
                         selectedProject.tag === 'Ongoing'
                           ? isDarkMode 
@@ -313,7 +376,7 @@ const Projects = () => {
                 </div>
 
                 {/* Featured Content */}
-                <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 xl:p-12 flex flex-col justify-center relative z-10">
+                <div className="featured-details lg:col-span-5 p-6 sm:p-8 lg:p-10 xl:p-12 flex flex-col justify-center relative z-10 bg-inherit">
                   
                   <div className="inline-flex items-center gap-3 mb-6">
                     <div className={`w-1 h-6 rounded-full bg-gradient-to-b ${isDarkMode ? 'from-indigo-400 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
@@ -343,7 +406,7 @@ const Projects = () => {
                          <p className={`text-sm font-semibold ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
                            {selectedProject.location}
                          </p>
-                      </div>
+                       </div>
                     )}
                   </div>
 
@@ -419,9 +482,9 @@ const Projects = () => {
                 return (
                   <div
                     key={project.id}
-                    onClick={() => setSelectedProject(project)}
+                    onClick={() => changeFeaturedProject(project)}
                     data-cursor="VIEW"
-                    className={`relative flex-shrink-0 w-40 sm:w-56 aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer snap-start transition-all duration-500 group ${
+                    className={`thumbnail-item relative flex-shrink-0 w-40 sm:w-56 aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer snap-start transition-all duration-500 group ${
                       isSelected 
                         ? (isDarkMode ? 'ring-2 ring-indigo-500 ring-offset-4 ring-offset-[#030712] shadow-2xl shadow-indigo-500/30' : 'ring-2 ring-blue-500 ring-offset-4 ring-offset-[#f8fafc] shadow-2xl shadow-blue-500/30')
                         : 'hover:-translate-y-2 hover:shadow-xl ' + (isDarkMode ? 'hover:shadow-black/50' : 'hover:shadow-blue-900/10')
@@ -434,14 +497,14 @@ const Projects = () => {
                     />
                     
                     {/* Gradient Overlay */}
-                    <div className={`absolute inset-0 transition-opacity duration-500 ${
+                    <div className={`absolute inset-0 transition-opacity duration-500 pointer-events-none ${
                       isSelected 
                         ? (isDarkMode ? 'bg-indigo-900/40 mix-blend-multiply' : 'bg-blue-900/20 mix-blend-multiply')
                         : 'bg-black/40 group-hover:bg-black/20'
                     }`} />
                     
                     {/* Content Overlay */}
-                    <div className="absolute inset-0 p-4 sm:p-5 flex flex-col justify-end">
+                    <div className="absolute inset-0 p-4 sm:p-5 flex flex-col justify-end pointer-events-none">
                       <div className={`transition-all duration-500 ${isSelected ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-90 group-hover:translate-y-0 group-hover:opacity-100'}`}>
                          <span className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider mb-1.5 ${
                             project.tag === 'Ongoing'

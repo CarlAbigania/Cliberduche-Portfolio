@@ -1,101 +1,117 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { useAssetLoader } from "../hooks/useAssetLoader";
 
 import logo from "/images/logo2.png";
 
 export default function Intro({ title, onFinish }) {
   const container = useRef(null);
   const titleRef = useRef(null);
-  const progress = useRef(null);
-  const counter = useRef(null);
+  const progressRef = useRef(null);
+  const counterRef = useRef(null);
   const logoRef = useRef(null);
   const logoWrapperRef = useRef(null);
+  const [hasStartedExit, setHasStartedExit] = useState(false);
+
+  // Use our real actual loader logic
+  const actualProgress = useAssetLoader();
 
   useEffect(() => {
-    // Split text into letters — h1 is opacity:0 so no flash, but layout space is preserved
+    // 1. Initial Setup: Split text, set hidden states
     const letters = titleRef.current.innerText.split("");
     titleRef.current.innerHTML = letters
       .map((letter) => `<span class="letter">${letter}</span>`)
       .join("");
 
-    // Make h1 visible — letters are opacity:0 so still hidden, GSAP animates them in
     gsap.set(titleRef.current, { opacity: 1 });
     gsap.set(titleRef.current.querySelectorAll(".letter"), { opacity: 0, y: 80 });
 
-    gsap.set(logoWrapperRef.current, { visibility: "visible", clipPath: "inset(0 0 100% 0)" });
+    gsap.set(logoWrapperRef.current, { visibility: "visible", clipPath: "inset(0 100% 0 0)" });
     gsap.set(logoRef.current, { opacity: 0, scale: 0.8, rotateY: -45 });
-    gsap.set(progress.current, { width: 0, visibility: "visible" });
+    gsap.set(progressRef.current, { width: "0%", visibility: "visible" });
 
-    // Loading counter
-    let obj = { val: 0 };
-    gsap.to(obj, {
-      val: 100,
-      duration: 2,
-      ease: "power2.out",
-      onUpdate: () => {
-        counter.current.innerText = Math.floor(obj.val);
-      },
-    });
+    // 2. Entrance Animation
+    const entranceTl = gsap.timeline({ delay: 0.2 });
 
-    const tl = gsap.timeline({
-      delay: 0.5,
-      onComplete: () => setTimeout(onFinish, 200),
-    });
-
-    // Logo mask reveal + 3D rotation
-    tl.to(logoWrapperRef.current, {
-      clipPath: "inset(0% 0% 0% 0%)",
-      duration: 1.2,
-      ease: "power3.inOut",
-    }).to(
-      logoRef.current,
-      {
+    entranceTl
+      .to(logoWrapperRef.current, {
+        clipPath: "inset(0% 0% 0% 0%)",
+        duration: 1.2,
+        ease: "power3.inOut",
+      })
+      .to(
+        logoRef.current,
+        {
+          opacity: 1,
+          scale: 1,
+          rotateY: 0,
+          duration: 1,
+          ease: "elastic.out(1, 0.5)",
+          onComplete: () => {
+             // Subtle float after entrance
+             gsap.to(logoRef.current, {
+              y: "-=8",
+              rotateY: "+=2",
+              duration: 2,
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut",
+            });
+          }
+        },
+        "<"
+      )
+      .to(titleRef.current.querySelectorAll(".letter"), {
+        y: 0,
         opacity: 1,
-        scale: 1,
-        rotateY: 0,
-        duration: 1,
-        ease: "elastic.out(1, 0.5)",
-      },
-      "<"
-    );
+        stagger: 0.04,
+        duration: 0.8,
+        ease: "power3.out",
+      }, "-=0.8");
 
-    // Start subtle floating animation for logo while letters load
-    gsap.to(logoRef.current, {
-      y: "-=8",
-      rotateY: "+=2",
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    });
+  }, []);
 
-    // Letters animation
-    tl.to(titleRef.current.querySelectorAll(".letter"), {
-      y: 0,
-      opacity: 1,
-      stagger: 0.04,
-      duration: 0.8,
-      ease: "power3.out",
-    });
-
-    // Progress bar animation
-    tl.to(
-      progress.current,
-      {
-        width: "100%",
-        duration: 2,
+  useEffect(() => {
+    // 3. React to actual progress updates dynamically
+    if (progressRef.current && counterRef.current) {
+        
+      // Ensure smooth visual transition of the loading bar based on actual progress jumps
+      gsap.to(progressRef.current, {
+        width: `${actualProgress}%`,
+        duration: 0.5, 
         ease: "power2.out",
-      },
-      "<"
-    );
+      });
 
-    // Exit intro
-    tl.to(container.current, {
-      clipPath: "inset(0 0 100% 0)",
-      duration: 1.2,
-      ease: "power4.inOut",
-    });
-  }, [onFinish]);
+      // Animate the text counter smoothly to the new progress value
+      const currentValObj = { val: parseInt(counterRef.current.innerText) || 0 };
+      gsap.to(currentValObj, {
+        val: actualProgress,
+        duration: 0.5,
+        ease: "power2.out",
+        onUpdate: () => {
+           if(counterRef.current) {
+             counterRef.current.innerText = Math.floor(currentValObj.val);
+           }
+        },
+      });
+    }
+
+    // 4. Exit sequence if we hit 100%
+    if (actualProgress === 100 && !hasStartedExit) {
+      setHasStartedExit(true);
+
+      const exitTl = gsap.timeline({
+         delay: 0.6, // Brief pause at 100% so the user sees it finish
+         onComplete: () => setTimeout(onFinish, 100),
+      });
+
+      exitTl.to(container.current, {
+        clipPath: "inset(0 0 100% 0)",
+        duration: 1.2,
+        ease: "power4.inOut",
+      });
+    }
+  }, [actualProgress, hasStartedExit, onFinish]);
 
   return (
     <>
@@ -165,7 +181,7 @@ export default function Intro({ title, onFinish }) {
         <div className="w-40 h-[2px] bg-gray-300 mt-6 overflow-hidden relative z-10">
           {/* visibility:hidden preserves layout space, no full-width flash */}
           <div
-            ref={progress}
+            ref={progressRef}
             className="h-full bg-[#0b2545]"
             style={{ visibility: "hidden" }}
           />
@@ -173,7 +189,7 @@ export default function Intro({ title, onFinish }) {
 
         {/* Loading counter */}
         <div
-          ref={counter}
+          ref={counterRef}
           className="mt-4 text-sm tracking-widest text-gray-500 relative z-10"
         >
           0
