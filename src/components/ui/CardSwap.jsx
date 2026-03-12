@@ -99,6 +99,7 @@ const CardSwap = ({
     const swap = () => {
       if (order.current.length < 2) return;
       const [front, ...rest] = order.current;
+      const elFront = refs[front].current;
       const tl = gsap.timeline();
       tlRef.current = tl;
 
