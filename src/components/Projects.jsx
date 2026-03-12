@@ -5,6 +5,7 @@ import { useTheme } from '../hooks/useTheme';
 import { cn } from '../utils/cn';
 import ModalPortal from './ModalPortal';
 import { MdChevronLeft, MdChevronRight, MdClose, MdLocationOn, MdCheckCircle, MdInfoOutline } from 'react-icons/md';
+import Magnet from './ui/Magnet';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -346,18 +347,21 @@ const Projects = () => {
                     )}
                   </div>
 
-                  <button
-                    onClick={() => handleProjectClick(selectedProject)}
-                    className={`group/btn relative w-fit px-6 py-3 rounded-full font-bold uppercase tracking-wider text-[10px] md:text-xs overflow-hidden transition-all duration-300 flex items-center gap-2 ${
-                       isDarkMode 
-                        ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-1' 
-                        : 'bg-blue-600 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-1'
-                    }`}
-                  >
-                    <span className="relative z-10">Explore Case Study</span>
-                    <MdChevronRight className="relative z-10 text-lg group-hover/btn:translate-x-1 transition-transform" />
-                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out rounded-full" />
-                  </button>
+                  <Magnet padding={50} magnetStrength={3}>
+                    <button
+                      onClick={() => handleProjectClick(selectedProject)}
+                      data-cursor="READ"
+                      className={`group/btn relative w-fit px-6 py-3 rounded-full font-bold uppercase tracking-wider text-[10px] md:text-xs overflow-hidden transition-all duration-300 flex items-center gap-2 ${
+                         isDarkMode 
+                          ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-1' 
+                          : 'bg-blue-600 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-1'
+                      }`}
+                    >
+                      <span className="relative z-10">Explore Case Study</span>
+                      <MdChevronRight className="relative z-10 text-lg group-hover/btn:translate-x-1 transition-transform" />
+                      <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out rounded-full" />
+                    </button>
+                  </Magnet>
 
                 </div>
               </div>
@@ -406,6 +410,7 @@ const Projects = () => {
 
             <div
               ref={thumbnailScrollRef}
+              data-cursor="DRAG"
               className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth pb-8 pt-4 scrollbar-hide snap-x snap-mandatory"
               style={{ scrollBehavior: 'smooth', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
@@ -415,6 +420,7 @@ const Projects = () => {
                   <div
                     key={project.id}
                     onClick={() => setSelectedProject(project)}
+                    data-cursor="VIEW"
                     className={`relative flex-shrink-0 w-40 sm:w-56 aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer snap-start transition-all duration-500 group ${
                       isSelected 
                         ? (isDarkMode ? 'ring-2 ring-indigo-500 ring-offset-4 ring-offset-[#030712] shadow-2xl shadow-indigo-500/30' : 'ring-2 ring-blue-500 ring-offset-4 ring-offset-[#f8fafc] shadow-2xl shadow-blue-500/30')

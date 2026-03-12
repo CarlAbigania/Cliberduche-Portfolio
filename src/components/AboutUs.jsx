@@ -14,6 +14,7 @@ import {
 } from 'react-icons/md';
 import CardSwap, { Card } from './ui/CardSwap';
 import { cn } from '../utils/cn';
+import SplitTextReveal from './ui/SplitTextReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -283,10 +284,31 @@ const AboutUs = () => {
               <span className={`text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>ABOUT US</span>
             </div>
             
-            <h2 className={`gsap-intro text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.1] tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-              Building <br/>
-              <span className={`bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-purple-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}>Tomorrow</span>
-              <br/> Today.
+            <h2 className="gsap-intro flex flex-col font-black leading-[1.1] tracking-tight w-full">
+              <div className="overflow-hidden pb-1">
+                 <SplitTextReveal
+                    text="Building"
+                    className={`block text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] ${isDarkMode ? 'text-white' : 'text-slate-900'}`}
+                    stagger={0.05}
+                    delay={0.1}
+                 />
+              </div>
+              <div className="overflow-hidden pb-1">
+                 <SplitTextReveal
+                    text="Tomorrow"
+                    className={`block text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-purple-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}
+                    stagger={0.06}
+                    delay={0.4}
+                 />
+              </div>
+              <div className="overflow-hidden pb-1">
+                 <SplitTextReveal
+                    text="Today."
+                    className={`block text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] ${isDarkMode ? 'text-white' : 'text-slate-900'}`}
+                    stagger={0.05}
+                    delay={0.8}
+                 />
+              </div>
             </h2>
             
             <p className={`gsap-intro text-base sm:text-lg md:text-xl leading-relaxed max-w-lg font-medium ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
@@ -316,7 +338,7 @@ const AboutUs = () => {
               >
                 {features.map((feat, i) => (
                   <Card key={i}>
-                    <div className={getCardContentClasses()}>
+                    <div className={`card-body ${getCardContentClasses()}`}>
                       <div>
                         <div className={getIconContainerClasses()}>
                           {feat.reactIcon && React.createElement(feat.reactIcon, { className: getIconClasses() })}
