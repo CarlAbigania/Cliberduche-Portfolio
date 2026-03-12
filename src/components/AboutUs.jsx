@@ -234,8 +234,8 @@ const AboutUs = () => {
   const getCardContentClasses = () => {
     const base = "flex flex-col justify-between w-full h-full rounded-2xl backdrop-blur-xl transition-all duration-300";
     const theme = isDarkMode
-      ? "border border-white/10 bg-white/5 shadow-2xl shadow-black/50"
-      : "border border-gray-200 bg-white/60 shadow-xl shadow-blue-900/5";
+      ? "border border-indigo-500/30 bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl shadow-indigo-500/20"
+      : "border border-gray-200 bg-white shadow-xl shadow-blue-900/5";
 
     let sizing = contentSize === 'sm' ? "p-3" : contentSize === 'md' ? "p-4" : "p-6";
     return `${base} ${theme} ${sizing}`;
