@@ -24,15 +24,16 @@ const Hero = ({ revealContent = true }) => {
     if (!revealContent) return;
 
     let ctx = gsap.context(() => {
-      // Background Parallax
+      // Advanced Background Zoom and Parallax
       gsap.to(bgRef.current, {
+        scale: 1.3,
         yPercent: 30,
         ease: "none",
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true,
+          scrub: 1, // Smooth scrubbing
         }
       });
 
@@ -60,6 +61,7 @@ const Hero = ({ revealContent = true }) => {
         rotateX: 0,
         duration: 1.5,
         stagger: 0.15,
+        ease: "expo.out"
       }, "-=0.8")
       .to(subtextRef.current, {
         y: 0,
@@ -188,30 +190,36 @@ const Hero = ({ revealContent = true }) => {
           {/* Typography */}
           <div className="flex flex-col items-center justify-center mb-8 relative px-2">
             <h1 className="flex flex-col items-center font-black leading-[1.05] tracking-tight drop-shadow-sm w-full">
-              <span 
-                ref={title1Ref} 
-                className={`text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-1 sm:mb-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}
-              >
-                Building the
-              </span>
-              <span 
-                ref={title2Ref} 
-                className={`text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-[8rem] uppercase tracking-[-0.04em] ${
-                  isDarkMode 
-                    ? 'text-transparent bg-clip-text bg-gradient-to-br from-white via-indigo-100 to-indigo-400 pb-1 sm:pb-2' 
-                    : 'text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-blue-900 to-cyan-700 pb-1 sm:pb-2'
-                }`}
-              >
-                Future
-              </span>
-              <span 
-                ref={title3Ref} 
-                className={`text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] italic tracking-[-0.02em] font-serif ${
-                  isDarkMode ? 'text-indigo-400' : 'text-blue-600'
-                }`}
-              >
-                Together.
-              </span>
+              <div className="overflow-hidden pb-2">
+                <span 
+                  ref={title1Ref} 
+                  className={`block text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-1 sm:mb-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}
+                >
+                  Building the
+                </span>
+              </div>
+              <div className="overflow-hidden pb-4">
+                <span 
+                  ref={title2Ref} 
+                  className={`block text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-[8rem] uppercase tracking-[-0.04em] ${
+                    isDarkMode 
+                      ? 'text-transparent bg-clip-text bg-gradient-to-br from-white via-indigo-100 to-indigo-400' 
+                      : 'text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-blue-900 to-cyan-700'
+                  }`}
+                >
+                  Future
+                </span>
+              </div>
+              <div className="overflow-hidden pb-2">
+                <span 
+                  ref={title3Ref} 
+                  className={`block text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] italic tracking-[-0.02em] font-serif ${
+                    isDarkMode ? 'text-indigo-400' : 'text-blue-600'
+                  }`}
+                >
+                  Together.
+                </span>
+              </div>
             </h1>
           </div>
 

@@ -166,6 +166,19 @@ const Projects = () => {
         });
       }
 
+      // Advanced Background Parallax specific to projects section
+      gsap.to('.projects-bg-layer', {
+        scale: 1.15,
+        yPercent: 15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.2,
+        }
+      });
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -199,10 +212,12 @@ const Projects = () => {
       }`}
     >
       {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className={`absolute top-0 right-0 w-[50vw] h-[50vw] rounded-full mix-blend-screen filter blur-[150px] opacity-20 transform translate-x-1/3 -translate-y-1/3 ${isDarkMode ? 'bg-indigo-600' : 'bg-blue-300'}`} />
-        <div className={`absolute bottom-0 left-0 w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[150px] opacity-20 transform -translate-x-1/3 translate-y-1/3 ${isDarkMode ? 'bg-purple-600' : 'bg-cyan-300'}`} />
-        <div className={`absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] ${isDarkMode ? 'opacity-[0.04]' : 'opacity-[0.03]'}`} />
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="projects-bg-layer absolute inset-[-10%] w-[120%] h-[120%]">
+          <div className={`absolute top-0 right-0 w-[50vw] h-[50vw] rounded-full mix-blend-screen filter blur-[150px] opacity-20 transform translate-x-1/3 -translate-y-1/3 ${isDarkMode ? 'bg-indigo-600' : 'bg-blue-300'}`} />
+          <div className={`absolute bottom-0 left-0 w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[150px] opacity-20 transform -translate-x-1/3 translate-y-1/3 ${isDarkMode ? 'bg-purple-600' : 'bg-cyan-300'}`} />
+          <div className={`absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] ${isDarkMode ? 'opacity-[0.04]' : 'opacity-[0.03]'}`} />
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
