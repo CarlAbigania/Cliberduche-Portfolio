@@ -14,6 +14,7 @@ import {
 } from 'react-icons/md';
 import CardSwap, { Card } from './ui/CardSwap';
 import { cn } from '../utils/cn';
+import SplitTextReveal from './ui/SplitTextReveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -123,25 +124,38 @@ const AboutUs = () => {
         ease: "back.out(1.2)"
       });
 
-      // Parallax Orbs
+      // Parallax Orbs and Background Zoom
       gsap.to('.gsap-orb-1', {
         y: 150,
+        scale: 1.2,
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: true,
+          scrub: 1,
         }
       });
       gsap.to('.gsap-orb-2', {
         y: -150,
+        scale: 1.1,
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: true,
+          scrub: 1,
+        }
+      });
+      // Global background subtle scale across the section
+      gsap.to('.about-bg-layer', {
+        scale: 1.15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5,
         }
       });
 
@@ -220,8 +234,8 @@ const AboutUs = () => {
   const getCardContentClasses = () => {
     const base = "flex flex-col justify-between w-full h-full rounded-2xl backdrop-blur-xl transition-all duration-300";
     const theme = isDarkMode
-      ? "border border-white/10 bg-white/5 shadow-2xl shadow-black/50"
-      : "border border-gray-200 bg-white/60 shadow-xl shadow-blue-900/5";
+      ? "border border-indigo-500/30 bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl shadow-indigo-500/20"
+      : "border border-gray-200 bg-white shadow-xl shadow-blue-900/5";
 
     let sizing = contentSize === 'sm' ? "p-3" : contentSize === 'md' ? "p-4" : "p-6";
     return `${base} ${theme} ${sizing}`;
@@ -253,10 +267,12 @@ const AboutUs = () => {
       isDarkMode ? 'bg-[#030712]' : 'bg-[#f8fafc]'
     }`}>
       {/* Background Ambience */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className={`gsap-orb-1 absolute top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[120px] opacity-30 ${isDarkMode ? 'bg-indigo-600/50' : 'bg-blue-400/40'}`} />
-        <div className={`gsap-orb-2 absolute top-[60%] -right-[10%] w-[35vw] h-[35vw] rounded-full mix-blend-screen filter blur-[100px] opacity-20 ${isDarkMode ? 'bg-teal-600/40' : 'bg-cyan-400/30'}`} />
-        <div className={`absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] ${isDarkMode ? 'opacity-[0.03]' : 'opacity-[0.04]'}`} />
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="about-bg-layer absolute inset-[-10%] w-[120%] h-[120%]">
+          <div className={`gsap-orb-1 absolute top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[120px] opacity-30 ${isDarkMode ? 'bg-indigo-600/50' : 'bg-blue-400/40'}`} />
+          <div className={`gsap-orb-2 absolute top-[60%] -right-[10%] w-[35vw] h-[35vw] rounded-full mix-blend-screen filter blur-[100px] opacity-20 ${isDarkMode ? 'bg-teal-600/40' : 'bg-cyan-400/30'}`} />
+          <div className={`absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] ${isDarkMode ? 'opacity-[0.03]' : 'opacity-[0.04]'}`} />
+        </div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40 border-b border-white/5">
@@ -268,10 +284,31 @@ const AboutUs = () => {
               <span className={`text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>ABOUT US</span>
             </div>
             
-            <h2 className={`gsap-intro text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black leading-[1.1] tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-              Building <br/>
-              <span className={`bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-purple-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}>Tomorrow</span>
-              <br/> Today.
+            <h2 className="gsap-intro flex flex-col font-black leading-[1.1] tracking-tight w-full">
+              <div className="overflow-hidden pb-1">
+                 <SplitTextReveal
+                    text="Building"
+                    className={`block text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] ${isDarkMode ? 'text-white' : 'text-slate-900'}`}
+                    stagger={0.05}
+                    delay={0.1}
+                 />
+              </div>
+              <div className="overflow-hidden pb-1">
+                 <SplitTextReveal
+                    text="Tomorrow"
+                    className={`block text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-purple-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}
+                    stagger={0.06}
+                    delay={0.4}
+                 />
+              </div>
+              <div className="overflow-hidden pb-1">
+                 <SplitTextReveal
+                    text="Today."
+                    className={`block text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] ${isDarkMode ? 'text-white' : 'text-slate-900'}`}
+                    stagger={0.05}
+                    delay={0.8}
+                 />
+              </div>
             </h2>
             
             <p className={`gsap-intro text-base sm:text-lg md:text-xl leading-relaxed max-w-lg font-medium ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
@@ -289,8 +326,10 @@ const AboutUs = () => {
           </div>
 
           <div className="gsap-intro relative flex justify-center w-full h-full min-h-[400px]">
-             <CardSwap
-                width={cardWidth}
+             {/* Magnetic Wrapper on CardSwap container for subtle interaction */}
+             <div className="interactive w-full flex justify-center">
+               <CardSwap
+                  width={cardWidth}
                 height={cardHeight}
                 cardDistance={cardDistance}
                 verticalDistance={verticalDistance}
@@ -299,7 +338,7 @@ const AboutUs = () => {
               >
                 {features.map((feat, i) => (
                   <Card key={i}>
-                    <div className={getCardContentClasses()}>
+                    <div className={`card-body ${getCardContentClasses()}`}>
                       <div>
                         <div className={getIconContainerClasses()}>
                           {feat.reactIcon && React.createElement(feat.reactIcon, { className: getIconClasses() })}
@@ -315,7 +354,8 @@ const AboutUs = () => {
                     </div>
                   </Card>
                 ))}
-            </CardSwap>
+               </CardSwap>
+             </div>
           </div>
         </div>
       </div>
