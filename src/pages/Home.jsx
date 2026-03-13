@@ -41,16 +41,16 @@ const Home = ({ heroRevealContent = true }) => {
       <main className={`relative z-10 w-full rounded-t-[40px] md:rounded-t-[60px] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] transition-colors duration-700 ${isDarkMode ? 'bg-[#030712]' : 'bg-[#f8fafc]'}`}>
         <section id="about">
           <AboutUs />
-        </section>
+        </section>       
         <section id="services">
           <Services />
         </section>
+                
+        <InfiniteMarquee text="CIVIL ENGINEERING • LAND DEVELOPMENT • HEAVY EQUIPMENT • " speed={1} />
+ 
         <section id="projects">
           <Projects />
         </section>
-        
-        <InfiniteMarquee text="CIVIL ENGINEERING • LAND DEVELOPMENT • HEAVY EQUIPMENT • " speed={1} />
-        
         <section id="equipment">
           <EquipmentFleet />
         </section>
