@@ -263,11 +263,11 @@ const AboutUs = () => {
   };
 
   return (
-    <section id="about" ref={containerRef} className={`relative overflow-hidden transition-colors duration-700 ${
+    <section id="about" ref={containerRef} className={`relative rounded-t-[40px] md:rounded-t-[60px] transition-colors duration-700 ${
       isDarkMode ? 'bg-[#030712]' : 'bg-[#f8fafc]'
     }`}>
       {/* Background Ambience */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none rounded-t-[40px] md:rounded-t-[60px]">
         <div className="about-bg-layer absolute inset-[-10%] w-[120%] h-[120%]">
           <div className={`gsap-orb-1 absolute top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[120px] opacity-30 ${isDarkMode ? 'bg-indigo-600/50' : 'bg-blue-400/40'}`} />
           <div className={`gsap-orb-2 absolute top-[60%] -right-[10%] w-[35vw] h-[35vw] rounded-full mix-blend-screen filter blur-[100px] opacity-20 ${isDarkMode ? 'bg-teal-600/40' : 'bg-cyan-400/30'}`} />
@@ -360,114 +360,86 @@ const AboutUs = () => {
         </div>
       </div>
 
-      {/* Highlights / Journey */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 border-b border-white/5">
-        <div className="max-w-4xl mx-auto">
-          <div className="gsap-journey-container space-y-16">
-            <div className="text-center">
-              <span className={`inline-block mb-4 text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-teal-400' : 'text-cyan-600'}`}>KEY MILESTONES</span>
-              <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Our Journey</h2>
+      {/* Narrative Section with Sticky Sidebar */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          
+          {/* Left Column (Sticky Sidebar) */}
+          <div className="lg:col-span-5 relative">
+            <div className="sticky top-32 space-y-6">
+               <div className="inline-flex items-center gap-3">
+                 <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-teal-400' : 'from-blue-600 to-cyan-500'}`} />
+                 <span className={`text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>THE STORY</span>
+               </div>
+               <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                 A Legacy <br className="hidden lg:block"/>of Excellence
+               </h2>
+               <p className={`text-lg font-medium leading-relaxed max-w-md ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                 From our humble beginnings to becoming a trusted leader in land development and civil works across CALABARZON.
+               </p>
             </div>
+          </div>
+
+          {/* Right Column (Scrolling Narrative) */}
+          <div className="lg:col-span-7 space-y-32">
             
-            <div className="space-y-8 lg:space-y-12 pl-4 sm:pl-0 border-l lg:border-none border-white/10 ml-4 sm:ml-0 overflow-hidden">
-              {highlights.map((item, i) => (
-                <div key={i} className="gsap-journey flex flex-col sm:flex-row gap-6 sm:gap-8 items-start relative group cursor-pointer pl-6 sm:pl-0">
-                  <div className="absolute left-[-24px] sm:relative sm:left-0 top-1 sm:top-0">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform shadow-xl ${
-                      isDarkMode ? 'bg-indigo-500 text-white shadow-indigo-500/20' : 'bg-blue-600 text-white shadow-blue-500/20'
-                    }`}>
-                      {i + 1}
+            {/* Journey Block */}
+            <div className="gsap-journey-container space-y-12">
+               <h3 className={`text-2xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'} border-b ${isDarkMode ? 'border-white/10' : 'border-slate-200'} pb-4`}>
+                 Key Milestones
+               </h3>
+               <div className={`space-y-12 border-l-2 border-dashed ml-3 pl-8 md:pl-10 relative ${isDarkMode ? 'border-indigo-500/30' : 'border-blue-500/30'}`}>
+                 {highlights.map((item, i) => (
+                   <div key={i} className="gsap-journey relative">
+                     <div className={`absolute -left-[42px] md:-left-[50px] top-1 w-5 h-5 rounded-full border-4 ${isDarkMode ? 'bg-[#030712] border-indigo-400' : 'bg-[#f8fafc] border-blue-500'}`} />
+                     <p className={`text-lg md:text-xl leading-relaxed font-medium ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                       {item}
+                     </p>
+                   </div>
+                 ))}
+               </div>
+            </div>
+
+            {/* Mission & Vision Block */}
+            <div className="space-y-20">
+              {missionVision.map((item, idx) => (
+                <div key={idx} className="gsap-mission relative space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className={`text-3xl ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>
+                       {idx === 0 ? <MdAutoAwesome /> : <MdRemoveRedEye />}
                     </div>
+                    <h3 className={`text-3xl lg:text-4xl font-black tracking-tight ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                      {item.title}
+                    </h3>
                   </div>
-                  <div className={`flex-1 p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-1 ${
-                    isDarkMode ? 'bg-white/5 border-white/10 group-hover:bg-white/10 hover:shadow-2xl hover:shadow-indigo-500/10' : 'bg-white border-gray-200 group-hover:shadow-xl hover:border-blue-200'
-                  }`}>
-                    <p className={`text-base sm:text-lg leading-relaxed font-medium ${isDarkMode ? 'text-slate-300 group-hover:text-white' : 'text-slate-700 group-hover:text-slate-900'}`}>
-                      {item}
-                    </p>
-                  </div>
+                  <p className={`text-lg md:text-xl leading-relaxed font-medium ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                    {item.desc}
+                  </p>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Mission & Vision */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {missionVision.map((item, idx) => (
-            <div key={idx} className={`gsap-mission relative p-8 md:p-12 rounded-3xl border overflow-hidden group ${
-              isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200 shadow-xl shadow-blue-900/5'
-            }`}>
-              <div className={`absolute -right-12 -top-12 w-48 h-48 rounded-full blur-3xl opacity-20 transition-opacity group-hover:opacity-40 ${
-                isDarkMode ? (idx === 0 ? 'bg-indigo-500' : 'bg-teal-500') : (idx === 0 ? 'bg-blue-500' : 'bg-cyan-500')
-              }`} />
-              
-              <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg ${
-                    isDarkMode ? 'bg-white/10 border border-white/10' : 'bg-slate-50 border border-slate-200'
-                  }`}>
-                    {idx === 0 ? <MdAutoAwesome className={`text-2xl ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`} /> : <MdRemoveRedEye className={`text-2xl ${isDarkMode ? 'text-teal-400' : 'text-cyan-600'}`} />}
-                  </div>
-                  <h3 className={`text-2xl md:text-3xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{item.title}</h3>
-                </div>
-                
-                <p id={`mission-text-${idx}`} className={cn(
-                  'text-base md:text-lg leading-relaxed font-medium transition-all duration-500',
-                  !expandedMission[idx] && 'line-clamp-4',
-                  isDarkMode ? 'text-slate-300' : 'text-slate-700'
-                )}>
-                  {item.desc}
-                </p>
-                
-                <button
-                  onClick={() => toggleMission(idx)}
-                  className={`mt-6 inline-flex items-center gap-2 font-bold uppercase tracking-wider text-sm transition-colors group/btn ${
-                    isDarkMode ? 'text-white hover:text-indigo-400' : 'text-slate-900 hover:text-blue-600'
-                  }`}
-                  aria-expanded={expandedMission[idx]}
-                  aria-controls={`mission-text-${idx}`}
-                >
-                  <span className="relative overflow-hidden">
-                    <span className="inline-block transition-transform duration-300 group-hover/btn:-translate-y-full">{expandedMission[idx] ? 'Show less' : 'Read more'}</span>
-                    <span className="inline-block absolute left-0 top-0 transition-transform duration-300 translate-y-full group-hover/btn:translate-y-0 text-indigo-400">{expandedMission[idx] ? 'Show less' : 'Read more'}</span>
-                  </span>
-                  <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Core Values */}
-      <div className="gsap-values-container relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 mb-12">
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
-          <span className={`inline-block mb-4 text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-purple-400' : 'text-indigo-600'}`}>OUR VALUES</span>
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>What Drives Us</h2>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
-          {coreValues.map((value, i) => (
-            <div key={i} className="gsap-value group relative" style={{ marginTop: window.innerWidth > 768 ? (i === 1 ? '40px' : i === 2 ? '80px' : '0') : '0' }}>
-               <div className={`absolute inset-0 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-0 group-hover:opacity-100 ${
-                  isDarkMode ? 'bg-indigo-500/20' : 'bg-blue-500/20'
-                }`} />
-               <div className={`relative h-full p-8 md:p-10 rounded-3xl border backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-2 ${
-                  isDarkMode ? 'bg-white/5 border-white/10' : 'bg-white border-gray-200 shadow-xl shadow-blue-900/5'
-               }`}>
-                 <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 ${
-                    isDarkMode ? 'bg-gradient-to-br from-indigo-500/20 to-purple-500/20' : 'bg-gradient-to-br from-blue-500/10 to-indigo-500/10'
-                 }`}>
-                   {value.reactIcon && React.createElement(value.reactIcon, { className: `text-3xl ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}` })}
-                 </div>
-                 <h3 className={`text-xl lg:text-2xl font-black mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{value.title}</h3>
-                 <p className={`text-sm lg:text-base leading-relaxed font-medium ${isDarkMode ? 'text-slate-400' : 'text-slate-700'}`}>{value.desc}</p>
+            {/* Core Values Block */}
+            <div className="gsap-values-container space-y-12">
+               <h3 className={`text-2xl font-black ${isDarkMode ? 'text-white' : 'text-slate-900'} border-b ${isDarkMode ? 'border-white/10' : 'border-slate-200'} pb-4`}>
+                 What Drives Us
+               </h3>
+               <div className="space-y-12">
+                 {coreValues.map((value, i) => (
+                   <div key={i} className="gsap-value flex flex-col sm:flex-row gap-6 items-start">
+                     <div className={`w-16 h-16 shrink-0 rounded-2xl flex items-center justify-center shadow-lg ${isDarkMode ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20' : 'bg-blue-50 text-blue-600 border border-blue-100'}`}>
+                       {value.reactIcon && React.createElement(value.reactIcon, { className: "text-3xl" })}
+                     </div>
+                     <div>
+                       <h4 className={`text-2xl font-black mb-3 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{value.title}</h4>
+                       <p className={`text-lg leading-relaxed font-medium ${isDarkMode ? 'text-slate-400' : 'text-slate-700'}`}>{value.desc}</p>
+                     </div>
+                   </div>
+                 ))}
                </div>
             </div>
-          ))}
+
+          </div>
         </div>
       </div>
     </section>
