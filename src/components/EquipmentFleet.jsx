@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../hooks/useTheme';
 import { cn } from '../utils/cn';
 import { MdLocalShipping, MdBuild, MdConstruction, MdExtension, MdDirections, MdLightbulb, MdChevronRight, MdSettings } from 'react-icons/md';
+import ParallaxImage from './ui/ParallaxImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -244,11 +245,13 @@ const EquipmentFleet = () => {
                 
                 {/* Image & Display Area */}
                 <div className="w-full lg:w-[55%]">
-                  <div className="relative aspect-[4/3] rounded-3xl overflow-hidden group bg-slate-900">
-                    <img
+                  <div className="relative aspect-[4/3] rounded-3xl overflow-hidden group bg-slate-900 pointer-events-none">
+                    <ParallaxImage
                       src={currentItem?.image}
                       alt={currentItem?.model}
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                      containerClassName="absolute inset-0 w-full h-full"
+                      className="transition-transform duration-1000 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                      speed={0.6}
                     />
                     
                     {/* Gradient overlay to ensure text readability */}
