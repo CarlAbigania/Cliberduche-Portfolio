@@ -234,7 +234,7 @@ const AboutUs = () => {
   const getCardContentClasses = () => {
     const base = "flex flex-col justify-between w-full h-full rounded-2xl backdrop-blur-xl transition-all duration-300";
     const theme = isDarkMode
-      ? "border border-indigo-500/30 bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl shadow-indigo-500/20"
+      ? "border border-indigo-500/40 bg-gradient-to-br from-[#020617] via-[#020617] to-slate-900 shadow-2xl shadow-indigo-500/30"
       : "border border-gray-200 bg-white shadow-xl shadow-blue-900/5";
 
     let sizing = contentSize === 'sm' ? "p-3" : contentSize === 'md' ? "p-4" : "p-6";
@@ -244,7 +244,7 @@ const AboutUs = () => {
   const getIconContainerClasses = () => {
     const base = "rounded-xl flex items-center justify-center mb-2";
     const theme = isDarkMode
-      ? "bg-gradient-to-br from-indigo-500/20 to-teal-500/20"
+      ? "bg-gradient-to-br from-indigo-500/25 via-purple-500/25 to-indigo-500/25"
       : "bg-gradient-to-br from-blue-500/10 to-cyan-500/10";
     let sizing = contentSize === 'sm' ? "w-8 h-8" : contentSize === 'md' ? "w-10 h-10" : "w-12 h-12";
     return `${base} ${theme} ${sizing}`;
@@ -280,7 +280,7 @@ const AboutUs = () => {
           
           <div className="space-y-8">
             <div className="gsap-intro inline-flex items-center gap-3">
-              <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-teal-400' : 'from-blue-600 to-cyan-500'}`} />
+            <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
               <span className={`text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>ABOUT US</span>
             </div>
             
@@ -367,8 +367,8 @@ const AboutUs = () => {
           {/* Left Column (Sticky Sidebar) */}
           <div className="lg:col-span-5 relative">
             <div className="sticky top-32 space-y-6">
-               <div className="inline-flex items-center gap-3">
-                 <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-teal-400' : 'from-blue-600 to-cyan-500'}`} />
+             <div className="inline-flex items-center gap-3">
+                 <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
                  <span className={`text-sm font-bold tracking-[0.2em] uppercase ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>THE STORY</span>
                </div>
                <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>

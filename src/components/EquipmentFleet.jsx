@@ -159,9 +159,13 @@ const EquipmentFleet = () => {
     >
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className={`absolute top-1/4 -left-[10%] w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[120px] opacity-20 ${isDarkMode ? 'bg-indigo-600' : 'bg-blue-300'}`} />
-        <div className={`absolute bottom-1/4 -right-[10%] w-[35vw] h-[35vw] rounded-full mix-blend-screen filter blur-[100px] opacity-20 ${isDarkMode ? 'bg-teal-600' : 'bg-cyan-300'}`} />
-        <div className={`absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] ${isDarkMode ? 'opacity-[0.04]' : 'opacity-[0.03]'}`} />
+        {!isDarkMode && (
+          <>
+            <div className="absolute top-1/4 -left-[10%] w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[120px] opacity-20 bg-blue-300" />
+            <div className="absolute bottom-1/4 -right-[10%] w-[35vw] h-[35vw] rounded-full mix-blend-screen filter blur-[100px] opacity-20 bg-cyan-300" />
+            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-[0.03]" />
+          </>
+        )}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -169,16 +173,16 @@ const EquipmentFleet = () => {
         {/* Section Header */}
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-teal-400' : 'from-blue-600 to-cyan-500'}`} />
+            <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
             <span className={`text-sm font-bold tracking-[0.2em] uppercase flex items-center gap-2 ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>
               <MdSettings className="text-lg animate-spin-slow" />
               EQUIPMENT & FLEET
             </span>
-            <div className={`w-12 h-1 bg-gradient-to-l rounded-full ${isDarkMode ? 'from-indigo-500 to-teal-400' : 'from-blue-600 to-cyan-500'}`} />
+            <div className={`w-12 h-1 bg-gradient-to-l rounded-full ${isDarkMode ? 'from-indigo-500 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
           </div>
           <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
             Modern <br className="hidden sm:block" />
-            <span className={`bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-teal-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}>
+            <span className={`bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-purple-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}>
                Heavy Fleet
             </span>
           </h2>
