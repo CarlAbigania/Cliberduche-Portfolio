@@ -11,16 +11,34 @@ import ComplianceSafety from '../components/ComplianceSafety';
 import ProcessOverview from '../components/ProcessOverview';
 import MeetOurTeam from '../components/MeetOurTeam';
 import InfiniteMarquee from '../components/InfiniteMarquee';
+import { useTheme } from '../hooks/useTheme';
 
 const Home = ({ heroRevealContent = true }) => {
+  const { isDarkMode } = useTheme();
+
   return (
     <>
-      <section id="hero">
-        <Hero revealContent={heroRevealContent} />
-      </section>
+      {/* 
+        Sticky Hero Section 
+        This div wraps the Hero to ensure it stays pinned at the top 
+        while the main content scrolls over it.
+      */}
+      <div className="sticky top-0 z-0 h-screen w-full overflow-hidden">
+        <section id="hero">
+          <Hero revealContent={heroRevealContent} />
+        </section>
+      </div>
+
       {heroRevealContent && <Header />}
       {heroRevealContent && <Sidebar />}
-      <main>
+
+      {/* 
+        Overlapping Main Content (The "Curtain")
+        z-10 ensures it sits above the sticky hero.
+        bg-color ensures the hero is hidden once scrolled.
+        rounded-t creates the card/sheet effect.
+      */}
+      <main className={`relative z-10 w-full rounded-t-[40px] md:rounded-t-[60px] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] overflow-hidden transition-colors duration-700 ${isDarkMode ? 'bg-[#030712]' : 'bg-[#f8fafc]'}`}>
         <section id="about">
           <AboutUs />
         </section>
