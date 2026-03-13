@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTheme } from '../hooks/useTheme';
 import { MdHandshake, MdLocationOn, MdPhone, MdPerson, MdCheckCircle, MdBusiness } from 'react-icons/md';
+import ParallaxImage from './ui/ParallaxImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -230,11 +231,13 @@ const ResourcesPartners = () => {
                <div key={index} className={`gsap-site-card relative group rounded-[2.5rem] overflow-hidden border ${isDarkMode ? 'border-white/10 bg-[#0f172a]' : 'border-slate-200 bg-white shadow-2xl shadow-blue-900/5'}`}>
                  
                  {/* Image Split */}
-                 <div className="relative h-56 sm:h-72 overflow-hidden bg-slate-900">
-                    <img 
+                 <div className="relative h-56 sm:h-72 overflow-hidden bg-slate-900 pointer-events-none">
+                    <ParallaxImage 
                       src={site.image} 
                       alt={site.title}
-                      className="w-full h-full object-cover opacity-80 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-100"
+                      containerClassName="absolute inset-0 w-full h-full"
+                      className="opacity-80 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-100"
+                      speed={0.8}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6">

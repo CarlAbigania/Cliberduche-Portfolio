@@ -10,6 +10,7 @@ import EquipmentFleet from '../components/EquipmentFleet';
 import ComplianceSafety from '../components/ComplianceSafety';
 import ProcessOverview from '../components/ProcessOverview';
 import MeetOurTeam from '../components/MeetOurTeam';
+import InfiniteMarquee from '../components/InfiniteMarquee';
 
 const Home = ({ heroRevealContent = true }) => {
   return (
@@ -29,6 +30,9 @@ const Home = ({ heroRevealContent = true }) => {
         <section id="projects">
           <Projects />
         </section>
+        
+        <InfiniteMarquee text="CIVIL ENGINEERING • LAND DEVELOPMENT • HEAVY EQUIPMENT • " speed={1} />
+        
         <section id="equipment">
           <EquipmentFleet />
         </section>

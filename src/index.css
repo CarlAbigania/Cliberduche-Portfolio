@@ -559,3 +559,16 @@
     animation: splashFloat 4s ease-in-out infinite;
   }
 }
+
+/* Stroke effect for Infinite Marquee text */
+.text-stroke {
+  -webkit-text-stroke-width: 2px;
+}
+
+.text-stroke-white {
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.4);
+}
+
+.text-stroke-black {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.4);
+}
