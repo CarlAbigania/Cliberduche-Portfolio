@@ -38,7 +38,7 @@ const Home = ({ heroRevealContent = true }) => {
         bg-color ensures the hero is hidden once scrolled.
         rounded-t creates the card/sheet effect.
       */}
-      <main className={`relative z-10 w-full rounded-t-[40px] md:rounded-t-[60px] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] overflow-hidden transition-colors duration-700 ${isDarkMode ? 'bg-[#030712]' : 'bg-[#f8fafc]'}`}>
+      <main className={`relative z-10 w-full rounded-t-[40px] md:rounded-t-[60px] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] transition-colors duration-700 ${isDarkMode ? 'bg-[#030712]' : 'bg-[#f8fafc]'}`}>
         <section id="about">
           <AboutUs />
         </section>

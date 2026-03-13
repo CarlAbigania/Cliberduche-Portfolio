@@ -99,6 +99,20 @@ const Hero = ({ revealContent = true }) => {
         }
       });
 
+      // Central Content Shrink on Scroll (Parallax Depth Effect)
+      gsap.to(containerRef.current, {
+        scale: 0.85,
+        opacity: 0.2,
+        yPercent: 15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        }
+      });
+
     }, heroRef);
 
     return () => ctx.revert();

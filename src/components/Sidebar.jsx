@@ -63,6 +63,18 @@ const Sidebar = () => {
       }
     });
 
+    // Extra safety: when scrolled very close to the top,
+    // force the "Home" / hero section to be active.
+    const handleScrollTopDetection = () => {
+      if (window.scrollY < window.innerHeight * 0.3) {
+        setActiveSection('hero');
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollTopDetection, { passive: true });
+    // Ensure correct initial state on load/refresh
+    handleScrollTopDetection();
+
     return () => {
       sections.forEach((id) => {
         const element = document.getElementById(id);
@@ -70,6 +82,7 @@ const Sidebar = () => {
           observer.unobserve(element);
         }
       });
+      window.removeEventListener('scroll', handleScrollTopDetection);
     };
   }, []);
 
