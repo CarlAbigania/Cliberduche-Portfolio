@@ -114,7 +114,7 @@ const ComplianceSafety = () => {
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className={`absolute top-0 right-0 w-[50vw] h-[50vw] rounded-full mix-blend-screen filter blur-[150px] opacity-20 transform translate-x-1/3 -translate-y-1/3 ${isDarkMode ? 'bg-indigo-600' : 'bg-blue-300'}`} />
-        <div className={`absolute bottom-0 left-0 w-[60vw] h-[60vw] rounded-full mix-blend-screen filter blur-[150px] opacity-10 transform -translate-x-1/3 translate-y-1/3 ${isDarkMode ? 'bg-teal-600' : 'bg-cyan-300'}`} />
+        <div className={`absolute bottom-0 left-0 w-[60vw] h-[60vw] rounded-full mix-blend-screen filter blur-[150px] opacity-10 transform -translate-x-1/3 translate-y-1/3 ${isDarkMode ? 'bg-purple-600' : 'bg-cyan-300'}`} />
         <div className={`absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] ${isDarkMode ? 'opacity-[0.05]' : 'opacity-[0.03]'}`} />
       </div>
 
@@ -123,16 +123,16 @@ const ComplianceSafety = () => {
         {/* Section Header */}
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
           <div className="inline-flex items-center gap-3 mb-6">
-             <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-teal-400' : 'from-blue-600 to-cyan-500'}`} />
+             <div className={`w-12 h-1 bg-gradient-to-r rounded-full ${isDarkMode ? 'from-indigo-500 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
              <span className={`text-sm font-bold tracking-[0.2em] uppercase flex items-center gap-2 ${isDarkMode ? 'text-indigo-400' : 'text-blue-600'}`}>
                <MdSecurity className="text-xl" />
                Compliance & Safety
              </span>
-             <div className={`w-12 h-1 bg-gradient-to-l rounded-full ${isDarkMode ? 'from-indigo-500 to-teal-400' : 'from-blue-600 to-cyan-500'}`} />
+             <div className={`w-12 h-1 bg-gradient-to-l rounded-full ${isDarkMode ? 'from-indigo-500 to-purple-400' : 'from-blue-600 to-cyan-500'}`} />
           </div>
           <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
             Unwavering <br className="hidden sm:block" />
-            <span className={`bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-teal-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}>
+            <span className={`bg-clip-text text-transparent bg-gradient-to-r ${isDarkMode ? 'from-indigo-400 via-purple-400 to-indigo-400' : 'from-blue-600 via-cyan-500 to-blue-600'}`}>
                Commitment
             </span>
           </h2>
@@ -156,14 +156,14 @@ const ComplianceSafety = () => {
              <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                    <pattern id="blueprint-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#4ade80" strokeWidth="0.5" opacity="0.5"/>
+                      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6366f1" strokeWidth="0.5" opacity="0.45"/>
                    </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#blueprint-grid)" />
              </svg>
              
              {/* Glowing Overlay */}
-             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-teal-500/10 mix-blend-overlay" />
+             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-purple-500/10 mix-blend-overlay" />
 
              {/* Hotspots */}
              {complianceHotspots.map((item, idx) => {
@@ -181,13 +181,13 @@ const ComplianceSafety = () => {
                    <button className="relative group p-2 outline-none">
                      {/* Pulse Ring */}
                      <div className={`absolute inset-0 rounded-full animate-ping opacity-75 ${
-                        isDarkMode ? 'bg-teal-400/40' : 'bg-cyan-400/60'
+                        isDarkMode ? 'bg-indigo-400/40' : 'bg-cyan-400/60'
                      }`} />
                      
                      {/* Core Button */}
                      <div className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center border-2 backdrop-blur-md transition-all duration-300 group-hover:scale-110 shadow-lg ${
                         isDarkMode 
-                          ? 'bg-slate-800/80 border-teal-500/50 text-teal-400 group-hover:bg-teal-500 group-hover:text-slate-900' 
+                          ? 'bg-slate-800/80 border-indigo-500/60 text-indigo-300 group-hover:bg-indigo-500 group-hover:text-slate-900' 
                           : 'bg-white/90 border-cyan-500/50 text-cyan-600 group-hover:bg-cyan-500 group-hover:text-white group-hover:border-transparent'
                      }`}>
                        <Icon className="text-xl sm:text-2xl" />
@@ -200,7 +200,7 @@ const ComplianceSafety = () => {
                         isDarkMode ? 'bg-slate-900/95 border-white/10' : 'bg-white/95 border-slate-200'
                      }`}>
                        <p className={`text-xs font-bold text-center leading-tight mb-1 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{item.full}</p>
-                       <p className={`text-[10px] text-center font-medium uppercase tracking-wider ${isDarkMode ? 'text-teal-400' : 'text-cyan-600'}`}>Click to View</p>
+                       <p className={`text-[10px] text-center font-medium uppercase tracking-wider ${isDarkMode ? 'text-indigo-300' : 'text-cyan-600'}`}>Click to View</p>
                      </div>
                    </button>
                  </div>
@@ -218,12 +218,12 @@ const ComplianceSafety = () => {
                        onClick={() => setSelectedCert(item)}
                        className="flex items-center gap-4 p-4 rounded-xl border border-white/10 bg-white/5 text-left active:bg-white/10 transition-colors"
                      >
-                       <div className="w-10 h-10 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0">
+                       <div className="w-10 h-10 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0">
                          <Icon className="text-xl" />
                        </div>
                        <div>
                          <p className="text-sm font-bold text-white leading-tight">{item.full}</p>
-                         <p className="text-xs text-teal-400 mt-0.5">Tap to view</p>
+                         <p className="text-xs text-indigo-300 mt-0.5">Tap to view</p>
                        </div>
                      </button>
                    );
@@ -269,7 +269,7 @@ const ComplianceSafety = () => {
  
                  {/* Bottom decorative highlight */}
                  <div className={`absolute bottom-0 left-6 right-6 sm:left-8 sm:right-8 h-1 rounded-t-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
-                   isDarkMode ? 'bg-gradient-to-r from-indigo-500 to-teal-400' : 'bg-gradient-to-r from-blue-600 to-cyan-500'
+                   isDarkMode ? 'bg-gradient-to-r from-indigo-500 to-purple-400' : 'bg-gradient-to-r from-blue-600 to-cyan-500'
                  }`} />
                </div>
              ))}
