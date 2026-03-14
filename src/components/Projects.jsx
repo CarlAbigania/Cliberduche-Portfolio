@@ -115,37 +115,37 @@ const Projects = () => {
     let ctx = gsap.context(() => {
       let mm = gsap.matchMedia();
 
-      // Header entrance (runs on all screens)
-      gsap.from(headerRef.current.children, {
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: 'power3.out',
-      });
-
-      // Filter entrance (runs on all screens)
-      if (filterRef.current) {
-        gsap.from(filterRef.current, {
+      // Desktop Only Animations (All Entrances, Clip paths, and Parallax)
+      mm.add("(min-width: 768px)", () => {
+        // Header entrance
+        gsap.from(headerRef.current.children, {
           scrollTrigger: {
-            trigger: filterRef.current,
-            start: 'top 90%',
+            trigger: headerRef.current,
+            start: 'top 85%',
             toggleActions: 'play none none reverse',
           },
-          y: 30,
+          y: 40,
           opacity: 0,
-          duration: 0.8,
-          ease: 'power2.out',
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power3.out',
         });
-      }
 
-      // Desktop Only Animations (Clip paths and Parallax)
-      mm.add("(min-width: 768px)", () => {
+        // Filter entrance
+        if (filterRef.current) {
+          gsap.from(filterRef.current, {
+            scrollTrigger: {
+              trigger: filterRef.current,
+              start: 'top 90%',
+              toggleActions: 'play none none reverse',
+            },
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+          });
+        }
+
         // Featured Project Advanced Reveal (Clip-Path)
         if (featuredRef.current && featuredImageRef.current) {
           const tl = gsap.timeline({
@@ -201,23 +201,6 @@ const Projects = () => {
             scrub: 1.2,
           }
         });
-      });
-
-      // Mobile Only Simplified Reveal
-      mm.add("(max-width: 767px)", () => {
-        if (featuredRef.current) {
-          gsap.from(featuredRef.current, {
-            scrollTrigger: {
-              trigger: featuredRef.current,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse',
-            },
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-          });
-        }
       });
 
     }, sectionRef);

@@ -31,54 +31,58 @@ const Services = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Header Animation
-      gsap.from('.gsap-service-header', {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: 'power3.out',
-      });
+      let mm = gsap.matchMedia();
 
-      // Cards Stagger Animation
-      gsap.from(cardsRef.current, {
-        scrollTrigger: {
-          trigger: '.gsap-services-grid',
-          start: 'top 75%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 80,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.1,
-        ease: 'back.out(1.2)',
-      });
+      mm.add("(min-width: 768px)", () => {
+        // Header Animation
+        gsap.from('.gsap-service-header', {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power3.out',
+        });
 
-      // Parallax Background Orbs
-      gsap.to('.gsap-service-orb-1', {
-        y: 200,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      });
-      gsap.to('.gsap-service-orb-2', {
-        y: -150,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
-        },
+        // Cards Stagger Animation
+        gsap.from(cardsRef.current, {
+          scrollTrigger: {
+            trigger: '.gsap-services-grid',
+            start: 'top 75%',
+            toggleActions: 'play none none reverse',
+          },
+          y: 80,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.1,
+          ease: 'back.out(1.2)',
+        });
+
+        // Parallax Background Orbs
+        gsap.to('.gsap-service-orb-1', {
+          y: 200,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1,
+          },
+        });
+        gsap.to('.gsap-service-orb-2', {
+          y: -150,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1,
+          },
+        });
       });
 
     }, sectionRef);

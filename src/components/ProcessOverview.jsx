@@ -53,51 +53,55 @@ const ProcessOverview = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Header Animation
-      gsap.from(headerRef.current.children, {
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: 'power3.out',
-      });
+      let mm = gsap.matchMedia();
 
-      // Connecting Path Animation
-      if (pathRef.current) {
-        const pathLength = pathRef.current.getTotalLength();
-        gsap.set(pathRef.current, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
-        
-        gsap.to(pathRef.current, {
+      mm.add("(min-width: 768px)", () => {
+        // Header Animation
+        gsap.from(headerRef.current.children, {
           scrollTrigger: {
-            trigger: stepsContainerRef.current,
-            start: 'top 60%',
-            end: 'bottom 40%',
-            scrub: 1,
-          },
-          strokeDashoffset: 0,
-          ease: 'none',
-        });
-      }
-
-      // Individual Steps Animation
-      const stepElements = gsap.utils.toArray('.gsap-process-step');
-      stepElements.forEach((step, i) => {
-        gsap.from(step, {
-          scrollTrigger: {
-            trigger: step,
+            trigger: headerRef.current,
             start: 'top 85%',
             toggleActions: 'play none none reverse',
           },
-          y: 50,
+          y: 40,
           opacity: 0,
-          duration: 0.8,
-          ease: 'back.out(1.2)',
-          delay: i % 2 === 0 ? 0 : 0.2, // Stagger left/right slightly
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power3.out',
+        });
+
+        // Connecting Path Animation
+        if (pathRef.current) {
+          const pathLength = pathRef.current.getTotalLength();
+          gsap.set(pathRef.current, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+          
+          gsap.to(pathRef.current, {
+            scrollTrigger: {
+              trigger: stepsContainerRef.current,
+              start: 'top 60%',
+              end: 'bottom 40%',
+              scrub: 1,
+            },
+            strokeDashoffset: 0,
+            ease: 'none',
+          });
+        }
+
+        // Individual Steps Animation
+        const stepElements = gsap.utils.toArray('.gsap-process-step');
+        stepElements.forEach((step, i) => {
+          gsap.from(step, {
+            scrollTrigger: {
+              trigger: step,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse',
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'back.out(1.2)',
+            delay: i % 2 === 0 ? 0 : 0.2, // Stagger left/right slightly
+          });
         });
       });
 
