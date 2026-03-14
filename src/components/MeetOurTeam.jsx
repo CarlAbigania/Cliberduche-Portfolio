@@ -132,48 +132,52 @@ const MeetOurTeam = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Header Animation
-      gsap.from(headerRef.current.children, {
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: 'power3.out',
-      });
+      let mm = gsap.matchMedia();
 
-      // Navigation & Indicators Animation
-      gsap.from(navRef.current, {
-        scrollTrigger: {
-          trigger: navRef.current,
-          start: 'top 90%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-      });
-
-      // Member Cards Stagger Animation (Initial Load)
-      if (cardsRef.current) {
-        gsap.from(cardsRef.current.children, {
+      mm.add("(min-width: 768px)", () => {
+        // Header Animation
+        gsap.from(headerRef.current.children, {
           scrollTrigger: {
-            trigger: cardsRef.current,
-            start: 'top 80%',
+            trigger: headerRef.current,
+            start: 'top 85%',
             toggleActions: 'play none none reverse',
           },
-          y: 60,
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power3.out',
+        });
+
+        // Navigation & Indicators Animation
+        gsap.from(navRef.current, {
+          scrollTrigger: {
+            trigger: navRef.current,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse',
+          },
+          y: 20,
           opacity: 0,
           duration: 0.8,
-          stagger: 0.15,
-          ease: 'back.out(1.2)',
+          ease: 'power2.out',
         });
-      }
+
+        // Member Cards Stagger Animation (Initial Load)
+        if (cardsRef.current) {
+          gsap.from(cardsRef.current.children, {
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+            y: 60,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'back.out(1.2)',
+          });
+        }
+      });
 
     }, sectionRef);
 

@@ -92,45 +92,49 @@ const EquipmentFleet = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Header Animation
-      gsap.from(headerRef.current.children, {
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: 'power3.out',
-      });
+      let mm = gsap.matchMedia();
 
-      // Sidebar Stagger Animation
-      gsap.from('.gsap-fleet-category', {
-        scrollTrigger: {
-          trigger: sidebarRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
-        x: -30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'back.out(1.2)',
-      });
+      mm.add("(min-width: 768px)", () => {
+        // Header Animation
+        gsap.from(headerRef.current.children, {
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power3.out',
+        });
 
-      // Main Display Animation
-      gsap.from(displayRef.current, {
-        scrollTrigger: {
-          trigger: displayRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
-        x: 40,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
+        // Sidebar Stagger Animation
+        gsap.from('.gsap-fleet-category', {
+          scrollTrigger: {
+            trigger: sidebarRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+          x: -30,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'back.out(1.2)',
+        });
+
+        // Main Display Animation
+        gsap.from(displayRef.current, {
+          scrollTrigger: {
+            trigger: displayRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+          },
+          x: 40,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+        });
       });
 
     }, sectionRef);

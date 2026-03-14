@@ -23,28 +23,42 @@ const SplitTextReveal = ({
     if (!triggerEl || !elementsRef.current || elementsRef.current.length === 0) return;
 
     const ctx = gsap.context(() => {
-      // Initial hidden state
-      gsap.set(elementsRef.current, {
-        y: '100%',
-        opacity: 0,
-        rotateZ: 5,
+      let mm = gsap.matchMedia();
+
+      mm.add("(min-width: 768px)", () => {
+        // Initial hidden state
+        gsap.set(elementsRef.current, {
+          y: '100%',
+          opacity: 0,
+          rotateZ: 5,
+        });
+
+        // Reveal animation
+        gsap.to(elementsRef.current, {
+          scrollTrigger: {
+            trigger: triggerEl,
+            start: start,
+            toggleActions: 'play none none reverse',
+          },
+          y: '0%',
+          opacity: 1,
+          rotateZ: 0,
+          duration: duration,
+          stagger: stagger,
+          delay: delay,
+          ease: 'power4.out',
+        });
       });
 
-      // Reveal animation
-      gsap.to(elementsRef.current, {
-        scrollTrigger: {
-          trigger: triggerEl,
-          start: start,
-          toggleActions: 'play none none reverse',
-        },
-        y: '0%',
-        opacity: 1,
-        rotateZ: 0,
-        duration: duration,
-        stagger: stagger,
-        delay: delay,
-        ease: 'power4.out',
+      mm.add("(max-width: 767px)", () => {
+        // Ensure static display on mobile
+        gsap.set(elementsRef.current, {
+          y: '0%',
+          opacity: 1,
+          rotateZ: 0,
+        });
       });
+
     }, containerRef);
 
     return () => ctx.revert();

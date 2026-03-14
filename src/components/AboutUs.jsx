@@ -60,103 +60,108 @@ const AboutUs = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Intro section animations
-      const introElements = gsap.utils.toArray('.gsap-intro');
-      introElements.forEach((el, idx) => {
-        gsap.from(el, {
+      let mm = gsap.matchMedia();
+
+      mm.add("(min-width: 768px)", () => {
+        // Intro section animations
+        const introElements = gsap.utils.toArray('.gsap-intro');
+        introElements.forEach((el, idx) => {
+          gsap.from(el, {
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+            y: 60,
+            opacity: 0,
+            duration: 1.2,
+            delay: idx * 0.1,
+            ease: "easeOut"
+          });
+        });
+
+        // Journey Timeline
+        const timelinePoints = gsap.utils.toArray('.gsap-journey');
+        gsap.from(timelinePoints, {
           scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
+            trigger: '.gsap-journey-container',
+            start: "top 80%",
             toggleActions: "play none none reverse",
           },
-          y: 60,
+          x: -50,
           opacity: 0,
-          duration: 1.2,
-          delay: idx * 0.1,
-          ease: "easeOut"
+          duration: 1,
+          stagger: 0.2,
+          ease: "power3.out"
         });
-      });
 
-      // Journey Timeline
-      const timelinePoints = gsap.utils.toArray('.gsap-journey');
-      gsap.from(timelinePoints, {
-        scrollTrigger: {
-          trigger: '.gsap-journey-container',
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-        x: -50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out"
-      });
+        // Mission & Vision
+        const missionCards = gsap.utils.toArray('.gsap-mission');
+        missionCards.forEach((card) => {
+          gsap.from(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: "top 75%",
+              toggleActions: "play none none reverse",
+            },
+            scale: 0.95,
+            y: 40,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power2.out"
+          });
+        });
 
-      // Mission & Vision
-      const missionCards = gsap.utils.toArray('.gsap-mission');
-      missionCards.forEach((card) => {
-        gsap.from(card, {
+        // Values Stagger
+        const values = gsap.utils.toArray('.gsap-value');
+        gsap.from(values, {
           scrollTrigger: {
-            trigger: card,
+            trigger: '.gsap-values-container',
             start: "top 75%",
             toggleActions: "play none none reverse",
           },
-          scale: 0.95,
-          y: 40,
+          y: 80,
           opacity: 0,
-          duration: 1.2,
-          ease: "power2.out"
+          duration: 1,
+          stagger: 0.15,
+          ease: "back.out(1.2)"
         });
-      });
 
-      // Values Stagger
-      const values = gsap.utils.toArray('.gsap-value');
-      gsap.from(values, {
-        scrollTrigger: {
-          trigger: '.gsap-values-container',
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-        },
-        y: 80,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: "back.out(1.2)"
-      });
-
-      // Parallax Orbs and Background Zoom
-      gsap.to('.gsap-orb-1', {
-        y: 150,
-        scale: 1.2,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        }
-      });
-      gsap.to('.gsap-orb-2', {
-        y: -150,
-        scale: 1.1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        }
-      });
-      // Global background subtle scale across the section
-      gsap.to('.about-bg-layer', {
-        scale: 1.15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5,
-        }
+        // Parallax Orbs and Background Zoom
+        gsap.to('.gsap-orb-1', {
+          y: 150,
+          scale: 1.2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          }
+        });
+        gsap.to('.gsap-orb-2', {
+          y: -150,
+          scale: 1.1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          }
+        });
+        
+        // Global background subtle scale across the section
+        gsap.to('.about-bg-layer', {
+          scale: 1.15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+          }
+        });
       });
 
     }, containerRef);

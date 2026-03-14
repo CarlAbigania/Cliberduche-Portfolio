@@ -74,84 +74,88 @@ const ResourcesPartners = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Header Animation
-      gsap.from(headerRef.current.children, {
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: 'power3.out',
-      });
+      let mm = gsap.matchMedia();
 
-      // Stats Counters Animation
-      if (statsRef.current) {
-        const statCards = statsRef.current.children;
-
-        if (statCards.length) {
-          gsap.fromTo(
-            statCards,
-            { y: 50, opacity: 0, scale: 0.9 },
-            {
-              scrollTrigger: {
-                trigger: statsRef.current,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse',
-              },
-              y: 0,
-              opacity: 1,
-              scale: 1,
-              duration: 0.8,
-              stagger: 0.1,
-              ease: 'back.out(1.2)',
-            }
-          );
-        }
-      }
-
-      // Sites Animation
-      if (sitesRef.current) {
-        gsap.from('.gsap-site-card', {
+      mm.add("(min-width: 768px)", () => {
+        // Header Animation
+        gsap.from(headerRef.current.children, {
           scrollTrigger: {
-            trigger: sitesRef.current,
-            start: 'top 80%',
+            trigger: headerRef.current,
+            start: 'top 85%',
             toggleActions: 'play none none reverse',
           },
-          x: (i) => (i % 2 === 0 ? -50 : 50),
+          y: 40,
           opacity: 0,
           duration: 1,
-          stagger: 0.2,
+          stagger: 0.15,
           ease: 'power3.out',
         });
-      }
 
-      // Suppliers Animation
-      if (suppliersRef.current) {
-        const supplierCards = suppliersRef.current.querySelectorAll('.gsap-supplier-card');
+        // Stats Counters Animation
+        if (statsRef.current) {
+          const statCards = statsRef.current.children;
 
-        if (supplierCards.length) {
-          gsap.fromTo(
-            supplierCards,
-            { y: 40, opacity: 0 },
-            {
-              scrollTrigger: {
-                trigger: suppliersRef.current,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse',
-              },
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              stagger: 0.1,
-              ease: 'back.out(1.1)',
-            }
-          );
+          if (statCards.length) {
+            gsap.fromTo(
+              statCards,
+              { y: 50, opacity: 0, scale: 0.9 },
+              {
+                scrollTrigger: {
+                  trigger: statsRef.current,
+                  start: 'top 85%',
+                  toggleActions: 'play none none reverse',
+                },
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'back.out(1.2)',
+              }
+            );
+          }
         }
-      }
+
+        // Sites Animation
+        if (sitesRef.current) {
+          gsap.from('.gsap-site-card', {
+            scrollTrigger: {
+              trigger: sitesRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+            x: (i) => (i % 2 === 0 ? -50 : 50),
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+          });
+        }
+
+        // Suppliers Animation
+        if (suppliersRef.current) {
+          const supplierCards = suppliersRef.current.querySelectorAll('.gsap-supplier-card');
+
+          if (supplierCards.length) {
+            gsap.fromTo(
+              supplierCards,
+              { y: 40, opacity: 0 },
+              {
+                scrollTrigger: {
+                  trigger: suppliersRef.current,
+                  start: 'top 85%',
+                  toggleActions: 'play none none reverse',
+                },
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'back.out(1.1)',
+              }
+            );
+          }
+        }
+      });
 
     }, sectionRef);
 
