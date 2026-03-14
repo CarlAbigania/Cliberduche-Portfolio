@@ -26,7 +26,7 @@ const Sidebar = () => {
   };
 
   const navigationLinks = [
-    { id: 'hero', label: 'Home', icon: 'fa-home' },
+    { id: 'home', label: 'Home', icon: 'fa-home' },
     { id: 'about', label: 'About Us', icon: 'fa-info-circle' },
     { id: 'services', label: 'Services', icon: 'fa-cogs' },
     { id: 'projects', label: 'Projects', icon: 'fa-project-diagram' },
@@ -41,7 +41,7 @@ const Sidebar = () => {
     // Use Intersection Observer for accurate and performant section detection
     const observerOptions = {
       root: null,
-      rootMargin: '-40% 0px -60% 0px', // Adjusted to trigger closer to the top
+      rootMargin: '-30% 0px -50% 0px', // Ensures a healthy 20vh trigger band
       threshold: 0
     };
 
@@ -54,20 +54,40 @@ const Sidebar = () => {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const observedIds = new Set();
 
-    const sections = navigationLinks.map(link => link.id);
-    sections.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
+    const observeSections = () => {
+      navigationLinks.forEach((link) => {
+        if (!observedIds.has(link.id)) {
+          const element = document.getElementById(link.id);
+          if (element) {
+            observer.observe(element);
+            observedIds.add(link.id);
+          }
+        }
+      });
+    };
+
+    // Initial check
+    observeSections();
+
+    // Since some sections are lazy loaded (Suspense), they won't be in the DOM immediately.
+    // Use a MutationObserver to detect when they are added.
+    const mutationObserver = new MutationObserver(() => {
+      if (observedIds.size < navigationLinks.length) {
+        observeSections();
+      } else {
+        mutationObserver.disconnect();
       }
     });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     // Extra safety: when scrolled very close to the top,
     // force the "Home" / hero section to be active.
     const handleScrollTopDetection = () => {
       if (window.scrollY < window.innerHeight * 0.3) {
-        setActiveSection('hero');
+        setActiveSection('home');
       }
     };
 
@@ -76,12 +96,8 @@ const Sidebar = () => {
     handleScrollTopDetection();
 
     return () => {
-      sections.forEach((id) => {
-        const element = document.getElementById(id);
-        if (element) {
-          observer.unobserve(element);
-        }
-      });
+      observer.disconnect();
+      mutationObserver.disconnect();
       window.removeEventListener('scroll', handleScrollTopDetection);
     };
   }, []);
