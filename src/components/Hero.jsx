@@ -26,17 +26,49 @@ const Hero = ({ revealContent = true }) => {
     if (!revealContent) return;
 
     let ctx = gsap.context(() => {
-      // Advanced Background Zoom and Parallax
-      gsap.to(bgRef.current, {
-        scale: 1.3,
-        yPercent: 30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1, // Smooth scrubbing
-        }
+      let mm = gsap.matchMedia();
+
+      // Advanced Background Zoom and Parallax (Desktop Only to save CPU/GPU on mobile)
+      mm.add("(min-width: 768px)", () => {
+        gsap.to(bgRef.current, {
+          scale: 1.3,
+          yPercent: 30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1, // Smooth scrubbing
+          }
+        });
+
+        // Ambient orbs subtle movement
+        orbsRef.current.forEach((orb, i) => {
+          if (orb) {
+            gsap.to(orb, {
+              x: i === 0 ? 80 : -80,
+              y: i === 0 ? 60 : -60,
+              duration: 12 + i * 4,
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut"
+            });
+          }
+        });
+
+        // Central Content Shrink on Scroll (Parallax Depth Effect)
+        gsap.to(containerRef.current, {
+          scale: 0.85,
+          opacity: 0.2,
+          yPercent: 15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          }
+        });
       });
 
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -83,34 +115,6 @@ const Hero = ({ revealContent = true }) => {
         repeat: -1,
         yoyo: true,
         ease: "power1.inOut"
-      });
-
-      // Ambient orbs subtle movement
-      orbsRef.current.forEach((orb, i) => {
-        if (orb) {
-          gsap.to(orb, {
-            x: i === 0 ? 80 : -80,
-            y: i === 0 ? 60 : -60,
-            duration: 12 + i * 4,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut"
-          });
-        }
-      });
-
-      // Central Content Shrink on Scroll (Parallax Depth Effect)
-      gsap.to(containerRef.current, {
-        scale: 0.85,
-        opacity: 0.2,
-        yPercent: 15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        }
       });
 
     }, heroRef);
