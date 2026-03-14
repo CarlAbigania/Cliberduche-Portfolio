@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useAssetLoader } from "../hooks/useAssetLoader";
 
-import logo from "/images/logo2.png";
+import logo from "/images/logo2.webp";
 
 export default function Intro({ title, onFinish }) {
   const container = useRef(null);

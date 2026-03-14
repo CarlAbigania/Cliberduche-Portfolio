@@ -25,7 +25,7 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      img: 'images/mdi-project-2019.png',
+      img: 'images/mdi-project-2019.webp',
       tag: 'Completed',
       title: 'MDI - Project 2019',
       desc: 'Comprehensive civil engineering and foundational infrastructure works.',
@@ -35,7 +35,7 @@ const Projects = () => {
     },
     {
       id: 2,
-      img: 'images/silang,cavite2021.png',
+      img: 'images/silang,cavite2021.webp',
       tag: 'Completed',
       title: 'Silang, Cavite Project 2021',
       desc: 'Extensive leveling and compaction, drainage systems, road networks, riprap, and bridge rectification.',
@@ -45,7 +45,7 @@ const Projects = () => {
     },
     {
       id: 3,
-      img: 'images/cbd-building2019.png',
+      img: 'images/cbd-building2019.webp',
       tag: 'Completed',
       title: 'CBD Building Project 2019',
       desc: 'Premium commercial building development and structural construction.',
@@ -55,7 +55,7 @@ const Projects = () => {
     },
     {
       id: 4,
-      img: 'images/mdi-mercator-holdings2025p1.png',
+      img: 'images/mdi-mercator-holdings2025p1.webp',
       tag: 'Completed',
       title: 'MDI - Mercator Holding 2025',
       desc: 'Major embankment, diversion road construction, retaining walls, drainage, pavement, and infrastructure works.',
@@ -66,7 +66,7 @@ const Projects = () => {
     },
     {
       id: 5,
-      img: 'images/mdi-mercator-holdings.png',
+      img: 'images/mdi-mercator-holdings.webp',
       tag: 'Ongoing',
       title: 'MDI - Mercator Phase II',
       desc: 'Ongoing embankment, major diversion road expansion, retaining walls, comprehensive drainage, pavement, and electrical post lights installation.',
@@ -76,7 +76,7 @@ const Projects = () => {
     },
     {
       id: 6,
-      img: 'images/pier2-north-harbour.png',
+      img: 'images/pier2-north-harbour.webp',
       tag: 'Ongoing',
       title: 'Pier 2 North Harbour',
       desc: 'Critical reconstruction of port bridge, heavy-duty pavement, lagoon management, coastal embankment, sub-surface drainage, water & electrical works.',
@@ -86,7 +86,7 @@ const Projects = () => {
     },
     {
       id: 7,
-      img: 'images/wdv-phas4-tanza,cavite.png',
+      img: 'images/wdv-phas4-tanza,cavite.webp',
       tag: 'Ongoing',
       title: 'WDV Phase 4 Tanza',
       desc: 'Extensive retaining wall and secure perimeter fence construction for massive residential development.',

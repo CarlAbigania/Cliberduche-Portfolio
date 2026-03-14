@@ -25,7 +25,7 @@ const ResourcesPartners = () => {
   const sites = [
     {
       title: 'Calamba City Site',
-      image: '/images/land-development-site1.png',
+      image: '/images/land-development-site1.webp',
       coords: '14°08\'32.0"N 121°09\'37.0"E',
       address: '45R6+V4J Calamba, Laguna',
       capacity: '20M+ cubic meters',
@@ -33,7 +33,7 @@ const ResourcesPartners = () => {
     },
     {
       title: 'Silang, Cavite Site',
-      image: '/images/land-development-site2.png',
+      image: '/images/land-development-site2.webp',
       coords: '14°15\'02"N 120°59\'12"E',
       address: 'Sabutan, 7X2P+6MF Silang, Cavite',
       capacity: '2.2M+ cubic meters',
