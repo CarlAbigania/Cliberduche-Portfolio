@@ -38,67 +38,59 @@ const Sidebar = () => {
   ];
 
   useEffect(() => {
-    // Use Intersection Observer for accurate and performant section detection
-    const observerOptions = {
-      root: null,
-      rootMargin: '-30% 0px -50% 0px', // Ensures a healthy 20vh trigger band
-      threshold: 0
-    };
+    let ticking = false;
 
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const viewportHeight = window.innerHeight;
+      const triggerPoint = scrollY + viewportHeight * 0.4; // 40% from top
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const observedIds = new Set();
+      // If at absolute top, it's home
+      if (scrollY < viewportHeight * 0.2) {
+        setActiveSection('home');
+        ticking = false;
+        return;
+      }
 
-    const observeSections = () => {
-      navigationLinks.forEach((link) => {
-        if (!observedIds.has(link.id)) {
-          const element = document.getElementById(link.id);
-          if (element) {
-            observer.observe(element);
-            observedIds.add(link.id);
+      let currentActiveId = 'home'; // Fallback
+      
+      // Find the last section that has its top edge scrolled past the trigger point
+      for (let i = 0; i < navigationLinks.length; i++) {
+        const id = navigationLinks[i].id;
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          const topAbsolute = rect.top + scrollY;
+          if (topAbsolute <= triggerPoint) {
+            currentActiveId = id;
           }
         }
-      });
+      }
+
+      setActiveSection(currentActiveId);
+      ticking = false;
     };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Periodically check in case React Suspense resolves while not scrolling
+    const interval = setInterval(() => {
+      updateActiveSection();
+    }, 1000);
 
     // Initial check
-    observeSections();
-
-    // Since some sections are lazy loaded (Suspense), they won't be in the DOM immediately.
-    // Use a MutationObserver to detect when they are added.
-    const mutationObserver = new MutationObserver(() => {
-      if (observedIds.size < navigationLinks.length) {
-        observeSections();
-      } else {
-        mutationObserver.disconnect();
-      }
-    });
-
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
-
-    // Extra safety: when scrolled very close to the top,
-    // force the "Home" / hero section to be active.
-    const handleScrollTopDetection = () => {
-      if (window.scrollY < window.innerHeight * 0.3) {
-        setActiveSection('home');
-      }
-    };
-
-    window.addEventListener('scroll', handleScrollTopDetection, { passive: true });
-    // Ensure correct initial state on load/refresh
-    handleScrollTopDetection();
+    updateActiveSection();
 
     return () => {
-      observer.disconnect();
-      mutationObserver.disconnect();
-      window.removeEventListener('scroll', handleScrollTopDetection);
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(interval);
     };
   }, []);
 
@@ -140,6 +132,19 @@ const Sidebar = () => {
   }, [isMobileMenuOpen]);
 
   const handleNavClick = (id) => {
+    // If clicking home, scroll directly to top 0 because the section is sticky
+    // and its getBoundingClientRect might be misleading.
+    if (id === 'home' || id === 'hero') {
+      setIsMobileMenuOpen(false);
+      window.dispatchEvent(
+        new CustomEvent('smooth-scroll-set-target', { detail: 0 })
+      );
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 0);
+      return;
+    }
+
     const element = document.getElementById(id);
     if (element) {
       // Close menu if on mobile
