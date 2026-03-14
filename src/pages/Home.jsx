@@ -26,9 +26,7 @@ const Home = ({ heroRevealContent = true }) => {
         while the main content scrolls over it.
       */}
       <div className="sticky top-0 z-0 h-screen w-full overflow-hidden">
-        <section id="hero">
-          <Hero revealContent={heroRevealContent} />
-        </section>
+        <Hero revealContent={heroRevealContent} />
       </div>
 
       {heroRevealContent && <Header />}
@@ -41,34 +39,18 @@ const Home = ({ heroRevealContent = true }) => {
         rounded-t creates the card/sheet effect.
       */}
       <main className={`relative z-10 w-full rounded-t-[40px] md:rounded-t-[60px] shadow-[0_-10px_40px_rgba(0,0,0,0.1)] transition-colors duration-700 ${isDarkMode ? 'bg-[#030712]' : 'bg-[#f8fafc]'}`}>
-        <section id="about">
-          <AboutUs />
-        </section>       
-        <section id="services">
-          <Services />
-        </section>
+        <AboutUs />
+        <Services />
                 
         <InfiniteMarquee text="CIVIL ENGINEERING • LAND DEVELOPMENT • HEAVY EQUIPMENT • " speed={1} />
  
         <Suspense fallback={<div className="h-40 w-full animate-pulse bg-white/5" />}>
-          <section id="projects">
-            <Projects />
-          </section>
-          <section id="equipment">
-            <EquipmentFleet />
-          </section>
-          <section id="process">
-            <ProcessOverview />
-          </section>
-          <section id="team">
-            <MeetOurTeam />
-          </section>
-          <section id="compliance">
-            <ComplianceSafety />
-          </section>
-          <section id="resources">
-            <ResourcesPartners />
-          </section>
+          <Projects />
+          <EquipmentFleet />
+          <ProcessOverview />
+          <MeetOurTeam />
+          <ComplianceSafety />
+          <ResourcesPartners />
         </Suspense>
       </main>
     </>
