@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Hero from '../components/Hero';
 import AboutUs from '../components/AboutUs';
 import Services from '../components/Services';
-import Projects from '../components/Projects';
-import ResourcesPartners from '../components/ResourcesPartners';
-import EquipmentFleet from '../components/EquipmentFleet';
-import ComplianceSafety from '../components/ComplianceSafety';
-import ProcessOverview from '../components/ProcessOverview';
-import MeetOurTeam from '../components/MeetOurTeam';
 import InfiniteMarquee from '../components/InfiniteMarquee';
 import { useTheme } from '../hooks/useTheme';
+
+// Lazy loaded components (below the fold)
+const Projects = lazy(() => import('../components/Projects'));
+const EquipmentFleet = lazy(() => import('../components/EquipmentFleet'));
+const ComplianceSafety = lazy(() => import('../components/ComplianceSafety'));
+const ProcessOverview = lazy(() => import('../components/ProcessOverview'));
+const MeetOurTeam = lazy(() => import('../components/MeetOurTeam'));
+const ResourcesPartners = lazy(() => import('../components/ResourcesPartners'));
 
 const Home = ({ heroRevealContent = true }) => {
   const { isDarkMode } = useTheme();
@@ -48,24 +50,26 @@ const Home = ({ heroRevealContent = true }) => {
                 
         <InfiniteMarquee text="CIVIL ENGINEERING • LAND DEVELOPMENT • HEAVY EQUIPMENT • " speed={1} />
  
-        <section id="projects">
-          <Projects />
-        </section>
-        <section id="equipment">
-          <EquipmentFleet />
-        </section>
-        <section id="process">
-          <ProcessOverview />
-        </section>
-        <section id="team">
-          <MeetOurTeam />
-        </section>
-        <section id="compliance">
-          <ComplianceSafety />
-        </section>
-        <section id="resources">
-          <ResourcesPartners />
-        </section>
+        <Suspense fallback={<div className="h-40 w-full animate-pulse bg-white/5" />}>
+          <section id="projects">
+            <Projects />
+          </section>
+          <section id="equipment">
+            <EquipmentFleet />
+          </section>
+          <section id="process">
+            <ProcessOverview />
+          </section>
+          <section id="team">
+            <MeetOurTeam />
+          </section>
+          <section id="compliance">
+            <ComplianceSafety />
+          </section>
+          <section id="resources">
+            <ResourcesPartners />
+          </section>
+        </Suspense>
       </main>
     </>
   );

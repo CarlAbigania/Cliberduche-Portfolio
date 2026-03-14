@@ -113,7 +113,9 @@ const Projects = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Header entrance
+      let mm = gsap.matchMedia();
+
+      // Header entrance (runs on all screens)
       gsap.from(headerRef.current.children, {
         scrollTrigger: {
           trigger: headerRef.current,
@@ -127,7 +129,7 @@ const Projects = () => {
         ease: 'power3.out',
       });
 
-      // Filter entrance
+      // Filter entrance (runs on all screens)
       if (filterRef.current) {
         gsap.from(filterRef.current, {
           scrollTrigger: {
@@ -142,59 +144,79 @@ const Projects = () => {
         });
       }
 
-      // Featured Project Advanced Reveal (Clip-Path)
-      if (featuredRef.current && featuredImageRef.current) {
-        const tl = gsap.timeline({
+      // Desktop Only Animations (Clip paths and Parallax)
+      mm.add("(min-width: 768px)", () => {
+        // Featured Project Advanced Reveal (Clip-Path)
+        if (featuredRef.current && featuredImageRef.current) {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: featuredRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            }
+          });
+
+          // Unmask the image container
+          tl.fromTo(featuredImageRef.current, 
+            { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' },
+            { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 1.4, ease: 'power4.inOut' }
+          )
+          // Fade in details alongside the end of the unmask
+          .from(featuredRef.current.querySelector('.featured-details'), {
+            y: 40,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+          }, "-=0.8");
+        }
+
+        // Carousel entrance (Clip-Path)
+        if (carouselRef.current) {
+          gsap.fromTo(carouselRef.current.querySelectorAll('.thumbnail-item'), 
+            { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)', opacity: 0 },
+            {
+              scrollTrigger: {
+                trigger: carouselRef.current,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse',
+              },
+              clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+              opacity: 1,
+              duration: 1.2,
+              stagger: 0.1,
+              ease: 'power3.inOut',
+            }
+          );
+        }
+
+        // Advanced Background Parallax
+        gsap.to('.projects-bg-layer', {
+          scale: 1.15,
+          yPercent: 15,
+          ease: "none",
           scrollTrigger: {
-            trigger: featuredRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse',
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.2,
           }
         });
+      });
 
-        // Unmask the image container
-        tl.fromTo(featuredImageRef.current, 
-          { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' },
-          { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 1.4, ease: 'power4.inOut' }
-        )
-        // Fade in details alongside the end of the unmask
-        .from(featuredRef.current.querySelector('.featured-details'), {
-          y: 40,
-          opacity: 0,
-          duration: 1,
-          ease: 'power3.out'
-        }, "-=0.8");
-      }
-
-      // Carousel entrance (Clip-Path)
-      if (carouselRef.current) {
-        gsap.fromTo(carouselRef.current.querySelectorAll('.thumbnail-item'), 
-          { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)', opacity: 0 },
-          {
+      // Mobile Only Simplified Reveal
+      mm.add("(max-width: 767px)", () => {
+        if (featuredRef.current) {
+          gsap.from(featuredRef.current, {
             scrollTrigger: {
-              trigger: carouselRef.current,
+              trigger: featuredRef.current,
               start: 'top 85%',
               toggleActions: 'play none none reverse',
             },
-            clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.1,
-            ease: 'power3.inOut',
-          }
-        );
-      }
-
-      // Advanced Background Parallax
-      gsap.to('.projects-bg-layer', {
-        scale: 1.15,
-        yPercent: 15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.2,
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+          });
         }
       });
 
@@ -493,6 +515,8 @@ const Projects = () => {
                     <img
                       src={project.img}
                       alt={project.title}
+                      loading="lazy"
+                      decoding="async"
                       className={`w-full h-full object-cover transition-transform duration-700 ${isSelected ? 'scale-110' : 'group-hover:scale-110'}`}
                     />
                     
@@ -557,6 +581,8 @@ const Projects = () => {
                   <img 
                     src={selectedProject?.img} 
                     alt={selectedProject?.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover opacity-80"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
