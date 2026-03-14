@@ -19,17 +19,17 @@ const ComplianceSafety = () => {
 
   // Blueprint map: all certificates as hotspots with coordinates
   const complianceHotspots = [
-    { name: 'SEC Registration', full: 'Securities and Exchange Commission', image: 'images/permits/securities-and-exchange-commision.png', reactIcon: MdDocumentScanner, x: 20, y: 30 },
-    { name: 'BIR Certificate', full: 'Bureau of Internal Revenue', image: 'images/permits/BIR.png', reactIcon: MdReceipt, x: 38, y: 25 },
-    { name: 'SSS Compliance', full: 'Social Security System', image: 'images/permits/SSS.png', reactIcon: MdVerified, x: 68, y: 28 },
-    { name: 'PhilHealth', full: 'PhilHealth Insurance', image: 'images/permits/philhealth.png', reactIcon: MdLocalHospital, x: 28, y: 58 },
-    { name: 'Pag-IBIG Fund', full: 'Home Development Mutual Fund', image: 'images/permits/pagibig-fund.png', reactIcon: MdHouse, x: 48, y: 75 },
-    { name: "Mayor's Permit", full: "Local Government Mayor's Permit 2026", image: 'images/permits/mayors2026.png', reactIcon: MdWorkspacePremium, x: 82, y: 38 },
-    { name: 'Fire Safety', full: 'Fire Safety Inspection Permit', image: 'images/permits/fire-safety-inspection.png', reactIcon: MdLocalFireDepartment, x: 22, y: 85 },
-    { name: 'Sanitary Permit', full: 'Health & Sanitary Permit', image: 'images/permits/sanitary.png', reactIcon: MdVerifiedUser, x: 62, y: 85 },
-    { name: 'PCAB License', full: 'Philippine Contractors Accreditation Board', image: 'images/permits/pcab-license.png', reactIcon: MdWorkspacePremium, x: 78, y: 65 },
-    { name: 'Insurance & Guarantee', full: 'Insurance Certificate & Guarantee', image: 'images/permits/insurance-certificate.png', reactIcon: MdVerifiedUser, x: 58, y: 48 },
-    { name: 'ECC Certificate', full: 'Environmental Compliance Certificate', image: 'images/permits/ECC.png', reactIcon: MdEco, x: 82, y: 85 },
+    { name: 'SEC Registration', full: 'Securities and Exchange Commission', image: 'images/permits/securities-and-exchange-commision.webp', reactIcon: MdDocumentScanner, x: 20, y: 30 },
+    { name: 'BIR Certificate', full: 'Bureau of Internal Revenue', image: 'images/permits/BIR.webp', reactIcon: MdReceipt, x: 38, y: 25 },
+    { name: 'SSS Compliance', full: 'Social Security System', image: 'images/permits/SSS.webp', reactIcon: MdVerified, x: 68, y: 28 },
+    { name: 'PhilHealth', full: 'PhilHealth Insurance', image: 'images/permits/philhealth.webp', reactIcon: MdLocalHospital, x: 28, y: 58 },
+    { name: 'Pag-IBIG Fund', full: 'Home Development Mutual Fund', image: 'images/permits/pagibig-fund.webp', reactIcon: MdHouse, x: 48, y: 75 },
+    { name: "Mayor's Permit", full: "Local Government Mayor's Permit 2026", image: 'images/permits/mayors2026.webp', reactIcon: MdWorkspacePremium, x: 82, y: 38 },
+    { name: 'Fire Safety', full: 'Fire Safety Inspection Permit', image: 'images/permits/fire-safety-inspection.webp', reactIcon: MdLocalFireDepartment, x: 22, y: 85 },
+    { name: 'Sanitary Permit', full: 'Health & Sanitary Permit', image: 'images/permits/sanitary.webp', reactIcon: MdVerifiedUser, x: 62, y: 85 },
+    { name: 'PCAB License', full: 'Philippine Contractors Accreditation Board', image: 'images/permits/pcab-license.webp', reactIcon: MdWorkspacePremium, x: 78, y: 65 },
+    { name: 'Insurance & Guarantee', full: 'Insurance Certificate & Guarantee', image: 'images/permits/insurance-certificate.webp', reactIcon: MdVerifiedUser, x: 58, y: 48 },
+    { name: 'ECC Certificate', full: 'Environmental Compliance Certificate', image: 'images/permits/ECC.webp', reactIcon: MdEco, x: 82, y: 85 },
   ];
 
   const safetyCommitments = [

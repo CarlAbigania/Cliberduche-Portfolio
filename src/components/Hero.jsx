@@ -146,8 +146,8 @@ const Hero = ({ revealContent = true }) => {
           className="absolute inset-[-10%] transition-opacity duration-1000 scale-[1.1]"
           style={{
             background: isDarkMode 
-              ? `linear-gradient(to bottom, rgba(3, 7, 18, 0.7) 0%, rgba(3, 7, 18, 0.95) 100%), url('/images/compony provided/office.jpg') center/cover no-repeat` 
-              : `linear-gradient(to bottom, rgba(248, 250, 252, 0.8) 0%, rgba(248, 250, 252, 0.98) 100%), url('/images/compony provided/office.jpg') center/cover no-repeat`,
+              ? `linear-gradient(to bottom, rgba(3, 7, 18, 0.7) 0%, rgba(3, 7, 18, 0.95) 100%), url('/images/compony provided/office.webp') center/cover no-repeat` 
+              : `linear-gradient(to bottom, rgba(248, 250, 252, 0.8) 0%, rgba(248, 250, 252, 0.98) 100%), url('/images/compony provided/office.webp') center/cover no-repeat`,
           }}
         />
         

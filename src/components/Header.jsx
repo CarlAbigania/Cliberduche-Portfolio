@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../hooks/useTheme';
-import logo from '/images/logo2.png';
+import logo from '/images/logo2.webp';
 import { MdDownload, MdLightMode, MdNightlight } from 'react-icons/md';
 import { FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
